@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/home"
+        android:title="home"
+        app:showAsAction="never"
+        android:icon="@drawable/home"/>
+
+    <item
+        android:id="@+id/cal"
+        android:title="cal"
+        app:showAsAction="never"
+        android:icon="@drawable/cal"/>
+
+    <item
+        android:id="@+id/noti"
+        android:title="not"
+        app:showAsAction="never"
+        android:icon="@drawable/noti"/>
+
+    <item
+        android:id="@+id/file"
+        android:title="file"
+        app:showAsAction="never"
+        android:icon="@drawable/file"/>
+
+    <item
+        android:id="@+id/my"
+        android:title="my"
+        app:showAsAction="never"
+        android:icon="@drawable/my"/>
+</menu>
