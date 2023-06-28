@@ -38,7 +38,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/gmarket_sans_ttf_medium"
-                        android:text="oo님의 최근 프로젝트"
+                        android:text="oo 님의 최근 프로젝트"
                         android:textColor="@color/black"
                         android:textSize="16sp" />
 
@@ -56,6 +56,7 @@
                 </LinearLayout>
 
                 <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/hor_list"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
@@ -106,9 +107,10 @@
                 </LinearLayout>
 
                 <androidx.recyclerview.widget.RecyclerView
-                    android:layout_gravity="center_horizontal"
+                    android:id="@+id/ver_list"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
                     android:orientation="vertical"
                     tools:listitem="@layout/item_ver">
 
@@ -118,8 +120,14 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="320dp"
+                android:layout_height="wrap_content"
                 android:orientation="vertical">
+
+                <View
+                    android:layout_gravity="center_horizontal"
+                    android:background="#B3B3B3B3"
+                    android:layout_width="331.01dp"
+                    android:layout_height="1px"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -149,6 +157,8 @@
                 </LinearLayout>
 
                 <androidx.recyclerview.widget.RecyclerView
+                    android:layout_marginLeft="30dp"
+                    android:id="@+id/grid_list"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     tools:listitem="@layout/item_grid"
