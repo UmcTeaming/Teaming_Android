@@ -44,9 +44,9 @@ class MainFragment : Fragment() {
         // 리스트가 변경됨을 어댑터에 알림
         verAdapter.notifyDataSetChanged()
 
-        horItemList.add(HorListItem(R.drawable.baseline_rectangle_24,"UMC 파이널 프로젝트(프로젝트명)","2023.06.13 ~ (진행기간)"))
-        horItemList.add(HorListItem(R.drawable.baseline_rectangle_24,"UMC 파이널 프로젝트(프로젝트명)","2023.06.13 ~ (진행기간)"))
-        horItemList.add(HorListItem(R.drawable.baseline_rectangle_24,"UMC 파이널 프로젝트(프로젝트명)","2023.06.13 ~ (진행기간)"))
+        horItemList.add(HorListItem(R.drawable.baseline_rectangle_24,"UMC 파이널 프로젝트","2023.06.13 ~"))
+        horItemList.add(HorListItem(R.drawable.baseline_rectangle_24,"UMC 파이널 프로젝트","2023.06.13 ~"))
+        horItemList.add(HorListItem(R.drawable.baseline_rectangle_24,"UMC 파이널 프로젝트","2023.06.13 ~"))
         horAdapter.notifyDataSetChanged()
 
         gridItemList.add(GridListItem(R.drawable.baseline_rectangle_24,"프로젝트명","진행일자"))

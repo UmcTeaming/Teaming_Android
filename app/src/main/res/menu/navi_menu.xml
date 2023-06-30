@@ -15,7 +15,7 @@
 
     <item
         android:id="@+id/noti"
-        android:title="not"
+        android:title="noti"
         app:showAsAction="never"
         android:icon="@drawable/noti"/>
 
@@ -26,8 +26,8 @@
         android:icon="@drawable/file"/>
 
     <item
-        android:id="@+id/my"
-        android:title="my"
+        android:id="@+id/user"
+        android:title="user"
         app:showAsAction="never"
-        android:icon="@drawable/my"/>
+        android:icon="@drawable/user"/>
 </menu>

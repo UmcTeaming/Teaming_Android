@@ -29,12 +29,14 @@
     </FrameLayout>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
+        app:itemActiveIndicatorStyle="@null"
         android:id="@+id/bottom_navi"
         android:layout_width="match_parent"
         android:layout_height="51dp"
         android:layout_gravity="bottom"
-        android:background="@color/white"
         app:labelVisibilityMode="unlabeled"
+        app:itemIconTint="@color/black"
+        android:backgroundTint="#00000000"
         app:itemBackground="@color/white"
         app:menu="@menu/navi_menu"/>
 
