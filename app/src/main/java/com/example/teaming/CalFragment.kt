@@ -1,59 +1,59 @@
 package com.example.teaming
 
+import android.os.Build
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.RequiresApi
+import com.example.teaming.databinding.FragmentCalBinding
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [CalFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
-class CalFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-
+class CalFragment : Fragment() {//minsdk API26 이상으로 바꿀 필요 있음
+    private lateinit var binding:FragmentCalBinding
+    lateinit var selectedDate: LocalDate
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
+        selectedDate = LocalDate.now()
+
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_cal, container, false)
+        binding = FragmentCalBinding.inflate(inflater,container,false)
+        setMonthView()
+        //이전 달 버튼
+        binding.leftButton.setOnClickListener{
+            selectedDate = selectedDate.minusMonths(1)
+            setMonthView()
+        }
+        //다음 달 버튼
+        binding.rightButton.setOnClickListener{
+            selectedDate = selectedDate.plusMonths(1)
+            setMonthView()
+        }
+
+
+        return binding.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment CalFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            CalFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun monthFromDate(date:LocalDate):String{
+        var formatter = DateTimeFormatter.ofPattern("MMM")
+        return date.format(formatter)
     }
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun setMonthView(){
+        binding.monthText.text=monthFromDate(selectedDate)
+    }
+
+
 }
