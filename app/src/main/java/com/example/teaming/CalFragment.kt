@@ -7,18 +7,20 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.RequiresApi
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.teaming.databinding.FragmentCalBinding
 import java.time.LocalDate
+import java.time.YearMonth
 import java.time.format.DateTimeFormatter
 
 
 class CalFragment : Fragment() {//minsdk API26 이상으로 바꿀 필요 있음
     private lateinit var binding:FragmentCalBinding
-    lateinit var selectedDate: LocalDate
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        selectedDate = LocalDate.now()
+        CalendarUtil.selectedDate = LocalDate.now()
 
     }
 
@@ -32,17 +34,33 @@ class CalFragment : Fragment() {//minsdk API26 이상으로 바꿀 필요 있음
         setMonthView()
         //이전 달 버튼
         binding.leftButton.setOnClickListener{
-            selectedDate = selectedDate.minusMonths(1)
+            CalendarUtil.selectedDate = CalendarUtil.selectedDate.minusMonths(1)
             setMonthView()
         }
         //다음 달 버튼
         binding.rightButton.setOnClickListener{
-            selectedDate = selectedDate.plusMonths(1)
+            CalendarUtil.selectedDate = CalendarUtil.selectedDate.plusMonths(1)
             setMonthView()
         }
 
-
         return binding.root
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun daysInMonthArray(date:LocalDate):ArrayList<LocalDate?>{
+        val dayList = ArrayList<LocalDate?>()
+        var yearMonth = YearMonth.from(date)
+        var lastDay = yearMonth.lengthOfMonth()
+        var firstDay = CalendarUtil.selectedDate.withDayOfMonth(1)
+        var dayOfWeek = firstDay.dayOfWeek.value
+        for(i in 1..41){
+            if(i<=dayOfWeek||i>lastDay+dayOfWeek) {
+                dayList.add(null)
+            }else{
+                dayList.add(LocalDate.of(CalendarUtil.selectedDate.year,CalendarUtil.selectedDate.month,i-dayOfWeek))
+            }
+        }
+        return dayList
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -52,8 +70,18 @@ class CalFragment : Fragment() {//minsdk API26 이상으로 바꿀 필요 있음
     }
     @RequiresApi(Build.VERSION_CODES.O)
     fun setMonthView(){
-        binding.monthText.text=monthFromDate(selectedDate)
+        binding.monthText.text=monthFromDate(CalendarUtil.selectedDate)
+        val dayList:ArrayList<LocalDate?> = daysInMonthArray(CalendarUtil.selectedDate)
+        val adapter = CalendarAdapter(dayList)
+        val context = requireContext()
+        val manager = GridLayoutManager(context,7)
+        binding.calendarView.layoutManager = manager
+        binding.calendarView.adapter = adapter
     }
+}
 
-
+class CalendarUtil{
+    companion object{
+        lateinit var selectedDate:LocalDate//오늘의 LocalDate객체. 이번달에서는 날짜까지 사용해도 되지만, 다른 달에서는 월만 사용해야 함
+    }
 }
