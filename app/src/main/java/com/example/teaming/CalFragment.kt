@@ -8,7 +8,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView.LayoutManager
 import com.example.teaming.databinding.FragmentCalBinding
 import java.time.LocalDate
 import java.time.YearMonth
@@ -32,6 +34,7 @@ class CalFragment : Fragment() {//minsdk API26 이상으로 바꿀 필요 있음
         // Inflate the layout for this fragment
         binding = FragmentCalBinding.inflate(inflater,container,false)
         setMonthView()
+        setScheduleView()
         //이전 달 버튼
         binding.leftButton.setOnClickListener{
             CalendarUtil.selectedDate = CalendarUtil.selectedDate.minusMonths(1)
@@ -78,7 +81,17 @@ class CalFragment : Fragment() {//minsdk API26 이상으로 바꿀 필요 있음
         binding.calendarView.layoutManager = manager
         binding.calendarView.adapter = adapter
     }
+
+    //캘린더 다가오는 일정 등록
+    fun setScheduleView() {
+        val scheduleList=ArrayList<CalendarScheduleItem>()
+        scheduleList.add(CalendarScheduleItem("12월11일~12월12일","11:00~12:00","더미약속",1))
+        binding.scheduleView.layoutManager = LinearLayoutManager(activity,LinearLayoutManager.VERTICAL,false)
+        binding.scheduleView.adapter = CalenderScheduleAdapter(scheduleList)
+    }
 }
+
+
 
 class CalendarUtil{
     companion object{
