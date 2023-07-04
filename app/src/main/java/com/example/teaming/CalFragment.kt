@@ -1,59 +1,100 @@
 package com.example.teaming
 
+import android.os.Build
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.RequiresApi
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView.LayoutManager
+import com.example.teaming.databinding.FragmentCalBinding
+import java.time.LocalDate
+import java.time.YearMonth
+import java.time.format.DateTimeFormatter
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [CalFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
-class CalFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-
+class CalFragment : Fragment() {//minsdk API26 이상으로 바꿀 필요 있음
+    private lateinit var binding:FragmentCalBinding
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
+        CalendarUtil.selectedDate = LocalDate.now()
+
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_cal, container, false)
+        binding = FragmentCalBinding.inflate(inflater,container,false)
+        setMonthView()
+        setScheduleView()
+        //이전 달 버튼
+        binding.leftButton.setOnClickListener{
+            CalendarUtil.selectedDate = CalendarUtil.selectedDate.minusMonths(1)
+            setMonthView()
+        }
+        //다음 달 버튼
+        binding.rightButton.setOnClickListener{
+            CalendarUtil.selectedDate = CalendarUtil.selectedDate.plusMonths(1)
+            setMonthView()
+        }
+
+        return binding.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment CalFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            CalFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun daysInMonthArray(date:LocalDate):ArrayList<LocalDate?>{
+        val dayList = ArrayList<LocalDate?>()
+        var yearMonth = YearMonth.from(date)
+        var lastDay = yearMonth.lengthOfMonth()
+        var firstDay = CalendarUtil.selectedDate.withDayOfMonth(1)
+        var dayOfWeek = firstDay.dayOfWeek.value
+        for(i in 1..41){
+            if(i<=dayOfWeek||i>lastDay+dayOfWeek) {
+                dayList.add(null)
+            }else{
+                dayList.add(LocalDate.of(CalendarUtil.selectedDate.year,CalendarUtil.selectedDate.month,i-dayOfWeek))
             }
+        }
+        return dayList
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun monthFromDate(date:LocalDate):String{
+        var formatter = DateTimeFormatter.ofPattern("MMM")
+        return date.format(formatter)
+    }
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun setMonthView(){
+        binding.monthText.text=monthFromDate(CalendarUtil.selectedDate)
+        val dayList:ArrayList<LocalDate?> = daysInMonthArray(CalendarUtil.selectedDate)
+        val adapter = CalendarAdapter(dayList)
+        val context = requireContext()
+        val manager = GridLayoutManager(context,7)
+        binding.calendarView.layoutManager = manager
+        binding.calendarView.adapter = adapter
+    }
+
+    //캘린더 다가오는 일정 등록
+    fun setScheduleView() {
+        val scheduleList=ArrayList<CalendarScheduleItem>()
+        scheduleList.add(CalendarScheduleItem("12월11일~12월12일","11:00~12:00","더미약속",1))
+        binding.scheduleView.layoutManager = LinearLayoutManager(activity,LinearLayoutManager.VERTICAL,false)
+        binding.scheduleView.adapter = CalenderScheduleAdapter(scheduleList)
+    }
+}
+
+
+
+class CalendarUtil{
+    companion object{
+        lateinit var selectedDate:LocalDate//오늘의 LocalDate객체. 이번달에서는 날짜까지 사용해도 되지만, 다른 달에서는 월만 사용해야 함
     }
 }
