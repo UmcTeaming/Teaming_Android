@@ -8,10 +8,10 @@
         android:icon="@drawable/home"/>
 
     <item
-        android:id="@+id/cal"
-        android:title="cal"
+        android:id="@+id/file"
+        android:title="file"
         app:showAsAction="never"
-        android:icon="@drawable/cal"/>
+        android:icon="@drawable/file"/>
 
     <item
         android:id="@+id/noti"
@@ -20,10 +20,10 @@
         android:icon="@drawable/noti"/>
 
     <item
-        android:id="@+id/file"
-        android:title="file"
+        android:id="@+id/cal"
+        android:title="cal"
         app:showAsAction="never"
-        android:icon="@drawable/file"/>
+        android:icon="@drawable/cal"/>
 
     <item
         android:id="@+id/user"
