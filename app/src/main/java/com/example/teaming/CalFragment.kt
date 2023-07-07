@@ -45,7 +45,11 @@ class CalFragment : Fragment() {//minsdk API26 이상으로 바꿀 필요 있음
             CalendarUtil.selectedDate = CalendarUtil.selectedDate.plusMonths(1)
             setMonthView()
         }
-
+        //일정 추가 버튼
+        binding.btnCalNewSchedule.setOnClickListener{
+            val dialog = CalNewScheduleDialog()
+            dialog.show(requireActivity().supportFragmentManager,"CalNewScheduleDialog")
+        }
         return binding.root
     }
 

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/dialog_cal_new_schedule"
+        android:layout_width="300dp"
+        android:layout_height="370dp"
+        android:background="@drawable/cal_dialog_new_background">
+    <Button
+        android:id="@+id/make_schedule"
+        android:layout_width="100dp"
+        android:layout_height="25dp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="20dp"
+        android:textSize="12sp"
+        android:text="일정 추가하기"
+        android:textColor="@color/white"
+        android:background="@drawable/btn_blue_ellipse"/>
+    <Button
+        android:id="@+id/to_before"
+        android:layout_width="100dp"
+        android:layout_height="25dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginLeft="20dp"
+        android:layout_marginBottom="20dp"
+        android:textSize="12sp"
+        android:text="이전으로"
+        android:textColor="@color/white"
+        android:background="@drawable/btn_blue_ellipse"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>
