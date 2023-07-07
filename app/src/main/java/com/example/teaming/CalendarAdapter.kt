@@ -11,9 +11,11 @@ import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
 import java.time.LocalDate
 
+
 class CalendarAdapter(val dayList:ArrayList<LocalDate?>,val recyclerView: RecyclerView): RecyclerView.Adapter<CalendarAdapter.CalendarViewHolder>() {
     private lateinit var itemClickListener: OnCalendarDayClickListener
     var check:Int? =null
+
     inner class CalendarViewHolder(itemView: View):RecyclerView.ViewHolder(itemView){
         var dayText:TextView = itemView.findViewById(R.id.day_text)
         var todayCircle:ImageView = itemView.findViewById(R.id.cal_today_circle)
@@ -48,6 +50,7 @@ class CalendarAdapter(val dayList:ArrayList<LocalDate?>,val recyclerView: Recycl
                     check = position
                 }
             }
+
             if(day==(CalendarUtil.selectedDate)&&CalendarUtil.selectedDate== LocalDate.now()){
                 holder.todayCircle.visibility=View.VISIBLE
                 holder.dayText.setTextColor(Color.WHITE)

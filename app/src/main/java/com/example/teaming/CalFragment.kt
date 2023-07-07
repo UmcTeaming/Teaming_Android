@@ -50,6 +50,7 @@ class CalFragment : Fragment() {//minsdk API26 이상으로 바꿀 필요 있음
             val dialog = CalNewScheduleDialog()
             dialog.show(requireActivity().supportFragmentManager,"CalNewScheduleDialog")
         }
+
         return binding.root
     }
 

@@ -183,6 +183,7 @@
             android:layout_height="21dp"
             android:background="@drawable/group_1871"
             app:layout_constraintRight_toRightOf="parent"
+
             app:layout_constraintTop_toBottomOf="@+id/calendar_wrapper_view"
             android:layout_marginRight="20dp"/>
 
@@ -196,6 +197,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"/>
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
