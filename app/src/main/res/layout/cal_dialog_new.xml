@@ -20,6 +20,13 @@
         android:text="일정 추가하기"
         android:textColor="@color/white"
         android:background="@drawable/btn_blue_ellipse"/>
+        <TextView
+            android:id="@+id/retrofit_test_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:text="Test"/>
     <Button
         android:id="@+id/to_before"
         android:layout_width="100dp"
