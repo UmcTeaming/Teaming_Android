@@ -34,7 +34,7 @@ class MainFragment : Fragment() {
         binding.horList.layoutManager = LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL,false)
         binding.horList.adapter = horAdapter
 
-        binding.gridList.layoutManager = GridLayoutManager(context,3)
+        binding.gridList.layoutManager = GridLayoutManager(context,2)
         binding.gridList.adapter = gridAdapter
 
         // 아이템 추가

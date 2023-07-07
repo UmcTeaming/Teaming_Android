@@ -1,14 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".FileFragment">
-
-    <!-- TODO: Update blank fragment layout -->
+    tools:context=".FileFragment"
+    android:background="@drawable/back2"
+    android:orientation="vertical">
+    
+    <ImageView
+        android:layout_marginLeft="28dp"
+        android:layout_marginTop="56dp"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:src="@drawable/icon_back"
+        android:clickable="true"/>
+    
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="file" />
+        android:layout_marginTop="14dp"
+        android:layout_marginLeft="40dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="카리나님의 포트폴리오"
+        android:fontFamily="@font/gmarket_sans_ttf_bold"
+        android:textSize="24sp"
+        android:textColor="@color/white"/>
 
-</FrameLayout>
+    <TextView
+        android:layout_marginTop="3dp"
+        android:textColor="@color/white"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="40dp"
+        android:text="지금까지의 프로젝트를 한눈에 모아보세요!"
+        android:fontFamily="@font/gmarket_sans_ttf_light"
+        android:textSize="11sp"/>
+    
+
+</LinearLayout>

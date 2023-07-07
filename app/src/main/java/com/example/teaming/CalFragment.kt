@@ -45,6 +45,11 @@ class CalFragment : Fragment() {//minsdk API26 이상으로 바꿀 필요 있음
             CalendarUtil.selectedDate = CalendarUtil.selectedDate.plusMonths(1)
             setMonthView()
         }
+        //일정 추가 버튼
+        binding.btnCalNewSchedule.setOnClickListener{
+            val dialog = CalNewScheduleDialog()
+            dialog.show(requireActivity().supportFragmentManager,"CalNewScheduleDialog")
+        }
 
         return binding.root
     }
@@ -75,7 +80,7 @@ class CalFragment : Fragment() {//minsdk API26 이상으로 바꿀 필요 있음
     fun setMonthView(){
         binding.monthText.text=monthFromDate(CalendarUtil.selectedDate)
         val dayList:ArrayList<LocalDate?> = daysInMonthArray(CalendarUtil.selectedDate)
-        val adapter = CalendarAdapter(dayList)
+        val adapter = CalendarAdapter(dayList,binding.calendarView)
         val context = requireContext()
         val manager = GridLayoutManager(context,7)
         binding.calendarView.layoutManager = manager
