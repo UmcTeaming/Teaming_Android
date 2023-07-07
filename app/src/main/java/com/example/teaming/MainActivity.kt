@@ -12,7 +12,7 @@ class MainActivity : AppCompatActivity() {
     private val calFragment by lazy { CalFragment() }
     private val notiFragment by lazy { NotiFragment() }
     private val fileFragment by lazy { FileFragment() }
-    private val myFragment by lazy { MyFragment() }
+    private val userFragment by lazy { UserFragment() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,7 +30,7 @@ class MainActivity : AppCompatActivity() {
                     R.id.cal -> changeFragment(calFragment)
                     R.id.noti -> changeFragment(notiFragment)
                     R.id.file -> changeFragment(fileFragment)
-                    R.id.my -> changeFragment(myFragment)
+                    R.id.user -> changeFragment(userFragment)
                 }
                 true
             }

@@ -7,19 +7,6 @@
     tools:context=".MainActivity"
     android:orientation="vertical">
 
-    <androidx.appcompat.widget.Toolbar
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <ImageView
-            android:scaleType = "centerCrop"
-            android:layout_width="159dp"
-            android:layout_height="32dp"
-            android:layout_gravity="center"
-            android:src="@drawable/mainlogo"/>
-
-    </androidx.appcompat.widget.Toolbar>
-
     <FrameLayout
         android:id="@+id/container"
         android:layout_width="match_parent"
@@ -29,12 +16,14 @@
     </FrameLayout>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
+        app:itemActiveIndicatorStyle="@null"
         android:id="@+id/bottom_navi"
         android:layout_width="match_parent"
         android:layout_height="51dp"
         android:layout_gravity="bottom"
-        android:background="@color/white"
         app:labelVisibilityMode="unlabeled"
+        app:itemIconTint="@color/btn_selector"
+        android:backgroundTint="#00000000"
         app:itemBackground="@color/white"
         app:menu="@menu/navi_menu"/>
 

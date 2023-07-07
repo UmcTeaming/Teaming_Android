@@ -8,26 +8,26 @@
         android:icon="@drawable/home"/>
 
     <item
-        android:id="@+id/cal"
-        android:title="cal"
-        app:showAsAction="never"
-        android:icon="@drawable/cal"/>
-
-    <item
-        android:id="@+id/noti"
-        android:title="not"
-        app:showAsAction="never"
-        android:icon="@drawable/noti"/>
-
-    <item
         android:id="@+id/file"
         android:title="file"
         app:showAsAction="never"
         android:icon="@drawable/file"/>
 
     <item
-        android:id="@+id/my"
-        android:title="my"
+        android:id="@+id/noti"
+        android:title="noti"
         app:showAsAction="never"
-        android:icon="@drawable/my"/>
+        android:icon="@drawable/noti"/>
+
+    <item
+        android:id="@+id/cal"
+        android:title="cal"
+        app:showAsAction="never"
+        android:icon="@drawable/cal"/>
+
+    <item
+        android:id="@+id/user"
+        android:title="user"
+        app:showAsAction="never"
+        android:icon="@drawable/user"/>
 </menu>
