@@ -1,13 +1,15 @@
 package com.example.teaming
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import androidx.viewpager2.widget.ViewPager2
 import com.example.teaming.databinding.FragmentMainBinding
 
 class MainFragment : Fragment() {
@@ -18,8 +20,15 @@ class MainFragment : Fragment() {
     private val gridItemList = arrayListOf<GridListItem>()
     private val gridAdapter = GridAdapter(gridItemList)
 
+    var mainActivity:MainActivity?=null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        mainActivity = context as MainActivity
     }
 
     override fun onCreateView(
@@ -28,19 +37,46 @@ class MainFragment : Fragment() {
     ): View? {
         val binding = FragmentMainBinding.inflate(inflater,container,false)
 
+        //viewPager 관련 내용
+        binding.viewPager2.adapter = horAdapter
+        binding.viewPager2.orientation = ViewPager2.ORIENTATION_HORIZONTAL
+        binding.viewPager2.offscreenPageLimit = 3
+        binding.viewPager2.currentItem = 1
+
+        val pageMargin = resources.getDimensionPixelOffset(R.dimen.pageMargin).toFloat()
+        val pageOffset = resources.getDimensionPixelOffset(R.dimen.offset).toFloat()
+
+        binding.viewPager2.setPageTransformer { page, position ->
+            val myOffset = position * -(2 * pageOffset + pageMargin)
+            if (position < -1) {
+                page.setTranslationX(-myOffset)
+            } else if (position <= 1) {
+                //val scaleFactor = Math.max(0.7f, 1 - Math.abs(position - 0.14285715f))
+                val scaleFactor = Math.max(0.7f, 1 - Math.abs(position - 0.14285715f))
+                page.setTranslationX(myOffset)
+                page.setScaleY(scaleFactor)
+                //page.setAlpha(scaleFactor)
+            } else {
+                // 기본 값
+                //page.setAlpha(0f)
+                page.setAlpha(1f)
+                page.setTranslationX(myOffset)
+            }
+        }
+
         binding.verList.layoutManager = LinearLayoutManager(context)
         binding.verList.adapter = verAdapter
 
-        binding.horList.layoutManager = LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL,false)
-        binding.horList.adapter = horAdapter
+//        binding.horList.layoutManager = LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL,false)
+//        binding.horList.adapter = horAdapter
 
         binding.gridList.layoutManager = GridLayoutManager(context,2)
         binding.gridList.adapter = gridAdapter
 
         // 아이템 추가
-        verItemList.add(VerListItem("UMC 파이널 프로젝트(프로젝트명)", "2023.06.13 ~ (진행기간)"))
-        verItemList.add(VerListItem("UMC 파이널 프로젝트(프로젝트명)", "2023.06.13 ~ (진행기간)"))
-        verItemList.add(VerListItem("UMC 파이널 프로젝트(프로젝트명)", "2023.06.13 ~ (진행기간)"))
+        verItemList.add(VerListItem(R.drawable.state_oval,"UMC 파이널 프로젝트(프로젝트명)", "2023.06.13 ~ (진행기간)"))
+        verItemList.add(VerListItem(R.drawable.state_oval,"UMC 파이널 프로젝트(프로젝트명)", "2023.06.13 ~ (진행기간)"))
+        verItemList.add(VerListItem(R.drawable.state_oval,"UMC 파이널 프로젝트(프로젝트명)", "2023.06.13 ~ (진행기간)"))
         // 리스트가 변경됨을 어댑터에 알림
         verAdapter.notifyDataSetChanged()
 
@@ -49,13 +85,19 @@ class MainFragment : Fragment() {
         horItemList.add(HorListItem(R.drawable.baseline_rectangle_24,"UMC 파이널 프로젝트","2023.06.13 ~"))
         horAdapter.notifyDataSetChanged()
 
-        gridItemList.add(GridListItem(R.drawable.baseline_rectangle_24,"프로젝트명","진행일자"))
-        gridItemList.add(GridListItem(R.drawable.baseline_rectangle_24,"프로젝트명","진행일자"))
-        gridItemList.add(GridListItem(R.drawable.baseline_rectangle_24,"프로젝트명","진행일자"))
-        gridItemList.add(GridListItem(R.drawable.baseline_rectangle_24,"프로젝트명","진행일자"))
-        gridItemList.add(GridListItem(R.drawable.baseline_rectangle_24,"프로젝트명","진행일자"))
-        gridItemList.add(GridListItem(R.drawable.baseline_rectangle_24,"프로젝트명","진행일자"))
+        gridItemList.add(GridListItem(R.drawable.baseline_rectangle_24,"프로젝트명","2023.06.13 ~ (진행기간)"))
+        gridItemList.add(GridListItem(R.drawable.baseline_rectangle_24,"프로젝트명","2023.06.13 ~ (진행기간)"))
+        gridItemList.add(GridListItem(R.drawable.baseline_rectangle_24,"프로젝트명","2023.06.13 ~ (진행기간)"))
+        gridItemList.add(GridListItem(R.drawable.baseline_rectangle_24,"프로젝트명","2023.06.13 ~ (진행기간)"))
+        gridItemList.add(GridListItem(R.drawable.baseline_rectangle_24,"프로젝트명","2023.06.13 ~ (진행기간)"))
+        gridItemList.add(GridListItem(R.drawable.baseline_rectangle_24,"프로젝트명","2023.06.13 ~ (진행기간)"))
+        gridItemList.add(GridListItem(R.drawable.baseline_rectangle_24,"프로젝트명","2023.06.13 ~ (진행기간)"))
+        gridItemList.add(GridListItem(R.drawable.baseline_rectangle_24,"프로젝트명","2023.06.13 ~ (진행기간)"))
         gridAdapter.notifyDataSetChanged()
+
+        binding.btnMainCreate.setOnClickListener {
+            mainActivity!!.openFragment(4)
+        }
 
         return binding.root
     }

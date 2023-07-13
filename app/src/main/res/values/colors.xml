@@ -5,4 +5,6 @@
     <color name="cal_day_name_color">#527FF5</color>
     <color name="pressed">#527FF5</color>
     <color name="unpressed">#4D111827</color>
+    <color name="file_btn_focus">#FFD008</color>
+    <color name="file_btn_unfocus">#B7C8F3</color>
 </resources>

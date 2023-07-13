@@ -1,17 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="152.63dp"
-    android:layout_margin="3dp"
+    android:layout_margin="6dp"
     android:layout_height="117dp"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@drawable/round_border"
+    android:backgroundTint="@color/white"
+    android:elevation="4dp">
 
     <ImageView
         android:layout_marginTop="5dp"
         android:id="@+id/grid_img"
-        android:background="#D9D9D9"
+        android:background="@drawable/file_view_img"
+        android:src="@drawable/file_background"
+        android:clipToOutline="true"
         android:layout_gravity="center_horizontal"
-        android:layout_width="132.95dp"
-        android:layout_height="73.39dp"/>
+        android:layout_width="132dp"
+        android:layout_height="74dp"/>
 
     <TextView
         android:id="@+id/grid_title"
@@ -19,7 +24,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="7dp"
-        android:fontFamily="@font/gmarket_sans_ttf_medium"
+        android:fontFamily="@font/roboto_bold"
         android:text="프로젝트 이름"
         android:textColor="@color/black"
         android:textSize="10sp" />

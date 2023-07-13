@@ -1,23 +1,86 @@
 package com.example.teaming
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.teaming.databinding.FragmentFileBinding
+import com.example.teaming.databinding.FragmentMainBinding
 
 class FileFragment : Fragment() {
+    // 색상 변경을 위해 선택되었는지 아닌지 확인하는 변수
+    private var isFileIcon1Selected = true
+    private var isFileIcon2Selected = false
+
+    // 프래그먼트 호출을 위함
+    var mainActivity: MainActivity? = null
+
+    /*다른 네비게이션바 갔다가 돌아오면 화면이 안보이는 문제 해결해야됨
+    ㅁ인채로 다른 화면 갔다 돌아오면 제대로 화면 표시 but = 상태로 화면 다녀오면 안뜸..;;*/
+
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        mainActivity = context as MainActivity
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        mainActivity!!.openFragment(2)
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_file, container, false)
-    }
+        val binding = FragmentFileBinding.inflate(inflater,container,false)
 
+        // 화면 시작시에 처음 보여야되는 리사이클러뷰 설정
+        isFileIcon1Selected = true
+        isFileIcon2Selected = false
+        binding.fileIcon1.isSelected = true
+        binding.fileIcon2.isSelected = false
+        binding.fileIcon1.backgroundTintList =
+            ContextCompat.getColorStateList(requireContext(), R.color.file_btn_focus)
+        binding.fileIcon2.backgroundTintList =
+            ContextCompat.getColorStateList(requireContext(), R.color.file_btn_unfocus)
+        mainActivity!!.openFragment(2)
+
+        // =버튼 클릭 시 색상 변경 관련
+        binding.fileIcon1.setOnClickListener {
+            if (!isFileIcon1Selected) {
+                isFileIcon1Selected = true
+                isFileIcon2Selected = false
+                binding.fileIcon1.isSelected = true
+                binding.fileIcon2.isSelected = false
+                binding.fileIcon1.backgroundTintList =
+                    ContextCompat.getColorStateList(requireContext(), R.color.file_btn_focus)
+                binding.fileIcon2.backgroundTintList =
+                    ContextCompat.getColorStateList(requireContext(), R.color.file_btn_unfocus)
+                mainActivity!!.openFragment(2)
+            }
+        }
+
+        // ㅁ버튼 클릭 시 색상 변경 관련
+        binding.fileIcon2.setOnClickListener {
+            if (!isFileIcon2Selected) {
+                isFileIcon1Selected = false
+                isFileIcon2Selected = true
+                binding.fileIcon1.isSelected = false
+                binding.fileIcon2.isSelected = true
+                binding.fileIcon1.backgroundTintList =
+                    ContextCompat.getColorStateList(requireContext(), R.color.file_btn_unfocus)
+                binding.fileIcon2.backgroundTintList =
+                    ContextCompat.getColorStateList(requireContext(), R.color.file_btn_focus)
+                mainActivity!!.openFragment(3)
+            }
+        }
+        return binding.root
+    }
 }

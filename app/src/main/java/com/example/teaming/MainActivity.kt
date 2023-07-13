@@ -13,6 +13,11 @@ class MainActivity : AppCompatActivity() {
     private val notiFragment by lazy { NotiFragment() }
     private val fileFragment by lazy { FileFragment() }
     private val userFragment by lazy { UserFragment() }
+    private val fileIcon1Fragment by lazy { File_Icon1_Fragment() }
+    private val fileIcon2Fragment by lazy { File_Icon2_Fragment() }
+    private val createFragment by lazy { CreateFragment() }
+
+    private val num: Int =0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,7 +43,23 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    fun openFragment(int: Int){
+        when(int){
+            1 ->
+            {
+                changeFragment(fileFragment)
+            }
+            2 -> changeFragment2(fileIcon1Fragment)
+            3 -> changeFragment2(fileIcon2Fragment)
+            4 -> changeFragment(createFragment)
+        }
+        true
+    }
+
     private fun changeFragment(fragment: Fragment){
         supportFragmentManager.beginTransaction().replace(R.id.container,fragment).commit()
+    }
+    private fun changeFragment2(fragment: Fragment){
+        supportFragmentManager.beginTransaction().replace(R.id.file_frame,fragment).commit()
     }
 }

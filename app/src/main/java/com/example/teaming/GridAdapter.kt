@@ -18,8 +18,8 @@ class GridAdapter(val grid_itemList: ArrayList<GridListItem>): RecyclerView.Adap
     }
 
     override fun getItemCount(): Int {
-        //return grid_itemList.size
-        return 6
+        return grid_itemList.size
+        //return 6
     }
 
     class ViewHolder(itemView: View):RecyclerView.ViewHolder(itemView){
