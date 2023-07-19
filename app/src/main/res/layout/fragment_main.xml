@@ -35,21 +35,11 @@
                     android:orientation="vertical">
 
                     <LinearLayout
+                        android:layout_marginTop="55dp"
                         android:layout_gravity="center_horizontal"
                         android:layout_width="330dp"
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
-
-                        <TextView
-                            android:clickable="true"
-                            android:layout_marginTop="34dp"
-                            android:textColor="#B3FFFFFF"
-                            android:textSize="11sp"
-                            android:layout_width="wrap_content"
-                            android:layout_height="30dp"
-                            android:fontFamily="@font/gmarket_sans_ttf_medium"
-                            android:gravity="center_vertical"
-                            android:text="전체 보기 >" />
 
                         <TextView
                             android:layout_width="wrap_content"

@@ -9,33 +9,31 @@ import android.view.ViewGroup
 import android.view.WindowManager
 import androidx.fragment.app.DialogFragment
 import com.example.teaming.databinding.CalDialogNewBinding
+import com.example.teaming.databinding.PjCompleteDialogBinding
+import com.example.teaming.databinding.PjModiDialogBinding
 import com.example.teaming.databinding.UserAddDialogBinding
 
-class AddDialog(): DialogFragment() {
-    private lateinit var binding: UserAddDialogBinding
+class PjModiDialog(): DialogFragment() {
+    private lateinit var binding: PjModiDialogBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = UserAddDialogBinding.inflate(inflater,container,false)
+        binding = PjModiDialogBinding.inflate(inflater,container,false)
         val view = binding.root
 
-        binding.btnDel.setOnClickListener{
+        // 확인 버튼
+        binding.btnYes.setOnClickListener{
             dismiss()
         }
 
-        binding.btnInvite.setOnClickListener{
-            // 나중에 서버에서 이메일이 있어서 확인된 경우에 보여지는 dialog
-            val dialog = AddCompleteDialog()
-            dialog.show(requireActivity().supportFragmentManager,"AddCompleteDialog")
+        // 프로젝트 보러가기 버튼
+        binding.btnPj.setOnClickListener{
             dismiss()
         }
 
-//        binding.btnX.setOnClickListener {
-//            dismiss()
-//        }
         return view
     }
 }

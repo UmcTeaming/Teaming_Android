@@ -41,6 +41,8 @@
             android:textSize="11sp" />
 
         <TextView
+            android:clickable="true"
+            android:id="@+id/basic_img"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="22.07dp"
             android:textColor="@color/black"

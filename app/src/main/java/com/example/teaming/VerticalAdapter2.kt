@@ -19,6 +19,10 @@ class VerticalAdapter2(val ver_itemList: ArrayList<VerListItem>): RecyclerView.A
     override fun onBindViewHolder(holder: VerticalAdapter2.ViewHolder, position: Int) {
         holder.verTitle.text = ver_itemList[position].ver_title
         holder.verDate.text = ver_itemList[position].ver_date
+
+        holder.itemView.setOnClickListener {
+            itemClickListener.onClick(it, position)
+        }
     }
 
     class ViewHolder(itemView: View):RecyclerView.ViewHolder(itemView){
@@ -26,4 +30,14 @@ class VerticalAdapter2(val ver_itemList: ArrayList<VerListItem>): RecyclerView.A
         val verTitle: TextView = itemView.findViewById(R.id.ver_title2)
         val verDate: TextView = itemView.findViewById(R.id.ver_date2)
     }
+
+    interface OnItemClickListener {
+        fun onClick(v: View, position: Int)
+    }
+    // (3) 외부에서 클릭 시 이벤트 설정
+    fun setItemClickListener(onItemClickListener: OnItemClickListener) {
+        this.itemClickListener = onItemClickListener
+    }
+    // (4) setItemClickListener로 설정한 함수 실행
+    private lateinit var itemClickListener : OnItemClickListener
 }

@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.GridLayoutManager
@@ -51,7 +52,6 @@ class MainFragment : Fragment() {
             if (position < -1) {
                 page.setTranslationX(-myOffset)
             } else if (position <= 1) {
-                //val scaleFactor = Math.max(0.7f, 1 - Math.abs(position - 0.14285715f))
                 val scaleFactor = Math.max(0.7f, 1 - Math.abs(position - 0.14285715f))
                 page.setTranslationX(myOffset)
                 page.setScaleY(scaleFactor)
@@ -98,6 +98,36 @@ class MainFragment : Fragment() {
         binding.btnMainCreate.setOnClickListener {
             mainActivity!!.openFragment(4)
         }
+
+        // main페이지의 첫번째 가로 리사이클러뷰 클릭이벤트
+        horAdapter.setItemClickListener(object: HorizontalAdapter.OnItemClickListener{
+            override fun onClick(v:View,position:Int){
+                // 클릭 시 이벤트 작성
+                Toast.makeText(view?.context,
+                    "${position}\n${horItemList[position].hor_title}\n${horItemList[position].hor_date}",
+                    Toast.LENGTH_SHORT).show()
+            }
+        })
+
+        // main페이지의 두번째 세로 리사이클러뷰 클릭이벤트
+        verAdapter.setItemClickListener(object: VerticalAdapter.OnItemClickListener{
+            override fun onClick(v:View,position:Int){
+                // 클릭 시 이벤트 작성
+                Toast.makeText(view?.context,
+                    "${position}\n${verItemList[position].ver_title}\n${verItemList[position].ver_date}",
+                    Toast.LENGTH_SHORT).show()
+            }
+        })
+
+        // main페이지의 세번째 그리드 리사이클러뷰 클릭이벤트
+        gridAdapter.setItemClickListener(object: GridAdapter.OnItemClickListener{
+            override fun onClick(v:View,position:Int){
+                // 클릭 시 이벤트 작성
+                Toast.makeText(view?.context,
+                    "${position}\n${gridItemList[position].grid_title}\n${gridItemList[position].grid_date}",
+                    Toast.LENGTH_SHORT).show()
+            }
+        })
 
         return binding.root
     }

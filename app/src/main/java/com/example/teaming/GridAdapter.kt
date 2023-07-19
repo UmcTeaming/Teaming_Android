@@ -15,6 +15,11 @@ class GridAdapter(val grid_itemList: ArrayList<GridListItem>): RecyclerView.Adap
     override fun onBindViewHolder(holder: GridAdapter.ViewHolder, position: Int) {
         holder.gridTitle.text = grid_itemList[position].grid_title
         holder.gridDate.text = grid_itemList[position].grid_date
+
+        // 리사이클러뷰 클릭 이벤트
+        holder.itemView.setOnClickListener {
+            itemClickListener.onClick(it, position)
+        }
     }
 
     override fun getItemCount(): Int {
@@ -27,4 +32,15 @@ class GridAdapter(val grid_itemList: ArrayList<GridListItem>): RecyclerView.Adap
         val gridTitle: TextView = itemView.findViewById(R.id.grid_title)
         val gridDate: TextView = itemView.findViewById(R.id.grid_date)
     }
+
+    // (2) 리스너 인터페이스
+    interface OnItemClickListener {
+        fun onClick(v: View, position: Int)
+    }
+    // (3) 외부에서 클릭 시 이벤트 설정
+    fun setItemClickListener(onItemClickListener: OnItemClickListener) {
+        this.itemClickListener = onItemClickListener
+    }
+    // (4) setItemClickListener로 설정한 함수 실행
+    private lateinit var itemClickListener : OnItemClickListener
 }

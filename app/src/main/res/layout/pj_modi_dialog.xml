@@ -27,46 +27,39 @@
             android:orientation="vertical">
 
             <TextView
+                android:layout_gravity="center_horizontal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="11sp"
-                android:text="이메일"
+                android:textSize="13sp"
+                android:text="팀 프로젝트가 수정되었습니다.:)"
                 android:fontFamily="@font/gmarket_sans_ttf_bold"
                 android:textColor="#194AC2"/>
 
-            <EditText
-                android:layout_marginTop="5dp"
-                android:layout_width="265dp"
-                android:layout_height="wrap_content"
-                android:hint="초대할 팀원의 이메일을 입력해주세요."
-                android:fontFamily="@font/gmarket_sans_ttf_light"
-                android:textColor="#80000000"
-                android:textSize="11sp"/>
 
             <LinearLayout
-                android:layout_marginTop="3dp"
+                android:layout_marginTop="34dp"
                 android:layout_width="265dp"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <Button
-                    android:id="@+id/btn_del"
+                    android:id="@+id/btn_pj"
                     android:background="@drawable/btn_useradd"
                     android:layout_width="128dp"
                     android:layout_height="28dp"
-                    android:text="취소하기"
+                    android:text="프로젝트 보러가기"
                     android:textColor="#527FF5"
                     android:fontFamily="@font/gmarket_sans_ttf_medium"
                     android:textSize="10sp"/>
 
                 <Button
-                    android:id="@+id/btn_invite"
+                    android:id="@+id/btn_yes"
                     android:layout_marginLeft="9dp"
                     android:backgroundTint="#527FF5"
                     android:background="@drawable/btn_useradd"
                     android:layout_width="128dp"
                     android:layout_height="28dp"
-                    android:text="초대하기"
+                    android:text="확인"
                     android:textColor="@color/white"
                     android:fontFamily="@font/gmarket_sans_ttf_bold"
                     android:textSize="10sp"/>

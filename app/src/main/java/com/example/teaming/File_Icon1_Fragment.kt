@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.teaming.databinding.FragmentFileBinding
 import com.example.teaming.databinding.FragmentFileIcon1Binding
@@ -36,9 +37,16 @@ class File_Icon1_Fragment : Fragment() {
         }
         verAdapter2.notifyDataSetChanged()
 
+        // file페이지 = 버튼 선택시 등장하는 리사이클러뷰 클릭이벤트
+        verAdapter2.setItemClickListener(object: VerticalAdapter2.OnItemClickListener{
+            override fun onClick(v:View,position:Int){
+                // 클릭 시 이벤트 작성
+                Toast.makeText(view?.context,
+                    "${position}\n${verItemList[position].ver_title}\n${verItemList[position].ver_date}",
+                    Toast.LENGTH_SHORT).show()
+            }
+        })
 
         return binding.root
     }
-
-
 }
