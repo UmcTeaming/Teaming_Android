@@ -11,8 +11,6 @@
         android:background="@drawable/cal_dialog_new_background">
 
         <EditText
-            android:backgroundTint="#527FF5"
-            android:layout_marginTop="40dp"
             android:fontFamily="@font/gmarket_sans_ttf_bold"
             android:id="@+id/retrofit_test_text"
             android:layout_width="match_parent"
@@ -24,14 +22,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginTop="10dp"
             android:gravity="center">
             <TextView
                 android:fontFamily="@font/gmarket_sans_ttf_bold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
-                android:textColor="#000000"
                 android:text="날짜:"/>
             <TextView
                 android:fontFamily="@font/gmarket_sans_ttf_bold"
@@ -39,7 +35,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
-                android:textColor="#40000000"
                 android:text="0000.00.00"/>
             <TextView
                 android:layout_width="wrap_content"
@@ -53,22 +48,18 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="20dp"
-                android:textColor="#40000000"
                 android:text="0000.00.00"/>
 
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="10dp">
+            android:orientation="horizontal">
             <Button
-                android:id="@+id/schedule_start_time"
                 android:fontFamily="@font/gmarket_sans_ttf_bold"
                 android:layout_width="wrap_content"
                 android:layout_height="25dp"
                 android:text="00:00"
-                android:backgroundTint="#50000000"
                 android:textColor="@color/white"
                 android:layout_marginLeft="20dp"
                 android:background="@drawable/btn_blue_ellipse"/>
@@ -79,11 +70,9 @@
                 android:gravity="center"
                 android:layout_weight="1"/>
             <Button
-                android:id="@+id/schedule_end_time"
                 android:fontFamily="@font/gmarket_sans_ttf_bold"
                 android:layout_width="wrap_content"
                 android:layout_height="25dp"
-                android:backgroundTint="#50000000"
                 android:textColor="@color/white"
                 android:text="00:00"
                 android:layout_marginRight="20dp"
@@ -103,8 +92,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:datePickerMode="spinner"
-            android:visibility="gone"
-            android:calendarViewShown="false"/>
+            android:visibility="gone"/>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
