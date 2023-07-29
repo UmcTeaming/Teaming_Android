@@ -19,6 +19,7 @@ class CalenderScheduleAdapter(val scheduleList:ArrayList<CalendarScheduleItem>):
                  binding.colorBar.setBackgroundColor(Color.RED)
              else
                  binding.colorBar.setBackgroundColor(Color.BLUE)
+
          }
     }
 
