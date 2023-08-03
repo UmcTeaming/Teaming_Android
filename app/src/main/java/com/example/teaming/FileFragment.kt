@@ -11,6 +11,7 @@ import android.widget.ArrayAdapter
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.teaming.databinding.FragmentFileBinding
+import com.example.teaming.databinding.FragmentFileIcon1Binding
 import com.example.teaming.databinding.FragmentMainBinding
 
 class FileFragment : Fragment() {
@@ -50,7 +51,12 @@ class FileFragment : Fragment() {
             ContextCompat.getColorStateList(requireContext(), R.color.file_btn_focus)
         binding.fileIcon2.backgroundTintList =
             ContextCompat.getColorStateList(requireContext(), R.color.file_btn_unfocus)
-        mainActivity!!.openFragment(2)
+
+        requireActivity().supportFragmentManager.beginTransaction()
+            .add(R.id.file_frame,File_Icon1_Fragment())
+            .commit()
+
+        //mainActivity!!.openFragment(2)
 
         // =버튼 클릭 시 색상 변경 관련
         binding.fileIcon1.setOnClickListener {
@@ -63,7 +69,11 @@ class FileFragment : Fragment() {
                     ContextCompat.getColorStateList(requireContext(), R.color.file_btn_focus)
                 binding.fileIcon2.backgroundTintList =
                     ContextCompat.getColorStateList(requireContext(), R.color.file_btn_unfocus)
-                mainActivity!!.openFragment(2)
+
+                requireActivity().supportFragmentManager.beginTransaction()
+                    .replace(R.id.file_frame,File_Icon1_Fragment())
+                    .commit()
+                //mainActivity!!.openFragment(2)
             }
         }
 
@@ -78,6 +88,11 @@ class FileFragment : Fragment() {
                     ContextCompat.getColorStateList(requireContext(), R.color.file_btn_unfocus)
                 binding.fileIcon2.backgroundTintList =
                     ContextCompat.getColorStateList(requireContext(), R.color.file_btn_focus)
+
+                requireActivity().supportFragmentManager.beginTransaction()
+                    .replace(R.id.file_frame,File_Icon2_Fragment())
+                    .commit()
+
                 mainActivity!!.openFragment(3)
             }
         }
