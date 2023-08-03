@@ -10,6 +10,22 @@
             android:background="@drawable/cal_circle_shape"
             android:visibility="invisible"
             />
+        <ImageView
+            android:id="@+id/cal_selected_day_circle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/cal_circle_shape"
+            android:backgroundTint="#808080"
+            android:visibility="invisible"
+            />
+        <ImageView
+            android:id="@+id/cal_day_has_schedule"
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/cal_circle_shape"
+            android:visibility="invisible"/>
         <TextView
             android:id="@+id/day_text"
             android:layout_width="wrap_content"
