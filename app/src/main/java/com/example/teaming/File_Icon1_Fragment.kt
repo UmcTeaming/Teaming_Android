@@ -41,9 +41,13 @@ class File_Icon1_Fragment : Fragment() {
         verAdapter2.setItemClickListener(object: VerticalAdapter2.OnItemClickListener{
             override fun onClick(v:View,position:Int){
                 // 클릭 시 이벤트 작성
-                Toast.makeText(view?.context,
+                /*Toast.makeText(view?.context,
                     "${position}\n${verItemList[position].ver_title}\n${verItemList[position].ver_date}",
-                    Toast.LENGTH_SHORT).show()
+                    Toast.LENGTH_SHORT).show()*/
+
+                requireActivity().supportFragmentManager.beginTransaction()
+                    .replace(R.id.container,PjPageFragment())
+                    .commit()
             }
         })
 

@@ -104,9 +104,13 @@ class MainFragment : Fragment() {
         horAdapter.setItemClickListener(object: HorizontalAdapter.OnItemClickListener{
             override fun onClick(v:View,position:Int){
                 // 클릭 시 이벤트 작성
-                Toast.makeText(view?.context,
+                /*Toast.makeText(view?.context,
                     "${position}\n${horItemList[position].hor_title}\n${horItemList[position].hor_date}",
-                    Toast.LENGTH_SHORT).show()
+                    Toast.LENGTH_SHORT).show()*/
+
+                requireActivity().supportFragmentManager.beginTransaction()
+                    .replace(R.id.container,PjPageFragment())
+                    .commit()
             }
         })
 
@@ -114,9 +118,13 @@ class MainFragment : Fragment() {
         verAdapter.setItemClickListener(object: VerticalAdapter.OnItemClickListener{
             override fun onClick(v:View,position:Int){
                 // 클릭 시 이벤트 작성
-                Toast.makeText(view?.context,
+                /*Toast.makeText(view?.context,
                     "${position}\n${verItemList[position].ver_title}\n${verItemList[position].ver_date}",
-                    Toast.LENGTH_SHORT).show()
+                    Toast.LENGTH_SHORT).show()*/
+
+                requireActivity().supportFragmentManager.beginTransaction()
+                    .replace(R.id.container,PjPageFragment())
+                    .commit()
             }
         })
 
@@ -124,9 +132,13 @@ class MainFragment : Fragment() {
         gridAdapter.setItemClickListener(object: GridAdapter.OnItemClickListener{
             override fun onClick(v:View,position:Int){
                 // 클릭 시 이벤트 작성
-                Toast.makeText(view?.context,
+                /*Toast.makeText(view?.context,
                     "${position}\n${gridItemList[position].grid_title}\n${gridItemList[position].grid_date}",
-                    Toast.LENGTH_SHORT).show()
+                    Toast.LENGTH_SHORT).show()*/
+
+                requireActivity().supportFragmentManager.beginTransaction()
+                    .replace(R.id.container,PjPageFragment())
+                    .commit()
             }
         })
 

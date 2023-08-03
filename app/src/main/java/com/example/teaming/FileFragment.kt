@@ -93,7 +93,7 @@ class FileFragment : Fragment() {
                     .replace(R.id.file_frame,File_Icon2_Fragment())
                     .commit()
 
-                mainActivity!!.openFragment(3)
+                //mainActivity!!.openFragment(3)
             }
         }
         return binding.root
