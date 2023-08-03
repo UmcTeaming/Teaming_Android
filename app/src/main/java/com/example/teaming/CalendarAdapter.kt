@@ -19,6 +19,7 @@ class CalendarAdapter(val dayList:ArrayList<LocalDate?>,val recyclerView: Recycl
     inner class CalendarViewHolder(itemView: View):RecyclerView.ViewHolder(itemView){
         var dayText:TextView = itemView.findViewById(R.id.day_text)
         var todayCircle:ImageView = itemView.findViewById(R.id.cal_today_circle)
+        var selectedCircle:ImageView = itemView.findViewById(R.id.cal_selected_day_circle)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CalendarViewHolder {
@@ -39,16 +40,16 @@ class CalendarAdapter(val dayList:ArrayList<LocalDate?>,val recyclerView: Recycl
         else{
             holder.dayText.text=day.dayOfMonth.toString()
             holder.itemView.setOnClickListener {
-                if(!(day==(CalendarUtil.selectedDate)&&CalendarUtil.selectedDate== LocalDate.now())) {
+                //if(!(day==(CalendarUtil.selectedDate)&&CalendarUtil.selectedDate== LocalDate.now())) {
                     if (check != null) {
                         val x = check
                         val beforeViewHolder: CalendarViewHolder =
                             recyclerView.findViewHolderForAdapterPosition(x!!) as CalendarViewHolder
-                        beforeViewHolder.todayCircle.visibility = View.INVISIBLE
+                        beforeViewHolder.selectedCircle.visibility = View.INVISIBLE
                     }
-                    holder.todayCircle.visibility = View.VISIBLE
+                    holder.selectedCircle.visibility = View.VISIBLE
                     check = position
-                }
+                //}
             }
 
             if(day==(CalendarUtil.selectedDate)&&CalendarUtil.selectedDate== LocalDate.now()){
