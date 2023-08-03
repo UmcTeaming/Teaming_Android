@@ -4,7 +4,7 @@
     <color name="white">#FFFFFFFF</color>
     <color name="cal_day_name_color">#527FF5</color>
     <color name="pressed">#527FF5</color>
-    <color name="unpressed">#4D000000</color>
+    <color name="unpressed_g">#4D000000</color>
     <color name="file_btn_focus">#FFD008</color>
     <color name="file_btn_unfocus">#B7C8F3</color>
     <color name="col_pink">#E18E87</color>
@@ -17,4 +17,8 @@
     <color name="col_purple">#B494F7</color>
     <color name="col_black">#555555</color>
     <color name="col_grey">#D8D8D8</color>
+    <color name="unpressed">#4D111827</color>
+    <color name="slide_gray">#575757</color>
+    <color name="color_7A7A7A">#7A7A7A</color>
+    <color name="disabled">#50000000</color>
 </resources>
