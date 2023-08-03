@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">Teaming</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="pj_file">프로젝트 파일</string>
+    <string name="final_file">최종 파일</string>
+    <string name="end_pj">프로젝트 종료하기</string>
 </resources>

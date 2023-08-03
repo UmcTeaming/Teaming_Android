@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:paddingStart="20dp"
+    android:paddingEnd="20dp"
+    android:background="@color/white">
+
+    <TextView
+        android:paddingStart="3dp"
+        android:id="@+id/no_way_home"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#194AC2"
+        android:fontFamily="@font/gmarket_sans_ttf_bold"
+        android:text="해당 메일로 가입된 회원이 없습니다."
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="30dp"
+        android:textSize="15sp"
+        />
+
+    <TextView
+        android:paddingStart="3dp"
+        android:id="@+id/line_num1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#80000000"
+        android:fontFamily="@font/gmarket_sans_ttf_medium"
+        android:text="메일 주소를 다시 확인하여 초대해주세요!"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/no_way_home"
+        android:layout_marginTop="15dp"
+        android:textSize="13sp"
+        />
+
+    <LinearLayout
+        android:layout_marginTop="20dp"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/line_num1"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/re_write_btn"
+            android:layout_marginEnd="7dp"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:src="@drawable/re_write_btn"
+            android:layout_weight="1"
+            android:scaleType="fitCenter"
+            android:background="@android:color/transparent"/>
+
+        <ImageButton
+            android:id="@+id/yes_btn"
+            android:layout_marginStart="7dp"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:src="@drawable/yes_btn"
+            android:layout_weight="1"
+            android:scaleType="fitCenter"
+            android:background="@android:color/transparent"
+            android:layout_marginBottom="20dp"/>
+
+
+    </LinearLayout>
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
