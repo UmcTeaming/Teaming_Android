@@ -20,6 +20,6 @@ class ProjectScheduleDialog : DialogFragment() {
         scheduleList.add(CalendarScheduleItem("12월11일~12월12일","11:00~12:00","더미약속",1))
         binding.projectSchedulesRecyclerView.layoutManager = LinearLayoutManager(activity,LinearLayoutManager.VERTICAL,false)
         binding.projectSchedulesRecyclerView.adapter = CalenderScheduleAdapter(scheduleList)
-        return super.onCreateView(inflater, container, savedInstanceState)
+        return binding.root
     }
 }
