@@ -7,7 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.teaming.databinding.FragmentList1Binding
-import com.example.teaming.databinding.FragmentMain1Binding
 
 class ListFragment1 : Fragment() {
 

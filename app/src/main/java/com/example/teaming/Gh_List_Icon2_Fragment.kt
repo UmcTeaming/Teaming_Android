@@ -5,15 +5,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.teaming.databinding.FragmentFileIcon1Binding
-import com.example.teaming.databinding.FragmentFileIcon2Binding
+import com.example.teaming.databinding.FragmentGhListIcon2Binding
+import com.example.teaming.databinding.FragmentList1Binding
 
-// 하단바 file 화면 내에서 보여지는 리사이클러뷰1 - ㅁ 눌렀을 때 보여지는 화면
-class File_Icon2_Fragment : Fragment() {
-    private val fileVerItemList = arrayListOf<GridListItem>()      // 아이템 배열
-    private val fileVerAdapter = FileVerAdapter(fileVerItemList)
+class Gh_List_Icon2_Fragment : Fragment() {
+    private val listVerItemList = arrayListOf<GridListItem>()      // 아이템 배열
+    private val fileVerAdapter = FileVerAdapter(listVerItemList)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,15 +23,15 @@ class File_Icon2_Fragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val binding = FragmentFileIcon2Binding.inflate(inflater,container,false)
+        val binding = FragmentGhListIcon2Binding.inflate(inflater,container,false)
 
-        binding.potVerList2.layoutManager = LinearLayoutManager(context)
-        binding.potVerList2.adapter = fileVerAdapter
+        binding.listVerList2.layoutManager = LinearLayoutManager(context)
+        binding.listVerList2.adapter = fileVerAdapter
 
-        fileVerItemList.clear()
+        listVerItemList.clear()
         // 아이템 추가
         for (i: Int in 1..8){
-            fileVerItemList.add(GridListItem(R.drawable.baseline_rectangle_24,"UMC 파이널 프로젝트 Teaming", "2023. 07. 01 ~ 2023. 08. 29"))
+            listVerItemList.add(GridListItem(R.drawable.baseline_rectangle_24,"UMC 파이널 프로젝트 Teaming", "2023. 07. 01 ~ 2023. 08. 29"))
         }
         fileVerAdapter.notifyDataSetChanged()
 
