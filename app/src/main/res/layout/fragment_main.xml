@@ -13,10 +13,11 @@
         android:layout_height="match_parent">
 
         <Button
-            android:layout_width="45dp"
-            android:layout_height="45dp"
+            android:id="@+id/btn_main_create"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_gravity="bottom|right"
-            android:layout_margin="20dp"
+            android:layout_margin="30dp"
             android:background="@drawable/btn_round"/>
 
         <ScrollView
@@ -34,63 +35,73 @@
                     android:layout_height="381dp"
                     android:orientation="vertical">
 
-                    <TextView
-                        android:clickable="true"
-                        android:layout_marginLeft="18dp"
-                        android:layout_marginTop="34dp"
-                        android:textColor="#B3FFFFFF"
-                        android:textSize="11sp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="30dp"
-                        android:fontFamily="@font/gmarket_sans_ttf_medium"
-                        android:gravity="center_vertical"
-                        android:text="전체 보기 >" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
+                    <LinearLayout
+                        android:layout_marginTop="55dp"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_width="330dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="18dp"
-                        android:fontFamily="@font/gmarket_sans_ttf_bold"
-                        android:gravity="center_vertical"
-                        android:text="카리나님의 최근 프로젝트"
-                        android:textColor="@color/white"
-                        android:textSize="20sp" />
+                        android:orientation="vertical">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="18dp"
-                        android:fontFamily="@font/gmarket_sans_ttf_light"
-                        android:gravity="center_vertical"
-                        android:text="최근 작업한 프로젝트입니다."
-                        android:textColor="#B3FFFFFF"
-                        android:textSize="11sp" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/gmarket_sans_ttf_bold"
+                            android:gravity="center_vertical"
+                            android:text="카리나님의 최근 프로젝트"
+                            android:textColor="@color/white"
+                            android:textSize="20sp" />
 
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/hor_list"
-                        android:layout_marginTop="16dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                        tools:listitem="@layout/item_hori2"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/gmarket_sans_ttf_light"
+                            android:gravity="center_vertical"
+                            android:text="최근 작업한 프로젝트입니다."
+                            android:textColor="#B3FFFFFF"
+                            android:textSize="11sp" />
+
+                    </LinearLayout>
+
+                    <androidx.viewpager2.widget.ViewPager2
+                        android:id="@+id/viewPager2"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:clipToPadding="false"
+                        android:clipChildren="false"
+                        />
+
+<!--                    <androidx.recyclerview.widget.RecyclerView-->
+<!--                        android:id="@+id/hor_list"-->
+<!--                        android:layout_marginTop="16dp"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:orientation="horizontal"-->
+<!--                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"-->
+<!--                        tools:listitem="@layout/item_hori"/>-->
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_marginTop="12dp"
                     android:layout_width="match_parent"
-                    android:layout_height="288dp"
+                    android:layout_height="290dp"
                     android:orientation="vertical">
 
-                    <TextView
-                        android:layout_width="179dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="18dp"
-                        android:fontFamily="@font/gmarket_sans_ttf_bold"
-                        android:gravity="center_vertical"
-                        android:text="진행중인 프로젝트"
-                        android:textColor="#1E4FD0"
-                        android:textSize="13sp" />
+                    <LinearLayout
+                        android:layout_gravity="center_horizontal"
+                        android:layout_width="330dp"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:layout_weight="1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="30dp"
+                            android:fontFamily="@font/gmarket_sans_ttf_bold"
+                            android:gravity="center_vertical"
+                            android:text="진행중인 프로젝트"
+                            android:textColor="#1E4FD0"
+                            android:textSize="13sp" />
+
+                    </LinearLayout>
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:layout_marginTop="3dp"
@@ -99,30 +110,23 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
                         android:orientation="vertical"
-                        tools:listitem="@layout/item_ver">
+                        tools:listitem="@layout/item_ver"
+                        android:overScrollMode="never"
+                        android:nestedScrollingEnabled="false">
 
                     </androidx.recyclerview.widget.RecyclerView>
                 </LinearLayout>
 
                 <LinearLayout
-                    android:layout_marginTop="22dp"
+                    android:layout_marginTop="39dp"
                     android:layout_width="match_parent"
-                    android:layout_height="541dp"
+                    android:layout_height="570dp"
                     android:orientation="vertical">
 
                     <TextView
-                        android:clickable="true"
-                        android:layout_marginLeft="18dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="전체 보기 >"
-                        android:textSize="10sp"
-                        android:fontFamily="@font/gmarket_sans_ttf_medium"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="330dp"
                         android:layout_height="30dp"
-                        android:layout_marginLeft="18dp"
+                        android:layout_gravity="center_horizontal"
                         android:fontFamily="@font/gmarket_sans_ttf_bold"
                         android:gravity="center_vertical"
                         android:text="카리나님의 포트폴리오"
@@ -130,7 +134,6 @@
                         android:textSize="13sp" />
 
                     <androidx.recyclerview.widget.RecyclerView
-                        android:layout_marginTop="2dp"
                         android:layout_gravity="center_horizontal"
                         android:id="@+id/grid_list"
                         android:layout_width="wrap_content"
@@ -138,6 +141,8 @@
                         tools:listitem="@layout/item_grid"
                         android:orientation="horizontal"
                         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                        android:overScrollMode="never"
+                        android:nestedScrollingEnabled="false"
                         >
                     </androidx.recyclerview.widget.RecyclerView>
                 </LinearLayout>

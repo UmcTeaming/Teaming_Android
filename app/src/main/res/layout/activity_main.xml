@@ -17,15 +17,16 @@
     </FrameLayout>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
-        app:itemActiveIndicatorStyle="@null"
         android:id="@+id/bottom_navi"
         android:layout_width="match_parent"
         android:layout_height="51dp"
         android:layout_gravity="bottom"
-        app:labelVisibilityMode="unlabeled"
-        app:itemIconTint="@color/btn_selector"
+        android:background="@color/white"
         android:backgroundTint="#00000000"
+        app:itemActiveIndicatorStyle="@null"
         app:itemBackground="@color/white"
-        app:menu="@menu/navi_menu"/>
+        app:itemIconTint="@color/btn_selector"
+        app:labelVisibilityMode="unlabeled"
+        app:menu="@menu/navi_menu" />
 
 </LinearLayout>

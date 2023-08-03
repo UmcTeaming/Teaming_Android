@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ListFragment1"
+    android:background="@drawable/bg_gradient2"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_marginTop="94dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_width="287dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_marginLeft="6dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/gmarket_sans_ttf_bold"
+            android:text="카리나님의 포트폴리오"
+            android:textColor="#527FF5"
+            android:textSize="24sp" />
+
+        <TextView
+            android:layout_marginLeft="6dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
+            android:fontFamily="@font/gmarket_sans_ttf_light"
+            android:text="지금까지의 프로젝트를 한눈에 모아보세요!"
+            android:textColor="#527FF5"
+            android:textSize="11sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_marginTop="70dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_width="278dp"
+        android:layout_height="315dp"
+        android:orientation="vertical"
+        android:backgroundTint="@color/white"
+        android:elevation="7dp"
+        android:background="@drawable/round_border"
+        android:gravity="center">
+
+        <TextView
+            android:layout_gravity="center_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="현재 진행중인 프로젝트가 없어요!"
+            android:fontFamily="@font/gmarket_sans_ttf_bold"
+            android:textColor="#80000000"
+            android:textSize="16sp"/>
+
+        <ImageView
+            android:layout_marginLeft="14dp"
+            android:layout_marginTop="33dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/non_project_img"/>
+
+        <TextView
+            android:layout_marginTop="16dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="프로젝트를 생성하고 티밍을 이용해보세요."
+            android:textSize="11sp"
+            android:fontFamily="@font/gmarket_sans_ttf_medium"
+            android:textColor="#66000000"/>
+
+        <Button
+            android:id="@+id/btn_new"
+            android:layout_marginTop="26dp"
+            android:background="@drawable/non_project_btn"
+            android:layout_width="160.46dp"
+            android:layout_height="33dp"
+            android:layout_gravity="center_horizontal"
+            />
+
+    </LinearLayout>
+
+</LinearLayout>

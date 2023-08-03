@@ -3,37 +3,96 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".FileFragment"
-    android:background="@drawable/back2"
+    android:background="@drawable/bg_gradient"
     android:orientation="vertical">
-    
-    <ImageView
-        android:layout_marginLeft="28dp"
-        android:layout_marginTop="56dp"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
-        android:src="@drawable/icon_back"
-        android:clickable="true"/>
-    
-    <TextView
-        android:layout_marginTop="14dp"
-        android:layout_marginLeft="40dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="카리나님의 포트폴리오"
-        android:fontFamily="@font/gmarket_sans_ttf_bold"
-        android:textSize="24sp"
-        android:textColor="@color/white"/>
 
-    <TextView
-        android:layout_marginTop="3dp"
-        android:textColor="@color/white"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="40dp"
-        android:text="지금까지의 프로젝트를 한눈에 모아보세요!"
-        android:fontFamily="@font/gmarket_sans_ttf_light"
-        android:textSize="11sp"/>
-    
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Button
+            android:id="@+id/btn_main_create"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="bottom|right"
+            android:layout_margin="30dp"
+            android:elevation="5dp"
+            android:background="@drawable/btn_round"/>
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_marginTop="94dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_width="287dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_marginLeft="6dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/gmarket_sans_ttf_bold"
+                        android:text="카리나님의 포트폴리오"
+                        android:textColor="@color/white"
+                        android:textSize="24sp" />
+
+                    <TextView
+                        android:layout_marginLeft="6dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="3dp"
+                        android:fontFamily="@font/gmarket_sans_ttf_light"
+                        android:text="지금까지의 프로젝트를 한눈에 모아보세요!"
+                        android:textColor="@color/white"
+                        android:textSize="11sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_marginTop="33dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_width="287dp"
+                    android:layout_height="24dp"
+                    android:gravity="center_vertical|end">
+
+                    <Button
+                        android:id="@+id/file_icon2"
+                        android:backgroundTint="@color/btn_file_selector"
+                        android:layout_width="13dp"
+                        android:layout_height="13dp"
+                        android:background="@drawable/file_icon1"/>
+
+                    <Button
+                        android:backgroundTint="@color/btn_file_selector"
+                        android:id="@+id/file_icon1"
+                        android:layout_marginLeft="10dp"
+                        android:layout_width="13dp"
+                        android:layout_height="13dp"
+                        android:background="@drawable/file_icon2"/>
+
+                </LinearLayout>
+
+                <FrameLayout
+                    android:id="@+id/file_frame"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="8dp"/>
+
+            </LinearLayout>
+
+        </androidx.core.widget.NestedScrollView>
+    </FrameLayout>
 
 </LinearLayout>

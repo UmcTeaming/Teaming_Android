@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/bg_gradient2"
+    tools:context=".ListFragment">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Button
+            android:id="@+id/btn_main_create"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="bottom|right"
+            android:elevation="4dp"
+            android:layout_margin="30dp"
+            android:background="@drawable/btn_round2"/>
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_marginTop="94dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_width="287dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_marginLeft="6dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/gmarket_sans_ttf_bold"
+                        android:text="카리나님의 포트폴리오"
+                        android:textColor="#527FF5"
+                        android:textSize="24sp" />
+
+                    <TextView
+                        android:layout_marginLeft="6dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="3dp"
+                        android:fontFamily="@font/gmarket_sans_ttf_light"
+                        android:text="지금까지의 프로젝트를 한눈에 모아보세요!"
+                        android:textColor="#527FF5"
+                        android:textSize="11sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_marginTop="33dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_width="287dp"
+                    android:layout_height="24dp"
+                    android:gravity="center_vertical|end">
+
+                    <Button
+                        android:id="@+id/file_icon2"
+                        android:backgroundTint="@color/btn_file_selector"
+                        android:layout_width="13dp"
+                        android:layout_height="13dp"
+                        android:background="@drawable/file_icon1"/>
+
+                    <Button
+                        android:backgroundTint="@color/btn_file_selector"
+                        android:id="@+id/file_icon1"
+                        android:layout_marginLeft="10dp"
+                        android:layout_width="13dp"
+                        android:layout_height="13dp"
+                        android:background="@drawable/file_icon2"/>
+
+                </LinearLayout>
+
+                <FrameLayout
+                    android:id="@+id/file_frame"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="8dp"/>
+
+                <!--            <androidx.recyclerview.widget.RecyclerView-->
+                <!--                android:layout_width="wrap_content"-->
+                <!--                android:layout_height="match_parent"-->
+                <!--                android:layout_gravity="center_horizontal"-->
+                <!--                android:layout_marginTop="5dp"-->
+                <!--                android:layout_marginBottom="8dp"-->
+                <!--                android:nestedScrollingEnabled="false"-->
+                <!--                android:overScrollMode="never"-->
+                <!--                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"-->
+                <!--                tools:listitem="@layout/item_file_ver" />-->
+
+                <!--            <androidx.recyclerview.widget.RecyclerView-->
+                <!--                android:id="@+id/pot_ver_list"-->
+                <!--                android:layout_width="wrap_content"-->
+                <!--                android:layout_height="match_parent"-->
+                <!--                android:layout_gravity="center_horizontal"-->
+                <!--                android:layout_marginTop="5dp"-->
+                <!--                android:layout_marginBottom="8dp"-->
+                <!--                android:orientation="vertical"-->
+                <!--                android:overScrollMode="never"-->
+                <!--                android:nestedScrollingEnabled="false"-->
+                <!--                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"-->
+                <!--                tools:listitem="@layout/item_ver2" />-->
+
+            </LinearLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+    </FrameLayout>
+
+</LinearLayout>

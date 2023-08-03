@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ModifyFragment"
+    android:gravity="center_vertical"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_gravity="center"
+        android:layout_width="265dp"
+        android:layout_height="149dp">
+
+        <ImageView
+            android:id="@+id/img_modi"
+            android:clickable="true"
+            android:background="#F4F4F4"
+            android:layout_gravity="center"
+            android:layout_width="265dp"
+            android:layout_height="149dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:fontFamily="@font/gmarket_sans_ttf_medium"
+            android:text="대표 이미지"
+            android:textColor="#4D000000"
+            android:textSize="12sp" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_marginTop="32dp"
+        android:layout_width="265dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="center_horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="프로젝트 명"
+            android:textColor="#194AC2"
+            android:fontFamily="@font/gmarket_sans_ttf_bold"
+            android:textSize="11sp"/>
+
+        <EditText
+            android:backgroundTint="#527FF5"
+            android:layout_width="265dp"
+            android:layout_height="wrap_content"
+            android:hint="프로젝트 명을 입력해주세요.(9자 이하)"
+            android:maxLength="9"
+            android:textColorHint="#80000000"
+            android:textSize="11sp"
+            android:fontFamily="@font/gmarket_sans_ttf_light"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_marginTop="32dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_width="265dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="날짜"
+            android:textColor="#194AC2"
+            android:fontFamily="@font/gmarket_sans_ttf_bold"
+            android:textSize="11sp"/>
+
+        <TextView
+            android:layout_marginTop="8dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="프로젝트의 예상 진행 날짜를 입력해주세요"
+            android:textColor="#80000000"
+            android:fontFamily="@font/gmarket_sans_ttf_light"
+            android:textSize="11sp"/>
+
+        <LinearLayout
+            android:layout_marginTop="10dp"
+            android:layout_width="265dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <EditText
+                android:inputType="date"
+                android:hint="2023/07/02"
+                android:textSize="11sp"
+                android:fontFamily="@font/gmarket_sans_ttf_medium"
+                android:gravity="center_horizontal"
+                android:layout_weight="1"
+                android:backgroundTint="#527FF5"
+                android:layout_width="117.04dp"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:gravity="center"
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/gmarket_sans_ttf_bold"
+                android:text="~"
+                android:textColor="#194AC2"/>
+
+            <EditText
+                android:inputType="date"
+                android:gravity="center_horizontal"
+                android:hint="2023/07/02"
+                android:textSize="11sp"
+                android:fontFamily="@font/gmarket_sans_ttf_medium"
+                android:layout_weight="1"
+                android:backgroundTint="#527FF5"
+                android:layout_width="117.04dp"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="32dp"
+        android:layout_width="265dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_gravity="center_vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/gmarket_sans_ttf_bold"
+            android:text="색상"
+            android:textSize="11sp"
+            android:textColor="#194AC2"/>
+
+        <View
+            android:id="@+id/modi_col"
+            android:layout_marginLeft="15dp"
+            android:layout_width="21dp"
+            android:layout_height="21dp"
+            android:background="@drawable/state_oval"
+            android:backgroundTint="#D9D9D9"/>
+
+        <Button
+            android:id="@+id/btn_modi_color"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="7dp"
+            android:layout_width="14dp"
+            android:layout_height="14dp"
+            android:background="@drawable/btn_create1"
+            android:backgroundTint="#57000000"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_marginTop="32dp"
+        android:layout_width="265dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="center_horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/gmarket_sans_ttf_bold"
+            android:text="팀원 추가"
+            android:textSize="11sp"
+            android:textColor="#194AC2"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/btn_modi_user"
+                android:layout_marginTop="9dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:backgroundTint="#7F7F7F"
+                android:background="@drawable/btn_create_user"/>
+
+            <TextView
+                android:gravity="center_horizontal"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:text="초대하기"
+                android:fontFamily="@font/gmarket_sans_ttf_medium"
+                android:textSize="12sp"
+                android:textColor="#80000000"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_modi_project"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="35dp"
+        android:backgroundTint="#527FF5"
+        android:background="@drawable/create_btn_round_border"
+        android:layout_width="265dp"
+        android:layout_height="36dp"
+        android:text="팀 프로젝트 수정하기"
+        android:fontFamily="@font/gmarket_sans_ttf_medium"
+        android:textSize="15sp"
+        android:textColor="@color/white"/>
+
+</LinearLayout>

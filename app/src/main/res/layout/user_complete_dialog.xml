@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/dlg_border"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:layout_width="328dp"
+        android:layout_height="182dp">
+
+        <LinearLayout
+            android:layout_gravity="center"
+            android:gravity="center_vertical"
+            android:layout_width="265dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_gravity="center_horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="13sp"
+                android:text="초대 이메일이 전송되었습니다."
+                android:fontFamily="@font/gmarket_sans_ttf_bold"
+                android:textColor="#194AC2"/>
+
+            <Button
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="34dp"
+                android:id="@+id/btn_complete"
+                android:backgroundTint="#527FF5"
+                android:background="@drawable/btn_useradd"
+                android:layout_width="128dp"
+                android:layout_height="28dp"
+                android:text="확인"
+                android:textColor="@color/white"
+                android:fontFamily="@font/gmarket_sans_ttf_bold"
+                android:textSize="10sp"/>
+
+
+        </LinearLayout>
+
+    </FrameLayout>
+    
+
+
+
+
+
+
+</LinearLayout>
