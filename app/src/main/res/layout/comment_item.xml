@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/comment_layer"
+    android:layout_marginTop="10dp">
+
+
+    <LinearLayout
+        android:id="@+id/profile"
+        android:layout_margin="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:orientation="horizontal">
+
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/comment_img"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/profile_default"
+            android:scaleType="centerCrop"
+            android:background="@android:color/transparent"/>
+
+        <TextView
+            android:layout_marginStart="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:text="닝닝"
+            android:textColor="#80000000"
+            android:fontFamily="@font/gmarket_sans_ttf_medium"
+            android:layout_gravity="center"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/context"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginStart="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/profile"
+        app:layout_constraintHorizontal_bias="0"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="닌닌 아니고 닝닝입니다. 수정 부탁드립니다."
+        android:textColor="@color/black"
+        android:fontFamily="@font/gmarket_sans_ttf_medium"
+        android:textSize="15sp"/>
+
+    <TextView
+        android:id="@+id/date"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginStart="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/context"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="1"
+        android:textSize="10sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="2023. 06. 20 오후 6:13"
+        android:textColor="#80000000"
+        android:fontFamily="@font/gmarket_sans_ttf_medium"/>
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
