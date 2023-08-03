@@ -19,21 +19,15 @@ class FileFragment : Fragment() {
     private var isFileIcon1Selected = true
     private var isFileIcon2Selected = false
 
-    // 프래그먼트 호출을 위함
-    var mainActivity: MainActivity? = null
-
     /*다른 네비게이션바 갔다가 돌아오면 화면이 안보이는 문제 해결해야됨
     ㅁ인채로 다른 화면 갔다 돌아오면 제대로 화면 표시 but = 상태로 화면 다녀오면 안뜸..;;*/
 
-
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        mainActivity = context as MainActivity
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mainActivity!!.openFragment(2)
     }
 
     override fun onCreateView(
@@ -95,6 +89,12 @@ class FileFragment : Fragment() {
 
                 //mainActivity!!.openFragment(3)
             }
+        }
+
+        binding.btnCreate.setOnClickListener {
+            requireActivity().supportFragmentManager.beginTransaction()
+                .replace(R.id.container,CreateFragment())
+                .commit()
         }
         return binding.root
     }

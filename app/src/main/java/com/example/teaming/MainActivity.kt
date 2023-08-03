@@ -65,17 +65,11 @@ class MainActivity : AppCompatActivity() {
                 // 조건문
                 changeFragment(fileFragment)
             }
-            2 -> changeFragment2(fileIcon1Fragment)
-            3 -> changeFragment2(fileIcon2Fragment)
-            4 -> changeFragment(createFragment)
         }
         true
     }
 
     private fun changeFragment(fragment: Fragment){
         supportFragmentManager.beginTransaction().replace(R.id.container,fragment).commit()
-    }
-    private fun changeFragment2(fragment: Fragment){
-        supportFragmentManager.beginTransaction().replace(R.id.file_frame,fragment).commit()
     }
 }
