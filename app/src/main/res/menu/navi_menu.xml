@@ -2,32 +2,38 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
+        android:checked="true"
         android:id="@+id/home"
         android:title="home"
+        android:enabled="true"
         app:showAsAction="never"
         android:icon="@drawable/home"/>
 
     <item
         android:id="@+id/file"
         android:title="file"
+        android:enabled="true"
         app:showAsAction="never"
         android:icon="@drawable/file"/>
 
     <item
-        android:id="@+id/noti"
-        android:title="noti"
+        android:id="@+id/list"
+        android:title="list"
+        android:enabled="true"
         app:showAsAction="never"
-        android:icon="@drawable/noti"/>
+        android:icon="@drawable/list"/>
 
     <item
         android:id="@+id/cal"
         android:title="cal"
+        android:enabled="true"
         app:showAsAction="never"
         android:icon="@drawable/cal"/>
 
     <item
         android:id="@+id/user"
         android:title="user"
+        android:enabled="true"
         app:showAsAction="never"
         android:icon="@drawable/user"/>
 </menu>

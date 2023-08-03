@@ -9,8 +9,10 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
 
     private val mainFragment by lazy { MainFragment() }
+    private val nonMainFragment by lazy {MainFragment1()}
     private val calFragment by lazy { CalFragment() }
-    private val notiFragment by lazy { NotiFragment() }
+    private val listFragment by lazy { ListFragment() }
+    private val nonListFragment by lazy { ListFragment1() }
     private val fileFragment by lazy { FileFragment() }
     private val userFragment by lazy { UserFragment() }
     private val fileIcon1Fragment by lazy { File_Icon1_Fragment() }
@@ -31,9 +33,22 @@ class MainActivity : AppCompatActivity() {
         binding.bottomNavi.run{
             setOnItemSelectedListener {
                 when(it.itemId){
-                    R.id.home -> changeFragment(mainFragment)
+                    R.id.home ->
+                    {
+                        // project가 없는 경우
+                        changeFragment(nonMainFragment)
+
+                        // project가 있는 경우
+                        //changeFragment(mainFragment)
+                    }
                     R.id.cal -> changeFragment(calFragment)
-                    R.id.noti -> changeFragment(notiFragment)
+                    R.id.list ->
+                    {
+                        // project가 없는 경우
+                        changeFragment(nonListFragment)
+                        // project가 있는 경우
+                        //changeFragment(listFragment)
+                    }
                     R.id.file -> changeFragment(fileFragment)
                     R.id.user -> changeFragment(userFragment)
                 }
@@ -47,6 +62,7 @@ class MainActivity : AppCompatActivity() {
         when(int){
             1 ->
             {
+                // 조건문
                 changeFragment(fileFragment)
             }
             2 -> changeFragment2(fileIcon1Fragment)

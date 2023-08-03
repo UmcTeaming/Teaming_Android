@@ -4,7 +4,7 @@
     <color name="white">#FFFFFFFF</color>
     <color name="cal_day_name_color">#527FF5</color>
     <color name="pressed">#527FF5</color>
-    <color name="unpressed">#4D111827</color>
+    <color name="unpressed">#4D000000</color>
     <color name="file_btn_focus">#FFD008</color>
     <color name="file_btn_unfocus">#B7C8F3</color>
     <color name="col_pink">#E18E87</color>

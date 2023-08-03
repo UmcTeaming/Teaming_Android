@@ -13,8 +13,8 @@
 
         <Button
             android:id="@+id/btn_main_create"
-            android:layout_width="45dp"
-            android:layout_height="45dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_gravity="bottom|right"
             android:layout_margin="30dp"
             android:background="@drawable/btn_round"/>

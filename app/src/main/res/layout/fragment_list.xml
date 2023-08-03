@@ -3,10 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".FileFragment"
-    android:background="@drawable/bg_gradient"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@drawable/bg_gradient2"
+    tools:context=".ListFragment">
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -17,9 +16,9 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_gravity="bottom|right"
+            android:elevation="4dp"
             android:layout_margin="30dp"
-            android:elevation="5dp"
-            android:background="@drawable/btn_round"/>
+            android:background="@drawable/btn_round2"/>
 
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
@@ -43,7 +42,7 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/gmarket_sans_ttf_bold"
                         android:text="카리나님의 포트폴리오"
-                        android:textColor="@color/white"
+                        android:textColor="#527FF5"
                         android:textSize="24sp" />
 
                     <TextView
@@ -53,7 +52,7 @@
                         android:layout_marginTop="3dp"
                         android:fontFamily="@font/gmarket_sans_ttf_light"
                         android:text="지금까지의 프로젝트를 한눈에 모아보세요!"
-                        android:textColor="@color/white"
+                        android:textColor="#527FF5"
                         android:textSize="11sp" />
 
                 </LinearLayout>
@@ -117,6 +116,7 @@
             </LinearLayout>
 
         </androidx.core.widget.NestedScrollView>
+
     </FrameLayout>
 
 </LinearLayout>

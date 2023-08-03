@@ -23,7 +23,6 @@
                 android:layout_marginLeft="303dp"
                 android:layout_width="12dp"
                 android:layout_height="12dp"
-                android:backgroundTint="#FFD008"
                 android:background="@drawable/state_oval"/>
 
             <LinearLayout
