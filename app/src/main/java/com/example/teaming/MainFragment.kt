@@ -21,15 +21,12 @@ class MainFragment : Fragment() {
     private val gridItemList = arrayListOf<GridListItem>()
     private val gridAdapter = GridAdapter(gridItemList)
 
-    var mainActivity:MainActivity?=null
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        mainActivity = context as MainActivity
     }
 
     override fun onCreateView(
@@ -97,7 +94,9 @@ class MainFragment : Fragment() {
         gridAdapter.notifyDataSetChanged()
 
         binding.btnMainCreate.setOnClickListener {
-            mainActivity!!.openFragment(4)
+            requireActivity().supportFragmentManager.beginTransaction()
+                .replace(R.id.container,CreateFragment())
+                .commit()
         }
 
         // main페이지의 첫번째 가로 리사이클러뷰 클릭이벤트

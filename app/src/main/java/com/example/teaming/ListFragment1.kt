@@ -10,15 +10,12 @@ import com.example.teaming.databinding.FragmentList1Binding
 
 class ListFragment1 : Fragment() {
 
-    var mainActivity:MainActivity?=null
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        mainActivity = context as MainActivity
     }
 
     override fun onCreateView(
@@ -29,7 +26,9 @@ class ListFragment1 : Fragment() {
         val binding = FragmentList1Binding.inflate(inflater,container,false)
 
         binding.btnNew.setOnClickListener {
-            mainActivity!!.openFragment(4)
+            requireActivity().supportFragmentManager.beginTransaction()
+                .replace(R.id.container,CreateFragment())
+                .commit()
         }
 
         return binding.root

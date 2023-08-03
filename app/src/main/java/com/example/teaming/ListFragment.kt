@@ -81,6 +81,12 @@ class ListFragment : Fragment() {
             }
         }
 
+        binding.btnCreate.setOnClickListener {
+            requireActivity().supportFragmentManager.beginTransaction()
+                .replace(R.id.container,CreateFragment())
+                .commit()
+        }
+
         return binding.root
     }
 

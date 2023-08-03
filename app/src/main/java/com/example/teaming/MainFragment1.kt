@@ -32,15 +32,21 @@ class MainFragment1 : Fragment() {
         val binding = FragmentMain1Binding.inflate(inflater,container,false)
 
         binding.btnNew1.setOnClickListener {
-            mainActivity!!.openFragment(4)
+            requireActivity().supportFragmentManager.beginTransaction()
+                .replace(R.id.container,CreateFragment())
+                .commit()
         }
 
         binding.btnNew2.setOnClickListener {
-            mainActivity!!.openFragment(4)
+            requireActivity().supportFragmentManager.beginTransaction()
+                .replace(R.id.container,CreateFragment())
+                .commit()
         }
 
         binding.btnNew3.setOnClickListener {
-            mainActivity!!.openFragment(4)
+            requireActivity().supportFragmentManager.beginTransaction()
+                .replace(R.id.container,CreateFragment())
+                .commit()
         }
         return binding.root
     }
