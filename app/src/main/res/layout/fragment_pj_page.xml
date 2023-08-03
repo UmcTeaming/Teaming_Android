@@ -101,16 +101,34 @@
             android:layout_height="match_parent"
             android:weightSum="2">
 
-            <ImageView
+            <FrameLayout
+                android:layout_gravity="left|bottom"
                 android:layout_width="0dp"
                 android:layout_height="100dp"
-                android:layout_gravity="left|bottom"
-                android:scaleType="fitCenter"
-                android:background="@drawable/pj_image_shape"
-                android:src="@drawable/pj_image_default"
                 android:layout_marginStart="10dp"
                 android:layout_marginBottom="15dp"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                >
+
+                <ImageView
+                    android:id="@+id/pj_image"
+                    android:layout_width="wrap_content"
+                    android:layout_height="100dp"
+                    android:scaleType="fitCenter"
+                    android:background="@drawable/pj_image_shape"
+                    android:src="@drawable/pj_image_default" />
+
+                <View
+                    android:layout_marginTop="7dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_gravity="right|top"
+                    android:background="@drawable/circle"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"/>
+
+            </FrameLayout>
+
+
 
             <LinearLayout
                 android:layout_width="0dp"
@@ -175,6 +193,7 @@
                         />
                 </LinearLayout>
 
+
             </LinearLayout>
 
         </LinearLayout>
@@ -229,5 +248,4 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/sort_selec_btn"
         app:layout_constraintVertical_bias="1.0" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>
