@@ -52,10 +52,11 @@ class MainFragment : Fragment() {
             if (position < -1) {
                 page.setTranslationX(-myOffset)
             } else if (position <= 1) {
-                val scaleFactor = Math.max(0.7f, 1 - Math.abs(position - 0.14285715f))
+                val scaleFactor = Math.max(0.7f, 1 - Math.abs(position - 0.04285715f))
                 page.setTranslationX(myOffset)
                 page.setScaleY(scaleFactor)
-                //page.setAlpha(scaleFactor)
+                page.setScaleX(scaleFactor)
+                page.setAlpha(scaleFactor)
             } else {
                 // 기본 값
                 //page.setAlpha(0f)

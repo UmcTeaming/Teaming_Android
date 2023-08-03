@@ -36,18 +36,18 @@ class MainActivity : AppCompatActivity() {
                     R.id.home ->
                     {
                         // project가 없는 경우
-                        changeFragment(nonMainFragment)
+                        //changeFragment(nonMainFragment)
 
                         // project가 있는 경우
-                        //changeFragment(mainFragment)
+                        changeFragment(mainFragment)
                     }
                     R.id.cal -> changeFragment(calFragment)
                     R.id.list ->
                     {
                         // project가 없는 경우
-                        changeFragment(nonListFragment)
+                        //changeFragment(nonListFragment)
                         // project가 있는 경우
-                        //changeFragment(listFragment)
+                        changeFragment(listFragment)
                     }
                     R.id.file -> changeFragment(fileFragment)
                     R.id.user -> changeFragment(userFragment)
