@@ -56,6 +56,7 @@ class ListFragment : Fragment() {
 
                 requireActivity().supportFragmentManager.beginTransaction()
                     .replace(R.id.file_frame,Gh_List_Icon1_Fragment())
+                    .addToBackStack(null)
                     .commit()
                 //mainActivity!!.openFragment(2)
             }
@@ -75,6 +76,7 @@ class ListFragment : Fragment() {
 
                 requireActivity().supportFragmentManager.beginTransaction()
                     .replace(R.id.file_frame,Gh_List_Icon2_Fragment())
+                    .addToBackStack(null)
                     .commit()
 
                 //mainActivity!!.openFragment(3)
@@ -84,6 +86,14 @@ class ListFragment : Fragment() {
         binding.btnCreate.setOnClickListener {
             requireActivity().supportFragmentManager.beginTransaction()
                 .replace(R.id.container,CreateFragment())
+                .addToBackStack(null)
+                .commit()
+        }
+
+        binding.btnNew1.setOnClickListener {
+            requireActivity().supportFragmentManager.beginTransaction()
+                .replace(R.id.container,CreateFragment())
+                .addToBackStack(null)
                 .commit()
         }
 

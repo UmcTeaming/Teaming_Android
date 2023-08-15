@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".CreateFragment"
     android:orientation="vertical"
     android:gravity="center_vertical">
@@ -30,7 +31,6 @@
             android:textColor="#4D000000"/>
 
     </RelativeLayout>
-
 
 
     <LinearLayout
@@ -159,50 +159,10 @@
 
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_marginTop="32dp"
-        android:layout_width="265dp"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_gravity="center_horizontal">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/gmarket_sans_ttf_bold"
-            android:text="팀원 추가"
-            android:textSize="11sp"
-            android:textColor="#194AC2"/>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <Button
-                android:id="@+id/btn_add_user"
-                android:layout_marginTop="9dp"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:backgroundTint="#7F7F7F"
-                android:background="@drawable/btn_create_user"/>
-
-            <TextView
-                android:gravity="center_horizontal"
-                android:layout_width="50dp"
-                android:layout_height="wrap_content"
-                android:text="초대하기"
-                android:fontFamily="@font/gmarket_sans_ttf_medium"
-                android:textSize="12sp"
-                android:textColor="#80000000"/>
-        </LinearLayout>
-
-    </LinearLayout>
-
     <Button
         android:id="@+id/btn_create_project"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="35dp"
+        android:layout_marginTop="158dp"
         android:background="@drawable/create_btn_round_border"
         android:layout_width="265dp"
         android:layout_height="36dp"

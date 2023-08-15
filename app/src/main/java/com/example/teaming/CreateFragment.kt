@@ -24,11 +24,6 @@ class CreateFragment : Fragment(), ColSelDialog.OnColorSelectedListener {
         // Inflate the layout for this fragment
         binding = FragmentCreateBinding.inflate(inflater,container,false)
 
-        binding.btnAddUser.setOnClickListener{
-            val dialog = AddDialog()
-            dialog.show(requireActivity().supportFragmentManager,"AddDialog")
-        }
-
         binding.imgAdd.setOnClickListener{
             val imgDialog = ImgDialog()
             imgDialog.show(requireActivity().supportFragmentManager,"ImgDialog")
