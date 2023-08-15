@@ -4,6 +4,7 @@ import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.GET
+import retrofit2.http.Headers
 import retrofit2.http.POST
 import retrofit2.http.Path
 import retrofit2.http.Query
@@ -14,6 +15,8 @@ import retrofit2.http.Query
 interface RetrofitService {
     @POST("/auth/login")
     fun login(@Body requestBody: RequestBody): Call<LoginResponse>
+
+    //@Headers("Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0QGdtYWlsLmNvbSIsImF1dGgiOiIiLCJleHAiOjE2OTQ2NTg2NzZ9.f29mb0LAROO4yxepLcYlr2KCsOPtJSNtYcMGW9cYVO8")
     @GET("/member/{memberId}/home")
-    fun mainPage(@Path("memberId") memberId: Int?): Call<MainPageResponse>
+    fun mainPage(@Path("memberId") memberId: Int?) : Call<MainPageResponse>
 }

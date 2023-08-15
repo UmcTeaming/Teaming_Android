@@ -54,8 +54,8 @@ data class RecentlyProject(
     val projectId: Int,
     @SerializedName("projectName")
     val projectName: String,
-    @SerializedName("projectStartedDate")
-    val projectStartedDate: String,
+    @SerializedName("projectCreatedDate")
+    val projectCreatedDate: String,
     @SerializedName("projectStatus")
     val projectStatus: String,
     @SerializedName("projectImage")
