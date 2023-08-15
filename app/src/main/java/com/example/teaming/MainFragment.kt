@@ -2,6 +2,7 @@ package com.example.teaming
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,6 +13,9 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager2.widget.ViewPager2
 import com.example.teaming.databinding.FragmentMainBinding
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class MainFragment : Fragment() {
     private val verItemList = arrayListOf<VerListItem>()      // 아이템 배열
@@ -34,6 +38,50 @@ class MainFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val binding = FragmentMainBinding.inflate(inflater,container,false)
+
+        // API 설정 - GET
+        val memberId = arguments?.getInt("memberId")
+        Log.d("Id","${memberId}")
+
+        val callMainPage = RetrofitApi.getRetrofitService.mainPage(memberId)
+
+        if(memberId!=null){
+            callMainPage.enqueue(object : Callback<MainPageResponse> {
+                override fun onResponse(call: Call<MainPageResponse>, response: retrofit2.Response<MainPageResponse>) {
+                    if (response.isSuccessful) {
+                        val mainPageResponse = response.body()
+                        if (mainPageResponse != null) {
+                            val userId = mainPageResponse.data
+
+                            Log.d("MainFragment", "Data: ${userId}")
+                        }
+                    } else {
+                        Log.e("MainFragment", "API 호출 반 실패: ${response.code()}")
+                    }
+                }
+                override fun onFailure(call: Call<MainPageResponse>, t: Throwable) {
+                    Log.e("MainFragment", "API 호출 완전 실패", t)
+                }
+            })
+        }
+
+        /*callMainPage.enqueue(object : Callback<MainPageResponse> {
+            override fun onResponse(call: Call<MainPageResponse>, response: Response<MainPageResponse>) {
+                if (response.isSuccessful) {
+                    val mainPageResponse = response.body()
+                    if (mainPageResponse != null) {
+                        val userId = mainPageResponse.data
+
+                        Log.d("LoginActivity", "Access Token: ${userId}")
+                    }
+                } else {
+                    Log.d("LoginActivity", "API 호출 반 실패: ${response.code()}")
+                }
+            }
+            override fun onFailure(call: Call<MainPageResponse>, t: Throwable) {
+                Log.e("MainFragment", "API 호출 완전 실패", t)
+            }
+        })*/
 
         //viewPager 관련 내용
         binding.viewPager2.adapter = horAdapter

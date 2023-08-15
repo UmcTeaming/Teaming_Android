@@ -9,7 +9,6 @@ import com.google.gson.Gson
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.RequestBody
 import retrofit2.*
-import java.util.Stack
 
 class MainActivity : AppCompatActivity() {
 
@@ -38,9 +37,16 @@ class MainActivity : AppCompatActivity() {
                 if (response.isSuccessful) {
                     val loginResponse = response.body()
                     if (loginResponse != null) {
-                        val accessToken = loginResponse.data.accessToken
+                        val accessToken = "Bearer ${loginResponse.data.accessToken}"
                         val userId = loginResponse.data.memberId
+
+                        var bundle = Bundle()
+                        bundle.putInt("memberId",userId)
+                        mainFragment.arguments = bundle
+                        Log.d("mainId","${userId}")
+
                         App.prefs.token=accessToken
+
                         Log.d("LoginActivity", "Access Token: $accessToken")
                     }
                 } else {
