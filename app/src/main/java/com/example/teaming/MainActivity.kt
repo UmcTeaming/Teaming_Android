@@ -55,25 +55,6 @@ class MainActivity : AppCompatActivity() {
             }
         })
 
-        /*callLogin.enqueue(object : Callback<LoginResponse> {
-            override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
-                if (response.isSuccessful) {
-                    val loginResponse = response.body()
-                    if (loginResponse != null) {
-                        val accessToken = loginResponse.data.accessToken
-                        Log.d("LoginActivity", "Access Token: $accessToken")
-                    }
-                } else {
-                    Log.d("LoginActivity", "Login Failed")
-                }
-
-            }
-
-            override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
-                Log.d("LoginActivity", "Login API Call Failed")
-            }
-        })*/
-
 
         initNavigationBar()
     }
