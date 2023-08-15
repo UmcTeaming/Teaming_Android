@@ -24,8 +24,15 @@ class DocRead : Fragment() {
     ): View? {
         binding = FragmentDocReadBinding.inflate(inflater,container,false)
 
+        requireActivity().supportFragmentManager.beginTransaction()
+            .add(R.id.doc_read_contain,PDFViewer())
+            .commit()
+
         binding.fileViewerBtn.setOnClickListener {
             setButtonState(true)
+            requireActivity().supportFragmentManager.beginTransaction()
+                .replace(R.id.doc_read_contain,PDFViewer())
+                .commit()
         }
 
         binding.commentBtn.setOnClickListener {
