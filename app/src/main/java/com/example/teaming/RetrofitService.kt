@@ -3,7 +3,9 @@ package com.example.teaming
 import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.http.Body
+import retrofit2.http.GET
 import retrofit2.http.POST
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 /**
@@ -12,4 +14,6 @@ import retrofit2.http.Query
 interface RetrofitService {
     @POST("/auth/login")
     fun login(@Body requestBody: RequestBody): Call<LoginResponse>
+    @GET("/member/{memberId}/home")
+    fun mainPage(@Path("memberId") memberId: Int?): Call<MainPageResponse>
 }

@@ -47,6 +47,7 @@ class File_Icon1_Fragment : Fragment() {
 
                 requireActivity().supportFragmentManager.beginTransaction()
                     .replace(R.id.container,PjPageFragment())
+                    .addToBackStack(null)
                     .commit()
             }
         })

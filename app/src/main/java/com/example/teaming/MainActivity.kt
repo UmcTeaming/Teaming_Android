@@ -8,7 +8,7 @@ import com.example.teaming.databinding.ActivityMainBinding
 import com.google.gson.Gson
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.RequestBody
-import java.util.Stack
+import retrofit2.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -37,8 +37,16 @@ class MainActivity : AppCompatActivity() {
                 if (response.isSuccessful) {
                     val loginResponse = response.body()
                     if (loginResponse != null) {
-                        val accessToken = loginResponse.data.accessToken
+                        val accessToken = "Bearer ${loginResponse.data.accessToken}"
+                        val userId = loginResponse.data.memberId
+
+                        var bundle = Bundle()
+                        bundle.putInt("memberId",userId)
+                        mainFragment.arguments = bundle
+                        Log.d("mainId","${userId}")
+
                         App.prefs.token=accessToken
+
                         Log.d("LoginActivity", "Access Token: $accessToken")
                     }
                 } else {
@@ -51,7 +59,7 @@ class MainActivity : AppCompatActivity() {
             }
         })
 
-
+        supportFragmentManager.beginTransaction().add(R.id.container,mainFragment).addToBackStack(null).commit()
         initNavigationBar()
     }
 
