@@ -1,6 +1,7 @@
 package com.example.teaming
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -11,7 +12,6 @@ import com.example.teaming.databinding.FragmentPjSortBinding
 class PjSort : Fragment() {
     private lateinit var binding:FragmentPjSortBinding
     private lateinit var pjOutAdapter: PjOutAdapter
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,9 +52,9 @@ class PjSort : Fragment() {
         item4.innerList.add(PjInData("oo 교양 조별과제 자료조사 2", 2))
         item4.innerList.add(PjInData("oo 교양 조별과제 자료조사 1", 1))
         dataList.add(item4)
-        //
 
         pjOutAdapter = PjOutAdapter(dataList)
+
         binding.outRecycler.apply {
             layoutManager = LinearLayoutManager(requireContext())
             adapter = pjOutAdapter
