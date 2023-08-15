@@ -9,7 +9,7 @@ class AuthInterceptor : Interceptor {
         var req =
             chain.request().newBuilder().addHeader("Authorization", App.prefs.token ?: "").build()
 
-        Log.d("return","${req}")
+        Log.d("R_return","${req}")
         return chain.proceed(req)
     }
 }

@@ -32,6 +32,8 @@ class MainActivity : AppCompatActivity() {
         val requestBody = RequestBody.create("application/json".toMediaType(), json)
         val callLogin = RetrofitApi.getRetrofitService.login(requestBody)
 
+        App.prefs.token = null
+
         callLogin.enqueue(object : Callback<LoginResponse> {
             override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
                 if (response.isSuccessful) {
@@ -43,19 +45,19 @@ class MainActivity : AppCompatActivity() {
                         var bundle = Bundle()
                         bundle.putInt("memberId",userId)
                         mainFragment.arguments = bundle
-                        Log.d("mainId","${userId}")
+                        Log.d("R_Login_mainId","${userId}")
 
-                        App.prefs.token=accessToken
+                        App.prefs.token = accessToken
 
-                        Log.d("LoginActivity", "Access Token: $accessToken")
+                        Log.d("R_LoginActivity", "Access Token: $accessToken")
                     }
                 } else {
-                    Log.d("LoginActivity", "API 호출 실패: ${response.code()}")
+                    Log.d("R_LoginActivity", "API 호출 실패: ${response.code()}")
                 }
             }
 
             override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
-                Log.e("LoginActivity", "로그인 API 호출 실패", t)
+                Log.e("R_LoginActivity", "로그인 API 호출 실패", t)
             }
         })
 

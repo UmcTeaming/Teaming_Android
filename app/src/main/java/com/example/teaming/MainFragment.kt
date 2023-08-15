@@ -41,7 +41,7 @@ class MainFragment : Fragment() {
 
         // API 설정 - GET
         val memberId = arguments?.getInt("memberId")
-        Log.d("Id","${memberId}")
+        Log.d("R_MainFragment","ID: ${memberId}")
 
         val callMainPage = RetrofitApi.getRetrofitService.mainPage(memberId)
 
@@ -53,14 +53,14 @@ class MainFragment : Fragment() {
                         if (mainPageResponse != null) {
                             val userId = mainPageResponse.data
 
-                            Log.d("MainFragment", "Data: ${userId}")
+                            Log.d("R_MainFragment", "Data: ${userId}")
                         }
                     } else {
-                        Log.e("MainFragment", "API 호출 반 실패: ${response.code()}")
+                        Log.e("R_MainFragment", "API 호출 반 실패: ${response.code()}")
                     }
                 }
                 override fun onFailure(call: Call<MainPageResponse>, t: Throwable) {
-                    Log.e("MainFragment", "API 호출 완전 실패", t)
+                    Log.e("R_MainFragment", "API 호출 완전 실패", t)
                 }
             })
         }
