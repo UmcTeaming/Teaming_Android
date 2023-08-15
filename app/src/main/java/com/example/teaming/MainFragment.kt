@@ -51,9 +51,57 @@ class MainFragment : Fragment() {
                     if (response.isSuccessful) {
                         val mainPageResponse = response.body()
                         if (mainPageResponse != null) {
+                            val recentlyProjects = mainPageResponse.data.recentlyProject
+                            Log.d("data", "${recentlyProjects}")
+
+                            horItemList.clear()
+                            for (project in recentlyProjects) {
+                                horItemList.add(
+                                    HorListItem(
+                                        R.drawable.file_view_img,
+                                        project.projectName,
+                                        project.projectCreatedDate
+                                    )
+                                )
+                            }
+
+                            // 아래 두 줄을 추가해서 어댑터에 데이터 변경을 알려줍니다.
+                            horAdapter.notifyDataSetChanged()
+                            binding.viewPager2.offscreenPageLimit = 3 // ViewPager2 페이지 개수 설정
+
+                            verItemList.clear()
+                            val progressProjects = mainPageResponse.data.progressProject
+                            for (index in 0 until minOf(progressProjects.size, 3)) {
+                                val project = progressProjects[index]
+                                verItemList.add(
+                                    VerListItem(
+                                        R.drawable.state_oval,
+                                        project.projectName, // 이 부분 수정 필요
+                                        project.projectStartedDate
+                                    )
+                                )
+                            }
+
+                            verAdapter.notifyDataSetChanged()
+
+                            gridItemList.clear()
+                            val portfolio = mainPageResponse.data.portfolio
+                            for(project in portfolio){
+                                val formattedDate = "${project.projectStartDate} ~ ${project.projectEndDate}"
+                                gridItemList.add(
+                                    GridListItem(
+                                        R.drawable.file_background,
+                                        project.projectName,
+                                        formattedDate
+                                    )
+                                )
+                            }
+                            gridAdapter.notifyDataSetChanged()
+
                             val userId = mainPageResponse.data
 
                             Log.d("R_MainFragment", "Data: ${userId}")
+                            Log.d("MainFragment", "Data: ${userId}")
                         }
                     } else {
                         Log.e("R_MainFragment", "API 호출 반 실패: ${response.code()}")
@@ -119,22 +167,23 @@ class MainFragment : Fragment() {
         binding.gridList.layoutManager = GridLayoutManager(context,2)
         binding.gridList.adapter = gridAdapter
 
-        // ver 아이템 초기화
+        /*// ver 아이템 초기화
         verItemList.clear()
         // ver 아이템 추가
         verItemList.add(VerListItem(R.drawable.state_oval,"UMC 파이널 프로젝트(프로젝트명)", "2023.06.13 ~ (진행기간)"))
         verItemList.add(VerListItem(R.drawable.state_oval,"UMC 파이널 프로젝트(프로젝트명)", "2023.06.13 ~ (진행기간)"))
-        verItemList.add(VerListItem(R.drawable.state_oval,"UMC 파이널 프로젝트(프로젝트명)", "2023.06.13 ~ (진행기간)"))
+        verItemList.add(VerListItem(R.drawable.state_oval,"UMC 파이널 프로젝트(프로젝트명)", "2023.06.13 ~ (진행기간)"))*/
 
         // 리스트가 변경됨을 어댑터에 알림
-        verAdapter.notifyDataSetChanged()
+        //verAdapter.notifyDataSetChanged()
 
+        //val recentlyProjects = mainPageResponse.data.recentlyProject
+        /*horItemList.add(HorListItem(R.drawable.baseline_rectangle_24,"UMC 파이널 프로젝트","2023.06.13 ~"))
         horItemList.add(HorListItem(R.drawable.baseline_rectangle_24,"UMC 파이널 프로젝트","2023.06.13 ~"))
         horItemList.add(HorListItem(R.drawable.baseline_rectangle_24,"UMC 파이널 프로젝트","2023.06.13 ~"))
-        horItemList.add(HorListItem(R.drawable.baseline_rectangle_24,"UMC 파이널 프로젝트","2023.06.13 ~"))
-        horAdapter.notifyDataSetChanged()
+        horAdapter.notifyDataSetChanged()*/
 
-        // grid 아이템 초기화
+        /*// grid 아이템 초기화
         gridItemList.clear()
         // grid 아이템 추가
         gridItemList.add(GridListItem(R.drawable.baseline_rectangle_24,"프로젝트명","2023.06.13 ~ (진행기간)"))
@@ -144,8 +193,8 @@ class MainFragment : Fragment() {
         gridItemList.add(GridListItem(R.drawable.baseline_rectangle_24,"프로젝트명","2023.06.13 ~ (진행기간)"))
         gridItemList.add(GridListItem(R.drawable.baseline_rectangle_24,"프로젝트명","2023.06.13 ~ (진행기간)"))
         gridItemList.add(GridListItem(R.drawable.baseline_rectangle_24,"프로젝트명","2023.06.13 ~ (진행기간)"))
-        gridItemList.add(GridListItem(R.drawable.baseline_rectangle_24,"프로젝트명","2023.06.13 ~ (진행기간)"))
-        gridAdapter.notifyDataSetChanged()
+        gridItemList.add(GridListItem(R.drawable.baseline_rectangle_24,"프로젝트명","2023.06.13 ~ (진행기간)"))*/
+        //gridAdapter.notifyDataSetChanged()
 
         binding.btnMainCreate.setOnClickListener {
             requireActivity().supportFragmentManager.beginTransaction()

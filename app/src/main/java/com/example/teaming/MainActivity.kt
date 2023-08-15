@@ -61,7 +61,7 @@ class MainActivity : AppCompatActivity() {
             }
         })
 
-
+        supportFragmentManager.beginTransaction().add(R.id.container,mainFragment).addToBackStack(null).commit()
         initNavigationBar()
     }
 
