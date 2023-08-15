@@ -28,7 +28,7 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_width="wrap_content"
                 android:layout_height="19.91dp"
-                android:text="현재 진행중인 프로젝트가 없어요!"
+                android:text="아직 생성된 프로젝트가 없어요!"
                 android:fontFamily="@font/gmarket_sans_ttf_bold"
                 android:textColor="#80000000"
                 android:textSize="16sp"/>

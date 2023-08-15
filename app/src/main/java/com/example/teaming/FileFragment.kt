@@ -85,7 +85,6 @@ class FileFragment : Fragment() {
                     .replace(R.id.file_frame,File_Icon2_Fragment())
                     .addToBackStack(null)
                     .commit()
-
             }
         }
 
