@@ -50,8 +50,6 @@ class FileFragment : Fragment() {
             .add(R.id.file_frame,File_Icon1_Fragment())
             .commit()
 
-        //mainActivity!!.openFragment(2)
-
         // =버튼 클릭 시 색상 변경 관련
         binding.fileIcon1.setOnClickListener {
             if (!isFileIcon1Selected) {
@@ -66,8 +64,8 @@ class FileFragment : Fragment() {
 
                 requireActivity().supportFragmentManager.beginTransaction()
                     .replace(R.id.file_frame,File_Icon1_Fragment())
+                    .addToBackStack(null)
                     .commit()
-                //mainActivity!!.openFragment(2)
             }
         }
 
@@ -85,15 +83,23 @@ class FileFragment : Fragment() {
 
                 requireActivity().supportFragmentManager.beginTransaction()
                     .replace(R.id.file_frame,File_Icon2_Fragment())
+                    .addToBackStack(null)
                     .commit()
 
-                //mainActivity!!.openFragment(3)
             }
         }
 
         binding.btnCreate.setOnClickListener {
             requireActivity().supportFragmentManager.beginTransaction()
                 .replace(R.id.container,CreateFragment())
+                .addToBackStack(null)
+                .commit()
+        }
+
+        binding.btnNew1.setOnClickListener {
+            requireActivity().supportFragmentManager.beginTransaction()
+                .replace(R.id.container,CreateFragment())
+                .addToBackStack(null)
                 .commit()
         }
         return binding.root

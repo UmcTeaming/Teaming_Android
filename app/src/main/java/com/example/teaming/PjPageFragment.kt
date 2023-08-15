@@ -64,6 +64,7 @@ class PjPageFragment : Fragment() {
             setButtonState(true)
             requireActivity().supportFragmentManager.beginTransaction()
                 .replace(R.id.fragmentContainer,PjSort())
+                .addToBackStack(null)
                 .commit()
         }
 
@@ -71,6 +72,7 @@ class PjPageFragment : Fragment() {
             setButtonState(false)
             requireActivity().supportFragmentManager.beginTransaction()
                 .replace(R.id.fragmentContainer,FiSort())
+                .addToBackStack(null)
                 .commit()
         }
 

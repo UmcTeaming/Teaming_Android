@@ -71,10 +71,13 @@ class MainFragment : Fragment() {
         binding.gridList.layoutManager = GridLayoutManager(context,2)
         binding.gridList.adapter = gridAdapter
 
-        // 아이템 추가
+        // ver 아이템 초기화
+        verItemList.clear()
+        // ver 아이템 추가
         verItemList.add(VerListItem(R.drawable.state_oval,"UMC 파이널 프로젝트(프로젝트명)", "2023.06.13 ~ (진행기간)"))
         verItemList.add(VerListItem(R.drawable.state_oval,"UMC 파이널 프로젝트(프로젝트명)", "2023.06.13 ~ (진행기간)"))
         verItemList.add(VerListItem(R.drawable.state_oval,"UMC 파이널 프로젝트(프로젝트명)", "2023.06.13 ~ (진행기간)"))
+
         // 리스트가 변경됨을 어댑터에 알림
         verAdapter.notifyDataSetChanged()
 
@@ -83,6 +86,9 @@ class MainFragment : Fragment() {
         horItemList.add(HorListItem(R.drawable.baseline_rectangle_24,"UMC 파이널 프로젝트","2023.06.13 ~"))
         horAdapter.notifyDataSetChanged()
 
+        // grid 아이템 초기화
+        gridItemList.clear()
+        // grid 아이템 추가
         gridItemList.add(GridListItem(R.drawable.baseline_rectangle_24,"프로젝트명","2023.06.13 ~ (진행기간)"))
         gridItemList.add(GridListItem(R.drawable.baseline_rectangle_24,"프로젝트명","2023.06.13 ~ (진행기간)"))
         gridItemList.add(GridListItem(R.drawable.baseline_rectangle_24,"프로젝트명","2023.06.13 ~ (진행기간)"))
@@ -96,6 +102,7 @@ class MainFragment : Fragment() {
         binding.btnMainCreate.setOnClickListener {
             requireActivity().supportFragmentManager.beginTransaction()
                 .replace(R.id.container,CreateFragment())
+                .addToBackStack(null)
                 .commit()
         }
 
@@ -109,6 +116,7 @@ class MainFragment : Fragment() {
 
                 requireActivity().supportFragmentManager.beginTransaction()
                     .replace(R.id.container,DocRead())
+                    .addToBackStack(null)
                     .commit()
             }
         })
@@ -123,6 +131,7 @@ class MainFragment : Fragment() {
 
                 requireActivity().supportFragmentManager.beginTransaction()
                     .replace(R.id.container,PjPageFragment())
+                    .addToBackStack(null)
                     .commit()
             }
         })
@@ -137,9 +146,32 @@ class MainFragment : Fragment() {
 
                 requireActivity().supportFragmentManager.beginTransaction()
                     .replace(R.id.container,PjPageFragment())
+                    .addToBackStack(null)
                     .commit()
             }
         })
+
+        binding.btnNew1.setOnClickListener {
+            requireActivity().supportFragmentManager.beginTransaction()
+                .replace(R.id.container,CreateFragment())
+                .addToBackStack(null)
+                .commit()
+        }
+
+        binding.btnNew2.setOnClickListener {
+            requireActivity().supportFragmentManager.beginTransaction()
+                .replace(R.id.container,CreateFragment())
+                .addToBackStack(null)
+                .commit()
+        }
+
+
+        /*
+        // 프로젝트가 없는 경우
+        binding.nonViewPager2.visibility = View.INVISIBLE
+        binding.nonVerList.visibility = View.GONE
+        binding.nonGridList.visibility = View.INVISIBLE
+        */
 
         return binding.root
     }
