@@ -16,7 +16,6 @@ class VerticalAdapter(val ver_itemList: ArrayList<VerListItem>): RecyclerView.Ad
 
     override fun getItemCount(): Int {
         return ver_itemList.size
-        //return 3
     }
 
     override fun onBindViewHolder(holder: VerticalAdapter.ViewHolder, position: Int) {
@@ -24,6 +23,7 @@ class VerticalAdapter(val ver_itemList: ArrayList<VerListItem>): RecyclerView.Ad
         holder.verDate.text = ver_itemList[position].ver_date
 
         holder.itemView.setOnClickListener {
+            itemClickListener.onClick(it, position)
             itemClickListener.onClick(it, position)
         }
     }

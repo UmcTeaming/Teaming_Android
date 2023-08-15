@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.teaming.databinding.FragmentGhListIcon2Binding
-import com.example.teaming.databinding.FragmentList1Binding
 
 class Gh_List_Icon2_Fragment : Fragment() {
     private val listVerItemList = arrayListOf<GridListItem>()      // 아이템 배열
@@ -45,6 +44,7 @@ class Gh_List_Icon2_Fragment : Fragment() {
 
                 requireActivity().supportFragmentManager.beginTransaction()
                     .replace(R.id.container,PjPageFragment())
+                    .addToBackStack(null)
                     .commit()
             }
         })

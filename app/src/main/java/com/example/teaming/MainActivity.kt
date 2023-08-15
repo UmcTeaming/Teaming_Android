@@ -4,20 +4,17 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import com.example.teaming.databinding.ActivityMainBinding
+import java.util.Stack
 
 class MainActivity : AppCompatActivity() {
+
     private lateinit var binding: ActivityMainBinding
 
     private val mainFragment by lazy { MainFragment() }
-    private val nonMainFragment by lazy {MainFragment1()}
     private val calFragment by lazy { CalFragment() }
     private val listFragment by lazy { ListFragment() }
-    private val nonListFragment by lazy { ListFragment1() }
     private val fileFragment by lazy { FileFragment() }
     private val userFragment by lazy { UserFragment() }
-    private val fileIcon1Fragment by lazy { File_Icon1_Fragment() }
-    private val fileIcon2Fragment by lazy { File_Icon2_Fragment() }
-    private val createFragment by lazy { CreateFragment() }
 
     private val num: Int =0
 
@@ -33,22 +30,9 @@ class MainActivity : AppCompatActivity() {
         binding.bottomNavi.run{
             setOnItemSelectedListener {
                 when(it.itemId){
-                    R.id.home ->
-                    {
-                        // project가 없는 경우
-                        //changeFragment(nonMainFragment)
-
-                        // project가 있는 경우
-                        changeFragment(mainFragment)
-                    }
+                    R.id.home -> changeFragment(mainFragment)
                     R.id.cal -> changeFragment(calFragment)
-                    R.id.list ->
-                    {
-                        // project가 없는 경우
-                        //changeFragment(nonListFragment)
-                        // project가 있는 경우
-                        changeFragment(listFragment)
-                    }
+                    R.id.list -> changeFragment(listFragment)
                     R.id.file -> changeFragment(fileFragment)
                     R.id.user -> changeFragment(userFragment)
                 }
@@ -57,19 +41,8 @@ class MainActivity : AppCompatActivity() {
             selectedItemId = R.id.home
         }
     }
-
-    fun openFragment(int: Int){
-        when(int){
-            1 ->
-            {
-                // 조건문
-                changeFragment(fileFragment)
-            }
-        }
-        true
-    }
-
     private fun changeFragment(fragment: Fragment){
-        supportFragmentManager.beginTransaction().replace(R.id.container,fragment).commit()
+        supportFragmentManager.beginTransaction().replace(R.id.container,fragment).addToBackStack(null).commit()
     }
+
 }
