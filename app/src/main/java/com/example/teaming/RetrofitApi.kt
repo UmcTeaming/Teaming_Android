@@ -12,7 +12,7 @@ object RetrofitApi {
     private const val BASE_URL = "http://teaming.shop:8080"
     private val getRetrofit by lazy{
         Retrofit.Builder()
-            /*.client(okHttpClient) //토큰 인터셉터*/
+            .client(okHttpClient) //토큰 인터셉터
             .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .build()

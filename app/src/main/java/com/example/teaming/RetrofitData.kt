@@ -20,3 +20,8 @@ data class LoginData(
     @SerializedName("accessToken")
     val accessToken: String
 )
+
+data class LoginRequset(
+    @SerializedName("email") val email: String,
+    @SerializedName("password") val password: String
+)

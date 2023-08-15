@@ -5,6 +5,9 @@ import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import com.example.teaming.databinding.ActivityMainBinding
+import com.google.gson.Gson
+import okhttp3.MediaType.Companion.toMediaType
+import okhttp3.RequestBody
 import retrofit2.*
 
 class MainActivity : AppCompatActivity() {
@@ -28,10 +31,10 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        //임시 로그인api
-        val email = "test@gmail.com"
-        val password = "test123"
-        val callLogin = RetrofitApi.getRetrofitService.login(email, password)
+        val requestBodyData = LoginRequset("test@gmail.com", "test123")
+        val json = Gson().toJson(requestBodyData)
+        val requestBody = RequestBody.create("application/json".toMediaType(), json)
+        val callLogin = RetrofitApi.getRetrofitService.login(requestBody)
 
         callLogin.enqueue(object : Callback<LoginResponse> {
             override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
@@ -39,6 +42,7 @@ class MainActivity : AppCompatActivity() {
                     val loginResponse = response.body()
                     if (loginResponse != null) {
                         val accessToken = loginResponse.data.accessToken
+                        App.prefs.token=accessToken
                         Log.d("LoginActivity", "Access Token: $accessToken")
                     }
                 } else {
