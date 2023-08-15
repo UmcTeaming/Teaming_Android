@@ -108,7 +108,7 @@ class MainFragment : Fragment() {
                     Toast.LENGTH_SHORT).show()*/
 
                 requireActivity().supportFragmentManager.beginTransaction()
-                    .replace(R.id.container,PjPageFragment())
+                    .replace(R.id.container,DocRead())
                     .commit()
             }
         })
