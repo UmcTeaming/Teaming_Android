@@ -32,6 +32,7 @@ class MainActivity : AppCompatActivity() {
         val requestBody = RequestBody.create("application/json".toMediaType(), json)
         val callLogin = RetrofitApi.getRetrofitService.login(requestBody)
 
+        App.prefs.token = null
         callLogin.enqueue(object : Callback<LoginResponse> {
             override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
                 if (response.isSuccessful) {
