@@ -2,6 +2,7 @@ package com.example.teaming
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import com.example.teaming.databinding.ActivityMainBinding
 import java.util.Stack
@@ -16,12 +17,37 @@ class MainActivity : AppCompatActivity() {
     private val fileFragment by lazy { FileFragment() }
     private val userFragment by lazy { UserFragment() }
 
-    private val num: Int =0
+    private val num: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        val requestBodyData = LoginRequset("test@gmail.com", "test123")
+        val json = Gson().toJson(requestBodyData)
+        val requestBody = RequestBody.create("application/json".toMediaType(), json)
+        val callLogin = RetrofitApi.getRetrofitService.login(requestBody)
+
+        callLogin.enqueue(object : Callback<LoginResponse> {
+            override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
+                if (response.isSuccessful) {
+                    val loginResponse = response.body()
+                    if (loginResponse != null) {
+                        val accessToken = loginResponse.data.accessToken
+                        App.prefs.token=accessToken
+                        Log.d("LoginActivity", "Access Token: $accessToken")
+                    }
+                } else {
+                    Log.d("LoginActivity", "API 호출 실패: ${response.code()}")
+                }
+            }
+
+            override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
+                Log.e("LoginActivity", "로그인 API 호출 실패", t)
+            }
+        })
+
 
         initNavigationBar()
     }
