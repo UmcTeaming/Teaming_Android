@@ -1,14 +1,18 @@
 package com.example.teaming
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.teaming.databinding.ActivityMainBinding
 import com.google.gson.Gson
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.RequestBody
-import retrofit2.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -21,6 +25,9 @@ class MainActivity : AppCompatActivity() {
     private val userFragment by lazy { UserFragment() }
 
     private val num: Int = 0
+
+    private val finishtimeed: Long = 1000
+    private var presstime: Long = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -61,8 +68,25 @@ class MainActivity : AppCompatActivity() {
             }
         })
 
-        supportFragmentManager.beginTransaction().add(R.id.container,mainFragment).addToBackStack(null).commit()
+        supportFragmentManager.beginTransaction().add(R.id.container,mainFragment).commit()
+
         initNavigationBar()
+    }
+
+    override fun onBackPressed() {
+        val tempTime = System.currentTimeMillis()
+        val intervalTime: Long = tempTime - presstime
+        if (supportFragmentManager.backStackEntryCount == 0) {
+            if (0 <= intervalTime && finishtimeed >= intervalTime) {
+                finish()
+            } else {
+                presstime = tempTime
+                Toast.makeText(this, "종료하려면 한번 더 누르세요", Toast.LENGTH_SHORT).show()
+            }
+        }
+        else{
+            super.onBackPressed()
+        }
     }
 
     private fun initNavigationBar() {
@@ -81,7 +105,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
     private fun changeFragment(fragment: Fragment){
-        supportFragmentManager.beginTransaction().replace(R.id.container,fragment).addToBackStack(null).commit()
+        supportFragmentManager.beginTransaction().replace(R.id.container,fragment).commit()
     }
 
 }
