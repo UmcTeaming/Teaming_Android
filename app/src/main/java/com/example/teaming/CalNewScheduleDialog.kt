@@ -4,6 +4,7 @@ import android.content.res.ColorStateList
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -29,7 +30,12 @@ class CalNewScheduleDialog():DialogFragment() {
         binding = CalDialogNewBinding.inflate(inflater,container,false)
         val view = binding.root
         binding.makeSchedule.setOnClickListener{
-            //RetrofitApi.getRetrofitService.createSchedule()
+            Log.d("chanho", "scheduleName: " + binding.scheduleName.text.toString() + " " +  binding.scheduleStartDay.text.toString() + " " + binding.scheduleEndDay.text.toString() + " " + binding.scheduleStartTime.text.toString() + " " + binding.scheduleEndTime.text.toString())
+            //val args = arguments
+            //val memberId = args!!.getInt("memberId")
+            //val projectId = args!!.getInt("projectId")
+            //val req = CreateSchedule(binding.scheduleName.text.toString(), binding.scheduleStartDay.text.toString(), binding.scheduleEndDay.text.toString(), binding.scheduleStartTime.text.toString(), binding.scheduleEndTime.text.toString())
+            //RetrofitApi.getRetrofitService.createSchedule(memberId,projectId,)
             //여기에 등록로직추가해야.
         }
         binding.toBefore.setOnClickListener{
