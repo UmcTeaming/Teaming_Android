@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:paddingStart="20dp"
+    android:paddingEnd="20dp"
+    android:background="@color/white">
+
+    <TextView
+        android:id="@+id/yes_home"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#194AC2"
+        android:fontFamily="@font/gmarket_sans_ttf_bold"
+        android:text="초대가 완료되었습니다 :)"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="50dp"
+        android:textSize="17sp"
+        android:gravity="center"
+        />
+
+
+    <ImageButton
+        android:id="@+id/close_yes_btn"
+        android:layout_marginTop="50dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/yes_home"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginStart="7dp"
+        android:layout_width="130dp"
+        android:layout_height="30dp"
+        android:src="@drawable/yes_btn"
+        android:scaleType="fitCenter"
+        android:background="@android:color/transparent"
+        android:layout_marginBottom="20dp"/>
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+    </layout>

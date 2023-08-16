@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".DocRead">
+
+    <TextView
+        android:id="@+id/doc_pj_name"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="45dp"
+        android:layout_marginStart="30dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/gmarket_sans_ttf_medium"
+        android:textSize="18sp"
+        android:text="프로젝트 1 (프로젝트 명)"
+        android:textColor="#80000000"
+        android:gravity="center"/>
+
+    <View
+        android:id="@+id/line_read_1"
+        android:layout_marginTop="15dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/doc_pj_name"
+        app:layout_constraintStart_toStartOf="parent"
+        android:background="#B3B3B3B3"/>
+
+    <ImageView
+        android:id="@+id/file_img"
+        android:layout_width="90dp"
+        android:layout_height="90dp"
+        android:src="@drawable/pdf_img"
+        android:scaleType="fitCenter"
+        android:background="@android:color/transparent"
+        app:layout_constraintTop_toBottomOf="@id/line_read_1"
+        android:layout_marginTop="15dp"
+        android:layout_marginStart="30dp"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <LinearLayout
+        android:id="@+id/teamone_name"
+        app:layout_constraintStart_toEndOf="@id/file_img"
+        app:layout_constraintTop_toBottomOf="@id/line_read_1"
+        android:layout_marginTop="17dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/file_name"
+            android:fontFamily="@font/gmarket_sans_ttf_medium"
+            android:textSize="15sp"
+            android:text="00교양 조별과제 자료조사2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"/>
+
+        <TextView
+            android:fontFamily="@font/gmarket_sans_ttf_medium"
+            android:text="카리나,닝닝"
+            android:textSize="13sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#80000000"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/file_type"
+        android:layout_marginTop="10dp"
+        app:layout_constraintTop_toBottomOf="@id/teamone_name"
+        app:layout_constraintStart_toEndOf="@id/file_img"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        
+        <View
+            android:layout_gravity="center"
+            android:background="@drawable/circle"
+            android:layout_width="15dp"
+            android:layout_height="15dp"/>
+
+        <TextView
+            android:layout_marginStart="5dp"
+            android:fontFamily="@font/gmarket_sans_ttf_medium"
+            android:text="Docx"
+            android:textSize="14sp"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <ImageButton
+            android:layout_gravity="center"
+            android:layout_marginStart="5dp"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/setting_btn"
+            android:scaleType="fitCenter"
+            android:background="@android:color/transparent"/>
+        
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/download_btn"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:src="@drawable/download_btn"
+        android:scaleType="fitCenter"
+        android:background="@android:color/transparent"
+        app:layout_constraintStart_toEndOf="@id/file_type"
+        app:layout_constraintTop_toBottomOf="@id/file_type"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
+
+    <TextView
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="30dp"
+        android:id="@+id/file_viewer_btn"
+        app:layout_constraintBottom_toTopOf="@id/line_read_2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:elevation="20dp"
+        android:layout_width="100dp"
+        android:layout_height="30dp"
+        android:background="@drawable/select_btn"
+        android:fontFamily="@font/gmarket_sans_ttf_bold"
+        android:gravity="center"
+        android:textSize="13sp"
+        android:textColor="#B3000000"
+        android:text="파일뷰어"
+        app:layout_constraintHorizontal_bias="0"
+        />
+
+    <TextView
+        android:elevation="0dp"
+        android:id="@+id/comment_btn"
+        app:layout_constraintBottom_toTopOf="@id/line_read_2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/file_viewer_btn"
+        android:gravity="center"
+        android:layout_width="100dp"
+        android:layout_height="25dp"
+        android:background="@drawable/no_select_btn"
+        android:fontFamily="@font/gmarket_sans_ttf_bold"
+        android:textSize="13sp"
+        android:textColor="#7A7A7A"
+        android:text="코멘트"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintVertical_bias="1"
+        />
+
+    <View
+        android:layout_marginTop="50dp"
+        android:id="@+id/line_read_2"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/download_btn"
+        app:layout_constraintStart_toStartOf="parent"
+        android:background="#B3B3B3B3"/>
+
+    <FrameLayout
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginLeft="40dp"
+        android:id="@+id/doc_read_contain"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toTopOf="@id/line_read_2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
+
+
+
+
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
