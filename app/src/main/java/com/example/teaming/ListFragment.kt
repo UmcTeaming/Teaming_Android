@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.FragmentManager
 import com.example.teaming.databinding.FragmentFileBinding
 import com.example.teaming.databinding.FragmentListBinding
 
@@ -23,9 +24,8 @@ class ListFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        val binding = FragmentListBinding.inflate(inflater,container,false)
 
+        val binding = FragmentListBinding.inflate(inflater,container,false)
         // 화면 시작시에 처음 보여야되는 리사이클러뷰 설정
         isFileIcon1Selected = true
         isFileIcon2Selected = false
