@@ -29,7 +29,8 @@ class CalNewScheduleDialog():DialogFragment() {
         binding = CalDialogNewBinding.inflate(inflater,container,false)
         val view = binding.root
         binding.makeSchedule.setOnClickListener{
-            //등록 로직 구현해야 함
+            //RetrofitApi.getRetrofitService.createSchedule()
+            //여기에 등록로직추가해야.
         }
         binding.toBefore.setOnClickListener{
             dismiss()

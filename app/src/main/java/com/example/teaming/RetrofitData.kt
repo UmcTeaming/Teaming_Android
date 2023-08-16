@@ -120,3 +120,16 @@ data class PortfolioList(
     @SerializedName("projectStatus")
     val projectStatus: String
 )
+
+data class CreateSchedule(
+    @SerializedName("schedule_name")
+    val scheduleName:String,
+    @SerializedName("schedule_start")
+    val scheduleStart:String,
+    @SerializedName("schedule_end")
+    val scheduleEnd:String,
+    @SerializedName("schedule_start_time")
+    val scheduleStartTime:String,
+    @SerializedName("schedule_end_time")
+    val scheduleEndTime:String
+)

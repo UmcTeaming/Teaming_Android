@@ -22,4 +22,10 @@ interface RetrofitService {
 
     @GET("/member/{memberId}/portfolio")
     fun portfolioPage(@Path("memberId") memberId: Int?) : Call<PortfolioPageResponse>
+
+    @POST("/projects/{memberId}/{projectId}/schedule")
+    fun createSchedule(
+        @Path("memberId") memberId: Int?,
+        @Path("projectId") projectId: Int?,
+        @Body scheduleData:CreateSchedule) : Call<CreateSchedule>
 }
