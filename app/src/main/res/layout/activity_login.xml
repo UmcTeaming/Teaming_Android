@@ -82,7 +82,7 @@
     <Button
         android:id="@+id/Button_login"
         android:layout_width="match_parent"
-        android:fontFamily="@font/roboto_medium"
+        android:fontFamily="@font/gmarket_sans_ttf_medium"
         android:layout_height="50dp"
         android:layout_marginRight="50dp"
         android:layout_marginLeft="50dp"

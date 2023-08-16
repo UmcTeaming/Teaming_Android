@@ -3,8 +3,8 @@ package com.example.teaming
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.example.login.LoginActivity
 import com.example.teaming.databinding.ActivityFindNumBinding
+import com.example.teaming.LoginActivity
 
 class FindNumActivity : AppCompatActivity() {
 

@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.teaming.databinding.ActivityStartBinding
+import com.example.teaming.LoginActivity
 
 class StartActivity : AppCompatActivity() {
 
