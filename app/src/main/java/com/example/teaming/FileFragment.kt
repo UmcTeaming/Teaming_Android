@@ -2,6 +2,7 @@ package com.example.teaming
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -19,6 +20,9 @@ class FileFragment : Fragment() {
     private var isFileIcon1Selected = true
     private var isFileIcon2Selected = false
 
+    private val fileIcon1Fragment by lazy { File_Icon1_Fragment() }
+    private val fileIcon2Fragment by lazy { File_Icon2_Fragment() }
+
     /*다른 네비게이션바 갔다가 돌아오면 화면이 안보이는 문제 해결해야됨
     ㅁ인채로 다른 화면 갔다 돌아오면 제대로 화면 표시 but = 상태로 화면 다녀오면 안뜸..;;*/
 
@@ -35,6 +39,15 @@ class FileFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val binding = FragmentFileBinding.inflate(inflater,container,false)
+
+        /*val memberId = arguments?.getInt("memberId")
+        Log.e("파일 프래그 id","$memberId")
+        var bundle = Bundle()
+        if(memberId!=null){
+            bundle.putInt("memberId",memberId)
+            fileIcon1Fragment.arguments = bundle
+            fileIcon2Fragment.arguments = bundle
+        }*/
 
         // 화면 시작시에 처음 보여야되는 리사이클러뷰 설정
         isFileIcon1Selected = true

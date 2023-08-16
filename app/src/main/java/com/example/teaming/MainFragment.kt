@@ -52,17 +52,23 @@ class MainFragment : Fragment() {
                         val mainPageResponse = response.body()
                         if (mainPageResponse != null) {
                             val recentlyProjects = mainPageResponse.data.recentlyProject
-                            Log.d("data", "${recentlyProjects}")
+                            //Log.d("data", "${recentlyProjects}")
 
                             horItemList.clear()
-                            for (project in recentlyProjects) {
-                                horItemList.add(
-                                    HorListItem(
-                                        R.drawable.file_view_img,
-                                        project.projectName,
-                                        project.projectCreatedDate
+                            if(recentlyProjects!=null){
+                                for (project in recentlyProjects) {
+                                    horItemList.add(
+                                        HorListItem(
+                                            R.drawable.file_view_img,
+                                            project.projectName,
+                                            project.projectCreatedDate
+                                        )
                                     )
-                                )
+                                }
+                            }
+                            else{
+                                binding.nonViewPager2.visibility = View.VISIBLE
+                                binding.viewPager2.visibility = View.INVISIBLE
                             }
 
                             // 아래 두 줄을 추가해서 어댑터에 데이터 변경을 알려줍니다.
@@ -71,35 +77,56 @@ class MainFragment : Fragment() {
 
                             verItemList.clear()
                             val progressProjects = mainPageResponse.data.progressProject
-                            for (index in 0 until minOf(progressProjects.size, 3)) {
-                                val project = progressProjects[index]
-                                verItemList.add(
-                                    VerListItem(
-                                        R.drawable.state_oval,
-                                        project.projectName, // 이 부분 수정 필요
-                                        project.projectStartedDate
+                            if(progressProjects!=null){
+                                for (index in 0 until minOf(progressProjects.size, 3)) {
+                                    val project = progressProjects[index]
+                                    verItemList.add(
+                                        VerListItem(
+                                            R.drawable.state_oval,
+                                            project.projectName, // 이 부분 수정 필요
+                                            project.projectStartedDate
+                                        )
                                     )
-                                )
+                                }
                             }
-
+                            else{
+                                binding.nonVerList.visibility = View.VISIBLE
+                                binding.verList.visibility = View.GONE
+                            }
                             verAdapter.notifyDataSetChanged()
 
                             gridItemList.clear()
                             val portfolio = mainPageResponse.data.portfolio
-                            for(project in portfolio){
-                                val formattedDate = "${project.projectStartDate} ~ ${project.projectEndDate}"
-                                gridItemList.add(
-                                    GridListItem(
-                                        R.drawable.file_background,
-                                        project.projectName,
-                                        formattedDate
+                            if(portfolio != null){
+                                for(project in portfolio){
+                                    val formattedDate = "${project.projectStartDate} ~ ${project.projectEndDate}"
+                                    gridItemList.add(
+                                        GridListItem(
+                                            R.drawable.file_background,
+                                            project.projectName,
+                                            formattedDate
+                                        )
                                     )
-                                )
+                                }
                             }
+                            else{
+                                binding.nonGridList.visibility = View.VISIBLE
+                                binding.gridList.visibility = View.GONE
+                            }
+
                             gridAdapter.notifyDataSetChanged()
 
                             val userId = mainPageResponse.data
                             Log.d("MainFragment", "Data: ${userId}")
+                        }
+                        if(mainPageResponse == null){
+                            // 프로젝트가 없는 경우 해당 화면을 보이도록
+                            binding.nonGridList.visibility = View.VISIBLE
+                            binding.nonVerList.visibility = View.VISIBLE
+                            binding.nonViewPager2.visibility = View.VISIBLE
+                            binding.viewPager2.visibility = View.INVISIBLE
+                            binding.verList.visibility = View.GONE
+                            binding.gridList.visibility = View.INVISIBLE
                         }
                     } else {
                         Log.e("MainFragment", "API 호출 반 실패: ${response.code()}")
