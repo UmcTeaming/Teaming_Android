@@ -40,16 +40,15 @@ class CalendarAdapter(val dayList:ArrayList<LocalDate?>,val recyclerView: Recycl
         else{
             holder.dayText.text=day.dayOfMonth.toString()
             holder.itemView.setOnClickListener {
-                //if(!(day==(CalendarUtil.selectedDate)&&CalendarUtil.selectedDate== LocalDate.now())) {
-                    if (check != null) {
-                        val x = check
-                        val beforeViewHolder: CalendarViewHolder =
-                            recyclerView.findViewHolderForAdapterPosition(x!!) as CalendarViewHolder
-                        beforeViewHolder.selectedCircle.visibility = View.INVISIBLE
-                    }
-                    holder.selectedCircle.visibility = View.VISIBLE
-                    check = position
-                //}
+                if (check != null) {
+                    val x = check
+                    val beforeViewHolder: CalendarViewHolder =
+                        recyclerView.findViewHolderForAdapterPosition(x!!) as CalendarViewHolder
+                    beforeViewHolder.selectedCircle.visibility = View.INVISIBLE
+                }
+                holder.selectedCircle.visibility = View.VISIBLE
+                check = position
+                itemClickListener.onItemClick(it,position)
             }
 
             if(day==(CalendarUtil.selectedDate)&&CalendarUtil.selectedDate== LocalDate.now()){
@@ -67,4 +66,3 @@ class CalendarAdapter(val dayList:ArrayList<LocalDate?>,val recyclerView: Recycl
         this.itemClickListener = onItemClickListener
     }
 }
-

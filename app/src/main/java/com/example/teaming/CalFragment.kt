@@ -81,6 +81,11 @@ class CalFragment : Fragment() {//minsdk API26 이상으로 바꿀 필요 있음
         binding.monthText.text=monthFromDate(CalendarUtil.selectedDate)
         val dayList:ArrayList<LocalDate?> = daysInMonthArray(CalendarUtil.selectedDate)
         val adapter = CalendarAdapter(dayList,binding.calendarView)
+        adapter.setOnItemClickListener(object:CalendarAdapter.OnCalendarDayClickListener{
+            override fun onItemClick(v: View, position: Int) {
+                binding.split.text = dayList[position].toString()
+            }
+        })
         val context = requireContext()
         val manager = GridLayoutManager(context,7)
         binding.calendarView.layoutManager = manager
