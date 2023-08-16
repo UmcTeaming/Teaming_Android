@@ -1,5 +1,6 @@
 package com.example.teaming
 
+import android.util.Log
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -7,7 +8,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 //retrofit2 싱글턴 객체
 object RetrofitApi {
 
-    val okHttpClient = OkHttpClient.Builder().addInterceptor(AuthInterceptor()).build()
+    private val okHttpClient = OkHttpClient.Builder().addInterceptor(AuthInterceptor()).build()
 
     private const val BASE_URL = "http://teaming.shop:8080"
     private val getRetrofit by lazy{

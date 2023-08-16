@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.teaming.databinding.FragmentFileBinding
 import com.example.teaming.databinding.FragmentFileIcon1Binding
@@ -25,6 +26,8 @@ class FileFragment : Fragment() {
 
     /*다른 네비게이션바 갔다가 돌아오면 화면이 안보이는 문제 해결해야됨
     ㅁ인채로 다른 화면 갔다 돌아오면 제대로 화면 표시 but = 상태로 화면 다녀오면 안뜸..;;*/
+
+
 
     override fun onAttach(context: Context) {
         super.onAttach(context)

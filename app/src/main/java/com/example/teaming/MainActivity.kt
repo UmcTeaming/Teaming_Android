@@ -3,12 +3,16 @@ package com.example.teaming
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.teaming.databinding.ActivityMainBinding
 import com.google.gson.Gson
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.RequestBody
-import retrofit2.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -24,6 +28,9 @@ class MainActivity : AppCompatActivity() {
 
     private val num: Int = 0
 
+    private val finishtimeed: Long = 1000
+    private var presstime: Long = 0
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -38,6 +45,7 @@ class MainActivity : AppCompatActivity() {
         val callLogin = RetrofitApi.getRetrofitService.login(requestBody)
 
         App.prefs.token = null
+
         callLogin.enqueue(object : Callback<LoginResponse> {
             override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
                 if (response.isSuccessful) {
@@ -54,24 +62,42 @@ class MainActivity : AppCompatActivity() {
                         Log.e("메인","${fileIcon1Fragment.arguments}")
                         fileIcon2Fragment.arguments = bundle
 
-                        Log.d("mainId","${userId}")
+                        //Log.d("mainId","${userId}")
+                        Log.d("R_Login_mainId","${userId}")
 
-                        App.prefs.token=accessToken
+                        App.prefs.token = accessToken
 
-                        Log.d("LoginActivity", "Access Token: $accessToken")
+                        Log.d("R_LoginActivity", "Access Token: $accessToken")
                     }
                 } else {
-                    Log.d("LoginActivity", "API 호출 실패: ${response.code()}")
+                    Log.d("R_LoginActivity", "API 호출 실패: ${response.code()}")
                 }
             }
 
             override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
-                Log.e("LoginActivity", "로그인 API 호출 실패", t)
+                Log.e("R_LoginActivity", "로그인 API 호출 실패", t)
             }
         })
 
-        supportFragmentManager.beginTransaction().add(R.id.container,mainFragment).addToBackStack(null).commit()
+        supportFragmentManager.beginTransaction().add(R.id.container,mainFragment).commit()
+
         initNavigationBar()
+    }
+
+    override fun onBackPressed() {
+        val tempTime = System.currentTimeMillis()
+        val intervalTime: Long = tempTime - presstime
+        if (supportFragmentManager.backStackEntryCount == 0) {
+            if (0 <= intervalTime && finishtimeed >= intervalTime) {
+                finish()
+            } else {
+                presstime = tempTime
+                Toast.makeText(this, "종료하려면 한번 더 누르세요", Toast.LENGTH_SHORT).show()
+            }
+        }
+        else{
+            super.onBackPressed()
+        }
     }
 
     private fun initNavigationBar() {
@@ -90,7 +116,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
     private fun changeFragment(fragment: Fragment){
-        supportFragmentManager.beginTransaction().replace(R.id.container,fragment).addToBackStack(null).commit()
+        supportFragmentManager.beginTransaction().replace(R.id.container,fragment).commit()
     }
 
 }

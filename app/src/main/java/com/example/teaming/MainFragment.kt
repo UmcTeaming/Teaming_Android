@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -41,7 +42,7 @@ class MainFragment : Fragment() {
 
         // API 설정 - GET
         val memberId = arguments?.getInt("memberId")
-        Log.d("Id","${memberId}")
+        Log.d("R_MainFragment","ID: ${memberId}")
 
         val callMainPage = RetrofitApi.getRetrofitService.mainPage(memberId)
 
@@ -117,6 +118,8 @@ class MainFragment : Fragment() {
                             gridAdapter.notifyDataSetChanged()
 
                             val userId = mainPageResponse.data
+
+                            Log.d("R_MainFragment", "Data: ${userId}")
                             Log.d("MainFragment", "Data: ${userId}")
                         }
                         if(mainPageResponse == null){
@@ -129,11 +132,11 @@ class MainFragment : Fragment() {
                             binding.gridList.visibility = View.INVISIBLE
                         }
                     } else {
-                        Log.e("MainFragment", "API 호출 반 실패: ${response.code()}")
+                        Log.e("R_MainFragment", "API 호출 반 실패: ${response.code()}")
                     }
                 }
                 override fun onFailure(call: Call<MainPageResponse>, t: Throwable) {
-                    Log.e("MainFragment", "API 호출 완전 실패", t)
+                    Log.e("R_MainFragment", "API 호출 완전 실패", t)
                 }
             })
         }
