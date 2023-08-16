@@ -15,8 +15,43 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Teaming"
         tools:targetApi="31">
+
+        <activity
+            android:name=".DialogSecondActivity"
+            android:exported="false" />
+        <activity
+            android:name=".DialogThirdActivity"
+            android:exported="false" />
+        <activity
+            android:name=".DialogFirstActivity"
+            android:exported="false" />
+        <activity
+            android:name=".FindNumActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SearchNumActivity"
+            android:exported="false" />
+        <activity
+            android:name=".StartActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MembershipActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AgreeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".LoginActivity"
+            android:exported="false"
+            android:label="login" />
+
         <activity
             android:name=".MainActivity"
+            android:exported="false"
+            android:label="main" />
+
+        <activity
+            android:name=".FirstActivity"
             android:screenOrientation="portrait"
             android:exported="true">
             <intent-filter>
