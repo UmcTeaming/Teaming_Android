@@ -88,3 +88,35 @@ data class Portfolio(
     val projectStatus: String
 
 )
+
+// 사용자 포트폴리오페이지 데이터
+data class PortfolioPageResponse(
+    @SerializedName("status")
+    val status: Int,
+    @SerializedName("message")
+    val message: String,
+    @SerializedName("data")
+    val data: PortFolioData
+)
+
+data class PortFolioData(
+    @SerializedName("memberId")
+    val memberId: Int,
+    @SerializedName("portfolio")
+    val portfolio: List<PortfolioList>
+)
+
+data class PortfolioList(
+    @SerializedName("projectId")
+    val projectId: Int,
+    @SerializedName("projectName")
+    val projectName: String,
+    @SerializedName("projectStartDate")
+    val projectStartDate: String,
+    @SerializedName("projectEndDate")
+    val projectEndDate: String,
+    @SerializedName("projectImage")
+    val projectImage: String,
+    @SerializedName("projectStatus")
+    val projectStatus: String
+)

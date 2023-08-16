@@ -1,9 +1,9 @@
 package com.example.teaming
 
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.teaming.databinding.ActivityMainBinding
 import com.google.gson.Gson
@@ -23,6 +23,8 @@ class MainActivity : AppCompatActivity() {
     private val listFragment by lazy { ListFragment() }
     private val fileFragment by lazy { FileFragment() }
     private val userFragment by lazy { UserFragment() }
+    private val fileIcon1Fragment by lazy { File_Icon1_Fragment() }
+    private val fileIcon2Fragment by lazy { File_Icon2_Fragment() }
 
     private val num: Int = 0
 
@@ -34,6 +36,9 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        // 데이터 없는 로그인 정보
+        //val requestBodyData = LoginRequset("and@gmail.com", "and123")
+        // 데이터 있는 로그인 정보
         val requestBodyData = LoginRequset("test@gmail.com", "test123")
         val json = Gson().toJson(requestBodyData)
         val requestBody = RequestBody.create("application/json".toMediaType(), json)
@@ -52,6 +57,12 @@ class MainActivity : AppCompatActivity() {
                         var bundle = Bundle()
                         bundle.putInt("memberId",userId)
                         mainFragment.arguments = bundle
+                        //fileFragment.arguments = bundle
+                        fileIcon1Fragment.arguments = bundle
+                        Log.e("메인","${fileIcon1Fragment.arguments}")
+                        fileIcon2Fragment.arguments = bundle
+
+                        //Log.d("mainId","${userId}")
                         Log.d("R_Login_mainId","${userId}")
 
                         App.prefs.token = accessToken

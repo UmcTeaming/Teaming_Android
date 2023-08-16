@@ -19,4 +19,7 @@ interface RetrofitService {
     //@Headers("Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0QGdtYWlsLmNvbSIsImF1dGgiOiIiLCJleHAiOjE2OTQ2NTg2NzZ9.f29mb0LAROO4yxepLcYlr2KCsOPtJSNtYcMGW9cYVO8")
     @GET("/member/{memberId}/home")
     fun mainPage(@Path("memberId") memberId: Int?) : Call<MainPageResponse>
+
+    @GET("/member/{memberId}/portfolio")
+    fun portfolioPage(@Path("memberId") memberId: Int?) : Call<PortfolioPageResponse>
 }
