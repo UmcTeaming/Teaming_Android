@@ -1,14 +1,18 @@
 package com.example.teaming
 
+import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentManager
-import com.example.teaming.databinding.FragmentFileBinding
 import com.example.teaming.databinding.FragmentListBinding
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class ListFragment : Fragment() {
     // 색상 변경을 위해 선택되었는지 아닌지 확인하는 변수
@@ -24,8 +28,53 @@ class ListFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
         val binding = FragmentListBinding.inflate(inflater,container,false)
+
+        val sharedPreference = requireActivity().getSharedPreferences("memberId",
+            Context.MODE_PRIVATE
+        )
+
+        val memberId = sharedPreference.getInt("memberId",-1)
+        Log.e("포트폴리오 id","${memberId}")
+
+        val callProgressPage = RetrofitApi.getRetrofitService.progressPage(memberId)
+
+        if(memberId!=null){
+            callProgressPage.enqueue(object : Callback<ProgressPageResponse> {
+                override fun onResponse(
+                    call: Call<ProgressPageResponse>, response: Response<ProgressPageResponse>
+                ) {
+                    if (response.isSuccessful) {
+                        Log.e("포트폴리오 memberId","${memberId}")
+                        val progressPageResponse = response.body()
+                        if (progressPageResponse != null) {
+                            val progressProjects = progressPageResponse.data.progressProjects
+                            Log.e("tag","${progressProjects}")
+
+                            if(progressProjects !=null){
+                                binding.btnLayout.visibility = View.VISIBLE
+                                binding.fileFrame.visibility = View.VISIBLE
+                                binding.nonViewPager2.visibility = View.GONE
+                            }
+                            else{
+                                binding.btnLayout.visibility = View.INVISIBLE
+                                binding.fileFrame.visibility = View.GONE
+                                binding.nonViewPager2.visibility = View.VISIBLE
+                            }
+                            /*binding.potVerList.visibility = View.GONE
+                            binding.icon1Non.visibility = View.VISIBLE*/
+                        }
+                    } else {
+                        Log.d("FileFragment", "API 반호출 실패: ${response.code()}")
+                    }
+                }
+
+                override fun onFailure(call: retrofit2.Call<ProgressPageResponse>, t: Throwable) {
+                    Log.e("FileFragment", "API 완전호출 실패", t)
+                }
+            })
+        }
+
         // 화면 시작시에 처음 보여야되는 리사이클러뷰 설정
         isFileIcon1Selected = true
         isFileIcon2Selected = false
@@ -99,6 +148,4 @@ class ListFragment : Fragment() {
 
         return binding.root
     }
-
-
 }

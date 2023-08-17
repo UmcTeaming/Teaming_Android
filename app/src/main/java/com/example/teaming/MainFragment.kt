@@ -1,6 +1,7 @@
 package com.example.teaming
 
 import android.content.Context
+import android.content.Context.MODE_PRIVATE
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -41,8 +42,11 @@ class MainFragment : Fragment() {
         val binding = FragmentMainBinding.inflate(inflater,container,false)
 
         // API 설정 - GET
-        val memberId = arguments?.getInt("memberId")
-        Log.d("R_MainFragment","ID: ${memberId}")
+        /*val memberId = arguments?.getInt("memberId")
+        Log.d("R_MainFragment","ID: ${memberId}")*/
+
+        val sharedPreference = requireActivity().getSharedPreferences("memberId", MODE_PRIVATE)
+        val memberId = sharedPreference.getInt("memberId", -1)
 
         val callMainPage = RetrofitApi.getRetrofitService.mainPage(memberId)
 
@@ -57,6 +61,8 @@ class MainFragment : Fragment() {
 
                             horItemList.clear()
                             if(recentlyProjects!=null){
+                                binding.nonViewPager2.visibility = View.INVISIBLE
+                                binding.viewPager2.visibility = View.VISIBLE
                                 for (project in recentlyProjects) {
                                     horItemList.add(
                                         HorListItem(
@@ -79,13 +85,16 @@ class MainFragment : Fragment() {
                             verItemList.clear()
                             val progressProjects = mainPageResponse.data.progressProject
                             if(progressProjects!=null){
+                                binding.nonVerList.visibility = View.INVISIBLE
+                                binding.verList.visibility = View.VISIBLE
                                 for (index in 0 until minOf(progressProjects.size, 3)) {
                                     val project = progressProjects[index]
+                                    val formattedDate = "${project.projectStartDate} ~ "
                                     verItemList.add(
                                         VerListItem(
                                             R.drawable.state_oval,
                                             project.projectName, // 이 부분 수정 필요
-                                            project.projectStartedDate
+                                            formattedDate
                                         )
                                     )
                                 }
@@ -99,6 +108,8 @@ class MainFragment : Fragment() {
                             gridItemList.clear()
                             val portfolio = mainPageResponse.data.portfolio
                             if(portfolio != null){
+                                binding.nonGridList.visibility = View.INVISIBLE
+                                binding.gridList.visibility = View.VISIBLE
                                 for(project in portfolio){
                                     val formattedDate = "${project.projectStartDate} ~ ${project.projectEndDate}"
                                     gridItemList.add(
@@ -122,7 +133,7 @@ class MainFragment : Fragment() {
                             Log.d("R_MainFragment", "Data: ${userId}")
                             Log.d("MainFragment", "Data: ${userId}")
                         }
-                        if(mainPageResponse == null){
+                       /* if(mainPageResponse == null){
                             // 프로젝트가 없는 경우 해당 화면을 보이도록
                             binding.nonGridList.visibility = View.VISIBLE
                             binding.nonVerList.visibility = View.VISIBLE
@@ -130,7 +141,7 @@ class MainFragment : Fragment() {
                             binding.viewPager2.visibility = View.INVISIBLE
                             binding.verList.visibility = View.GONE
                             binding.gridList.visibility = View.INVISIBLE
-                        }
+                        }*/
                     } else {
                         Log.e("R_MainFragment", "API 호출 반 실패: ${response.code()}")
                     }
@@ -140,24 +151,6 @@ class MainFragment : Fragment() {
                 }
             })
         }
-
-        /*callMainPage.enqueue(object : Callback<MainPageResponse> {
-            override fun onResponse(call: Call<MainPageResponse>, response: Response<MainPageResponse>) {
-                if (response.isSuccessful) {
-                    val mainPageResponse = response.body()
-                    if (mainPageResponse != null) {
-                        val userId = mainPageResponse.data
-
-                        Log.d("LoginActivity", "Access Token: ${userId}")
-                    }
-                } else {
-                    Log.d("LoginActivity", "API 호출 반 실패: ${response.code()}")
-                }
-            }
-            override fun onFailure(call: Call<MainPageResponse>, t: Throwable) {
-                Log.e("MainFragment", "API 호출 완전 실패", t)
-            }
-        })*/
 
         //viewPager 관련 내용
         binding.viewPager2.adapter = horAdapter
@@ -189,40 +182,8 @@ class MainFragment : Fragment() {
         binding.verList.layoutManager = LinearLayoutManager(context)
         binding.verList.adapter = verAdapter
 
-//        binding.horList.layoutManager = LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL,false)
-//        binding.horList.adapter = horAdapter
-
         binding.gridList.layoutManager = GridLayoutManager(context,2)
         binding.gridList.adapter = gridAdapter
-
-        /*// ver 아이템 초기화
-        verItemList.clear()
-        // ver 아이템 추가
-        verItemList.add(VerListItem(R.drawable.state_oval,"UMC 파이널 프로젝트(프로젝트명)", "2023.06.13 ~ (진행기간)"))
-        verItemList.add(VerListItem(R.drawable.state_oval,"UMC 파이널 프로젝트(프로젝트명)", "2023.06.13 ~ (진행기간)"))
-        verItemList.add(VerListItem(R.drawable.state_oval,"UMC 파이널 프로젝트(프로젝트명)", "2023.06.13 ~ (진행기간)"))*/
-
-        // 리스트가 변경됨을 어댑터에 알림
-        //verAdapter.notifyDataSetChanged()
-
-        //val recentlyProjects = mainPageResponse.data.recentlyProject
-        /*horItemList.add(HorListItem(R.drawable.baseline_rectangle_24,"UMC 파이널 프로젝트","2023.06.13 ~"))
-        horItemList.add(HorListItem(R.drawable.baseline_rectangle_24,"UMC 파이널 프로젝트","2023.06.13 ~"))
-        horItemList.add(HorListItem(R.drawable.baseline_rectangle_24,"UMC 파이널 프로젝트","2023.06.13 ~"))
-        horAdapter.notifyDataSetChanged()*/
-
-        /*// grid 아이템 초기화
-        gridItemList.clear()
-        // grid 아이템 추가
-        gridItemList.add(GridListItem(R.drawable.baseline_rectangle_24,"프로젝트명","2023.06.13 ~ (진행기간)"))
-        gridItemList.add(GridListItem(R.drawable.baseline_rectangle_24,"프로젝트명","2023.06.13 ~ (진행기간)"))
-        gridItemList.add(GridListItem(R.drawable.baseline_rectangle_24,"프로젝트명","2023.06.13 ~ (진행기간)"))
-        gridItemList.add(GridListItem(R.drawable.baseline_rectangle_24,"프로젝트명","2023.06.13 ~ (진행기간)"))
-        gridItemList.add(GridListItem(R.drawable.baseline_rectangle_24,"프로젝트명","2023.06.13 ~ (진행기간)"))
-        gridItemList.add(GridListItem(R.drawable.baseline_rectangle_24,"프로젝트명","2023.06.13 ~ (진행기간)"))
-        gridItemList.add(GridListItem(R.drawable.baseline_rectangle_24,"프로젝트명","2023.06.13 ~ (진행기간)"))
-        gridItemList.add(GridListItem(R.drawable.baseline_rectangle_24,"프로젝트명","2023.06.13 ~ (진행기간)"))*/
-        //gridAdapter.notifyDataSetChanged()
 
         binding.btnMainCreate.setOnClickListener {
             requireActivity().supportFragmentManager.beginTransaction()
@@ -289,7 +250,6 @@ class MainFragment : Fragment() {
                 .addToBackStack(null)
                 .commit()
         }
-
 
         /*
         // 프로젝트가 없는 경우

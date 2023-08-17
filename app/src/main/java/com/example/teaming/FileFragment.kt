@@ -15,19 +15,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.teaming.databinding.FragmentFileBinding
 import com.example.teaming.databinding.FragmentFileIcon1Binding
 import com.example.teaming.databinding.FragmentMainBinding
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class FileFragment : Fragment() {
     // 색상 변경을 위해 선택되었는지 아닌지 확인하는 변수
     private var isFileIcon1Selected = true
     private var isFileIcon2Selected = false
-
-    private val fileIcon1Fragment by lazy { File_Icon1_Fragment() }
-    private val fileIcon2Fragment by lazy { File_Icon2_Fragment() }
-
-    /*다른 네비게이션바 갔다가 돌아오면 화면이 안보이는 문제 해결해야됨
-    ㅁ인채로 다른 화면 갔다 돌아오면 제대로 화면 표시 but = 상태로 화면 다녀오면 안뜸..;;*/
-
-
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -43,13 +38,45 @@ class FileFragment : Fragment() {
     ): View? {
         val binding = FragmentFileBinding.inflate(inflater,container,false)
 
-        /*val memberId = arguments?.getInt("memberId")
-        Log.e("파일 프래그 id","$memberId")
-        var bundle = Bundle()
+        /*val sharedPreference = requireActivity().getSharedPreferences("memberId",
+            Context.MODE_PRIVATE
+        )*/
+        /*val memberId = sharedPreference.getInt("memberId",-1)
+        Log.e("포트폴리오 id","${memberId}")
+
+        val callPortfolioPage = RetrofitApi.getRetrofitService.portfolioPage(memberId)
+
         if(memberId!=null){
-            bundle.putInt("memberId",memberId)
-            fileIcon1Fragment.arguments = bundle
-            fileIcon2Fragment.arguments = bundle
+            callPortfolioPage.enqueue(object : Callback<PortfolioPageResponse> {
+                override fun onResponse(
+                    call: Call<PortfolioPageResponse>, response: Response<PortfolioPageResponse>
+                ) {
+                    if (response.isSuccessful) {
+                        Log.e("포트폴리오 memberId","${memberId}")
+                        val portfolioPageResponse = response.body()
+                        if (portfolioPageResponse != null) {
+                            val portfolioProjects = portfolioPageResponse.data.portfolio
+
+                            if(portfolioProjects !=null){
+                                binding.btnLayout.visibility = View.VISIBLE
+                                binding.fileFrame.visibility = View.VISIBLE
+                                binding.nonViewPager2.visibility = View.GONE
+                            }
+                            else{
+                                binding.btnLayout.visibility = View.INVISIBLE
+                                binding.fileFrame.visibility = View.GONE
+                                binding.nonViewPager2.visibility = View.VISIBLE
+                            }
+                        }
+                    } else {
+                        Log.d("FileFragment", "API 반호출 실패: ${response.code()}")
+                    }
+                }
+
+                override fun onFailure(call: Call<PortfolioPageResponse>, t: Throwable) {
+                    Log.e("FileFragment", "API 완전호출 실패", t)
+                }
+            })
         }*/
 
         // 화면 시작시에 처음 보여야되는 리사이클러뷰 설정
