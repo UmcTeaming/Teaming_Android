@@ -46,7 +46,7 @@ class Gh_List_Icon2_Fragment : Fragment() {
                         Log.e("포트폴리오 memberId","${memberId}")
                         val progressPageResponse = response.body()
                         if (progressPageResponse != null) {
-                            val progressProjects = progressPageResponse.data.portfolio
+                            val progressProjects = progressPageResponse.data.progressProjects
 
                             listVerItemList.clear()
                             //Log.d("FileFragment", "${portfolioProjects}")
@@ -106,7 +106,7 @@ class Gh_List_Icon2_Fragment : Fragment() {
                                 Log.e("포트폴리오 memberId","${memberId}")
                                 val progressPageResponse = response.body()
                                 if (progressPageResponse != null) {
-                                    val progressProjects = progressPageResponse.data.portfolio
+                                    val progressProjects = progressPageResponse.data.progressProjects
 
                                     listVerItemList.clear()
                                     //Log.d("FileFragment", "${portfolioProjects}")

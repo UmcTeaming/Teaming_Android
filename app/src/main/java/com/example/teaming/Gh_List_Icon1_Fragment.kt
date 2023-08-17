@@ -47,7 +47,7 @@ class Gh_List_Icon1_Fragment : Fragment() {
                         Log.e("포트폴리오 memberId","${memberId}")
                         val progressPageResponse = response.body()
                         if (progressPageResponse != null) {
-                            val progressProjects = progressPageResponse.data.portfolio
+                            val progressProjects = progressPageResponse.data.progressProjects
 
                             listItemList.clear()
                             //Log.d("FileFragment", "${portfolioProjects}")
@@ -66,8 +66,10 @@ class Gh_List_Icon1_Fragment : Fragment() {
                                 }
                                 verAdapter2.notifyDataSetChanged()
                             }
-                            /*binding.potVerList.visibility = View.GONE
-                            binding.icon1Non.visibility = View.VISIBLE*/
+                            /*else{
+                                binding.listVerList.visibility = View.GONE
+                                binding.icon1Non.visibility = View.VISIBLE
+                            }*/
                         }
                     } else {
                         Log.d("FileFragment", "API 반호출 실패: ${response.code()}")
@@ -107,7 +109,7 @@ class Gh_List_Icon1_Fragment : Fragment() {
                                 Log.e("포트폴리오 memberId","${memberId}")
                                 val progressPageResponse = response.body()
                                 if (progressPageResponse != null) {
-                                    val progressProjects = progressPageResponse.data.portfolio
+                                    val progressProjects = progressPageResponse.data.progressProjects
 
                                     listItemList.clear()
                                     //Log.d("FileFragment", "${portfolioProjects}")

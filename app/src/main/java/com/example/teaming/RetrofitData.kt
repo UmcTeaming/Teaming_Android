@@ -146,8 +146,8 @@ data class ProgressPageResponse(
 data class ProgressData(
     @SerializedName("member_id")
     val member_id: Int,
-    @SerializedName("portfolio")
-    val portfolio: List<PortfolioProgress>
+    @SerializedName("progressProjects")
+    val progressProjects: List<PortfolioProgress>
 )
 
 data class PortfolioProgress(
