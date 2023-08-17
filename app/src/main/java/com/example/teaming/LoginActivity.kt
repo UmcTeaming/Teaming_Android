@@ -18,10 +18,6 @@ class LoginActivity : AppCompatActivity() {
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        /*binding.ButtonLogin.setOnClickListener {
-            val intent = Intent(this, StartActivity::class.java)
-            startActivity(intent)
-        }*/
 
         binding.ButtonGoSearch.setOnClickListener {
             val intent = Intent(this, SearchNumActivity::class.java)

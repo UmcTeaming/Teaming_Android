@@ -20,6 +20,7 @@ class AgreeActivity : AppCompatActivity() {
         binding.ButtonAgree.setOnClickListener {
             val intent = Intent(this, MembershipActivity::class.java)
             startActivity(intent)
+
         }
 
     }

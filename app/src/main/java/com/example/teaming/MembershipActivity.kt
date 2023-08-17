@@ -1,6 +1,7 @@
 package com.example.teaming
 
 import android.content.Intent
+import android.graphics.Color
 import android.graphics.Paint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -33,5 +34,7 @@ class MembershipActivity : AppCompatActivity() {
         val button = findViewById<Button>(R.id.Button_see);
         button.paintFlags = button.paintFlags or Paint.UNDERLINE_TEXT_FLAG
         button.text = getString(R.string.underlined_text1)
+
+
     }
 }
