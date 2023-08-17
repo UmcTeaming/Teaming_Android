@@ -68,8 +68,8 @@ class MainFragment : Fragment() {
                                         HorListItem(
                                             R.drawable.file_view_img,
                                             project.projectName,
-                                            project.projectCreatedDate
-                                        )
+                                            project.projectCreatedDate,
+                                            project.projectId                                        )
                                     )
                                 }
                             }
@@ -94,7 +94,8 @@ class MainFragment : Fragment() {
                                         VerListItem(
                                             R.drawable.state_oval,
                                             project.projectName, // 이 부분 수정 필요
-                                            formattedDate
+                                            formattedDate,
+                                            project.projectId
                                         )
                                     )
                                 }
@@ -116,7 +117,8 @@ class MainFragment : Fragment() {
                                         GridListItem(
                                             R.drawable.file_background,
                                             project.projectName,
-                                            formattedDate
+                                            formattedDate,
+                                            project.projectId
                                         )
                                     )
                                 }
@@ -199,9 +201,15 @@ class MainFragment : Fragment() {
                 /*Toast.makeText(view?.context,
                     "${position}\n${horItemList[position].hor_title}\n${horItemList[position].hor_date}",
                     Toast.LENGTH_SHORT).show()*/
+                val bundle = Bundle()
+
+                bundle.putInt("projectID",horItemList[position].hor_id)
+
+                val pjPageFragment = PjPageFragment()
+                pjPageFragment.arguments = bundle
 
                 requireActivity().supportFragmentManager.beginTransaction()
-                    .replace(R.id.container,DocRead())
+                        .replace(R.id.container,pjPageFragment)
                     .addToBackStack(null)
                     .commit()
             }
@@ -214,6 +222,13 @@ class MainFragment : Fragment() {
                 /*Toast.makeText(view?.context,
                     "${position}\n${verItemList[position].ver_title}\n${verItemList[position].ver_date}",
                     Toast.LENGTH_SHORT).show()*/
+
+                val bundle = Bundle()
+
+                bundle.putInt("projectID",verItemList[position].ver_Id)
+
+                val pjPageFragment = PjPageFragment()
+                pjPageFragment.arguments = bundle
 
                 requireActivity().supportFragmentManager.beginTransaction()
                     .replace(R.id.container,PjPageFragment())
@@ -229,6 +244,13 @@ class MainFragment : Fragment() {
                 /*Toast.makeText(view?.context,
                     "${position}\n${gridItemList[position].grid_title}\n${gridItemList[position].grid_date}",
                     Toast.LENGTH_SHORT).show()*/
+
+                val bundle = Bundle()
+
+                bundle.putInt("projectID",gridItemList[position].grid_Id)
+
+                val pjPageFragment = PjPageFragment()
+                pjPageFragment.arguments = bundle
 
                 requireActivity().supportFragmentManager.beginTransaction()
                     .replace(R.id.container,PjPageFragment())

@@ -2,7 +2,6 @@ package com.example.teaming
 
 import android.content.SharedPreferences
 import android.os.Bundle
-import android.provider.Contacts.SettingsColumns.KEY
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -38,9 +37,10 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         // 데이터 없는 로그인 정보
-        val requestBodyData = LoginRequset("and@gmail.com", "and123")
+        //val requestBodyData = LoginRequset("and@gmail.com", "and123")
+
         // 데이터 있는 로그인 정보
-        //val requestBodyData = LoginRequset("test@gmail.com", "test123")
+        val requestBodyData = LoginRequset("test@gmail.com", "test123")
         val json = Gson().toJson(requestBodyData)
         val requestBody = RequestBody.create("application/json".toMediaType(), json)
         val callLogin = RetrofitApi.getRetrofitService.login(requestBody)
@@ -63,31 +63,19 @@ class MainActivity : AppCompatActivity() {
                         val editor = preferences.edit()
                         editor.putInt("memberId", userId)
 
-                        // 변경 사항을 반영하고 저장
                         editor.commit()
-                        /*var bundle = Bundle()
-                        bundle.putInt("memberId",userId)
-                        mainFragment.arguments = bundle
-                        fileFragment.arguments = bundle
-                        *//*fileIcon1Fragment.arguments = bundle
-                        Log.e("메인","${fileIcon1Fragment.arguments}")
-                        fileIcon2Fragment.arguments = bundle*/
-
-                        //Log.d("mainId","${userId}")
-                        Log.d("R_Login_mainId","${userId}")
-                        Log.d("R_Login_mainId","${userId}")
 
                         App.prefs.token = accessToken
 
-                        Log.d("R_LoginActivity", "Access Token: $accessToken")
+                        Log.d("Login_Token", "Access Token: $accessToken")
                     }
                 } else {
-                    Log.d("R_LoginActivity", "API 호출 실패: ${response.code()}")
+                    Log.d("Login", "API 호출 실패: ${response.code()}")
                 }
             }
 
             override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
-                Log.e("R_LoginActivity", "로그인 API 호출 실패", t)
+                Log.e("Login", "로그인 API 호출 실패", t)
             }
         })
 
@@ -100,7 +88,7 @@ class MainActivity : AppCompatActivity() {
         val tempTime = System.currentTimeMillis()
         val intervalTime: Long = tempTime - presstime
         if (supportFragmentManager.backStackEntryCount == 0) {
-            if (0 <= intervalTime && finishtimeed >= intervalTime) {
+            if ((0 <= intervalTime) && (finishtimeed >= intervalTime)) {
                 finish()
             } else {
                 presstime = tempTime
