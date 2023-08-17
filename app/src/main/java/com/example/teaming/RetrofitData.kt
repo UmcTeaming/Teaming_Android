@@ -212,3 +212,33 @@ data class Member(
     val email: String
 )
 
+data class ProjectFilesResponse(
+    @SerializedName("status")
+    val status: Int,
+    @SerializedName("message")
+    val message: String,
+    @SerializedName("data")
+    val data: List<ProjectFileData>
+)
+
+data class ProjectFileData(
+    @SerializedName("createdAt")
+    val createdAt: String,
+    @SerializedName("filesDetails")
+    val filesDetails: List<FileDetails>
+)
+
+data class FileDetails(
+    @SerializedName("file_type")
+    val file_type: String,
+    @SerializedName("file_name")
+    val file_name: String,
+    @SerializedName("file")
+    val file: String,
+    @SerializedName("comment")
+    val comment: Int,
+    @SerializedName("file_id")
+    val file_id: Int
+)
+
+
