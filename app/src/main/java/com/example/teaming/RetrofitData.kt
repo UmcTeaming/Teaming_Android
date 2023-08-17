@@ -10,10 +10,17 @@ data class LoginResponse(
     @SerializedName("message")
     val message: String,
     @SerializedName("data")
-    val data: LoginData
+    val data: Data
 )
 
-data class LoginData(
+data class Data(
+    @SerializedName("name")
+    val status: String,
+    @SerializedName("jwtToken")
+    val jwtToken: JwtToken
+)
+
+data class JwtToken(
     @SerializedName("grantType")
     val grantType: String,
     @SerializedName("memberId")

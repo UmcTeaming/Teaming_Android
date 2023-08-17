@@ -52,8 +52,11 @@ class MainActivity : AppCompatActivity() {
                 if (response.isSuccessful) {
                     val loginResponse = response.body()
                     if (loginResponse != null) {
-                        val accessToken = "Bearer ${loginResponse.data.accessToken}"
-                        val userId = loginResponse.data.memberId
+                        val accessToken = "Bearer ${loginResponse.data.jwtToken.accessToken}"
+                        val userId = loginResponse.data.jwtToken.memberId
+
+
+                        var bundle = Bundle()
 
                         val preferences = getSharedPreferences("memberId", MODE_PRIVATE)
 
@@ -68,10 +71,11 @@ class MainActivity : AppCompatActivity() {
                         fileFragment.arguments = bundle
                         *//*fileIcon1Fragment.arguments = bundle
                         Log.e("메인","${fileIcon1Fragment.arguments}")
-                        fileIcon2Fragment.arguments = bundle*//*
+                        fileIcon2Fragment.arguments = bundle*/
 
                         //Log.d("mainId","${userId}")
-                        Log.d("R_Login_mainId","${userId}")*/
+                        Log.d("R_Login_mainId","${userId}")
+                        Log.d("R_Login_mainId","${userId}")
 
                         App.prefs.token = accessToken
 
