@@ -19,7 +19,6 @@ interface RetrofitService {
     @POST("/auth/login")
     fun login(@Body requestBody: RequestBody): Call<LoginResponse>
 
-    //@Headers("Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0QGdtYWlsLmNvbSIsImF1dGgiOiIiLCJleHAiOjE2OTQ2NTg2NzZ9.f29mb0LAROO4yxepLcYlr2KCsOPtJSNtYcMGW9cYVO8")
     @GET("/member/{memberId}/home")
     fun mainPage(@Path("memberId") memberId: Int?) : Call<MainPageResponse>
 
@@ -39,6 +38,9 @@ interface RetrofitService {
         @Part("end_date") endDate: RequestBody,
         @Part("project_color") projectColor: RequestBody
     ): Call<CreateProjectResponse>
+
+    @GET("/projects/{memberId}/{projectId}")
+    fun projectpage(@Path("memberId") memberId: Int?,@Path("projectId") projectId: Int?) : Call<ProjectpageResponse>
 
     @GET("/member/{memberId}/mypage")
     fun myPage(@Path("memberId") memberId: Int?) : Call<MyPageResponse>

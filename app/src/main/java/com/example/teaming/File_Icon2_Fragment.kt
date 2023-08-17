@@ -59,7 +59,8 @@ class File_Icon2_Fragment : Fragment() {
                                         GridListItem(
                                             R.drawable.file_background,
                                             projects.projectName,
-                                            formattedDate
+                                            formattedDate,
+                                            projects.projectId
                                         )
                                     )
                                 }
@@ -122,7 +123,8 @@ class File_Icon2_Fragment : Fragment() {
                                                 GridListItem(
                                                     R.drawable.file_background,
                                                     projects.projectName,
-                                                    formattedDate
+                                                    formattedDate,
+                                                    projects.projectId
                                                 )
                                             )
                                         }
