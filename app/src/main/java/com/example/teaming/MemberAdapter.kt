@@ -22,7 +22,7 @@ class MemberAdapter(val itemList: ArrayList<MemberData>) :
         holder.apply {
             Glide.with(itemView.context)
                 .load(imageData.img)
-                .error(R.drawable.profile_default)
+                .error(R.drawable.no_profile)
                 .into(image)
         }
 

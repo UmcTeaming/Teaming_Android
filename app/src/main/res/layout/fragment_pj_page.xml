@@ -26,7 +26,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
         <TextView
-            android:id="@id/project_name_1"
+            android:id="@+id/project_name_top"
             android:layout_marginStart="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -136,7 +136,7 @@
                 android:layout_weight="1">
 
                 <TextView
-                    android:id="@+id/project_name_2"
+                    android:id="@+id/project_name_bottom"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/gmarket_sans_ttf_bold"

@@ -66,8 +66,8 @@ class PjPageFragment : Fragment() {
                     val projectpageresponse = response.body()
                     if (projectpageresponse != null) {
 
-                        binding.projectName1.text = projectpageresponse.data.name
-                        binding.projectName2.text = projectpageresponse.data.name
+                        binding.projectNameTop.text = projectpageresponse.data.name
+                        binding.projectNameBottom.text = projectpageresponse.data.name
 
                         binding.projectDate.text = "${projectpageresponse.data.startDate} ~ ${projectpageresponse.data.startDate}"
 
