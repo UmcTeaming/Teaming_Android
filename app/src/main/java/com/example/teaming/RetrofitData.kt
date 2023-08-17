@@ -68,8 +68,12 @@ data class ProgressProject(
     val projectId: Int,
     @SerializedName("projectName")
     val projectName: String,
-    @SerializedName("projectStartedDate")
-    val projectStartedDate: String,
+    @SerializedName("projectStartDate")
+    val projectStartDate: String,
+    @SerializedName("projectEndDate")
+    val projectEndDate: String,
+    @SerializedName("projectImage")
+    val projectImage: String,
     @SerializedName("projectStatus")
     val projectStatus: String
 )

@@ -11,6 +11,7 @@
         android:id="@+id/icon1_non"
         android:visibility="invisible"
         android:layout_gravity="center_horizontal"
+        android:layout_margin="8dp"
         android:layout_width="287dp"
         android:layout_height="114dp"
         android:orientation="vertical"

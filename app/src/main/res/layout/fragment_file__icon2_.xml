@@ -29,6 +29,7 @@
         android:orientation="vertical"
         android:backgroundTint="@color/white"
         android:elevation="7dp"
+        android:layout_margin="8dp"
         android:background="@drawable/round_border"
         android:gravity="center">
 

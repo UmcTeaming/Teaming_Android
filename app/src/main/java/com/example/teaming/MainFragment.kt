@@ -89,11 +89,12 @@ class MainFragment : Fragment() {
                                 binding.verList.visibility = View.VISIBLE
                                 for (index in 0 until minOf(progressProjects.size, 3)) {
                                     val project = progressProjects[index]
+                                    val formattedDate = "${project.projectStartDate} ~ "
                                     verItemList.add(
                                         VerListItem(
                                             R.drawable.state_oval,
                                             project.projectName, // 이 부분 수정 필요
-                                            project.projectStartedDate
+                                            formattedDate
                                         )
                                     )
                                 }

@@ -61,7 +61,9 @@ class File_Icon1_Fragment : Fragment() {
                             verItemList.clear()
                             //Log.d("FileFragment", "${portfolioProjects}")
                             if(portfolioProjects != null){
-                                //binding.potVerList.visibility = View.VISIBLE
+                                /*binding.potVerList.visibility = View.VISIBLE
+                                binding.icon1Non.visibility = View.INVISIBLE*/
+                                Log.d("FileFragment", "${portfolioProjects}")
                                 for(projects in portfolioProjects){
                                     val formattedDate = "${projects.projectStartDate} ~ ${projects.projectEndDate}"
                                     verItemList.add(
@@ -74,6 +76,7 @@ class File_Icon1_Fragment : Fragment() {
                                 }
                                 verAdapter2.notifyDataSetChanged()
                             }
+                            Log.d("FileFragment2", "${portfolioProjects}")
                             binding.potVerList.visibility = View.GONE
                             binding.icon1Non.visibility = View.VISIBLE
                         }
