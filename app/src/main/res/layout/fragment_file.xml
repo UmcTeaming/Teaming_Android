@@ -110,6 +110,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/btn_layout"
                     android:visibility="visible"
                     android:layout_marginTop="33dp"
                     android:layout_gravity="center_horizontal"

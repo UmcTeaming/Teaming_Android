@@ -109,6 +109,7 @@ class CalFragment : Fragment() {//minsdk API26 이상으로 바꿀 필요 있음
 
     //캘린더 다가오는 일정 등록
     fun setScheduleView() {
+        Log.d("chanho", "Clicked")
         val scheduleList = ArrayList<CalendarScheduleItem>()
         //scheduleList.add(CalendarScheduleItem("2023-12-11","2023-07-10","10:30:00","14:30:00","티밍 입니다다", "#d79ac3"))
         val memberId = 54
