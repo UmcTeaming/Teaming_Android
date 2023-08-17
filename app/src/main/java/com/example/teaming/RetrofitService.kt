@@ -28,4 +28,8 @@ interface RetrofitService {
         @Path("memberId") memberId: Int?,
         @Path("projectId") projectId: Int?,
         @Body scheduleData:CreateSchedule) : Call<CreateSchedule>
+    @POST("/member/{memberId}/schedule_start")
+    fun takeDaySchedule(
+        @Path("memberId") memberId : Int?,
+        @Body scheduleStart:TakeDayScheduleRequest) : Call<CalendarScheduleResult>
 }

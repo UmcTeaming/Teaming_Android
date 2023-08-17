@@ -3,8 +3,8 @@ package com.example.teaming
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.example.login.MembershipActivity
-import com.example.login.SearchNumActivity
+import com.example.teaming.SearchNumActivity
+import com.example.teaming.MembershipActivity
 import com.example.teaming.databinding.ActivityLoginBinding
 
 class LoginActivity : AppCompatActivity() {
@@ -32,6 +32,12 @@ class LoginActivity : AppCompatActivity() {
             val intent = Intent(this, MembershipActivity::class.java)
             startActivity(intent)
         }
+
+        binding.ButtonLogin.setOnClickListener {
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+        }
+
     }
 
 }

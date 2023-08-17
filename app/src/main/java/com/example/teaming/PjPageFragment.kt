@@ -78,6 +78,17 @@ class PjPageFragment : Fragment() {
             showPjInviteDialog()
         }
 
+        binding.projectSchedules.setOnClickListener{
+            val dialog = ProjectScheduleDialog()
+            val args = Bundle()
+            //memberID = 54
+            //projectID = 11
+            args.putInt("projectId", 11)
+            args.putInt("memberId", 54)
+            dialog.arguments = args
+            dialog.show(requireActivity().supportFragmentManager,"CalNewScheduleDialog")
+        }
+
         return binding.root
     }
 

@@ -1,8 +1,9 @@
-package com.example.login
+package com.example.teaming
 
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.example.teaming.LoginActivity
 import com.example.teaming.databinding.ActivityFirstBinding
 
 class FirstActivity : AppCompatActivity() {
@@ -24,6 +25,8 @@ class FirstActivity : AppCompatActivity() {
         binding.ButtonStart.setOnClickListener {
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
+
+
         }
     }
 

@@ -133,3 +133,13 @@ data class CreateSchedule(
     @SerializedName("schedule_end_time")
     val scheduleEndTime:String
 )
+
+data class TakeDayScheduleRequest(
+    @SerializedName("schedule_start")
+    val scheduleStart :String
+)
+
+data class CalendarScheduleResult(
+    @SerializedName("data")
+    val data: ArrayList<CalendarScheduleItem>
+)

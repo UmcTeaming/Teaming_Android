@@ -4,7 +4,7 @@ package com.example.teaming
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.example.login.SearchNumActivity
+import com.example.teaming.SearchNumActivity
 import com.example.teaming.databinding.ActivityDialogFirstBinding
 
 class DialogFirstActivity : AppCompatActivity() {

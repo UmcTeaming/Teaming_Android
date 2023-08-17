@@ -17,7 +17,7 @@ class ProjectScheduleDialog : DialogFragment() {
     ): View? {
         binding = ProjectSheduleDialogBinding.inflate(inflater,container,false)
         val scheduleList=ArrayList<CalendarScheduleItem>()
-        scheduleList.add(CalendarScheduleItem("12월11일~12월12일","11:00~12:00","더미약속",1))
+        scheduleList.add(CalendarScheduleItem("2023-12-11","2023-07-10","10:30:00","14:30:00","티밍 입니다다", "#d79ac3"))
         binding.projectSchedulesRecyclerView.layoutManager = LinearLayoutManager(activity,LinearLayoutManager.VERTICAL,false)
         binding.projectSchedulesRecyclerView.adapter = CalenderScheduleAdapter(scheduleList)
         binding.makeSchedule.setOnClickListener {

@@ -10,16 +10,11 @@ import com.example.teaming.databinding.CalScheduleItemLayoutBinding
 
 class CalenderScheduleAdapter(val scheduleList:ArrayList<CalendarScheduleItem>):RecyclerView.Adapter<CalenderScheduleAdapter.CalendarScheduleViewHolder>() {
     inner class CalendarScheduleViewHolder(val binding:CalScheduleItemLayoutBinding):RecyclerView.ViewHolder(binding.root){
-         fun bind(day:String,time:String,desc:String,color:Int){
-             lateinit var col:String
-             binding.calScheduleDay.text = day
+         fun bind(startDay:String,endDay:String,startTime:String,endTime:String,desc:String, color:String){
+             binding.calScheduleDay.text = startDay + "~" + endDay
              binding.calScheduleDescription.text = desc
-             binding.calScheduleTime.text = time
-             if(color==1)
-                 binding.colorBar.setBackgroundColor(Color.RED)
-             else
-                 binding.colorBar.setBackgroundColor(Color.BLUE)
-
+             binding.calScheduleTime.text = startTime + "~" + endTime
+             binding.colorBar.setBackgroundColor(Color.parseColor(color))
          }
     }
 
@@ -34,7 +29,6 @@ class CalenderScheduleAdapter(val scheduleList:ArrayList<CalendarScheduleItem>):
 
     override fun onBindViewHolder(holder: CalendarScheduleViewHolder, position: Int) {
         var data = scheduleList[position]
-        holder.bind(data.day,data.time,data.desc,data.color)
+        holder.bind(data.startDay,data.endDay,data.startTime,data.endTime, data.desc, data.color)
     }
-
 }

@@ -2,6 +2,7 @@ package com.example.teaming
 
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -12,6 +13,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.LayoutManager
 import com.example.teaming.databinding.FragmentCalBinding
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import java.time.LocalDate
 import java.time.YearMonth
 import java.time.format.DateTimeFormatter
@@ -19,11 +23,13 @@ import java.time.format.DateTimeFormatter
 
 class CalFragment : Fragment() {//minsdk API26 이상으로 바꿀 필요 있음
     private lateinit var binding:FragmentCalBinding
+    private var scheduleDay:LocalDate? = null
+
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         CalendarUtil.selectedDate = LocalDate.now()
-
+        scheduleDay = LocalDate.now()
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -48,8 +54,15 @@ class CalFragment : Fragment() {//minsdk API26 이상으로 바꿀 필요 있음
         //일정 추가 버튼
         binding.btnCalNewSchedule.setOnClickListener{
             val dialog = CalNewScheduleDialog()
+            val args = Bundle()
+            //memberID = 54
+            //projectID = 11
+            args.putInt("projectId", 11)
+            args.putInt("memberId", 54)
+            dialog.arguments = args
             dialog.show(requireActivity().supportFragmentManager,"CalNewScheduleDialog")
         }
+        binding.split.text = scheduleDay.toString()
 
         return binding.root
     }
@@ -84,6 +97,8 @@ class CalFragment : Fragment() {//minsdk API26 이상으로 바꿀 필요 있음
         adapter.setOnItemClickListener(object:CalendarAdapter.OnCalendarDayClickListener{
             override fun onItemClick(v: View, position: Int) {
                 binding.split.text = dayList[position].toString()
+                scheduleDay = dayList[position]
+                setScheduleView()
             }
         })
         val context = requireContext()
@@ -94,8 +109,36 @@ class CalFragment : Fragment() {//minsdk API26 이상으로 바꿀 필요 있음
 
     //캘린더 다가오는 일정 등록
     fun setScheduleView() {
-        val scheduleList=ArrayList<CalendarScheduleItem>()
-        scheduleList.add(CalendarScheduleItem("12월11일~12월12일","11:00~12:00","더미약속",1))
+        val scheduleList = ArrayList<CalendarScheduleItem>()
+        //scheduleList.add(CalendarScheduleItem("2023-12-11","2023-07-10","10:30:00","14:30:00","티밍 입니다다", "#d79ac3"))
+        val memberId = 54
+        val req = TakeDayScheduleRequest(scheduleDay.toString())
+        val retrofitObj = RetrofitApi.getRetrofitService.takeDaySchedule(memberId,req)
+        retrofitObj.enqueue(object : Callback<CalendarScheduleResult>{
+            override fun onResponse(
+                call: Call<CalendarScheduleResult>,
+                response: Response<CalendarScheduleResult>
+            ) {
+                if (response.isSuccessful){
+                    Log.d("chanho", "Success CalSchedule")
+                    if (response.body() != null) {
+                        val res = response.body()?.data
+                        if (res != null)
+                            for(x in res){
+                                Log.d("chanho", "${x.desc}")
+                                scheduleList.add(x)
+                            }
+                    }
+                }
+                else
+                    Log.d("chanho", "not success CalSchedule")
+            }
+
+            override fun onFailure(call: Call<CalendarScheduleResult>, t: Throwable) {
+                Log.d("chanho", "onFailure CalSchedule")
+            }
+
+        })
         binding.scheduleView.layoutManager = LinearLayoutManager(activity,LinearLayoutManager.VERTICAL,false)
         binding.scheduleView.adapter = CalenderScheduleAdapter(scheduleList)
     }

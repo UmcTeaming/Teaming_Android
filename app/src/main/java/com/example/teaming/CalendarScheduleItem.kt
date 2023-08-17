@@ -1,3 +1,17 @@
 package com.example.teaming
 
-data class CalendarScheduleItem(var day:String,var time:String,var desc:String,var color:Int)
+import com.google.gson.annotations.SerializedName
+
+data class CalendarScheduleItem(
+    @SerializedName ("schedule_start")
+    val startDay:String,
+    @SerializedName("schedule_end")
+    val endDay:String,
+    @SerializedName("schedule_start_time")
+    val startTime:String,
+    @SerializedName("schedule_end_time")
+    val endTime:String,
+    @SerializedName("schedule_name")
+    val desc:String,
+    @SerializedName("project_color")
+    val color:String)
