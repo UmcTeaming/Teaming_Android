@@ -1,5 +1,6 @@
 package com.example.teaming
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -31,8 +32,12 @@ class File_Icon2_Fragment : Fragment() {
         // Inflate the layout for this fragment
         val binding = FragmentFileIcon2Binding.inflate(inflater,container,false)
 
-        val memberId = arguments?.getInt("memberId")
-        Log.e("포트폴리오 id","$memberId")
+        val sharedPreference = requireActivity().getSharedPreferences("memberId",
+            Context.MODE_PRIVATE
+        )
+        val memberId = sharedPreference.getInt("memberId",-1)
+        Log.e("포트폴리오 id","${memberId}")
+
         val callPortfolioPage = RetrofitApi.getRetrofitService.portfolioPage(memberId)
 
         if(memberId!=null){
@@ -47,17 +52,21 @@ class File_Icon2_Fragment : Fragment() {
 
                             fileVerItemList.clear()
                             //Log.d("FileFragment", "${portfolioProjects}")
-                            for(projects in portfolioProjects){
-                                val formattedDate = "${projects.projectStartDate} ~ ${projects.projectEndDate}"
-                                fileVerItemList.add(
-                                    GridListItem(
-                                        R.drawable.file_background,
-                                        projects.projectName,
-                                        formattedDate
+                            if(portfolioProjects != null){
+                                for(projects in portfolioProjects){
+                                    val formattedDate = "${projects.projectStartDate} ~ ${projects.projectEndDate}"
+                                    fileVerItemList.add(
+                                        GridListItem(
+                                            R.drawable.file_background,
+                                            projects.projectName,
+                                            formattedDate
+                                        )
                                     )
-                                )
+                                }
+                                fileVerAdapter.notifyDataSetChanged()
                             }
-                            fileVerAdapter.notifyDataSetChanged()
+                            binding.potVerList2.visibility = View.GONE
+                            binding.icon2Non.visibility = View.VISIBLE
                         }
                     } else {
                         Log.d("FileFragment", "API 반호출 실패: ${response.code()}")
@@ -104,17 +113,21 @@ class File_Icon2_Fragment : Fragment() {
 
                                     fileVerItemList.clear()
                                     //Log.d("FileFragment", "${portfolioProjects}")
-                                    for(projects in portfolioProjects){
-                                        val formattedDate = "${projects.projectStartDate} ~ ${projects.projectEndDate}"
-                                        fileVerItemList.add(
-                                            GridListItem(
-                                                R.drawable.file_background,
-                                                projects.projectName,
-                                                formattedDate
+                                    if(portfolioProjects != null){
+                                        for(projects in portfolioProjects){
+                                            val formattedDate = "${projects.projectStartDate} ~ ${projects.projectEndDate}"
+                                            fileVerItemList.add(
+                                                GridListItem(
+                                                    R.drawable.file_background,
+                                                    projects.projectName,
+                                                    formattedDate
+                                                )
                                             )
-                                        )
+                                        }
+                                        fileVerAdapter.notifyDataSetChanged()
                                     }
-                                    fileVerAdapter.notifyDataSetChanged()
+                                    binding.potVerList2.visibility = View.GONE
+                                    binding.icon2Non.visibility = View.VISIBLE
                                 }
                             } else {
                                 Log.d("FileFragment", "API 반호출 실패: ${response.code()}")

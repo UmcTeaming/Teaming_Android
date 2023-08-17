@@ -1,6 +1,7 @@
 package com.example.teaming
 
 import com.google.gson.annotations.SerializedName
+import retrofit2.http.Multipart
 
 
 data class LoginResponse(
@@ -119,4 +120,50 @@ data class PortfolioList(
     val projectImage: String,
     @SerializedName("projectStatus")
     val projectStatus: String
+)
+
+// 진행중인 프로젝트 페이지 관련
+data class ProgressPageResponse(
+    @SerializedName("status")
+    val status: Int,
+    @SerializedName("message")
+    val message: String,
+    @SerializedName("data")
+    val data: ProgressData
+)
+
+data class ProgressData(
+    @SerializedName("member_id")
+    val member_id: Int,
+    @SerializedName("portfolio")
+    val portfolio: List<PortfolioProgress>
+)
+
+data class PortfolioProgress(
+    @SerializedName("projectId")
+    val projectId: Int,
+    @SerializedName("projectName")
+    val projectName: String,
+    @SerializedName("projectStartDate")
+    val projectStartDate: String,
+    @SerializedName("projectEndDate")
+    val projectEndDate: String,
+    @SerializedName("projectImage")
+    val projectImage: String,
+    @SerializedName("projectStatus")
+    val projectStatus: String
+)
+
+// 프로젝트 생성
+data class CreateProjectResponse(
+    @SerializedName("project_name")
+    val project_name: String,
+    @SerializedName("project_image")
+    val project_image: String,
+    @SerializedName("start_date")
+    val start_date: String,
+    @SerializedName("end_date")
+    val end_date: String,
+    @SerializedName("project_color")
+    val project_color: String
 )

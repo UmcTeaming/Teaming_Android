@@ -7,6 +7,7 @@
     tools:context=".File_Icon2_Fragment">
 
     <androidx.recyclerview.widget.RecyclerView
+        android:visibility="visible"
         android:id="@+id/pot_ver_list2"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
@@ -17,5 +18,47 @@
         android:overScrollMode="never"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:listitem="@layout/item_file_ver" />
+
+    <LinearLayout
+        android:layout_marginTop="5dp"
+        android:id="@+id/icon2_non"
+        android:visibility="invisible"
+        android:layout_gravity="center_horizontal"
+        android:layout_width="287dp"
+        android:layout_height="222dp"
+        android:orientation="vertical"
+        android:backgroundTint="@color/white"
+        android:elevation="7dp"
+        android:background="@drawable/round_border"
+        android:gravity="center">
+
+        <TextView
+            android:layout_gravity="center_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="아직 완료된 프로젝트가 없어요!"
+            android:fontFamily="@font/gmarket_sans_ttf_bold"
+            android:textColor="#80000000"
+            android:textSize="16sp"/>
+
+        <ImageView
+            android:layout_marginLeft="14dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="126dp"
+            android:layout_height="126dp"
+            android:background="@drawable/non_img"/>
+
+        <TextView
+            android:layout_marginTop="16dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="프로젝트를 완료하고 포트폴리오를 채워보세요:)"
+            android:textSize="11sp"
+            android:fontFamily="@font/gmarket_sans_ttf_medium"
+            android:textColor="#66000000"/>
+
+    </LinearLayout>
+
 
 </FrameLayout>

@@ -14,7 +14,7 @@
         <LinearLayout
             android:layout_marginTop="213dp"
             android:id="@+id/non_viewPager2"
-            android:visibility="visible"
+            android:visibility="invisible"
             android:layout_gravity="center_horizontal"
             android:layout_width="278dp"
             android:layout_height="315dp"
@@ -92,7 +92,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/gmarket_sans_ttf_bold"
-                        android:text="카리나님의 포트폴리오"
+                        android:text="카리나님의 팀 프로젝트"
                         android:textColor="#527FF5"
                         android:textSize="24sp" />
 
@@ -102,14 +102,15 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="3dp"
                         android:fontFamily="@font/gmarket_sans_ttf_light"
-                        android:text="지금까지의 프로젝트를 한눈에 모아보세요!"
+                        android:text="현재 진행 중인 프로젝트를 한눈에 모아보세요!"
                         android:textColor="#527FF5"
                         android:textSize="11sp" />
 
                 </LinearLayout>
 
                 <LinearLayout
-                    android:visibility="invisible"
+                    android:id="@+id/btn_layout"
+                    android:visibility="visible"
                     android:layout_marginTop="33dp"
                     android:layout_gravity="center_horizontal"
                     android:layout_width="287dp"
@@ -134,7 +135,7 @@
                 </LinearLayout>
 
                 <FrameLayout
-                    android:visibility="gone"
+                    android:visibility="visible"
                     android:id="@+id/file_frame"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"

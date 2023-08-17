@@ -12,4 +12,5 @@ class Prefs(context: Context) {
         set(value){
             prefs.edit().putString("token",value).apply()
         }
+
 }

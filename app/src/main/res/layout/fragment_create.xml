@@ -9,6 +9,7 @@
     android:gravity="center_vertical">
 
     <RelativeLayout
+        android:id="@+id/relative_img"
         android:layout_gravity="center"
         android:layout_width="265dp"
         android:layout_height="149dp">
@@ -22,6 +23,7 @@
             android:layout_height="149dp"/>
 
         <TextView
+            android:id="@+id/text"
             android:layout_centerInParent="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -49,6 +51,7 @@
             android:textSize="11sp"/>
 
         <EditText
+            android:id="@+id/pj_name"
             android:backgroundTint="#527FF5"
             android:layout_width="265dp"
             android:layout_height="wrap_content"
@@ -91,6 +94,7 @@
             android:orientation="horizontal">
 
             <EditText
+                android:id="@+id/pj_start"
                 android:inputType="date"
                 android:hint="2023/07/02"
                 android:textSize="11sp"
@@ -111,6 +115,7 @@
                 android:textColor="#194AC2"/>
 
             <EditText
+                android:id="@+id/pj_end"
                 android:inputType="date"
                 android:gravity="center_horizontal"
                 android:hint="2023/07/02"
@@ -162,7 +167,7 @@
     <Button
         android:id="@+id/btn_create_project"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="158dp"
+        android:layout_marginTop="100dp"
         android:background="@drawable/create_btn_round_border"
         android:layout_width="265dp"
         android:layout_height="36dp"

@@ -1,9 +1,11 @@
 package com.example.teaming
 
-import androidx.appcompat.app.AppCompatActivity
+import android.content.SharedPreferences
 import android.os.Bundle
+import android.provider.Contacts.SettingsColumns.KEY
 import android.util.Log
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.teaming.databinding.ActivityMainBinding
 import com.google.gson.Gson
@@ -37,9 +39,9 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         // 데이터 없는 로그인 정보
-        //val requestBodyData = LoginRequset("and@gmail.com", "and123")
+        val requestBodyData = LoginRequset("and@gmail.com", "and123")
         // 데이터 있는 로그인 정보
-        val requestBodyData = LoginRequset("test@gmail.com", "test123")
+        //val requestBodyData = LoginRequset("test@gmail.com", "test123")
         val json = Gson().toJson(requestBodyData)
         val requestBody = RequestBody.create("application/json".toMediaType(), json)
         val callLogin = RetrofitApi.getRetrofitService.login(requestBody)
@@ -54,16 +56,23 @@ class MainActivity : AppCompatActivity() {
                         val accessToken = "Bearer ${loginResponse.data.accessToken}"
                         val userId = loginResponse.data.memberId
 
-                        var bundle = Bundle()
+                        val preferences = getSharedPreferences("memberId", MODE_PRIVATE)
+
+                        val editor = preferences.edit()
+                        editor.putInt("memberId", userId)
+
+                        // 변경 사항을 반영하고 저장
+                        editor.commit()
+                        /*var bundle = Bundle()
                         bundle.putInt("memberId",userId)
                         mainFragment.arguments = bundle
-                        //fileFragment.arguments = bundle
-                        fileIcon1Fragment.arguments = bundle
+                        fileFragment.arguments = bundle
+                        *//*fileIcon1Fragment.arguments = bundle
                         Log.e("메인","${fileIcon1Fragment.arguments}")
-                        fileIcon2Fragment.arguments = bundle
+                        fileIcon2Fragment.arguments = bundle*//*
 
                         //Log.d("mainId","${userId}")
-                        Log.d("R_Login_mainId","${userId}")
+                        Log.d("R_Login_mainId","${userId}")*/
 
                         App.prefs.token = accessToken
 
