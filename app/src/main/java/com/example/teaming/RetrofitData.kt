@@ -178,3 +178,23 @@ data class CreateProjectResponse(
     @SerializedName("project_color")
     val project_color: String
 )
+
+data class MyPageResponse(
+    @SerializedName("status")
+    val status: Int,
+    @SerializedName("message")
+    val message: String,
+    @SerializedName("date")
+    val data: profiledata
+)
+
+data class profiledata(
+    @SerializedName("memberId")
+    val memberId: Int,
+    @SerializedName("name")
+    val name: String,
+    @SerializedName("email")
+    val email: String,
+    @SerializedName("profileImage")
+    val profileImage: String
+)

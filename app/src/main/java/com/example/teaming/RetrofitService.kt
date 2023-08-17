@@ -39,4 +39,7 @@ interface RetrofitService {
         @Part("end_date") endDate: RequestBody,
         @Part("project_color") projectColor: RequestBody
     ): Call<CreateProjectResponse>
+
+    @GET("/member/{memberId}/mypage")
+    fun myPage(@Path("memberId") memberId: Int?) : Call<MyPageResponse>
 }

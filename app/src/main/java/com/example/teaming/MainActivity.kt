@@ -38,7 +38,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         // 데이터 없는 로그인 정보
-        val requestBodyData = LoginRequset("and@gmail.com", "and123")
+        val requestBodyData = LoginRequset("test1234@gmail.com", "test123")
         // 데이터 있는 로그인 정보
         //val requestBodyData = LoginRequset("test@gmail.com", "test123")
         val json = Gson().toJson(requestBodyData)
