@@ -65,8 +65,10 @@ class File_Icon2_Fragment : Fragment() {
                                 }
                                 fileVerAdapter.notifyDataSetChanged()
                             }
-                            binding.potVerList2.visibility = View.GONE
-                            binding.icon2Non.visibility = View.VISIBLE
+                            else{
+                                binding.potVerList2.visibility = View.GONE
+                                binding.icon2Non.visibility = View.VISIBLE
+                            }
                         }
                     } else {
                         Log.d("FileFragment", "API 반호출 실패: ${response.code()}")
@@ -126,8 +128,10 @@ class File_Icon2_Fragment : Fragment() {
                                         }
                                         fileVerAdapter.notifyDataSetChanged()
                                     }
-                                    binding.potVerList2.visibility = View.GONE
-                                    binding.icon2Non.visibility = View.VISIBLE
+                                    else{
+                                        binding.potVerList2.visibility = View.GONE
+                                        binding.icon2Non.visibility = View.VISIBLE
+                                    }
                                 }
                             } else {
                                 Log.d("FileFragment", "API 반호출 실패: ${response.code()}")

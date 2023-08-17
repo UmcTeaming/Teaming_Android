@@ -19,7 +19,7 @@ import retrofit2.Response
 class File_Icon1_Fragment : Fragment() {
     private val verItemList = arrayListOf<VerListItem>()      // 아이템 배열
     private val verAdapter2 = VerticalAdapter2(verItemList)
-    private var memberId: Int? = null // memberId 변수 선언
+    //private var memberId: Int? = null // memberId 변수 선언
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -63,7 +63,7 @@ class File_Icon1_Fragment : Fragment() {
                             if(portfolioProjects != null){
                                 /*binding.potVerList.visibility = View.VISIBLE
                                 binding.icon1Non.visibility = View.INVISIBLE*/
-                                Log.d("FileFragment", "${portfolioProjects}")
+                                //Log.d("FileFragment", "${portfolioProjects}")
                                 for(projects in portfolioProjects){
                                     val formattedDate = "${projects.projectStartDate} ~ ${projects.projectEndDate}"
                                     verItemList.add(
@@ -76,9 +76,11 @@ class File_Icon1_Fragment : Fragment() {
                                 }
                                 verAdapter2.notifyDataSetChanged()
                             }
-                            Log.d("FileFragment2", "${portfolioProjects}")
-                            binding.potVerList.visibility = View.GONE
-                            binding.icon1Non.visibility = View.VISIBLE
+                            else{
+                                //Log.d("FileFragment2", "${portfolioProjects}")
+                                binding.potVerList.visibility = View.GONE
+                                binding.icon1Non.visibility = View.VISIBLE
+                            }
                         }
                     } else {
                         Log.d("FileFragment", "API 반호출 실패: ${response.code()}")
@@ -135,8 +137,10 @@ class File_Icon1_Fragment : Fragment() {
                                         }
                                         verAdapter2.notifyDataSetChanged()
                                     }
-                                    binding.potVerList.visibility = View.GONE
-                                    binding.icon1Non.visibility = View.VISIBLE
+                                    else{
+                                        binding.potVerList.visibility = View.GONE
+                                        binding.icon1Non.visibility = View.VISIBLE
+                                    }
                                 }
                             } else {
                                 Log.d("FileFragment", "API 반호출 실패: ${response.code()}")
