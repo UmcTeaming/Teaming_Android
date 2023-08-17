@@ -70,7 +70,8 @@ class File_Icon1_Fragment : Fragment() {
                                         VerListItem(
                                             R.drawable.state_oval,
                                             projects.projectName,
-                                            formattedDate
+                                            formattedDate,
+                                            projects.projectId
                                         )
                                     )
                                 }
@@ -129,7 +130,8 @@ class File_Icon1_Fragment : Fragment() {
                                                 VerListItem(
                                                     R.drawable.state_oval,
                                                     projects.projectName,
-                                                    formattedDate
+                                                    formattedDate,
+                                                    projects.projectId
                                                 )
                                             )
                                         }

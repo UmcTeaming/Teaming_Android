@@ -15,7 +15,7 @@ data class LoginResponse(
 
 data class Data(
     @SerializedName("name")
-    val status: String,
+    val name: String,
     @SerializedName("jwtToken")
     val jwtToken: JwtToken
 )
@@ -178,3 +178,37 @@ data class CreateProjectResponse(
     @SerializedName("project_color")
     val project_color: String
 )
+
+data class ProjectpageResponse(
+    @SerializedName("status")
+    val status: Int,
+    @SerializedName("message")
+    val message: String,
+    @SerializedName("data")
+    val data: ProjectData
+)
+
+data class ProjectData(
+    @SerializedName("name")
+    val name: String,
+    @SerializedName("image")
+    val image: String?,
+    @SerializedName("startDate")
+    val startDate: String,
+    @SerializedName("endDate")
+    val endDate: String,
+    @SerializedName("projectStatus")
+    val projectStatus: String,
+    @SerializedName("memberListDtos")
+    val memberList: List<Member>
+)
+
+data class Member(
+    @SerializedName("member_name")
+    val member_name: String,
+    @SerializedName("member_image")
+    val member_image: String?,
+    @SerializedName("email")
+    val email: String
+)
+
