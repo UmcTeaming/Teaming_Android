@@ -50,10 +50,12 @@ class MainActivity : AppCompatActivity() {
                 if (response.isSuccessful) {
                     val loginResponse = response.body()
                     if (loginResponse != null) {
-                        val accessToken = "Bearer ${loginResponse.data.accessToken}"
-                        val userId = loginResponse.data.memberId
+                        val accessToken = "Bearer ${loginResponse.data.jwtToken.accessToken}"
+                        val userId = loginResponse.data.jwtToken.memberId
+
 
                         var bundle = Bundle()
+
                         bundle.putInt("memberId",userId)
                         mainFragment.arguments = bundle
                         //fileFragment.arguments = bundle
@@ -63,9 +65,6 @@ class MainActivity : AppCompatActivity() {
 
                         //Log.d("mainId","${userId}")
                         Log.d("R_Login_mainId","${userId}")
-
-                        App.prefs.token = accessToken
-
                         Log.d("R_LoginActivity", "Access Token: $accessToken")
                     }
                 } else {
