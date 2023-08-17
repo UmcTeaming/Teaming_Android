@@ -47,7 +47,13 @@ class PjPageFragment : Fragment() {
 
         val projectId = arguments?.getInt("projectID")
 
-        Log.d("플젝ID", "$projectId")
+        val preferences = requireContext().getSharedPreferences("projectID_page", AppCompatActivity.MODE_PRIVATE)
+
+        val editor = preferences.edit()
+        editor.putInt("projectID_page", projectId ?: -1)
+
+        editor.commit()
+
 
         requireActivity().supportFragmentManager.beginTransaction()
             .add(R.id.fragmentContainer,PjSort())
@@ -58,7 +64,7 @@ class PjPageFragment : Fragment() {
         )
         val memberId = sharedPreference.getInt("memberId",-1)
 
-        val callProjectPage = RetrofitApi.getRetrofitService.projectpage(memberId,projectId)
+        val callProjectPage = RetrofitApi.getRetrofitService.projectPage(memberId,projectId)
 
         callProjectPage.enqueue(object : Callback<ProjectpageResponse> {
             override fun onResponse(call: Call<ProjectpageResponse>, response: Response<ProjectpageResponse>) {
@@ -69,17 +75,17 @@ class PjPageFragment : Fragment() {
                         binding.projectNameTop.text = projectpageresponse.data.name
                         binding.projectNameBottom.text = projectpageresponse.data.name
 
-                        binding.projectDate.text = "${projectpageresponse.data.startDate} ~ ${projectpageresponse.data.startDate}"
-
                         Glide.with(requireContext())
                             .load(projectpageresponse.data.image)
                             .error(R.drawable.pj_image_default)
                             .into(binding.pjImage)
 
                         if (projectpageresponse.data.projectStatus == "ING"){
-                            binding.status.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.status_end))
+                            binding.status.setImageResource(R.drawable.circle)
+                            binding.projectDate.text = "${projectpageresponse.data.startDate}"
                         }else{
-                            binding.status.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.status_ing))
+                            binding.status.setImageResource(R.drawable.circle_end)
+                            binding.projectDate.text = "${projectpageresponse.data.startDate} ~ ${projectpageresponse.data.startDate}"
                         }
 
                         itemList.clear()
@@ -91,9 +97,17 @@ class PjPageFragment : Fragment() {
                                 )
                             )
                         }
+                        while (itemList.size < 4) {
+                            itemList.add(MemberData("no_profile", "기본"))
+                        }
 
+                        val memberboard = binding.root.findViewById<RecyclerView>(R.id.member)
 
-                        Log.d("projectpage", "${projectpageresponse.data.memberList}")
+                        val memberAdapter = MemberAdapter(itemList)
+                        memberAdapter.notifyDataSetChanged()
+
+                        memberboard.adapter = memberAdapter
+                        memberboard.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
                     }
                 } else {
                     Log.d("projectpage", "API 호출 실패: ${response.code()}")
@@ -104,21 +118,6 @@ class PjPageFragment : Fragment() {
                 Log.e("projectpage", "로그인 API 호출 실패", t)
             }
         })
-
-
-        //이쪽은 멤버 관리 부분 리사이클러뷰 - 수정 가능
-        val memberboard = binding.root.findViewById<RecyclerView>(R.id.member)
-
-        while (itemList.size < 4) {
-            itemList.add(MemberData(null, "기본"))
-        }
-
-
-        val memberAdapter = MemberAdapter(itemList)
-        memberAdapter.notifyDataSetChanged()
-
-        memberboard.adapter = memberAdapter
-        memberboard.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
 
         binding.pjFile.setOnClickListener {
             setButtonState(true)
