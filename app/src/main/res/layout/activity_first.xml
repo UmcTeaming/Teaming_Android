@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+
+    <TextView
+        android:id="@+id/text1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="160dp"
+        android:fontFamily="@font/gmarket_sans_ttf_medium"
+        android:text="티밍"
+        android:textColor="#B30049FF"
+        android:textSize="30sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+    </TextView>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/gmarket_sans_ttf_medium"
+        android:text="에서 효율적인"
+        android:textColor="#000000"
+        android:textSize="30sp"
+        app:layout_constraintLeft_toRightOf="@id/text1"
+        app:layout_constraintTop_toTopOf="@id/text1">
+    </TextView>
+
+    <TextView
+        android:id="@+id/text2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/gmarket_sans_ttf_medium"
+        android:text="팀 프로젝트를"
+        android:textColor="#000000"
+        android:textSize="30sp"
+        app:layout_constraintLeft_toLeftOf="@id/text1"
+        app:layout_constraintTop_toBottomOf="@id/text1">
+    </TextView>
+
+    <TextView
+        android:id="@+id/text3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/gmarket_sans_ttf_medium"
+        android:text="기록해 보세요!"
+        android:textColor="#000000"
+        android:textSize="30sp"
+        app:layout_constraintLeft_toLeftOf="@id/text2"
+        app:layout_constraintTop_toBottomOf="@id/text2">
+    </TextView>
+
+    <ImageView
+        android:layout_width="370dp"
+        android:layout_height="370dp"
+        android:src="@drawable/logo_m_1"
+        android:layout_marginLeft="90dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="@id/text2">
+    </ImageView>
+
+    <Button
+        android:id="@+id/Button_start"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="420dp"
+        android:layout_marginRight="30dp"
+        android:background="@drawable/bin_blue"
+        android:fontFamily="@font/gmarket_sans_ttf_medium"
+        android:text="시작하기"
+        android:textColor="#ffffff"
+        android:textSize="25sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@id/text1">
+    </Button>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

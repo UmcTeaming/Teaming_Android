@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ChangeNum">
+
+    <ImageView
+        android:id="@+id/secret"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/secret"
+        android:layout_marginTop="90dp"
+        android:layout_marginLeft="60dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        >
+    </ImageView>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=" 비밀번호 변경하기"
+        android:textColor="#000000"
+        android:textSize="28sp"
+        android:fontFamily="@font/gmarket_sans_ttf_medium"
+        app:layout_constraintLeft_toRightOf="@+id/secret"
+        app:layout_constraintTop_toTopOf="@id/secret"
+        >
+    </TextView>
+
+    <TextView
+        android:id="@id/text1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="변경을 위해서는 현재 비밀번호 입력이 필요해요!"
+        android:fontFamily="@font/gmarket_sans_ttf_medium"
+        android:textColor="#80000000"
+        android:textSize="13sp"
+        android:layout_marginTop="25dp"
+        app:layout_constraintTop_toBottomOf="@id/secret"
+        app:layout_constraintLeft_toLeftOf="@id/secret"
+        >
+    </TextView>
+
+    <TextView
+        android:id="@+id/text2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="현재 비밀번호"
+        android:fontFamily="@font/gmarket_sans_ttf_bold"
+        android:textSize="15sp"
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="50dp"
+        app:layout_constraintTop_toBottomOf="@id/text1"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:textColor="#194AC2"
+        >
+    </TextView>
+
+    <EditText
+        android:id="@+id/text3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColorHint="#194AC2"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintTop_toBottomOf="@id/text2"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:backgroundTint="#527FF5"
+        android:textColor="#000000"
+        android:text="현재 비밀번호를 입력해주세요."
+        android:fontFamily="@font/gmarket_sans_ttf_light"
+        android:textSize="12sp"
+        >
+    </EditText>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="다음으로"
+        android:background="@drawable/button_check"
+        android:textColor="#ffffff"
+        android:fontFamily="@font/gmarket_sans_ttf_bold"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:layout_marginTop="300dp"
+        app:layout_constraintTop_toBottomOf="@id/text3"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        >
+    </Button>
+
+    <ImageView
+        android:id="@+id/img1"
+        android:layout_width="23dp"
+        android:layout_height="23dp"
+        android:src="@drawable/eyeoff"
+        app:layout_constraintRight_toRightOf="@id/text3"
+        app:layout_constraintTop_toTopOf="@id/text2"
+        >
+    </ImageView>
+
+    <ImageView
+        android:id="@+id/img2"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:src="@drawable/checkoff"
+        android:layout_marginRight="10dp"
+        app:layout_constraintRight_toLeftOf="@id/img1"
+        app:layout_constraintTop_toTopOf="@id/img1"
+        >
+    </ImageView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
