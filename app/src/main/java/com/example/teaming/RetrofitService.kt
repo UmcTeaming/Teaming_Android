@@ -66,5 +66,13 @@ interface RetrofitService {
 
     @POST("/projects/{memberId}/{projectId}/invitations")
     fun invitation(@Path("memberId") memberId: Int?,@Path("projectId") projectId: Int?, @Body requestBody: RequestBody) : Call<InvitationsResponse>
+  
+    @GET("/projects/{memberId}/{projectId}/files/{fileId}")
+    fun docReadPage(@Path("memberId") memberId: Int?,@Path("projectId") projectId: Int?,@Path("fileId") fileId: Int?) : Call<DocReadPageResponse>
 
+    @GET("/files/{memberId}/{fileId}/comments")
+    fun commentLoad(@Path("memberId") memberId: Int?,@Path("fileId") fileId: Int?) : Call<CommentLoadResponse>
+
+    @POST("/files/{memberId}/{fileId}/comments")
+    fun commentWrite(@Path("memberId") memberId: Int?,@Path("fileId") fileId: Int?,@Body requestBody: RequestBody) : Call<CommentWriteResponse>
 }

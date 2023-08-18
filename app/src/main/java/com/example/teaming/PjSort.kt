@@ -16,7 +16,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class PjSort : Fragment() {
+class PjSort : Fragment(), PjInAdapter.OnPjInItemClickListener {
     private lateinit var binding:FragmentPjSortBinding
     private lateinit var pjOutAdapter: PjOutAdapter
 
@@ -59,7 +59,8 @@ class PjSort : Fragment() {
                     if (projectfilesresponse != null && projectfilesresponse.data != null) {
                         dataList.addAll(projectfilesresponse.data)
 
-                        pjOutAdapter = PjOutAdapter(dataList)
+
+                        pjOutAdapter = PjOutAdapter(dataList,this@PjSort)
 
                         binding.outRecycler.apply {
                             layoutManager = LinearLayoutManager(requireContext())
@@ -77,32 +78,24 @@ class PjSort : Fragment() {
             }
         })
 
-        // 아래는 데이터 추가 영역
-        /*val item1 = PjOutData("2023. 06. 20", ArrayList<PjInData>())
-        item1.innerList.add(PjInData("oo 교양 조별과제 자료조사 1", 5))
-        dataList.add(
-            item1
-        )
-
-        val item2 = PjOutData("2023. 06. 19", ArrayList<PjInData>())
-        item2.innerList.add(PjInData("oo 교양 조별과제 자료조사 2", 2))
-        item2.innerList.add(PjInData("oo 교양 조별과제 자료조사 1", 1))
-        dataList.add(item2)
-
-        val item3 = PjOutData("2023. 06. 18", ArrayList<PjInData>())
-        item3.innerList.add(PjInData("oo 교양 발표ppt", 4))
-        item3.innerList.add(PjInData("oo 교양 조별과제 자료조사 2", 2))
-        item3.innerList.add(PjInData("oo 교양 조별과제 자료조사 1", 1))
-        dataList.add(item3)
-
-        val item4 = PjOutData("2023. 06. 17", ArrayList<PjInData>())
-        item4.innerList.add(PjInData("oo 교양 발표ppt2", 4))
-        item4.innerList.add(PjInData("oo 교양 발표ppt", 4))
-        item4.innerList.add(PjInData("oo 교양 조별과제 자료조사 2", 2))
-        item4.innerList.add(PjInData("oo 교양 조별과제 자료조사 1", 1))
-        dataList.add(item4)*/
 
         return binding.root
+    }
+
+    override fun onPjInItemClick(fileDetails: FileDetails) {
+
+        val bundle = Bundle()
+
+        bundle.putInt("file_id",fileDetails.file_id)
+        bundle.putString("file_status", "ING")
+
+        val docRead = DocRead()
+        docRead.arguments = bundle
+
+        requireActivity().supportFragmentManager.beginTransaction()
+            .replace(R.id.container,docRead)
+            .addToBackStack(null)
+            .commit()
     }
 
 }

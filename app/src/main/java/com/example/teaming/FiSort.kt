@@ -13,7 +13,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class FiSort : Fragment() {
+class FiSort : Fragment(), FiInAdapter.OnFiInItemClickListener  {
     private lateinit var binding: FragmentFiSortBinding
     private lateinit var FiOutAdapter: FiOutAdapter
 
@@ -55,7 +55,7 @@ class FiSort : Fragment() {
                         Log.d("통신파이","${finalfilesresponse}")
                         Log.d("파이","${dataList}")
 
-                        FiOutAdapter = FiOutAdapter(dataList)
+                        FiOutAdapter = FiOutAdapter(dataList,this@FiSort)
 
                         binding.outRecyclerFi.apply {
                             layoutManager = LinearLayoutManager(requireContext())
@@ -74,5 +74,21 @@ class FiSort : Fragment() {
         })
 
         return binding.root
+    }
+
+    override fun onFiInItemClick(finalDetails: FinalDetails) {
+
+        val bundle = Bundle()
+
+        bundle.putInt("file_id",finalDetails.file_id)
+        bundle.putString("file_status", "END")
+
+        val docRead = DocRead()
+        docRead.arguments = bundle
+
+        requireActivity().supportFragmentManager.beginTransaction()
+            .replace(R.id.container,docRead)
+            .addToBackStack(null)
+            .commit()
     }
 }
