@@ -60,6 +60,12 @@ class CalNewScheduleDialog():DialogFragment() {
                 ) {
                     if (response.isSuccessful){
                         Log.d("chanho", "Success")
+                        val dialog = ScheduleMakeCompleteDialog()
+                        val args = Bundle()
+                        args.putInt("projectId", 11)
+                        dialog.arguments = args
+                        dialog.show(requireActivity().supportFragmentManager,"ScheduleMakeCompleteDialog")
+                        dismiss()
                     }
                     else
                         Log.d("chanho", "not success")
