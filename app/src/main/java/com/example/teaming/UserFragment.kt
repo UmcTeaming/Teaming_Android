@@ -55,7 +55,6 @@ class UserFragment : Fragment() {
                     Log.d("R_LoginActivity", "API 호출 실패: ${response.code()}")
                 }
             }
-
             override fun onFailure(call: Call<MyPageResponse>, t: Throwable) {
                 Log.e("R_LoginActivity", "로그인 API 호출 실패", t)
             }

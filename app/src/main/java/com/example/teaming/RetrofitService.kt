@@ -44,4 +44,11 @@ interface RetrofitService {
 
     @GET("/member/{memberId}/mypage")
     fun myPage(@Path("memberId") memberId: Int?) : Call<MyPageResponse>
+
+    @POST("/auth/signup")
+    fun signup(
+        @Part("name") name: RequestBody,
+        @Part("email") email: RequestBody,
+        @Part("password") password: RequestBody
+    ): Call<SignupResponse>
 }
