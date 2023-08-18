@@ -1,6 +1,7 @@
 package com.example.teaming
 
 import com.google.gson.annotations.SerializedName
+import okhttp3.MultipartBody
 import retrofit2.http.Multipart
 
 
@@ -133,6 +134,30 @@ data class PortfolioList(
     val projectStatus: String
 )
 
+
+data class CreateSchedule(
+    @SerializedName("schedule_name")
+    val scheduleName:String,
+    @SerializedName("schedule_start")
+    val scheduleStart:String,
+    @SerializedName("schedule_end")
+    val scheduleEnd:String,
+    @SerializedName("schedule_start_time")
+    val scheduleStartTime:String,
+    @SerializedName("schedule_end_time")
+    val scheduleEndTime:String
+)
+
+data class TakeDayScheduleRequest(
+    @SerializedName("schedule_start")
+    val scheduleStart :String
+)
+
+data class CalendarScheduleResult(
+    @SerializedName("data")
+    val data: ArrayList<CalendarScheduleItem>
+)
+
 // 진행중인 프로젝트 페이지 관련
 data class ProgressPageResponse(
     @SerializedName("status")
@@ -167,16 +192,30 @@ data class PortfolioProgress(
 
 // 프로젝트 생성
 data class CreateProjectResponse(
+    @SerializedName("status")
+    val status: Int,
+    @SerializedName("message")
+    val message: String,
+    @SerializedName("data")
+    val data: CreateData
+)
+
+data class CreateData(
+    @SerializedName("project_id")
+    val project_id: Int
+)
+
+data class CreateProjectRequest(
     @SerializedName("project_name")
-    val project_name: String,
+    val projectName: String,
     @SerializedName("project_image")
-    val project_image: String,
+    val projectImage: String,
     @SerializedName("start_date")
-    val start_date: String,
+    val startDate: String,
     @SerializedName("end_date")
-    val end_date: String,
+    val endDate: String,
     @SerializedName("project_color")
-    val project_color: String
+    val projectColor: String
 )
 
 data class ProjectpageResponse(

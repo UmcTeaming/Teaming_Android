@@ -55,20 +55,11 @@
         android:textColor="@color/white"
         android:text="00:00~00:00"
         android:background="@drawable/cal_circle_shape"
-        app:layout_constraintRight_toLeftOf="@id/cal_schedule_button"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginRight="20dp"
-        app:layout_constraintBottom_toBottomOf="parent"/>
-
-    <Button
-        android:id="@+id/cal_schedule_button"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
-        android:layout_marginTop="25dp"
-        android:layout_marginRight="5dp"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:background="@drawable/cheveron_left"/>
+        android:layout_marginRight="5dp"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </LinearLayout>

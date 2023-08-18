@@ -24,6 +24,17 @@
             android:background="#527FF5"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"/>
+        <TextView
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:id="@+id/delete_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="삭제하기"
+            android:fontFamily="@font/gmarket_sans_ttf_medium"
+            android:textColor="#527FF5"
+            android:layout_gravity="right"
+            android:layout_marginRight="20dp"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/project_schedules_recycler_view"
