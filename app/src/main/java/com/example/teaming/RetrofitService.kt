@@ -48,4 +48,10 @@ interface RetrofitService {
     @Multipart
     @GET("/projects/{memberId}/{projectId}/files-upload")
     fun fileUpload(@Path("memberId") memberId: Int?,@Path(" projectId") projectId: Int?, @Part file: MultipartBody.Part) : Call<ProjectFilesResponse>
+
+    @GET("/projects/{memberId}/{projectId}/final-files")
+    fun finalFiles(@Path("memberId") memberId: Int?,@Path("projectId") projectId: Int?) : Call<FinalFilesResponse>
+
+    @POST("/projects/{memberId}/{projectId}/invitations")
+    fun invitation(@Path("memberId") memberId: Int?,@Path("projectId") projectId: Int?, @Body requestBody: RequestBody) : Call<InvitationsResponse>
 }
