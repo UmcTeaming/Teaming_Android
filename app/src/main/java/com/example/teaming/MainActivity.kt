@@ -2,6 +2,7 @@ package com.example.teaming
 
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.provider.Contacts.SettingsColumns.KEY
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -63,6 +64,17 @@ class MainActivity : AppCompatActivity() {
                         editor.putInt("memberId", userId)
 
                         editor.commit()
+                        /*var bundle = Bundle()
+                        bundle.putInt("memberId",userId)
+                        mainFragment.arguments = bundle
+                        fileFragment.arguments = bundle
+                        *//*fileIcon1Fragment.arguments = bundle
+                        Log.e("메인","${fileIcon1Fragment.arguments}")
+                        fileIcon2Fragment.arguments = bundle*/
+
+                        //Log.d("mainId","${userId}")
+                        Log.d("R_Login_mainId","${userId}")
+                        Log.d("R_Login_mainId","${userId}")
 
                         App.prefs.token = accessToken
 

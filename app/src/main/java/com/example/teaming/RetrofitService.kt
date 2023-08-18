@@ -19,6 +19,7 @@ interface RetrofitService {
     @POST("/auth/login")
     fun login(@Body requestBody: RequestBody): Call<LoginResponse>
 
+    //@Headers("Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0QGdtYWlsLmNvbSIsImF1dGgiOiIiLCJleHAiOjE2OTQ2NTg2NzZ9.f29mb0LAROO4yxepLcYlr2KCsOPtJSNtYcMGW9cYVO8")
     @GET("/member/{memberId}/home")
     fun mainPage(@Path("memberId") memberId: Int?) : Call<MainPageResponse>
 
@@ -31,15 +32,20 @@ interface RetrofitService {
     @Multipart
     @POST("/projects/{memberId}/create")
     fun createProject(
-        @Path("memberId") memberId: Int?,
-        @Part("project_name") projectName: RequestBody,
-        @Part image: MultipartBody.Part,
-        @Part("start_date") startDate: RequestBody,
-        @Part("end_date") endDate: RequestBody,
-        @Part("project_color") projectColor: RequestBody
+        @Path("memberId") memberId: Int,
+        @Part("data") requestData: RequestBody,
+        @Part projectImage: MultipartBody.Part?
     ): Call<CreateProjectResponse>
 
     @GET("/projects/{memberId}/{projectId}")
+    fun projectPage(@Path("memberId") memberId: Int?,@Path("projectId") projectId: Int?) : Call<ProjectpageResponse>
+
+    @GET("/projects/{memberId}/{projectId}/files")
+    fun projectFiles(@Path("memberId") memberId: Int?,@Path("projectId") projectId: Int?) : Call<ProjectFilesResponse>
+
+    @Multipart
+    @GET("/projects/{memberId}/{projectId}/files-upload")
+    fun fileUpload(@Path("memberId") memberId: Int?,@Path(" projectId") projectId: Int?, @Part file: MultipartBody.Part) : Call<ProjectFilesResponse>
     fun projectpage(@Path("memberId") memberId: Int?,@Path("projectId") projectId: Int?) : Call<ProjectpageResponse>
 
     @GET("/member/{memberId}/mypage")

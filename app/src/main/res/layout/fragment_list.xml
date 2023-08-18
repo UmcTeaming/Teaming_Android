@@ -54,7 +54,7 @@
             <Button
                 android:id="@+id/btn_new1"
                 android:layout_marginTop="26dp"
-                android:background="@drawable/non_project_btn"
+                android:background="@drawable/non_project_btn3"
                 android:layout_width="136dp"
                 android:layout_height="33dp"
                 android:layout_gravity="center_horizontal"

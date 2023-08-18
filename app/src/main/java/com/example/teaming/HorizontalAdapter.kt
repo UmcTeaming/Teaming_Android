@@ -15,7 +15,7 @@ class HorizontalAdapter(val hor_itemList: ArrayList<HorListItem>): RecyclerView.
     }
 
     override fun onBindViewHolder(holder: HorizontalAdapter.ViewHolder, position: Int) {
-        //holder.horImg.setImageResource(R.drawable.file_background)
+        holder.horImg.setImageResource(R.drawable.file_background)
         holder.horTitle.text = hor_itemList[position].hor_title
         holder.horDate.text = hor_itemList[position].hor_date
 

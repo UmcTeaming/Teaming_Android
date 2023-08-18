@@ -25,19 +25,13 @@ class PjCompleteDialog(): DialogFragment() {
         binding = PjCompleteDialogBinding.inflate(inflater,container,false)
         val view = binding.root
 
-        val projectName = arguments?.getString("projectName")
-        val imageUri = arguments?.getString("imageUri")
-        val startDate = arguments?.getString("startDate")
-        val endDate = arguments?.getString("endDate")
-        val projectColor = arguments?.getString("projectColor")
-
-        //Log.d("uri","${imageUri}")
-
         // 확인 버튼
         binding.btnYes.setOnClickListener{
-
-            
             dismiss()
+            requireActivity().supportFragmentManager.beginTransaction()
+                .replace(R.id.container,MainFragment())
+                .addToBackStack(null)
+                .commit()
         }
 
         // 프로젝트 보러가기 버튼

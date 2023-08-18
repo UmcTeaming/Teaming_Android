@@ -20,10 +20,18 @@ class MemberAdapter(val itemList: ArrayList<MemberData>) :
         val imageData = itemList[position]
 
         holder.apply {
-            Glide.with(itemView.context)
-                .load(imageData.img)
-                .error(R.drawable.no_profile)
-                .into(image)
+            if (imageData.img == "no_profile"){
+                Glide.with(itemView.context)
+                    .load(R.drawable.no_profile)
+                    .error(R.drawable.no_profile)
+                    .into(image)
+            }else{
+                Glide.with(itemView.context)
+                    .load(imageData.img)
+                    .error(R.drawable.default_profile)
+                    .into(image)
+            }
+
         }
 
     }
