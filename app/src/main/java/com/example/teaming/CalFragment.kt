@@ -17,9 +17,11 @@ import com.example.teaming.databinding.FragmentCalBinding
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.time.YearMonth
 import java.time.format.DateTimeFormatter
+import java.util.Locale
 
 
 class CalFragment : Fragment() {//minsdk API26 이상으로 바꿀 필요 있음
@@ -52,18 +54,9 @@ class CalFragment : Fragment() {//minsdk API26 이상으로 바꿀 필요 있음
             CalendarUtil.selectedDate = CalendarUtil.selectedDate.plusMonths(1)
             setMonthView()
         }
-        //일정 추가 버튼
-        binding.btnCalNewSchedule.setOnClickListener{
-            val dialog = CalNewScheduleDialog()
-            val args = Bundle()
-            //memberID = 54
-            //projectID = 11
-            args.putInt("projectId", 11)
-            args.putInt("memberId", 54)
-            dialog.arguments = args
-            dialog.show(requireActivity().supportFragmentManager,"CalNewScheduleDialog")
-        }
-        binding.split.text = scheduleDay.toString()
+        val outputFormat = DateTimeFormatter.ofPattern("M월 d일", Locale.getDefault())
+        val formattedDate = scheduleDay?.format(outputFormat)
+        binding.split.text = formattedDate
 
         return binding.root
     }
@@ -97,7 +90,9 @@ class CalFragment : Fragment() {//minsdk API26 이상으로 바꿀 필요 있음
         val adapter = CalendarAdapter(dayList,binding.calendarView)
         adapter.setOnItemClickListener(object:CalendarAdapter.OnCalendarDayClickListener{
             override fun onItemClick(v: View, position: Int) {
-                binding.split.text = dayList[position].toString()
+                val outputFormat = DateTimeFormatter.ofPattern("M월 d일", Locale.getDefault())
+                val formattedDate = dayList[position]?.format(outputFormat)
+                binding.split.text = formattedDate
                 scheduleDay = dayList[position]
                 setScheduleView()
             }
