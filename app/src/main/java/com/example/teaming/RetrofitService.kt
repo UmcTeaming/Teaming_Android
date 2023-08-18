@@ -24,6 +24,17 @@ interface RetrofitService {
     @GET("/member/{memberId}/portfolio")
     fun portfolioPage(@Path("memberId") memberId: Int?) : Call<PortfolioPageResponse>
 
+
+    @POST("/projects/{memberId}/{projectId}/schedule")
+    fun createSchedule(
+        @Path("memberId") memberId: Int?,
+        @Path("projectId") projectId: Int?,
+        @Body scheduleData:CreateSchedule) : Call<CreateSchedule>
+    @POST("/member/{memberId}/schedule_start")
+    fun takeDaySchedule(
+        @Path("memberId") memberId : Int?,
+        @Body scheduleStart:TakeDayScheduleRequest) : Call<CalendarScheduleResult>
+
     @GET("/member/{memberId}/progressProjects")
     fun progressPage(@Path("memberId") memberId: Int?) : Call<ProgressPageResponse>
 
@@ -36,6 +47,7 @@ interface RetrofitService {
     ): Call<CreateProjectResponse>
 
     @GET("/projects/{memberId}/{projectId}")
+
     fun projectPage(@Path("memberId") memberId: Int?,@Path("projectId") projectId: Int?) : Call<ProjectpageResponse>
 
     @GET("/projects/{memberId}/{projectId}/files")
@@ -45,9 +57,14 @@ interface RetrofitService {
     @GET("/projects/{memberId}/{projectId}/files-upload")
     fun fileUpload(@Path("memberId") memberId: Int?,@Path(" projectId") projectId: Int?, @Part file: MultipartBody.Part) : Call<ProjectFilesResponse>
 
+
+    @GET("/projects/{memberId}/{projectId}/schedule")
+    fun projectSchedule(@Path("memberId") memberId:Int?, @Path("projectId") projectId:Int?) : Call<CalendarScheduleResult>
+
     @GET("/projects/{memberId}/{projectId}/final-files")
     fun finalFiles(@Path("memberId") memberId: Int?,@Path("projectId") projectId: Int?) : Call<FinalFilesResponse>
 
     @POST("/projects/{memberId}/{projectId}/invitations")
     fun invitation(@Path("memberId") memberId: Int?,@Path("projectId") projectId: Int?, @Body requestBody: RequestBody) : Call<InvitationsResponse>
+
 }

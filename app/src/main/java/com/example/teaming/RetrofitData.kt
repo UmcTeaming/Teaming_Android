@@ -134,6 +134,30 @@ data class PortfolioList(
     val projectStatus: String
 )
 
+
+data class CreateSchedule(
+    @SerializedName("schedule_name")
+    val scheduleName:String,
+    @SerializedName("schedule_start")
+    val scheduleStart:String,
+    @SerializedName("schedule_end")
+    val scheduleEnd:String,
+    @SerializedName("schedule_start_time")
+    val scheduleStartTime:String,
+    @SerializedName("schedule_end_time")
+    val scheduleEndTime:String
+)
+
+data class TakeDayScheduleRequest(
+    @SerializedName("schedule_start")
+    val scheduleStart :String
+)
+
+data class CalendarScheduleResult(
+    @SerializedName("data")
+    val data: ArrayList<CalendarScheduleItem>
+)
+
 // 진행중인 프로젝트 페이지 관련
 data class ProgressPageResponse(
     @SerializedName("status")
