@@ -1,5 +1,6 @@
 package com.example.teaming
 
+import android.content.Context.MODE_PRIVATE
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
@@ -112,6 +113,7 @@ class CalFragment : Fragment() {//minsdk API26 이상으로 바꿀 필요 있음
         Log.d("chanho", "Clicked")
         val scheduleList = ArrayList<CalendarScheduleItem>()
         //scheduleList.add(CalendarScheduleItem("2023-12-11","2023-07-10","10:30:00","14:30:00","티밍 입니다다", "#d79ac3"))
+        //val sharedPreference = requireActivity().getSharedPreferences("memberId", MODE_PRIVATE)
         val memberId = 54
         val req = TakeDayScheduleRequest(scheduleDay.toString())
         val retrofitObj = RetrofitApi.getRetrofitService.takeDaySchedule(memberId,req)
@@ -124,11 +126,13 @@ class CalFragment : Fragment() {//minsdk API26 이상으로 바꿀 필요 있음
                     Log.d("chanho", "Success CalSchedule")
                     if (response.body() != null) {
                         val res = response.body()?.data
-                        if (res != null)
-                            for(x in res){
-                                Log.d("chanho", "${x.desc}")
+                        if (res != null) {
+                            for (x in res) {
                                 scheduleList.add(x)
                             }
+                            binding.scheduleView.layoutManager = LinearLayoutManager(activity,LinearLayoutManager.VERTICAL,false)
+                            binding.scheduleView.adapter = CalenderScheduleAdapter(scheduleList)
+                        }
                     }
                 }
                 else

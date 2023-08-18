@@ -14,7 +14,8 @@ class CalenderScheduleAdapter(val scheduleList:ArrayList<CalendarScheduleItem>):
              binding.calScheduleDay.text = startDay + "~" + endDay
              binding.calScheduleDescription.text = desc
              binding.calScheduleTime.text = startTime + "~" + endTime
-             binding.colorBar.setBackgroundColor(Color.parseColor(color))
+             //binding.colorBar.setBackgroundColor(Color.parseColor(color))
+             binding.colorBar.setBackgroundColor(Color.WHITE)
          }
     }
 
