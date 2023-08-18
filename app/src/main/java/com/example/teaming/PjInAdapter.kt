@@ -6,7 +6,10 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class PjInAdapter(private val dataList: ArrayList<FileDetails>) :
+class PjInAdapter(
+    private val dataList: ArrayList<FileDetails>,
+    private val itemClickListener: OnPjInItemClickListener
+) :
     RecyclerView.Adapter<PjInAdapter.PjInViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PjInViewHolder {
@@ -30,6 +33,14 @@ class PjInAdapter(private val dataList: ArrayList<FileDetails>) :
         fun bind(item: FileDetails) {
             fileNameTextView.text = item.file_name
             commentNumTextView.text = item.comment.toString()
+
+            itemView.setOnClickListener {
+                itemClickListener.onPjInItemClick(item)
+            }
         }
+    }
+
+    interface OnPjInItemClickListener {
+        fun onPjInItemClick(fileDetails: FileDetails)
     }
 }

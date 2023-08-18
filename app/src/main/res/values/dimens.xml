@@ -7,5 +7,5 @@
     <dimen name="big_height">30dp</dimen>
     <dimen name="small_height">25dp</dimen>
     <dimen name="elevation_10dp">10dp</dimen>
-    <dimen name="elevation_0dp">0dp</dimen>
+    <dimen name="elevation_0dp">5dp</dimen>
 </resources>

@@ -298,5 +298,69 @@ data class InvitationsRequest(
     val email: String
 )
 
+data class DocReadPageResponse(
+    @SerializedName("status")
+    val status: Int,
+    @SerializedName("message")
+    val message: String,
+    @SerializedName("data")
+    val data: DocFileData
+)
+
+data class DocFileData(
+    @SerializedName("project_name")
+    val project_name: String,
+    @SerializedName("file_type")
+    val file_type: String,
+    @SerializedName("file_name")
+    val file_name: String,
+    @SerializedName("uploader")
+    val uploader: String,
+    @SerializedName("upload_date")
+    val upload_date: String
+)
+
+data class CommentLoadResponse(
+    @SerializedName("status")
+    val status: Int,
+    @SerializedName("message")
+    val message: String,
+    @SerializedName("data")
+    val data: List<CommentData>
+)
+
+data class CommentData(
+    @SerializedName("commentId")
+    val commentId: Int,
+    @SerializedName("writer")
+    val writer: String,
+    @SerializedName("content")
+    val content: String,
+    @SerializedName("create_at")
+    val create_at: String,
+    @SerializedName("profile_image")
+    val profile_image: String?
+)
+
+data class CommentWriteRequest(
+    @SerializedName("content")
+    val content: String
+)
+
+data class CommentWriteResponse(
+    @SerializedName("status")
+    val status: Int,
+    @SerializedName("message")
+    val message: String,
+    @SerializedName("data")
+    val commentData: CommentIdData
+)
+
+data class CommentIdData(
+    @SerializedName("commentId")
+    val commentId: Int
+)
+
+
 
 

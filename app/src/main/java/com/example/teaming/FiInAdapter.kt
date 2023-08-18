@@ -7,7 +7,10 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
 
-class FiInAdapter(private val dataList: ArrayList<FinalDetails>) :
+class FiInAdapter(
+    private val dataList: ArrayList<FinalDetails>,
+    private val itemClickListener: OnFiInItemClickListener
+    ) :
     RecyclerView.Adapter<FiInAdapter.FiInViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FiInViewHolder {
@@ -31,6 +34,14 @@ class FiInAdapter(private val dataList: ArrayList<FinalDetails>) :
         fun bind(item: FinalDetails) {
             fileNameTextView.text = item.file_name
             commentNumTextView.text = item.comment.toString()
+
+            itemView.setOnClickListener {
+                itemClickListener.onFiInItemClick(item)
+            }
         }
+    }
+
+    interface OnFiInItemClickListener {
+        fun onFiInItemClick(finalDetails: FinalDetails)
     }
 }
