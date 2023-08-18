@@ -59,7 +59,8 @@ class Gh_List_Icon1_Fragment : Fragment() {
                                         VerListItem(
                                             R.drawable.state_oval,
                                             projects.projectName,
-                                            formattedDate
+                                            formattedDate,
+                                            projects.projectId
                                         )
                                     )
                                 }
@@ -120,7 +121,8 @@ class Gh_List_Icon1_Fragment : Fragment() {
                                                 VerListItem(
                                                     R.drawable.state_oval,
                                                     projects.projectName,
-                                                    formattedDate
+                                                    formattedDate,
+                                                    projects.projectId
                                                 )
                                             )
                                         }

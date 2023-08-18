@@ -35,4 +35,13 @@ interface RetrofitService {
         @Part projectImage: MultipartBody.Part?
     ): Call<CreateProjectResponse>
 
+    @GET("/projects/{memberId}/{projectId}")
+    fun projectPage(@Path("memberId") memberId: Int?,@Path("projectId") projectId: Int?) : Call<ProjectpageResponse>
+
+    @GET("/projects/{memberId}/{projectId}/files")
+    fun projectFiles(@Path("memberId") memberId: Int?,@Path("projectId") projectId: Int?) : Call<ProjectFilesResponse>
+
+    @Multipart
+    @GET("/projects/{memberId}/{projectId}/files-upload")
+    fun fileUpload(@Path("memberId") memberId: Int?,@Path(" projectId") projectId: Int?, @Part file: MultipartBody.Part) : Call<ProjectFilesResponse>
 }

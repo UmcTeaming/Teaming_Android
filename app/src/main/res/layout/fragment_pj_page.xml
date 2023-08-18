@@ -26,6 +26,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
         <TextView
+            android:id="@+id/project_name_top"
             android:layout_marginStart="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -111,13 +112,14 @@
                     android:background="@drawable/pj_image_shape"
                     android:src="@drawable/pj_image_default" />
 
-                <View
+                <ImageView
+                    android:id="@+id/status"
                     android:layout_marginTop="7dp"
                     android:layout_marginRight="5dp"
                     android:layout_gravity="right|top"
                     android:background="@drawable/circle"
-                    android:layout_width="15dp"
-                    android:layout_height="15dp"/>
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"/>
 
             </FrameLayout>
 
@@ -134,37 +136,33 @@
                 android:layout_weight="1">
 
                 <TextView
+                    android:id="@+id/project_name_bottom"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/gmarket_sans_ttf_bold"
                     android:textSize="14sp"
                     android:layout_marginTop="5dp"
                     android:text="UMC 파이널 프로젝트"
-                    android:textColor="@color/black" />
+                    android:textColor="@color/black"
+                    android:layout_weight="4"/>
 
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/gmarket_sans_ttf_bold"
-                    android:textSize="13sp"
-                    android:layout_marginTop="8dp"
-                    android:text="Teaming"
-                    android:textColor="@color/black" />
-
-                <TextView
+                    android:id="@+id/project_date"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/gmarket_sans_ttf_medium"
                     android:textSize="10sp"
                     android:layout_marginTop="5dp"
                     android:text="23.06.01 ~ 23.07.31"
-                    android:textColor="#7d7d7d" />
+                    android:textColor="#7d7d7d"
+                    android:layout_weight="1"/>
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:layout_marginTop="10dp">
+                    android:layout_marginTop="5dp"
+                    android:layout_weight="2">
 
                     <ImageButton
                         android:layout_gravity="center"

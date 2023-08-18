@@ -16,7 +16,7 @@ data class LoginResponse(
 
 data class Data(
     @SerializedName("name")
-    val status: String,
+    val name: String,
     @SerializedName("jwtToken")
     val jwtToken: JwtToken
 )
@@ -193,3 +193,67 @@ data class CreateProjectRequest(
     @SerializedName("project_color")
     val projectColor: String
 )
+
+data class ProjectpageResponse(
+    @SerializedName("status")
+    val status: Int,
+    @SerializedName("message")
+    val message: String,
+    @SerializedName("data")
+    val data: ProjectData
+)
+
+data class ProjectData(
+    @SerializedName("name")
+    val name: String,
+    @SerializedName("image")
+    val image: String?,
+    @SerializedName("startDate")
+    val startDate: String,
+    @SerializedName("endDate")
+    val endDate: String,
+    @SerializedName("projectStatus")
+    val projectStatus: String,
+    @SerializedName("memberListDtos")
+    val memberList: List<Member>
+)
+
+data class Member(
+    @SerializedName("member_name")
+    val member_name: String,
+    @SerializedName("member_image")
+    val member_image: String?,
+    @SerializedName("email")
+    val email: String
+)
+
+data class ProjectFilesResponse(
+    @SerializedName("status")
+    val status: Int,
+    @SerializedName("message")
+    val message: String,
+    @SerializedName("data")
+    val data: List<ProjectFileData>
+)
+
+data class ProjectFileData(
+    @SerializedName("createdAt")
+    val createdAt: String,
+    @SerializedName("filesDetails")
+    val filesDetails: List<FileDetails>
+)
+
+data class FileDetails(
+    @SerializedName("file_type")
+    val file_type: String,
+    @SerializedName("file_name")
+    val file_name: String,
+    @SerializedName("file")
+    val file: String,
+    @SerializedName("comment")
+    val comment: Int,
+    @SerializedName("file_id")
+    val file_id: Int
+)
+
+

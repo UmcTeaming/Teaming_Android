@@ -8,7 +8,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
-class PjOutAdapter(private val dataList: ArrayList<PjOutData>) :
+class PjOutAdapter(private val dataList: ArrayList<ProjectFileData>) :
     RecyclerView.Adapter<PjOutAdapter.PjOutViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PjOutViewHolder {
@@ -29,19 +29,19 @@ class PjOutAdapter(private val dataList: ArrayList<PjOutData>) :
         private val dateTextView: TextView = itemView.findViewById(R.id.date)
         private val innerRecyclerView: RecyclerView = itemView.findViewById(R.id.in_recycler)
 
-        fun bind(item: PjOutData) {
-            dateTextView.text = item.date
+        fun bind(item: ProjectFileData) {
+            dateTextView.text = item.createdAt.substring(0,10)
 
-            val innerAdapter = PjInAdapter(item.innerList)
+            val innerAdapter = PjInAdapter(ArrayList(item.filesDetails))
             innerRecyclerView.apply {
                 layoutManager = LinearLayoutManager(itemView.context,LinearLayoutManager.VERTICAL, false)
                 adapter = innerAdapter
             }
 
             //체크용 로그출력
-            Log.d("PjOutData", "Date: ${item.date}")
-            for (innerData in item.innerList) {
-                Log.d("PjOutData", "Inner Data: File Name: ${innerData.file_name}, Comment Num: ${innerData.comment_num}")
+            Log.d("PjOutData", "Date: ${item.createdAt}")
+            for (innerData in item.filesDetails) {
+                Log.d("PjOutData", "Inner Data: File Name: ${innerData.file_name}, Comment Num: ${innerData.comment}")
             }
         }
     }

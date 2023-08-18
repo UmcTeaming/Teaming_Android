@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 
 class MemberAdapter(val itemList: ArrayList<MemberData>) :
     RecyclerView.Adapter<MemberAdapter.MemberViewHolder>() {
@@ -16,7 +17,23 @@ class MemberAdapter(val itemList: ArrayList<MemberData>) :
     }
 
     override fun onBindViewHolder(holder: MemberViewHolder, position: Int) {
-        holder.m_image.setImageResource(itemList[position].img)
+        val imageData = itemList[position]
+
+        holder.apply {
+            if (imageData.img == "no_profile"){
+                Glide.with(itemView.context)
+                    .load(R.drawable.no_profile)
+                    .error(R.drawable.no_profile)
+                    .into(image)
+            }else{
+                Glide.with(itemView.context)
+                    .load(imageData.img)
+                    .error(R.drawable.default_profile)
+                    .into(image)
+            }
+
+        }
+
     }
 
     override fun getItemCount(): Int {
@@ -25,6 +42,6 @@ class MemberAdapter(val itemList: ArrayList<MemberData>) :
 
 
     inner class MemberViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val m_image = itemView.findViewById<ImageView>(R.id.imageView)
+        val image = itemView.findViewById<ImageView>(R.id.imageView)
     }
 }
