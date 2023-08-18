@@ -18,6 +18,9 @@ import com.example.teaming.databinding.FragmentPjPageBinding
 import com.example.teaming.databinding.InviteNoInfoDialogBinding
 import com.example.teaming.databinding.InviteYesInfoDialogBinding
 import com.example.teaming.databinding.PjInviteDialogBinding
+import com.google.gson.Gson
+import okhttp3.MediaType.Companion.toMediaType
+import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -202,13 +205,47 @@ class PjPageFragment : Fragment() {
         }
 
         dialogBinding.inviteChkBtn.setOnClickListener {
-            if (dialogBinding.emailWrite.text.toString() == "admin@teaming.com") {
-                pjInviteDialog.dismiss()
-                showInviteYesInfoDialog()
-            } else {
-                pjInviteDialog.dismiss()
-                showInviteNoInfoDialog()
-            }
+
+            val sharedPreference_mem = requireActivity().getSharedPreferences("memberId",
+                Context.MODE_PRIVATE
+            )
+            val sharedPreference = requireActivity().getSharedPreferences("projectID_page",
+                Context.MODE_PRIVATE
+            )
+
+            val memberId = sharedPreference_mem.getInt("memberId",-1)
+
+            val projectId = sharedPreference.getInt("projectID_page",-1)
+
+            val requestBodyData = InvitationsRequest(dialogBinding.emailWrite.text.toString())
+            Log.d("리퀘스트","${requestBodyData}")
+            val json = Gson().toJson(requestBodyData)
+            val requestBody = RequestBody.create("application/json".toMediaType(), json)
+
+            val callInvitation = RetrofitApi.getRetrofitService.invitation(memberId,projectId,requestBody)
+
+            callInvitation.enqueue(object : Callback<InvitationsResponse> {
+                override fun onResponse(call: Call<InvitationsResponse>, response: Response<InvitationsResponse>) {
+                    if (response.isSuccessful) {
+                        val invitationsResponse = response.body()
+                        if (invitationsResponse != null) {
+                            Log.d("Invitation", "API 호출 성공: ${invitationsResponse}")
+                            pjInviteDialog.dismiss()
+                            showInviteYesInfoDialog()
+                        }
+                    } else {
+                        pjInviteDialog.dismiss()
+                        showInviteNoInfoDialog()
+                        Log.d("Invitation", "API 호출 실패: ${response.code()}")
+                    }
+                }
+
+                override fun onFailure(call: Call<InvitationsResponse>, t: Throwable) {
+                    Log.e("Invitation", "로그인 API 호출 실패", t)
+                }
+            })
+
+
         }
 
         pjInviteDialog.show()

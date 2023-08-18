@@ -1,6 +1,7 @@
 package com.example.teaming
 
 import com.google.gson.annotations.SerializedName
+import okhttp3.MultipartBody
 import retrofit2.http.Multipart
 
 
@@ -191,16 +192,30 @@ data class PortfolioProgress(
 
 // 프로젝트 생성
 data class CreateProjectResponse(
+    @SerializedName("status")
+    val status: Int,
+    @SerializedName("message")
+    val message: String,
+    @SerializedName("data")
+    val data: CreateData
+)
+
+data class CreateData(
+    @SerializedName("project_id")
+    val project_id: Int
+)
+
+data class CreateProjectRequest(
     @SerializedName("project_name")
-    val project_name: String,
+    val projectName: String,
     @SerializedName("project_image")
-    val project_image: String,
+    val projectImage: String,
     @SerializedName("start_date")
-    val start_date: String,
+    val startDate: String,
     @SerializedName("end_date")
-    val end_date: String,
+    val endDate: String,
     @SerializedName("project_color")
-    val project_color: String
+    val projectColor: String
 )
 
 data class ProjectpageResponse(
@@ -264,4 +279,63 @@ data class FileDetails(
     @SerializedName("file_id")
     val file_id: Int
 )
+
+data class FinalFilesResponse(
+    @SerializedName("status")
+    val status: Int,
+    @SerializedName("message")
+    val message: String,
+    @SerializedName("data")
+    val data: List<FinalFileData>
+)
+
+data class FinalFileData(
+    @SerializedName("createdAt")
+    val createdAt: String,
+    @SerializedName("filesDetails")
+    val filesDetails: List<FinalDetails>
+)
+
+data class FinalDetails(
+    @SerializedName("file_type")
+    val file_type: String,
+    @SerializedName("file_name")
+    val file_name: String,
+    @SerializedName("file")
+    val file: String,
+    @SerializedName("comment")
+    val comment: Int,
+    @SerializedName("file_id")
+    val file_id: Int
+)
+
+data class InvitationsResponse(
+    @SerializedName("status")
+    val status: Int,
+    @SerializedName("message")
+    val message: String,
+    @SerializedName("data")
+    val data: InvitationData
+)
+
+data class InvitationData(
+    @SerializedName("members")
+    val members: List<InvitedMember>
+)
+
+data class InvitedMember(
+    @SerializedName("member_name")
+    val memberName: String,
+    @SerializedName("member_image")
+    val memberImage: String?,
+    @SerializedName("member_email")
+    val memberEmail: String
+)
+
+data class InvitationsRequest(
+    @SerializedName("email")
+    val email: String
+)
+
+
 
