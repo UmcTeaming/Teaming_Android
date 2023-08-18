@@ -119,7 +119,7 @@
                             <Button
                                 android:id="@+id/btn_new1"
                                 android:layout_marginTop="9dp"
-                                android:background="@drawable/non_project_btn"
+                                android:background="@drawable/non_project_btn2"
                                 android:layout_width="116dp"
                                 android:layout_height="23dp"
                                 android:layout_gravity="center_horizontal"
@@ -216,7 +216,7 @@
                             <Button
                                 android:id="@+id/btn_new2"
                                 android:layout_marginTop="21dp"
-                                android:background="@drawable/non_project_btn"
+                                android:background="@drawable/non_project_btn2"
                                 android:layout_width="160.46dp"
                                 android:layout_height="33dp"
                                 android:layout_gravity="center_horizontal"
