@@ -68,12 +68,12 @@ class PjSort : Fragment() {
 
                     }
                 } else {
-                    Log.d("projectfiles", "API 호출 실패: ${response.code()}")
+                    Log.d("Finalfiles", "API 호출 실패: ${response.code()}")
                 }
             }
 
             override fun onFailure(call: Call<ProjectFilesResponse>, t: Throwable) {
-                Log.e("projectfiles", "로그인 API 호출 실패", t)
+                Log.e("Finalfiles", "로그인 API 호출 실패", t)
             }
         })
 

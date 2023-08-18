@@ -256,4 +256,62 @@ data class FileDetails(
     val file_id: Int
 )
 
+data class FinalFilesResponse(
+    @SerializedName("status")
+    val status: Int,
+    @SerializedName("message")
+    val message: String,
+    @SerializedName("data")
+    val data: List<FinalFileData>
+)
+
+data class FinalFileData(
+    @SerializedName("createdAt")
+    val createdAt: String,
+    @SerializedName("filesDetails")
+    val filesDetails: List<FinalDetails>
+)
+
+data class FinalDetails(
+    @SerializedName("file_type")
+    val file_type: String,
+    @SerializedName("file_name")
+    val file_name: String,
+    @SerializedName("file")
+    val file: String,
+    @SerializedName("comment")
+    val comment: Int,
+    @SerializedName("file_id")
+    val file_id: Int
+)
+
+data class InvitationsResponse(
+    @SerializedName("status")
+    val status: Int,
+    @SerializedName("message")
+    val message: String,
+    @SerializedName("data")
+    val data: InvitationData
+)
+
+data class InvitationData(
+    @SerializedName("members")
+    val members: List<InvitedMember>
+)
+
+data class InvitedMember(
+    @SerializedName("member_name")
+    val memberName: String,
+    @SerializedName("member_image")
+    val memberImage: String?,
+    @SerializedName("member_email")
+    val memberEmail: String
+)
+
+data class InvitationsRequest(
+    @SerializedName("email")
+    val email: String
+)
+
+
 
