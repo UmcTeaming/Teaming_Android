@@ -176,19 +176,6 @@
             app:layout_constraintTop_toBottomOf="@+id/calendar_wrapper_view"
             android:layout_marginLeft="20dp"
             />
-        <Button
-            android:id="@+id/btn_cal_new_schedule"
-            tools:ignore="SpeakableTextPresentCheck"
-            android:layout_marginTop="5dp"
-            android:layout_width="21dp"
-            android:layout_height="21dp"
-            android:background="@drawable/group_1871"
-            app:layout_constraintRight_toRightOf="parent"
-
-            app:layout_constraintTop_toBottomOf="@+id/calendar_wrapper_view"
-            android:layout_marginRight="20dp"/>
-
-
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/schedule_view"
             android:layout_marginTop="10dp"
