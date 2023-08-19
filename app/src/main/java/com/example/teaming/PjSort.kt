@@ -70,6 +70,7 @@ class PjSort : Fragment(), PjInAdapter.OnPjInItemClickListener {
                     }else{
                         requireActivity().supportFragmentManager.beginTransaction()
                             .replace(R.id.fragmentContainer,NoPjSort())
+                            .addToBackStack(null)
                             .commit()
                     }
                 } else {

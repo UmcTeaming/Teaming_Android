@@ -50,7 +50,7 @@ class File_Icon2_Fragment : Fragment() {
                         if (portfolioPageResponse != null) {
                             val portfolioProjects = portfolioPageResponse.data.portfolio
 
-                            if(portfolioProjects != null){
+                            if(portfolioProjects != null && portfolioProjects.isNotEmpty()){
                                 fileVerItemList.clear()
                                 for(projects in portfolioProjects){
                                     val formattedDate = "${projects.projectStartDate} ~ ${projects.projectEndDate}"

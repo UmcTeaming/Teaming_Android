@@ -150,6 +150,20 @@ class PjPageFragment : Fragment() {
             dialog.show(requireActivity().supportFragmentManager,"CalNewScheduleDialog")
         }
 
+        binding.modifyBtn.setOnClickListener{
+
+            val bundle = Bundle()
+            bundle.putInt("projectID",projectId!!)
+
+            val modifyFragment = ModifyFragment()
+            modifyFragment.arguments = bundle
+
+            requireActivity().supportFragmentManager.beginTransaction()
+                .replace(R.id.container,modifyFragment)
+                .addToBackStack(null)
+                .commit()
+        }
+
         return binding.root
     }
 
