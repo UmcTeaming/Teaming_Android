@@ -67,6 +67,10 @@ class PjSort : Fragment(), PjInAdapter.OnPjInItemClickListener {
                             adapter = pjOutAdapter
                         }
 
+                    }else{
+                        requireActivity().supportFragmentManager.beginTransaction()
+                            .replace(R.id.fragmentContainer,NoPjSort())
+                            .commit()
                     }
                 } else {
                     Log.d("Finalfiles", "API 호출 실패: ${response.code()}")

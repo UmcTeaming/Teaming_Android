@@ -62,6 +62,10 @@ class FiSort : Fragment(), FiInAdapter.OnFiInItemClickListener  {
                             adapter = FiOutAdapter
                         }
 
+                    }else{
+                        requireActivity().supportFragmentManager.beginTransaction()
+                            .replace(R.id.fragmentContainer,NoPjSort())
+                            .commit()
                     }
                 } else {
                     Log.d("projectfiles", "API 호출 실패: ${response.code()}")
