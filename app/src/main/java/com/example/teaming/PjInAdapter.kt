@@ -3,12 +3,14 @@ package com.example.teaming
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
 class PjInAdapter(
     private val dataList: ArrayList<FileDetails>,
-    private val itemClickListener: OnPjInItemClickListener
+    private val itemClickListener: OnPjInItemClickListener,
+    private val itemDelListener: OnPjInItemDelListener
 ) :
     RecyclerView.Adapter<PjInAdapter.PjInViewHolder>() {
 
@@ -29,6 +31,7 @@ class PjInAdapter(
     inner class PjInViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val fileNameTextView: TextView = itemView.findViewById(R.id.file_name)
         private val commentNumTextView: TextView = itemView.findViewById(R.id.comment_num)
+        private val oneDelBtn : ImageButton = itemView.findViewById(R.id.del_btn)
 
         fun bind(item: FileDetails) {
             fileNameTextView.text = item.file_name
@@ -37,10 +40,19 @@ class PjInAdapter(
             itemView.setOnClickListener {
                 itemClickListener.onPjInItemClick(item)
             }
+
+            oneDelBtn.setOnClickListener{
+                itemDelListener.onPjInItemDel(item)
+            }
+
         }
     }
 
     interface OnPjInItemClickListener {
         fun onPjInItemClick(fileDetails: FileDetails)
+    }
+
+    interface OnPjInItemDelListener {
+        fun onPjInItemDel(fileDetails: FileDetails)
     }
 }

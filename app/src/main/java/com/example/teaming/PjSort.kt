@@ -16,7 +16,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class PjSort : Fragment(), PjInAdapter.OnPjInItemClickListener {
+class PjSort : Fragment(), PjInAdapter.OnPjInItemClickListener, PjInAdapter.OnPjInItemDelListener {
     private lateinit var binding:FragmentPjSortBinding
     private lateinit var pjOutAdapter: PjOutAdapter
 
@@ -60,7 +60,7 @@ class PjSort : Fragment(), PjInAdapter.OnPjInItemClickListener {
                         dataList.addAll(projectfilesresponse.data)
 
 
-                        pjOutAdapter = PjOutAdapter(dataList,this@PjSort)
+                        pjOutAdapter = PjOutAdapter(dataList,this@PjSort,this@PjSort)
 
                         binding.outRecycler.apply {
                             layoutManager = LinearLayoutManager(requireContext())
@@ -100,6 +100,10 @@ class PjSort : Fragment(), PjInAdapter.OnPjInItemClickListener {
             .replace(R.id.container,docRead)
             .addToBackStack(null)
             .commit()
+    }
+
+    override fun onPjInItemDel(fileDetails: FileDetails){
+
     }
 
 }
