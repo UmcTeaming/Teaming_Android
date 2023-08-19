@@ -19,7 +19,6 @@ import retrofit2.Response
 class File_Icon1_Fragment : Fragment() {
     private val verItemList = arrayListOf<VerListItem>()      // 아이템 배열
     private val verAdapter2 = VerticalAdapter2(verItemList)
-    //private var memberId: Int? = null // memberId 변수 선언
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,18 +32,10 @@ class File_Icon1_Fragment : Fragment() {
         // Inflate the layout for this fragment
         val binding = FragmentFileIcon1Binding.inflate(inflater,container,false)
 
-        /*memberId = arguments?.getInt("memberId")
-        Log.e("포트폴리오 id","${memberId}")*/
-
         val sharedPreference = requireActivity().getSharedPreferences("memberId", MODE_PRIVATE)
         val memberId = sharedPreference.getInt("memberId",-1)
         Log.e("포트폴리오 id","${memberId}")
 
-        /* memberId = sharedPreference.getInt("")*/
-
-        /*val memberId = arguments?.getInt("memberId")
-        Log.e("포트폴리오 id","${memberId}")*/
-        //Log.e("포트폴리오 id","${memberId}")
         val callPortfolioPage = RetrofitApi.getRetrofitService.portfolioPage(memberId)
 
         if(memberId!=null){
@@ -58,20 +49,16 @@ class File_Icon1_Fragment : Fragment() {
                         if (portfolioPageResponse != null) {
                             val portfolioProjects = portfolioPageResponse.data.portfolio
 
-                            verItemList.clear()
-                            //Log.d("FileFragment", "${portfolioProjects}")
                             if(portfolioProjects != null){
-                                /*binding.potVerList.visibility = View.VISIBLE
-                                binding.icon1Non.visibility = View.INVISIBLE*/
-                                //Log.d("FileFragment", "${portfolioProjects}")
+                                verItemList.clear()
                                 for(projects in portfolioProjects){
                                     val formattedDate = "${projects.projectStartDate} ~ ${projects.projectEndDate}"
                                     verItemList.add(
                                         VerListItem(
-                                            R.drawable.state_oval,
                                             projects.projectName,
                                             formattedDate,
-                                            projects.projectId
+                                            projects.projectId,
+                                            projects.projectStatus
                                         )
                                     )
                                 }
@@ -97,66 +84,19 @@ class File_Icon1_Fragment : Fragment() {
         binding.potVerList.layoutManager = LinearLayoutManager(context)
         binding.potVerList.adapter = verAdapter2
 
-        /*verItemList.clear()
-        // 아이템 추가
-        for (i: Int in 1..8){
-            verItemList.add(VerListItem(R.drawable.state_oval,"UMC 파이널 프로젝트 Teaming", "2023. 07. 01 ~ 2023. 08. 29"))
-        }*/
-        //verAdapter2.notifyDataSetChanged()
-
-        // file페이지 = 버튼 선택시 등장하는 리사이클러뷰 클릭이벤트
         verAdapter2.setItemClickListener(object: VerticalAdapter2.OnItemClickListener{
             override fun onClick(v:View,position:Int){
+
                 // 클릭 시 이벤트 작성
-                /*Toast.makeText(view?.context,
-                    "${position}\n${verItemList[position].ver_title}\n${verItemList[position].ver_date}",
-                    Toast.LENGTH_SHORT).show()*/
+                val bundle = Bundle()
 
-                if(memberId!=null){
-                    callPortfolioPage.enqueue(object : Callback<PortfolioPageResponse> {
-                        override fun onResponse(
-                            call: Call<PortfolioPageResponse>, response: Response<PortfolioPageResponse>
-                        ) {
-                            if (response.isSuccessful) {
-                                val portfolioPageResponse = response.body()
-                                if (portfolioPageResponse != null) {
-                                    val portfolioProjects = portfolioPageResponse.data.portfolio
+                bundle.putInt("projectID",verItemList[position].ver_Id)
 
-                                    verItemList.clear()
-                                    //Log.d("FileFragment", "${portfolioProjects}")
-                                    if(portfolioProjects != null){
-                                        //binding.potVerList.visibility = View.VISIBLE
-                                        for(projects in portfolioProjects){
-                                            val formattedDate = "${projects.projectStartDate} ~ ${projects.projectEndDate}"
-                                            verItemList.add(
-                                                VerListItem(
-                                                    R.drawable.state_oval,
-                                                    projects.projectName,
-                                                    formattedDate,
-                                                    projects.projectId
-                                                )
-                                            )
-                                        }
-                                        verAdapter2.notifyDataSetChanged()
-                                    }
-                                    else{
-                                        binding.potVerList.visibility = View.GONE
-                                        binding.icon1Non.visibility = View.VISIBLE
-                                    }
-                                }
-                            } else {
-                                Log.d("FileFragment", "API 반호출 실패: ${response.code()}")
-                            }
-                        }
-
-                        override fun onFailure(call: Call<PortfolioPageResponse>, t: Throwable) {
-                            Log.e("FileFragment", "API 완전호출 실패", t)
-                        }
-                    })
-                }
+                val pjPageFragment = PjPageFragment()
+                pjPageFragment.arguments = bundle
 
                 requireActivity().supportFragmentManager.beginTransaction()
-                    .replace(R.id.container,PjPageFragment())
+                    .replace(R.id.container,pjPageFragment)
                     .addToBackStack(null)
                     .commit()
             }
