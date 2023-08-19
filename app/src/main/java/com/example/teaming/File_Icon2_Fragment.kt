@@ -50,17 +50,17 @@ class File_Icon2_Fragment : Fragment() {
                         if (portfolioPageResponse != null) {
                             val portfolioProjects = portfolioPageResponse.data.portfolio
 
-                            fileVerItemList.clear()
-                            //Log.d("FileFragment", "${portfolioProjects}")
                             if(portfolioProjects != null){
+                                fileVerItemList.clear()
                                 for(projects in portfolioProjects){
                                     val formattedDate = "${projects.projectStartDate} ~ ${projects.projectEndDate}"
                                     fileVerItemList.add(
                                         GridListItem(
-                                            R.drawable.file_background,
+                                            projects.projectImage,
                                             projects.projectName,
                                             formattedDate,
-                                            projects.projectId
+                                            projects.projectId,
+                                            projects.projectStatus
                                         )
                                     )
                                 }
@@ -85,69 +85,19 @@ class File_Icon2_Fragment : Fragment() {
         binding.potVerList2.layoutManager = LinearLayoutManager(context)
         binding.potVerList2.adapter = fileVerAdapter
 
-        //fileVerItemList.clear()
-        // 아이템 추가
-        /*for (i: Int in 1..8){
-            fileVerItemList.add(GridListItem(R.drawable.baseline_rectangle_24,"UMC 파이널 프로젝트 Teaming", "2023. 07. 01 ~ 2023. 08. 29"))
-        }
-        fileVerAdapter.notifyDataSetChanged()*/
-
-        // file페이지 = 버튼 선택시 등장하는 리사이클러뷰 클릭이벤트
         fileVerAdapter.setItemClickListener(object: FileVerAdapter.OnItemClickListener{
             override fun onClick(v:View,position:Int){
                 // 클릭 시 이벤트 작성
-                /*Toast.makeText(view?.context,
-                    "${position}\n${fileVerItemList[position].grid_title}\n${fileVerItemList[position].grid_date}",
-                    Toast.LENGTH_SHORT).show()*/
+                val bundle = Bundle()
 
-                val memberId = arguments?.getInt("memberId")
-                Log.e("포트폴리오 id","$memberId")
-                val callPortfolioPage = RetrofitApi.getRetrofitService.portfolioPage(memberId)
+                bundle.putInt("projectID",fileVerItemList[position].grid_Id)
 
-                if(memberId!=null){
-                    callPortfolioPage.enqueue(object : Callback<PortfolioPageResponse> {
-                        override fun onResponse(
-                            call: Call<PortfolioPageResponse>, response: Response<PortfolioPageResponse>
-                        ) {
-                            if (response.isSuccessful) {
-                                val portfolioPageResponse = response.body()
-                                if (portfolioPageResponse != null) {
-                                    val portfolioProjects = portfolioPageResponse.data.portfolio
-
-                                    fileVerItemList.clear()
-                                    //Log.d("FileFragment", "${portfolioProjects}")
-                                    if(portfolioProjects != null){
-                                        for(projects in portfolioProjects){
-                                            val formattedDate = "${projects.projectStartDate} ~ ${projects.projectEndDate}"
-                                            fileVerItemList.add(
-                                                GridListItem(
-                                                    R.drawable.file_background,
-                                                    projects.projectName,
-                                                    formattedDate,
-                                                    projects.projectId
-                                                )
-                                            )
-                                        }
-                                        fileVerAdapter.notifyDataSetChanged()
-                                    }
-                                    else{
-                                        binding.potVerList2.visibility = View.GONE
-                                        binding.icon2Non.visibility = View.VISIBLE
-                                    }
-                                }
-                            } else {
-                                Log.d("FileFragment", "API 반호출 실패: ${response.code()}")
-                            }
-                        }
-
-                        override fun onFailure(call: Call<PortfolioPageResponse>, t: Throwable) {
-                            Log.e("FileFragment", "API 완전호출 실패", t)
-                        }
-                    })
-                }
+                val pjPageFragment = PjPageFragment()
+                pjPageFragment.arguments = bundle
 
                 requireActivity().supportFragmentManager.beginTransaction()
-                    .replace(R.id.container,PjPageFragment())
+                    .replace(R.id.container,pjPageFragment)
+                    .addToBackStack(null)
                     .commit()
             }
         })

@@ -17,8 +17,8 @@
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-            <View
-                android:id="@+id/ver_state"
+            <ImageView
+                android:id="@+id/ver_state1"
                 android:layout_marginTop="11dp"
                 android:layout_marginLeft="303dp"
                 android:layout_width="12dp"

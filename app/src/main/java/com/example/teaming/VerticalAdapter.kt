@@ -1,8 +1,10 @@
 package com.example.teaming
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
@@ -26,10 +28,18 @@ class VerticalAdapter(val ver_itemList: ArrayList<VerListItem>): RecyclerView.Ad
             itemClickListener.onClick(it, position)
             itemClickListener.onClick(it, position)
         }
+
+        val status = ver_itemList[position].ver_status
+        Log.e("status","${status}")
+        if (status == "ING") {
+            holder.verState.setImageResource(R.drawable.circle)
+        } else {
+            holder.verState.setImageResource(R.drawable.circle_end)
+        }
     }
 
     class ViewHolder(itemView: View):RecyclerView.ViewHolder(itemView){
-        //val verState: Int = itemView.findViewById(R.id.ver_state)
+        val verState: ImageView = itemView.findViewById(R.id.ver_state1)
         val verTitle: TextView = itemView.findViewById(R.id.ver_title)
         val verDate: TextView = itemView.findViewById(R.id.ver_date)
     }
