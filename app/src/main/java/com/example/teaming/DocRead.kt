@@ -67,6 +67,18 @@ class DocRead : Fragment() {
 
                         filename = docReadPageResponse.data.file_name
 
+                        val bundle = Bundle()
+
+                        bundle.putInt("file_id",fileId)
+                        bundle.putString("file_name",filename)
+
+                        val pdfViewer = PDFViewer()
+                        pdfViewer.arguments = bundle
+
+                        requireActivity().supportFragmentManager.beginTransaction()
+                            .add(R.id.doc_read_contain,pdfViewer)
+                            .commit()
+
                         if (fileStatus == "ING"){
                             binding.fileStatusCircle.setImageResource(R.drawable.circle)
                         }else if(fileStatus == "END"){
@@ -85,17 +97,21 @@ class DocRead : Fragment() {
         })
 
 
-        requireActivity().supportFragmentManager.beginTransaction()
-            .add(R.id.doc_read_contain,PDFViewer())
-            .commit()
+
 
         binding.fileViewerBtn.setOnClickListener {
             setButtonState(true)
 
+            val bundle = Bundle()
 
+            bundle.putInt("file_id",fileId)
+            bundle.putString("file_name",filename)
+
+            val pdfViewer = PDFViewer()
+            pdfViewer.arguments = bundle
 
             requireActivity().supportFragmentManager.beginTransaction()
-                .replace(R.id.doc_read_contain,PDFViewer())
+                .replace(R.id.doc_read_contain,pdfViewer)
                 .commit()
         }
 

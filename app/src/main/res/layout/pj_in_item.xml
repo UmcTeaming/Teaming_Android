@@ -63,7 +63,7 @@
     </LinearLayout>
 
     <ImageButton
-        android:id="@+id/del_btn"
+        android:id="@+id/one_del_btn"
         android:layout_width="20dp"
         android:layout_height="20dp"
         app:layout_constraintStart_toEndOf="@id/file_descrip"

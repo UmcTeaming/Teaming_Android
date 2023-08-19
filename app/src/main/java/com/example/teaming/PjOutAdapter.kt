@@ -41,15 +41,6 @@ class PjOutAdapter(private val dataList: ArrayList<ProjectFileData>,
                     LinearLayoutManager(itemView.context, LinearLayoutManager.VERTICAL, false)
                 adapter = innerAdapter
             }
-
-            /*//체크용 로그출력
-            Log.d("PjOutData", "Date: ${item.createdAt}")
-            for (innerData in item.filesDetails) {
-                Log.d(
-                    "PjOutData",
-                    "Inner Data: File Name: ${innerData.file_name}, Comment Num: ${innerData.comment}"
-                )
-            }*/
         }
     }
 

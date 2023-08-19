@@ -19,9 +19,9 @@ import retrofit2.Response
 class PjSort : Fragment(), PjInAdapter.OnPjInItemClickListener, PjInAdapter.OnPjInItemDelListener {
     private lateinit var binding:FragmentPjSortBinding
     private lateinit var pjOutAdapter: PjOutAdapter
+    private lateinit var pjInAdapter: PjInAdapter
 
     private val dataList : ArrayList<ProjectFileData> = ArrayList()
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -67,6 +67,17 @@ class PjSort : Fragment(), PjInAdapter.OnPjInItemClickListener, PjInAdapter.OnPj
                             adapter = pjOutAdapter
                         }
 
+                        val trashButton = binding.trashBtn
+
+                        var buttonVisible = false
+
+                        trashButton.setOnClickListener {
+                            buttonVisible = true
+
+
+
+
+                        }
                     }else{
                         requireActivity().supportFragmentManager.beginTransaction()
                             .replace(R.id.fragmentContainer,NoPjSort())
@@ -103,7 +114,8 @@ class PjSort : Fragment(), PjInAdapter.OnPjInItemClickListener, PjInAdapter.OnPj
     }
 
     override fun onPjInItemDel(fileDetails: FileDetails){
-
+        fileDetails.del_btn_mark = true
     }
+
 
 }

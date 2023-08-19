@@ -15,16 +15,30 @@
         android:text="프로젝트 종료하기"
         android:fontFamily="@font/gmarket_sans_ttf_medium"
         android:textColor="#527FF5"
-        android:textSize="13sp"
-        app:layout_constraintTop_toTopOf="parent"
+        android:textSize="15sp"
+        app:layout_constraintTop_toBottomOf="@id/out_recycler_fi"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="10dp"/>
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"/>
+
+    <ImageButton
+        android:id="@+id/trash_btn"
+        android:scaleType="fitCenter"
+        android:background="@android:color/transparent"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:src="@drawable/trash"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/out_recycler_fi"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/end_btn"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>

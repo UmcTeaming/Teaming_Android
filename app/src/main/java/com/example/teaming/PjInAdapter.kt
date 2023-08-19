@@ -14,6 +14,7 @@ class PjInAdapter(
 ) :
     RecyclerView.Adapter<PjInAdapter.PjInViewHolder>() {
 
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PjInViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.pj_in_item, parent, false)
         return PjInViewHolder(view)
@@ -31,11 +32,18 @@ class PjInAdapter(
     inner class PjInViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val fileNameTextView: TextView = itemView.findViewById(R.id.file_name)
         private val commentNumTextView: TextView = itemView.findViewById(R.id.comment_num)
-        private val oneDelBtn : ImageButton = itemView.findViewById(R.id.del_btn)
+        private val oneDelBtn : ImageButton = itemView.findViewById(R.id.one_del_btn)
+
 
         fun bind(item: FileDetails) {
             fileNameTextView.text = item.file_name
             commentNumTextView.text = item.comment.toString()
+
+            if(item.del_btn_mark == false){
+                oneDelBtn.setImageResource(R.drawable.one_del_btn)
+            }else{
+                oneDelBtn.setImageResource(R.drawable.one_del_btn_blue)
+            }
 
             itemView.setOnClickListener {
                 itemClickListener.onPjInItemClick(item)
