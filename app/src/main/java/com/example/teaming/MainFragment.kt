@@ -74,7 +74,8 @@ class MainFragment : Fragment() {
                                             project.projectImage,
                                             project.projectName,
                                             project.projectCreatedDate,
-                                            project.projectId
+                                            project.projectId,
+                                            project.projectStatus
                                         )
                                     )
                                 }
@@ -98,10 +99,10 @@ class MainFragment : Fragment() {
                                     val formattedDate = "${project.projectStartDate} ~ "
                                     verItemList.add(
                                         VerListItem(
-                                            R.drawable.state_oval,
                                             project.projectName, // 이 부분 수정 필요
                                             formattedDate,
-                                            project.projectId
+                                            project.projectId,
+                                            project.projectStatus
                                         )
                                     )
                                 }
@@ -124,7 +125,8 @@ class MainFragment : Fragment() {
                                             project.projectImage,
                                             project.projectName,
                                             formattedDate,
-                                            project.projectId
+                                            project.projectId,
+                                            project.projectStatus
                                         )
                                     )
                                 }

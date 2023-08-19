@@ -1,5 +1,6 @@
 package com.example.teaming
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -27,6 +28,14 @@ class FileVerAdapter(val file_ver_itemList: ArrayList<GridListItem>): RecyclerVi
             .load(file_ver_itemList[position].gridImg) // 이미지 URL 또는 리소스 ID
             .error(R.drawable.file_background) // 에러 발생 시 표시할 이미지 리소스
             .into(holder.gridImg) // 이미지가 표시될 ImageView
+
+        val status = file_ver_itemList[position].grid_status
+        Log.e("status","${status}")
+        if (status == "ING") {
+            holder.stateCol.setImageResource(R.drawable.circle)
+        } else {
+            holder.stateCol.setImageResource(R.drawable.circle_end)
+        }
     }
 
     override fun getItemCount(): Int {
@@ -37,6 +46,7 @@ class FileVerAdapter(val file_ver_itemList: ArrayList<GridListItem>): RecyclerVi
         val gridImg: ImageView = itemView.findViewById(R.id.grid_img)
         val gridTitle: TextView = itemView.findViewById(R.id.grid_title)
         val gridDate: TextView = itemView.findViewById(R.id.grid_date)
+        val stateCol: ImageView = itemView.findViewById(R.id.file_ver_state)
     }
 
     // (2) 리스너 인터페이스
