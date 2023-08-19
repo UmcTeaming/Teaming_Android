@@ -13,11 +13,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
-import androidx.core.content.FileProvider
 import com.example.teaming.databinding.FragmentCreateBinding
 import com.google.gson.FieldNamingPolicy
+import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import okhttp3.MediaType.Companion.toMediaType
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.Call
@@ -84,34 +85,51 @@ class CreateFragment : Fragment(), ColSelDialog.OnColorSelectedListener, ImgDial
             val end = binding.pjEnd.text.toString()
             val backgroundColor = binding.createCol.backgroundTintList?.defaultColor ?: 0
             val hexColor = String.format("#%06X", 0xFFFFFF and backgroundColor)
-            //val img = selectedImageUri?.toString() ?: ""
 
-            val requestData = CreateProjectRequest(name, "", start, end, hexColor) // Placeholder for image
+            // Convert name to JSON
+            val nameJson = Gson().toJson(name)
+            val nameRequestBody = RequestBody.create("text/plain".toMediaType(), nameJson)
 
-            val gson = GsonBuilder().setFieldNamingPolicy(FieldNamingPolicy.IDENTITY)
-                .setPrettyPrinting()
-                .create()
+            val startJson = Gson().toJson(start)
+            val startRequestBody = RequestBody.create("text/plain".toMediaType(), startJson)
 
-            val json = gson.toJson(requestData)
-            val jsonRequestBody = RequestBody.create("application/json".toMediaType(), json)
+            val endJson = Gson().toJson(end)
+            val endRequestBody = RequestBody.create("text/plain".toMediaType(), endJson)
 
-            val imagePart: MultipartBody.Part? = selectedImageUri?.let {
-                val file = File(it.path)
-                val requestFile = RequestBody.create("image/*".toMediaType(), file)
-                MultipartBody.Part.createFormData("projectImage", file.name, requestFile)
-            }
+            val hexColorJson = Gson().toJson(hexColor)
+            val hexColorRequestBody = RequestBody.create("text/plain".toMediaType(), hexColorJson)
 
-            val call = RetrofitApi.getRetrofitService.createProject(memberId, jsonRequestBody, imagePart)
+            val imageFileName = selectedImageUri?.lastPathSegment ?: "image.jpg"
+            val imageFile = File(requireContext().cacheDir, imageFileName)
+
+            val imageRequestBody = RequestBody.create("image/*".toMediaTypeOrNull(), imageFile)
+            val imagePart = MultipartBody.Part.createFormData("project_image", imageFile.name, imageRequestBody)
+
+            // Print the data for debugging purposes
+            Log.e("멀티파트", "imagePart: ${imageFile.name}, ${imageRequestBody.contentType()}, ${imageRequestBody.contentLength()} bytes")
+            Log.e("멀티파트", "nameRequestBody: ${nameRequestBody.contentType()}, ${nameRequestBody.contentLength()} bytes, ${nameRequestBody.toString()}")
+            Log.e("멀티파트", "startRequestBody: ${startRequestBody.contentType()}, ${startRequestBody.contentLength()} bytes, ${startRequestBody.toString()}")
+            Log.e("멀티파트", "endRequestBody: ${endRequestBody.contentType()}, ${endRequestBody.contentLength()} bytes, ${endRequestBody.toString()}")
+            Log.e("멀티파트", "hexColorRequestBody: ${hexColorRequestBody.contentType()}, ${hexColorRequestBody.contentLength()} bytes, ${hexColorRequestBody.toString()}")
+
+
+            val memberId = sharedPreference.getInt("memberId", -1)
+
+            val call = RetrofitApi.getRetrofitService.createProject(
+                memberId,
+                nameRequestBody,
+                imagePart,
+                startRequestBody,
+                endRequestBody,
+                hexColorRequestBody
+            )
 
             call.enqueue(object : Callback<CreateProjectResponse> {
-                override fun onResponse(
-                    call: Call<CreateProjectResponse>,
-                    response: Response<CreateProjectResponse>
-                ) {
+                override fun onResponse(call: Call<CreateProjectResponse>, response: Response<CreateProjectResponse>) {
                     if (response.isSuccessful) {
                         val createProjectResponse = response.body()
                         if (createProjectResponse != null) {
-                            val projectId = createProjectResponse.data?.project_id
+                            val projectId = createProjectResponse.data.project_id
                             if (projectId != null) {
                                 Log.e("Post 여부", "Post 성공: 프로젝트 ID = $projectId")
 
@@ -125,7 +143,7 @@ class CreateFragment : Fragment(), ColSelDialog.OnColorSelectedListener, ImgDial
                             Log.e("Post 여부", "Post 성공하지만 응답 데이터가 비어있습니다.")
                         }
                     } else {
-                        Log.e("Post 여부", "Post 실패: 응답 코드 = ${response.code()}, 에러 메시지 = ${response.message()}")
+                        Log.e("Post 여부", "Post 실패: 응답 코드 = ${response.code()}")
                     }
                 }
 
@@ -133,9 +151,6 @@ class CreateFragment : Fragment(), ColSelDialog.OnColorSelectedListener, ImgDial
                     Log.e("Post 여부", "Post 실패: 네트워크 또는 기타 오류", t)
                 }
             })
-            // 다이얼로그 표시
-            val dialog = PjCompleteDialog()
-            dialog.show(requireActivity().supportFragmentManager, "PjCompleteDialog")
         }
 
         return binding.root
@@ -187,28 +202,21 @@ class CreateFragment : Fragment(), ColSelDialog.OnColorSelectedListener, ImgDial
         updateButtonState()
     }
 
-    override fun onImgSelected(img_num: Int) {
+    /*override fun onImgSelected(img_num: Int) {
         if (img_num == 1) {
-            // Create an imageBitmap from the drawable resource
             val drawable = ContextCompat.getDrawable(requireContext(), R.drawable.file_background)
             val imageBitmap = (drawable as BitmapDrawable).bitmap
 
-            // Save the imageBitmap to a temporary file
-            val imageFile = File.createTempFile("image", ".jpg", requireContext().cacheDir)
+            val imageFile = File(requireContext().cacheDir, "image${System.currentTimeMillis()}.jpg")
             imageBitmap.compress(Bitmap.CompressFormat.JPEG, 90, FileOutputStream(imageFile))
 
-            // Set the selectedImageUri to the Uri of the saved image file
-            selectedImageUri = FileProvider.getUriForFile(
-                requireContext(),
-                "${requireContext().packageName}.provider",
-                imageFile
-            )
+            selectedImageUri = Uri.fromFile(imageFile)
 
-            // Update the UI
-            binding.imgAdd.setImageBitmap(imageBitmap)
+            binding.imgAdd.setImageURI(selectedImageUri)
             binding.text.visibility = View.INVISIBLE
+
+            updateButtonState()
         }
-        updateButtonState()
     }
 
     override fun onImgSelected(imageUri: Uri?) {
@@ -223,32 +231,63 @@ class CreateFragment : Fragment(), ColSelDialog.OnColorSelectedListener, ImgDial
 
     override fun onImgSelected(imageBitmap: Bitmap?) {
         if (imageBitmap != null) {
-            // Bitmap을 File로 저장하고 Uri 얻기
-            val imageFile = File.createTempFile("image", ".jpg", requireContext().cacheDir)
+            val imageFile = File(requireContext().cacheDir, "image${System.currentTimeMillis()}.jpg")
             imageBitmap.compress(Bitmap.CompressFormat.JPEG, 90, FileOutputStream(imageFile))
+
             selectedImageUri = Uri.fromFile(imageFile)
 
-            binding.imgAdd.setImageBitmap(imageBitmap)
+            binding.imgAdd.setImageURI(selectedImageUri)
             binding.text.visibility = View.INVISIBLE
+
+            updateButtonState()
+        }
+    }*/
+
+    override fun onImgSelected(img_num: Int) {
+        if (img_num == 1) {
+            val drawable = ContextCompat.getDrawable(requireContext(), R.drawable.file_background)
+            val imageBitmap = (drawable as BitmapDrawable).bitmap
+
+            val fileName = "image${System.currentTimeMillis()}.jpg"
+            val imageFile = File(requireContext().cacheDir, fileName)
+
+            FileOutputStream(imageFile).use { outputStream ->
+                imageBitmap.compress(Bitmap.CompressFormat.JPEG, 90, outputStream)
+            }
+
+            selectedImageUri = Uri.fromFile(imageFile)
+
+            binding.imgAdd.setImageURI(selectedImageUri)
+            binding.text.visibility = View.INVISIBLE
+
+            updateButtonState()
+        }
+    }
+
+    override fun onImgSelected(imageUri: Uri?) {
+        if (imageUri != null) {
+            binding.imgAdd.setImageURI(imageUri)
+            binding.text.visibility = View.INVISIBLE
+            selectedImageUri = imageUri
         }
         updateButtonState()
     }
 
-    private fun getUriFromDrawableRes(context: Context, drawableResId: Int): Uri? {
-        val drawable = ContextCompat.getDrawable(context, drawableResId) ?: return null
-        val bitmap = (drawable as BitmapDrawable).bitmap
+    override fun onImgSelected(imageBitmap: Bitmap?) {
+        if (imageBitmap != null) {
+            val fileName = "image${System.currentTimeMillis()}.jpg"
+            val imageFile = File(requireContext().cacheDir, fileName)
 
-        val cachePath = File(context.cacheDir, "images")
-        cachePath.mkdirs()
+            FileOutputStream(imageFile).use { outputStream ->
+                imageBitmap.compress(Bitmap.CompressFormat.JPEG, 90, outputStream)
+            }
 
-        // Create a unique file name
-        val fileName = "image_${System.currentTimeMillis()}.png"
+            selectedImageUri = Uri.fromFile(imageFile)
 
-        val imageFile = File(cachePath, fileName)
-        val stream = FileOutputStream(imageFile)
-        bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream)
-        stream.close()
+            binding.imgAdd.setImageURI(selectedImageUri)
+            binding.text.visibility = View.INVISIBLE
 
-        return FileProvider.getUriForFile(context, "${context.packageName}.provider", imageFile)
+            updateButtonState()
+        }
     }
 }

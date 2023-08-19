@@ -57,7 +57,7 @@ class File_Icon2_Fragment : Fragment() {
                                     val formattedDate = "${projects.projectStartDate} ~ ${projects.projectEndDate}"
                                     fileVerItemList.add(
                                         GridListItem(
-                                            R.drawable.file_background,
+                                            projects.projectImage,
                                             projects.projectName,
                                             formattedDate,
                                             projects.projectId
@@ -114,14 +114,15 @@ class File_Icon2_Fragment : Fragment() {
                                 if (portfolioPageResponse != null) {
                                     val portfolioProjects = portfolioPageResponse.data.portfolio
 
-                                    fileVerItemList.clear()
+                                    //fileVerItemList.clear()
                                     //Log.d("FileFragment", "${portfolioProjects}")
                                     if(portfolioProjects != null){
+                                        fileVerItemList.clear()
                                         for(projects in portfolioProjects){
                                             val formattedDate = "${projects.projectStartDate} ~ ${projects.projectEndDate}"
                                             fileVerItemList.add(
                                                 GridListItem(
-                                                    R.drawable.file_background,
+                                                    projects.projectImage,
                                                     projects.projectName,
                                                     formattedDate,
                                                     projects.projectId

@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 
 class HorizontalAdapter(val hor_itemList: ArrayList<HorListItem>): RecyclerView.Adapter<HorizontalAdapter.ViewHolder>() {
 
@@ -15,13 +16,18 @@ class HorizontalAdapter(val hor_itemList: ArrayList<HorListItem>): RecyclerView.
     }
 
     override fun onBindViewHolder(holder: HorizontalAdapter.ViewHolder, position: Int) {
-        holder.horImg.setImageResource(R.drawable.file_background)
+        //holder.horImg = hor_itemList[position]
         holder.horTitle.text = hor_itemList[position].hor_title
         holder.horDate.text = hor_itemList[position].hor_date
 
         holder.itemView.setOnClickListener {
             itemClickListener.onClick(it, position)
         }
+
+        Glide.with(holder.itemView.context)
+            .load(hor_itemList[position].hor_img) // 이미지 URL 또는 리소스 ID
+            .error(R.drawable.file_background) // 에러 발생 시 표시할 이미지 리소스
+            .into(holder.horImg) // 이미지가 표시될 ImageView
     }
 
     override fun getItemCount(): Int {

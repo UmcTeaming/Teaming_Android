@@ -66,6 +66,7 @@ class File_Icon1_Fragment : Fragment() {
                                 //Log.d("FileFragment", "${portfolioProjects}")
                                 for(projects in portfolioProjects){
                                     val formattedDate = "${projects.projectStartDate} ~ ${projects.projectEndDate}"
+
                                     verItemList.add(
                                         VerListItem(
                                             R.drawable.state_oval,

@@ -31,8 +31,11 @@ interface RetrofitService {
     @POST("/projects/{memberId}/create")
     fun createProject(
         @Path("memberId") memberId: Int,
-        @Part("data") requestData: RequestBody,
-        @Part projectImage: MultipartBody.Part?
+        @Part("project_name") projectName: RequestBody,
+        @Part projectImage: MultipartBody.Part,
+        @Part("start_date") startDate: RequestBody,
+        @Part("end_date") endDate: RequestBody,
+        @Part("project_color") projectColor: RequestBody
     ): Call<CreateProjectResponse>
 
     @GET("/projects/{memberId}/{projectId}")
