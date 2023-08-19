@@ -8,6 +8,7 @@ import retrofit2.http.GET
 import retrofit2.http.Multipart
 import retrofit2.http.POST
 import retrofit2.http.Part
+import retrofit2.http.PartMap
 import retrofit2.http.Path
 
 /**
@@ -42,11 +43,8 @@ interface RetrofitService {
     @POST("/projects/{memberId}/create")
     fun createProject(
         @Path("memberId") memberId: Int,
-        @Part("project_name") projectName: RequestBody,
         @Part projectImage: MultipartBody.Part,
-        @Part("start_date") startDate: RequestBody,
-        @Part("end_date") endDate: RequestBody,
-        @Part("project_color") projectColor: RequestBody
+        @PartMap requestBody: HashMap<String, RequestBody>
     ): Call<CreateProjectResponse>
 
     @GET("/projects/{memberId}/{projectId}")

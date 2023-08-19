@@ -2,6 +2,7 @@ package com.example.teaming
 
 import android.content.Context
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.graphics.drawable.BitmapDrawable
 import android.net.Uri
 import android.os.Bundle
@@ -17,10 +18,12 @@ import com.example.teaming.databinding.FragmentCreateBinding
 import com.google.gson.FieldNamingPolicy
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
+import okhttp3.MediaType
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
+import okio.BufferedSink
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -86,42 +89,31 @@ class CreateFragment : Fragment(), ColSelDialog.OnColorSelectedListener, ImgDial
             val backgroundColor = binding.createCol.backgroundTintList?.defaultColor ?: 0
             val hexColor = String.format("#%06X", 0xFFFFFF and backgroundColor)
 
-            // Convert name to JSON
-            val nameJson = Gson().toJson(name)
-            val nameRequestBody = RequestBody.create("text/plain".toMediaType(), nameJson)
+            val imagePart: MultipartBody.Part? = selectedImageUri?.let { uri ->
+                val inputStream = requireContext().contentResolver.openInputStream(uri)
+                val imageByteArray = inputStream?.readBytes()
 
-            val startJson = Gson().toJson(start)
-            val startRequestBody = RequestBody.create("text/plain".toMediaType(), startJson)
+                imageByteArray?.let {
+                    val imageRequestBody = createBitmapRequestBody(BitmapFactory.decodeByteArray(it, 0, it.size))
+                    MultipartBody.Part.createFormData("project_image", uri.lastPathSegment, imageRequestBody)
+                }
+            }
 
-            val endJson = Gson().toJson(end)
-            val endRequestBody = RequestBody.create("text/plain".toMediaType(), endJson)
+            val nameRequestBody: RequestBody = RequestBody.create("text/plain".toMediaType(), name)
+            val startRequestBody: RequestBody = RequestBody.create("text/plain".toMediaType(), start)
+            val endRequestBody: RequestBody = RequestBody.create("text/plain".toMediaType(), end)
+            val hexColorRequestBody: RequestBody = RequestBody.create("text/plain".toMediaType(), hexColor)
 
-            val hexColorJson = Gson().toJson(hexColor)
-            val hexColorRequestBody = RequestBody.create("text/plain".toMediaType(), hexColorJson)
-
-            val imageFileName = selectedImageUri?.lastPathSegment ?: "image.jpg"
-            val imageFile = File(requireContext().cacheDir, imageFileName)
-
-            val imageRequestBody = RequestBody.create("image/*".toMediaTypeOrNull(), imageFile)
-            val imagePart = MultipartBody.Part.createFormData("project_image", imageFile.name, imageRequestBody)
-
-            // Print the data for debugging purposes
-            Log.e("멀티파트", "imagePart: ${imageFile.name}, ${imageRequestBody.contentType()}, ${imageRequestBody.contentLength()} bytes")
-            Log.e("멀티파트", "nameRequestBody: ${nameRequestBody.contentType()}, ${nameRequestBody.contentLength()} bytes, ${nameRequestBody.toString()}")
-            Log.e("멀티파트", "startRequestBody: ${startRequestBody.contentType()}, ${startRequestBody.contentLength()} bytes, ${startRequestBody.toString()}")
-            Log.e("멀티파트", "endRequestBody: ${endRequestBody.contentType()}, ${endRequestBody.contentLength()} bytes, ${endRequestBody.toString()}")
-            Log.e("멀티파트", "hexColorRequestBody: ${hexColorRequestBody.contentType()}, ${hexColorRequestBody.contentLength()} bytes, ${hexColorRequestBody.toString()}")
-
-
-            val memberId = sharedPreference.getInt("memberId", -1)
+            val textHashMap = hashMapOf<String, RequestBody>()
+            textHashMap["project_name"] = nameRequestBody
+            textHashMap["start_date"] = startRequestBody
+            textHashMap["end_date"] = endRequestBody
+            textHashMap["project_color"] = hexColorRequestBody
 
             val call = RetrofitApi.getRetrofitService.createProject(
                 memberId,
-                nameRequestBody,
-                imagePart,
-                startRequestBody,
-                endRequestBody,
-                hexColorRequestBody
+                projectImage = imagePart!!,
+                textHashMap
             )
 
             call.enqueue(object : Callback<CreateProjectResponse> {
@@ -154,6 +146,15 @@ class CreateFragment : Fragment(), ColSelDialog.OnColorSelectedListener, ImgDial
         }
 
         return binding.root
+    }
+
+    private fun createBitmapRequestBody(bitmap: Bitmap): RequestBody {
+        return object : RequestBody() {
+            override fun contentType(): MediaType = "image/jpeg".toMediaType()
+            override fun writeTo(sink: BufferedSink) {
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 99, sink.outputStream())
+            }
+        }
     }
 
     private fun updateButtonState() {
