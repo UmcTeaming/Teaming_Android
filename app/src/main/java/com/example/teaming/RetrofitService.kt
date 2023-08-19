@@ -2,13 +2,9 @@ package com.example.teaming
 
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
+import okhttp3.ResponseBody
 import retrofit2.Call
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.Multipart
-import retrofit2.http.POST
-import retrofit2.http.Part
-import retrofit2.http.Path
+import retrofit2.http.*
 
 /**
  * API Request를 Interface로 정의하는 곳입니다.
@@ -75,4 +71,10 @@ interface RetrofitService {
 
     @POST("/files/{memberId}/{fileId}/comments")
     fun commentWrite(@Path("memberId") memberId: Int?,@Path("fileId") fileId: Int?,@Body requestBody: RequestBody) : Call<CommentWriteResponse>
+
+    @Streaming
+    @GET
+    fun fileDownload(@Url url: String): Call<ResponseBody>
+
+
 }

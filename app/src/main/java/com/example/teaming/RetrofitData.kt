@@ -236,6 +236,8 @@ data class ProjectData(
     val startDate: String,
     @SerializedName("endDate")
     val endDate: String,
+    @SerializedName("projectColor")
+    val projectColor: String,
     @SerializedName("projectStatus")
     val projectStatus: String,
     @SerializedName("memberListDtos")
