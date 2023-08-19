@@ -87,14 +87,29 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
-                    <TextView
-                        android:layout_marginLeft="6dp"
+                    <LinearLayout
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/gmarket_sans_ttf_bold"
-                        android:text="카리나님의 팀 프로젝트"
-                        android:textColor="#527FF5"
-                        android:textSize="24sp" />
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/member_name"
+                            android:layout_marginLeft="6dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/gmarket_sans_ttf_bold"
+                            android:text="카리나"
+                            android:textColor="#527FF5"
+                            android:textSize="24sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/gmarket_sans_ttf_bold"
+                            android:text="님의 포트폴리오"
+                            android:textColor="#527FF5"
+                            android:textSize="24sp" />
+
+                    </LinearLayout>
 
                     <TextView
                         android:layout_marginLeft="6dp"

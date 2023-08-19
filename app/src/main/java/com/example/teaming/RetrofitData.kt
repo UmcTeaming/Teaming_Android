@@ -2,7 +2,7 @@ package com.example.teaming
 
 import com.google.gson.annotations.SerializedName
 import okhttp3.MultipartBody
-import retrofit2.http.Multipart
+import okhttp3.RequestBody
 
 
 data class LoginResponse(
@@ -68,7 +68,7 @@ data class RecentlyProject(
     @SerializedName("projectStatus")
     val projectStatus: String,
     @SerializedName("projectImage")
-    val projectImage: String
+    val projectImage: String?
 )
 
 data class ProgressProject(
@@ -207,15 +207,15 @@ data class CreateData(
 
 data class CreateProjectRequest(
     @SerializedName("project_name")
-    val projectName: String,
+    val projectName: RequestBody,
     @SerializedName("project_image")
-    val projectImage: String,
+    val projectImage: MultipartBody.Part?,
     @SerializedName("start_date")
-    val startDate: String,
+    val startDate: RequestBody,
     @SerializedName("end_date")
-    val endDate: String,
+    val endDate: RequestBody,
     @SerializedName("project_color")
-    val projectColor: String
+    val projectColor: RequestBody
 )
 
 data class ProjectpageResponse(

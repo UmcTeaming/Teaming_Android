@@ -56,7 +56,7 @@ class Gh_List_Icon2_Fragment : Fragment() {
                                     val formattedDate = "${projects.projectStartDate} ~ ${projects.projectEndDate}"
                                     listVerItemList.add(
                                         GridListItem(
-                                            R.drawable.file_background,
+                                            projects.projectImage,
                                             projects.projectName,
                                             formattedDate,
                                             projects.projectId
@@ -116,7 +116,7 @@ class Gh_List_Icon2_Fragment : Fragment() {
                                             val formattedDate = "${projects.projectStartDate} ~ ${projects.projectEndDate}"
                                             listVerItemList.add(
                                                 GridListItem(
-                                                    R.drawable.file_background,
+                                                    projects.projectImage,
                                                     projects.projectName,
                                                     formattedDate,
                                                     projects.projectId
