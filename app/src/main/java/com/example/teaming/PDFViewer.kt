@@ -1,12 +1,21 @@
 package com.example.teaming
 
+import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.teaming.databinding.FragmentPDFViewerBinding
 import com.github.barteksc.pdfviewer.scroll.DefaultScrollHandle
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import okhttp3.ResponseBody
+import java.io.File
+import java.io.FileOutputStream
 
 class PDFViewer : Fragment() {
 
@@ -25,14 +34,72 @@ class PDFViewer : Fragment() {
     ): View? {
         binding = FragmentPDFViewerBinding.inflate(inflater, container, false)
 
-        binding.pdfshow.fromAsset("tmp.pdf")
-            .defaultPage(0)
-            .scrollHandle(DefaultScrollHandle(requireContext()))
-            .spacing(20)
-            .load()
+        val fileId = arguments?.getInt("file_id") ?: -1
+        val fileName = arguments?.getString("file_name") ?: ""
 
+        val sharedPreference_mem = requireActivity().getSharedPreferences("memberId",
+            Context.MODE_PRIVATE
+        )
+        val sharedPreference = requireActivity().getSharedPreferences("projectID_page",
+            Context.MODE_PRIVATE
+        )
+
+        val memberId = sharedPreference_mem.getInt("memberId", -1)
+        val projectId = sharedPreference.getInt("projectID_page", -1)
+
+        val fileUrl = "http://teaming.shop:8080/files/$memberId/$projectId/files/$fileId/download"
+
+        GlobalScope.launch(Dispatchers.IO) {
+            val service = RetrofitApi.getRetrofitService.fileDownload(fileUrl)
+            val response = service.execute()
+
+            if (response.isSuccessful) {
+                val responseBody: ResponseBody? = response.body()
+                if (responseBody != null) {
+                    val savedFile = saveFileToInternalStorage(requireContext(), fileName, responseBody)
+
+                    if (savedFile != null) {
+                        withContext(Dispatchers.Main) {
+                            binding.pdfshow.fromFile(savedFile)
+                                .defaultPage(0)
+                                .scrollHandle(DefaultScrollHandle(requireContext()))
+                                .spacing(20)
+                                .onError {
+                                    requireActivity().supportFragmentManager.beginTransaction()
+                                        .replace(R.id.doc_read_contain,PdfError())
+                                        .commit()
+                                }
+                                .load()
+                        }
+                    } else {
+                        Log.d("pdf error","지원하지않는 확장자입니다.")
+                    }
+                }
+            } else {
+                // API 요청 실패
+            }
+        }
 
         return binding.root
     }
 
+    private suspend fun saveFileToInternalStorage(context: Context, fileName: String, responseBody: ResponseBody): File? {
+        try {
+            val file = File(context.filesDir, fileName)
+            val outputStream = FileOutputStream(file)
+            val buffer = ByteArray(4 * 1024) // 4KB 버퍼 사용
+
+            var bytesRead: Int
+            while (responseBody.byteStream().read(buffer).also { bytesRead = it } != -1) {
+                outputStream.write(buffer, 0, bytesRead)
+            }
+
+            outputStream.flush()
+            outputStream.close()
+            return file
+        } catch (e: Exception) {
+            e.printStackTrace()
+            return null
+        }
+    }
 }
