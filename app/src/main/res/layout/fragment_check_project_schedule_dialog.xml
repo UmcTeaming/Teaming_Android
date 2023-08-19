@@ -11,23 +11,31 @@
         android:background="@drawable/cal_dialog_new_background">
 
         <EditText
+            android:enabled="false"
+            android:backgroundTint="#527FF5"
+            android:layout_marginTop="40dp"
             android:fontFamily="@font/gmarket_sans_ttf_bold"
-            android:id="@+id/retrofit_test_text"
+            android:id="@+id/title_text"
+            android:textSize="15sp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
             android:hint="팀플 일정의 제목을 작성해주세요."/>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
+            android:layout_marginTop="10dp"
             android:gravity="center">
             <TextView
                 android:fontFamily="@font/gmarket_sans_ttf_bold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
+                android:textColor="#000000"
                 android:text="날짜:"/>
             <TextView
                 android:fontFamily="@font/gmarket_sans_ttf_bold"
@@ -35,6 +43,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
+                android:textColor="#000000"
                 android:text="0000.00.00"/>
             <TextView
                 android:layout_width="wrap_content"
@@ -48,19 +57,22 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="20dp"
+                android:textColor="#000000"
                 android:text="0000.00.00"/>
 
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp">
             <Button
                 android:id="@+id/start_time"
                 android:fontFamily="@font/gmarket_sans_ttf_bold"
                 android:layout_width="wrap_content"
                 android:layout_height="25dp"
                 android:text="00:00"
+                android:backgroundTint="#527FF5"
                 android:textColor="@color/white"
                 android:layout_marginLeft="20dp"
                 android:background="@drawable/btn_blue_ellipse"/>
@@ -75,59 +87,29 @@
                 android:fontFamily="@font/gmarket_sans_ttf_bold"
                 android:layout_width="wrap_content"
                 android:layout_height="25dp"
+                android:backgroundTint="#527FF5"
                 android:textColor="@color/white"
                 android:text="00:00"
                 android:layout_marginRight="20dp"
                 android:background="@drawable/btn_blue_ellipse"/>
 
         </LinearLayout>
-        <TimePicker
-            android:layout_gravity="center"
-            android:id="@+id/schedule_time_picker"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:timePickerMode="spinner"
-            android:visibility="gone"/>
-        <DatePicker
-            android:layout_gravity="center"
-            android:id="@+id/schedule_date_picker"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:datePickerMode="spinner"
-            android:visibility="gone"/>
-        <LinearLayout
+        <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
             <Button
                 android:layout_marginTop="20dp"
                 android:id="@+id/to_before"
+                android:layout_gravity="center_horizontal"
                 android:layout_width="100dp"
                 android:layout_height="25dp"
-                android:layout_marginLeft="20dp"
                 android:textSize="12sp"
                 android:fontFamily="@font/gmarket_sans_ttf_bold"
                 android:text="이전으로"
                 android:textColor="#527FF5"
-                android:layout_marginBottom="10dp"
+                android:layout_marginBottom="30dp"
                 android:background="@drawable/cal_dialog_back_btn"/>
-            <View
-                android:layout_width="0dp"
-                android:layout_height="25dp"
-                android:layout_weight="1"/>
-            <Button
-                android:layout_marginTop="20dp"
-                android:id="@+id/make_schedule"
-                android:layout_width="100dp"
-                android:layout_height="25dp"
-                android:textSize="12sp"
-                android:text="일정 추가하기"
-                android:fontFamily="@font/gmarket_sans_ttf_bold"
-                android:backgroundTint="#70000000"
-                android:layout_marginRight="20dp"
-                android:textColor="@color/white"
-                android:background="@drawable/btn_blue_ellipse"
-                android:layout_marginBottom="10dp"/>
-        </LinearLayout>
+        </FrameLayout>
     </LinearLayout>
 </FrameLayout>

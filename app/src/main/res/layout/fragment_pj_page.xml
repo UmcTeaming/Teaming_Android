@@ -106,7 +106,7 @@
 
                 <ImageView
                     android:id="@+id/pj_image"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="100dp"
                     android:scaleType="fitCenter"
                     android:background="@drawable/pj_image_shape"
@@ -174,13 +174,13 @@
                         android:src="@drawable/file_upload_btn" />
 
                     <ImageButton
+                        android:id="@+id/project_schedules"
                         android:layout_width="18dp"
                         android:layout_height="18dp"
                         android:scaleType="fitCenter"
                         android:background="@android:color/transparent"
                         android:src="@drawable/team_calender"
                         android:layout_gravity="center_vertical"
-                        android:layout_marginStart="10dp"
                         />
                 </LinearLayout>
 

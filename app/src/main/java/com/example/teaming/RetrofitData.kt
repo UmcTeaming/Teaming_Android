@@ -133,6 +133,30 @@ data class PortfolioList(
     val projectStatus: String
 )
 
+
+data class CreateSchedule(
+    @SerializedName("schedule_name")
+    val scheduleName:String,
+    @SerializedName("schedule_start")
+    val scheduleStart:String,
+    @SerializedName("schedule_end")
+    val scheduleEnd:String,
+    @SerializedName("schedule_start_time")
+    val scheduleStartTime:String,
+    @SerializedName("schedule_end_time")
+    val scheduleEndTime:String
+)
+
+data class TakeDayScheduleRequest(
+    @SerializedName("schedule_start")
+    val scheduleStart :String
+)
+
+data class CalendarScheduleResult(
+    @SerializedName("data")
+    val data: ArrayList<CalendarScheduleItem>
+)
+
 // 진행중인 프로젝트 페이지 관련
 data class ProgressPageResponse(
     @SerializedName("status")
@@ -254,5 +278,127 @@ data class FileDetails(
     @SerializedName("file_id")
     val file_id: Int
 )
+
+data class FinalFilesResponse(
+    @SerializedName("status")
+    val status: Int,
+    @SerializedName("message")
+    val message: String,
+    @SerializedName("data")
+    val data: List<FinalFileData>
+)
+
+data class FinalFileData(
+    @SerializedName("createdAt")
+    val createdAt: String,
+    @SerializedName("filesDetails")
+    val filesDetails: List<FinalDetails>
+)
+
+data class FinalDetails(
+    @SerializedName("file_type")
+    val file_type: String,
+    @SerializedName("file_name")
+    val file_name: String,
+    @SerializedName("file")
+    val file: String,
+    @SerializedName("comment")
+    val comment: Int,
+    @SerializedName("file_id")
+    val file_id: Int
+)
+
+data class InvitationsResponse(
+    @SerializedName("status")
+    val status: Int,
+    @SerializedName("message")
+    val message: String,
+    @SerializedName("data")
+    val data: InvitationData
+)
+
+data class InvitationData(
+    @SerializedName("members")
+    val members: List<InvitedMember>
+)
+
+data class InvitedMember(
+    @SerializedName("member_name")
+    val memberName: String,
+    @SerializedName("member_image")
+    val memberImage: String?,
+    @SerializedName("member_email")
+    val memberEmail: String
+)
+
+data class InvitationsRequest(
+    @SerializedName("email")
+    val email: String
+)
+
+data class DocReadPageResponse(
+    @SerializedName("status")
+    val status: Int,
+    @SerializedName("message")
+    val message: String,
+    @SerializedName("data")
+    val data: DocFileData
+)
+
+data class DocFileData(
+    @SerializedName("project_name")
+    val project_name: String,
+    @SerializedName("file_type")
+    val file_type: String,
+    @SerializedName("file_name")
+    val file_name: String,
+    @SerializedName("uploader")
+    val uploader: String,
+    @SerializedName("upload_date")
+    val upload_date: String
+)
+
+data class CommentLoadResponse(
+    @SerializedName("status")
+    val status: Int,
+    @SerializedName("message")
+    val message: String,
+    @SerializedName("data")
+    val data: List<CommentData>
+)
+
+data class CommentData(
+    @SerializedName("commentId")
+    val commentId: Int,
+    @SerializedName("writer")
+    val writer: String,
+    @SerializedName("content")
+    val content: String,
+    @SerializedName("create_at")
+    val create_at: String,
+    @SerializedName("profile_image")
+    val profile_image: String?
+)
+
+data class CommentWriteRequest(
+    @SerializedName("content")
+    val content: String
+)
+
+data class CommentWriteResponse(
+    @SerializedName("status")
+    val status: Int,
+    @SerializedName("message")
+    val message: String,
+    @SerializedName("data")
+    val commentData: CommentIdData
+)
+
+data class CommentIdData(
+    @SerializedName("commentId")
+    val commentId: Int
+)
+
+
 
 

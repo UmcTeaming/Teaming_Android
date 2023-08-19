@@ -18,6 +18,9 @@ import com.example.teaming.databinding.FragmentPjPageBinding
 import com.example.teaming.databinding.InviteNoInfoDialogBinding
 import com.example.teaming.databinding.InviteYesInfoDialogBinding
 import com.example.teaming.databinding.PjInviteDialogBinding
+import com.google.gson.Gson
+import okhttp3.MediaType.Companion.toMediaType
+import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -78,11 +81,12 @@ class PjPageFragment : Fragment() {
                         Glide.with(requireContext())
                             .load(projectpageresponse.data.image)
                             .error(R.drawable.pj_image_default)
+                            .fitCenter()
                             .into(binding.pjImage)
 
                         if (projectpageresponse.data.projectStatus == "ING"){
                             binding.status.setImageResource(R.drawable.circle)
-                            binding.projectDate.text = "${projectpageresponse.data.startDate}"
+                            binding.projectDate.text = "${projectpageresponse.data.startDate} ~"
                         }else{
                             binding.status.setImageResource(R.drawable.circle_end)
                             binding.projectDate.text = "${projectpageresponse.data.startDate} ~ ${projectpageresponse.data.startDate}"
@@ -135,6 +139,15 @@ class PjPageFragment : Fragment() {
 
         binding.inviteBtn.setOnClickListener {
             showPjInviteDialog()
+        }
+
+        binding.projectSchedules.setOnClickListener{
+            val dialog = ProjectScheduleDialog()
+            val args = Bundle()
+            args.putInt("projectId", projectId!!)
+            args.putInt("memberId", memberId!!)
+            dialog.arguments = args
+            dialog.show(requireActivity().supportFragmentManager,"CalNewScheduleDialog")
         }
 
         return binding.root
@@ -193,13 +206,71 @@ class PjPageFragment : Fragment() {
         }
 
         dialogBinding.inviteChkBtn.setOnClickListener {
-            if (dialogBinding.emailWrite.text.toString() == "admin@teaming.com") {
-                pjInviteDialog.dismiss()
-                showInviteYesInfoDialog()
-            } else {
-                pjInviteDialog.dismiss()
-                showInviteNoInfoDialog()
-            }
+
+            val sharedPreference_mem = requireActivity().getSharedPreferences("memberId",
+                Context.MODE_PRIVATE
+            )
+            val sharedPreference = requireActivity().getSharedPreferences("projectID_page",
+                Context.MODE_PRIVATE
+            )
+
+            val memberId = sharedPreference_mem.getInt("memberId",-1)
+
+            val projectId = sharedPreference.getInt("projectID_page",-1)
+
+            val requestBodyData = InvitationsRequest(dialogBinding.emailWrite.text.toString())
+            Log.d("리퀘스트","${requestBodyData}")
+            val json = Gson().toJson(requestBodyData)
+            val requestBody = RequestBody.create("application/json".toMediaType(), json)
+
+            val callInvitation = RetrofitApi.getRetrofitService.invitation(memberId,projectId,requestBody)
+
+            callInvitation.enqueue(object : Callback<InvitationsResponse> {
+                override fun onResponse(call: Call<InvitationsResponse>, response: Response<InvitationsResponse>) {
+                    if (response.isSuccessful) {
+                        val invitationsResponse = response.body()
+                        if (invitationsResponse != null) {
+                            Log.d("Invitation", "API 호출 성공: ${invitationsResponse}")
+                            pjInviteDialog.dismiss()
+                            showInviteYesInfoDialog()
+
+                            itemList.clear()
+                            for (member in invitationsResponse.data.members) {
+                                itemList.add(
+                                    MemberData(
+                                        member.memberImage,
+                                        member.memberName
+                                    )
+                                )
+                            }
+                            while (itemList.size < 4) {
+                                itemList.add(MemberData("no_profile", "기본"))
+                            }
+
+                            val memberboard = binding.root.findViewById<RecyclerView>(R.id.member)
+
+                            val memberAdapter = MemberAdapter(itemList)
+                            memberAdapter.notifyDataSetChanged()
+
+                            memberboard.adapter = memberAdapter
+                            memberboard.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+
+                            if(invitationsResponse.status != 200){
+                                pjInviteDialog.dismiss()
+                                showInviteNoInfoDialog(invitationsResponse.status)
+                            }
+                        }
+                    } else {
+                        Log.d("Invitation", "API 호출 실패: ${response.code()}")
+                    }
+                }
+
+                override fun onFailure(call: Call<InvitationsResponse>, t: Throwable) {
+                    Log.e("Invitation", "로그인 API 호출 실패", t)
+                }
+            })
+
+
         }
 
         pjInviteDialog.show()
@@ -222,7 +293,7 @@ class PjPageFragment : Fragment() {
         inviteYesInfoDialog.show()
     }
 
-    private fun showInviteNoInfoDialog() {
+    private fun showInviteNoInfoDialog(errorcode : Int) {
         inviteNoInfoDialog = Dialog(requireContext())
         val dialogBinding: InviteNoInfoDialogBinding = DataBindingUtil.inflate(
             LayoutInflater.from(requireContext()),
@@ -230,6 +301,12 @@ class PjPageFragment : Fragment() {
             null,
             false
         )
+
+        if (errorcode == 208){
+            dialogBinding.noWayHome.text = "이미 참여 중인 초대자입니다."
+        }else if(errorcode == 404){
+            dialogBinding.noWayHome.text = "회원이 아닌 초대자 입니다."
+        }
         inviteNoInfoDialog.setContentView(dialogBinding.root)
 
         dialogBinding.yesBtn.setOnClickListener {
