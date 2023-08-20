@@ -2,14 +2,20 @@ package com.example.teaming
 
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
+import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.Headers
 import retrofit2.http.Multipart
+import retrofit2.http.PATCH
 import retrofit2.http.POST
 import retrofit2.http.Part
+import retrofit2.http.PartMap
 import retrofit2.http.Path
+import retrofit2.http.Streaming
+import retrofit2.http.Url
+
 import retrofit2.http.Query
 
 /**
@@ -26,6 +32,16 @@ interface RetrofitService {
     @GET("/member/{memberId}/portfolio")
     fun portfolioPage(@Path("memberId") memberId: Int?) : Call<PortfolioPageResponse>
 
+    @POST("/projects/{memberId}/{projectId}/schedule")
+    fun createSchedule(
+        @Path("memberId") memberId: Int?,
+        @Path("projectId") projectId: Int?,
+        @Body scheduleData:CreateSchedule) : Call<CreateSchedule>
+    @POST("/member/{memberId}/schedule_start")
+    fun takeDaySchedule(
+        @Path("memberId") memberId : Int?,
+        @Body scheduleStart:TakeDayScheduleRequest) : Call<CalendarScheduleResult>
+
     @GET("/member/{memberId}/progressProjects")
     fun progressPage(@Path("memberId") memberId: Int?) : Call<ProgressPageResponse>
 
@@ -33,11 +49,34 @@ interface RetrofitService {
     @POST("/projects/{memberId}/create")
     fun createProject(
         @Path("memberId") memberId: Int,
-        @Part("data") requestData: RequestBody,
-        @Part projectImage: MultipartBody.Part?
+        @Part projectImage: MultipartBody.Part,
+        @PartMap requestBody: HashMap<String, RequestBody>
     ): Call<CreateProjectResponse>
 
+    @Multipart
+    @PATCH("/projects/{memberId}/{projectId}/modifyProject")
+    fun modifyProject(
+        @Path("memberId") memberId: Int,
+        @Path("projectId") projectId: Int,
+        @Part projectImage: MultipartBody.Part,
+        @PartMap requestBody: HashMap<String, RequestBody>
+    ): Call<ModifyProjectResponse>
+
+    @PATCH("/projects/{memberId}/{projectId}/status")
+    fun endProject(
+        @Path("memberId") memberId: Int,
+        @Path("projectId") projectId: Int,
+        @Body request: ProjectEndRequest
+    ):Call<ProjectEndResponse>
+
     @GET("/projects/{memberId}/{projectId}")
+    fun getInfoModify(
+        @Path("memberId") memberId: Int?,
+        @Path("projectId") projectId: Int?
+    ) : Call<InfoProjectResponse>
+
+    @GET("/projects/{memberId}/{projectId}")
+
     fun projectPage(@Path("memberId") memberId: Int?,@Path("projectId") projectId: Int?) : Call<ProjectpageResponse>
 
     @GET("/projects/{memberId}/{projectId}/files")
@@ -57,4 +96,29 @@ interface RetrofitService {
         @Part("email") email: RequestBody,
         @Part("password") password: RequestBody
     ): Call<SignupResponse>
+
+
+    @GET("/projects/{memberId}/{projectId}/schedule")
+    fun projectSchedule(@Path("memberId") memberId:Int?, @Path("projectId") projectId:Int?) : Call<CalendarScheduleResult>
+
+    @GET("/projects/{memberId}/{projectId}/final-files")
+    fun finalFiles(@Path("memberId") memberId: Int?,@Path("projectId") projectId: Int?) : Call<FinalFilesResponse>
+
+    @POST("/projects/{memberId}/{projectId}/invitations")
+    fun invitation(@Path("memberId") memberId: Int?,@Path("projectId") projectId: Int?, @Body requestBody: RequestBody) : Call<InvitationsResponse>
+
+    @GET("/projects/{memberId}/{projectId}/files/{fileId}")
+    fun docReadPage(@Path("memberId") memberId: Int?,@Path("projectId") projectId: Int?,@Path("fileId") fileId: Int?) : Call<DocReadPageResponse>
+
+    @GET("/files/{memberId}/{fileId}/comments")
+    fun commentLoad(@Path("memberId") memberId: Int?,@Path("fileId") fileId: Int?) : Call<CommentLoadResponse>
+
+    @POST("/files/{memberId}/{fileId}/comments")
+    fun commentWrite(@Path("memberId") memberId: Int?,@Path("fileId") fileId: Int?,@Body requestBody: RequestBody) : Call<CommentWriteResponse>
+
+    @Streaming
+    @GET
+    fun fileDownload(@Url url: String): Call<ResponseBody>
+
+
 }

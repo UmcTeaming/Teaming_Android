@@ -31,9 +31,7 @@ class MemberAdapter(val itemList: ArrayList<MemberData>) :
                     .error(R.drawable.default_profile)
                     .into(image)
             }
-
         }
-
     }
 
     override fun getItemCount(): Int {
@@ -43,5 +41,6 @@ class MemberAdapter(val itemList: ArrayList<MemberData>) :
 
     inner class MemberViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val image = itemView.findViewById<ImageView>(R.id.imageView)
+        val image2 = itemView.findViewById<ImageView>(R.id.imageView2)
     }
 }

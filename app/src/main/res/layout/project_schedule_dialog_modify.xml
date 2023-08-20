@@ -56,6 +56,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
             <Button
+                android:id="@+id/start_time"
                 android:fontFamily="@font/gmarket_sans_ttf_bold"
                 android:layout_width="wrap_content"
                 android:layout_height="25dp"
@@ -70,6 +71,7 @@
                 android:gravity="center"
                 android:layout_weight="1"/>
             <Button
+                android:id="@+id/end_time"
                 android:fontFamily="@font/gmarket_sans_ttf_bold"
                 android:layout_width="wrap_content"
                 android:layout_height="25dp"

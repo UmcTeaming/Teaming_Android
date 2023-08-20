@@ -47,11 +47,11 @@ class ListFragment : Fragment() {
                     if (response.isSuccessful) {
                         Log.e("포트폴리오 memberId","${memberId}")
                         val progressPageResponse = response.body()
-                        if (progressPageResponse != null) {
+                        if (progressPageResponse != null ) {
                             val progressProjects = progressPageResponse.data.progressProjects
                             Log.e("tag","${progressProjects}")
 
-                            if(progressProjects !=null){
+                            if(progressProjects !=null && progressProjects.isNotEmpty()){
                                 binding.btnLayout.visibility = View.VISIBLE
                                 binding.fileFrame.visibility = View.VISIBLE
                                 binding.nonViewPager2.visibility = View.GONE

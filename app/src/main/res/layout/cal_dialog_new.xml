@@ -14,7 +14,7 @@
             android:backgroundTint="#527FF5"
             android:layout_marginTop="40dp"
             android:fontFamily="@font/gmarket_sans_ttf_bold"
-            android:id="@+id/retrofit_test_text"
+            android:id="@+id/schedule_name"
             android:textSize="15sp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

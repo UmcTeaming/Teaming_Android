@@ -8,6 +8,8 @@
     android:background="@color/white">
 
     <androidx.recyclerview.widget.RecyclerView
+        android:layout_marginTop="10dp"
+        android:id="@+id/comment_recycler"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
@@ -15,6 +17,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
+        android:background="@color/white"
         android:id="@+id/write_comment"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -24,6 +27,7 @@
         android:orientation="horizontal">
 
         <EditText
+            android:id="@+id/input_comment"
             android:layout_marginEnd="20dp"
             android:layout_marginStart="20dp"
             android:layout_width="0dp"
@@ -38,6 +42,7 @@
             android:fontFamily="@font/gmarket_sans_ttf_medium"/>
         
         <ImageButton
+            android:id="@+id/send_btn"
             android:scaleType="centerCrop"
             android:background="@android:color/transparent"
             android:layout_marginEnd="20dp"
