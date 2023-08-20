@@ -491,6 +491,8 @@ data class ScheduleDate(
     val dateList:String
 )
 
+
+
 data class MonthScheduleRequest(
     @SerializedName("date_request")
     val dateRequest:String
@@ -533,4 +535,9 @@ data class MemberRequestDto(
     val email: String,
     @SerializedName("password")
     val password: String
+)
+
+data class MonthScheduleRequest(
+    @SerializedName("date_request")
+    val dateRequest:String
 )
