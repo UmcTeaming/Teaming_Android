@@ -280,7 +280,7 @@ data class FileDetails(
     val comment: Int,
     @SerializedName("file_id")
     val file_id: Int,
-    var del_btn_mark: Boolean = false,
+    var del_btn_mark: Boolean = false
 )
 
 data class FinalFilesResponse(
@@ -309,7 +309,8 @@ data class FinalDetails(
     @SerializedName("comment")
     val comment: Int,
     @SerializedName("file_id")
-    val file_id: Int
+    val file_id: Int,
+    var del_btn_mark: Boolean = false
 )
 
 data class InvitationsResponse(
@@ -401,6 +402,13 @@ data class CommentWriteResponse(
 data class CommentIdData(
     @SerializedName("commentId")
     val commentId: Int
+)
+
+data class FileDeleteResponse(
+    @SerializedName("status")
+    val status: Int,
+    @SerializedName("message")
+    val message: String
 )
 
 

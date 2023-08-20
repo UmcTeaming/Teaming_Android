@@ -67,32 +67,34 @@ class PjSort : Fragment(), PjInAdapter.OnPjInItemClickListener, PjInAdapter.OnPj
                             adapter = pjOutAdapter
                         }
 
-                        val trashButton = binding.trashBtn
+                        Log.d("pj data","$dataList")
 
-                        var buttonVisible = false
-
-                        trashButton.setOnClickListener {
-                            buttonVisible = true
-
-
-
-
-                        }
                     }else{
                         requireActivity().supportFragmentManager.beginTransaction()
                             .replace(R.id.fragmentContainer,NoPjSort())
                             .commit()
+                        Log.d("pj data","$projectfilesresponse")
                     }
                 } else {
-                    Log.d("Finalfiles", "API 호출 실패: ${response.code()}")
+                    Log.d("pjfile", "API 호출 실패: ${response.code()}")
                 }
             }
 
             override fun onFailure(call: Call<ProjectFilesResponse>, t: Throwable) {
-                Log.e("Finalfiles", "로그인 API 호출 실패", t)
+                Log.e("pjfile", "로그인 API 호출 실패", t)
             }
         })
 
+        binding.trashBtn.setOnClickListener{
+            val filesToDelete = dataList.flatMap { projectFileData ->
+                projectFileData.filesDetails.filter { it.del_btn_mark }
+            }
+
+            if (filesToDelete.isNotEmpty()) {
+                val dialogFragment = FileDeleteDialogFragment.newInstance(filesToDelete)
+                dialogFragment.show(childFragmentManager, "FileDeleteDialogFragment")
+            }
+        }
 
         return binding.root
     }
@@ -114,7 +116,18 @@ class PjSort : Fragment(), PjInAdapter.OnPjInItemClickListener, PjInAdapter.OnPj
     }
 
     override fun onPjInItemDel(fileDetails: FileDetails){
-        fileDetails.del_btn_mark = true
+        fileDetails.del_btn_mark = !fileDetails.del_btn_mark
+        pjOutAdapter.notifyDataSetChanged()
+
+        val filesToDelete = dataList.flatMap { projectFileData ->
+            projectFileData.filesDetails.filter { it.del_btn_mark }
+        }
+
+        if (filesToDelete.isNotEmpty()) {
+            binding.trashBtn.setImageResource(R.drawable.trashred_trash)
+        } else {
+            binding.trashBtn.setImageResource(R.drawable.trash) // 또는 다른 이미지로 변경
+        }
     }
 
 

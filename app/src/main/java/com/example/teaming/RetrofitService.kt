@@ -4,13 +4,7 @@ import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import okhttp3.ResponseBody
 import retrofit2.Call
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.Multipart
-import retrofit2.http.POST
-import retrofit2.http.Part
-import retrofit2.http.PartMap
-import retrofit2.http.Path
+import retrofit2.http.*
 
 
 /**
@@ -83,5 +77,7 @@ interface RetrofitService {
     @GET
     fun fileDownload(@Url url: String): Call<ResponseBody>
 
+    @DELETE("/projects/{memberId}/{projectId}/files/{fileId}")
+    fun fileDelete(@Path("memberId") memberId: Int?,@Path("projectId") projectId: Int?,@Path("fileId") fileId: Int?) : Call<FileDeleteResponse>
 
 }
