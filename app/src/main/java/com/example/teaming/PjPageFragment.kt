@@ -2,6 +2,7 @@ package com.example.teaming
 
 import android.app.Dialog
 import android.content.Context
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -48,7 +49,29 @@ class PjPageFragment : Fragment() {
 
         binding = FragmentPjPageBinding.inflate(inflater,container,false)
 
-        val projectId = arguments?.getInt("projectID")
+        var projectId: Int? = null
+        var num = arguments?.getInt("num")
+        /*var num2 = arguments?.getInt("num2")
+        var num3 = arguments?.getInt("num3")
+        Log.e("num","${num2}, ${num3}")*/
+
+        /*if(num2!=2){
+            projectId = arguments?.getInt("createProjectID")
+        }
+
+        if(num3!=3){
+            projectId = arguments?.getInt("modiProjectID")
+        }
+
+        if(num2==0 && num3==0){
+            projectId = arguments?.getInt("projectID")
+        }*/
+
+        projectId = when(num){
+            2-> arguments?.getInt("modiProjectID")
+            3-> arguments?.getInt("createProjectID")
+            else-> arguments?.getInt("projectID")
+        }
 
         val preferences = requireContext().getSharedPreferences("projectID_page", AppCompatActivity.MODE_PRIVATE)
 

@@ -34,13 +34,15 @@ import okio.BufferedSink
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.FileOutputStream
 
 class ModifyFragment : Fragment(),ColSelDialog.OnColorSelectedListener, ImgDialog.OnImgSelectedListener {
     private lateinit var binding: FragmentModifyBinding
-
     private val itemList = ArrayList<MemberData>()
+
+    private var img_Selected = false
 
     private lateinit var pjInviteDialog: Dialog
     private lateinit var inviteYesInfoDialog: Dialog
@@ -64,6 +66,7 @@ class ModifyFragment : Fragment(),ColSelDialog.OnColorSelectedListener, ImgDialo
         val memberId = sharedPreference.getInt("memberId", -1)
 
         val projectId = arguments?.getInt("projectID")
+
 
         Log.e("modify memberId","${memberId}")
         Log.e("modify projectId","${projectId}")
@@ -143,14 +146,34 @@ class ModifyFragment : Fragment(),ColSelDialog.OnColorSelectedListener, ImgDialo
             val backgroundColor = binding.modiCol.backgroundTintList?.defaultColor ?: 0
             val hexColor = String.format("#%06X", 0xFFFFFF and backgroundColor)
 
-            val imagePart: MultipartBody.Part? = selectedImageUri?.let { uri ->
-                val inputStream = requireContext().contentResolver.openInputStream(uri)
-                val imageByteArray = inputStream?.readBytes()
+            var imagePart: MultipartBody.Part? = null
 
-                imageByteArray?.let {
-                    val imageRequestBody = createBitmapRequestBody(BitmapFactory.decodeByteArray(it, 0, it.size))
-                    MultipartBody.Part.createFormData("project_image", uri.lastPathSegment, imageRequestBody)
+            if (img_Selected) {
+                selectedImageUri?.let { uri ->
+                    val inputStream = requireContext().contentResolver.openInputStream(uri)
+                    val imageByteArray = inputStream?.readBytes()
+
+                    imageByteArray?.let {
+                        val imageRequestBody = createBitmapRequestBody(BitmapFactory.decodeByteArray(it, 0, it.size))
+                        imagePart = MultipartBody.Part.createFormData("project_image", uri.lastPathSegment, imageRequestBody)
+                    }
                 }
+            } else {
+                // 이미지뷰에서 Drawable 가져오기
+                val drawable = binding.imgModi.drawable
+                // Drawable을 Bitmap으로 변환
+                val imageBitmap = (drawable as BitmapDrawable).bitmap
+
+                // Bitmap을 ByteArray로 변환
+                val outputStream = ByteArrayOutputStream()
+                imageBitmap.compress(Bitmap.CompressFormat.JPEG, 90, outputStream)
+                val imageByteArray = outputStream.toByteArray()
+
+                // ByteArray를 RequestBody로 변환
+                val imageRequestBody = RequestBody.create("image/jpeg".toMediaType(), imageByteArray)
+
+                // MultipartBody.Part 생성
+                imagePart = MultipartBody.Part.createFormData("project_image", "image.jpg", imageRequestBody)
             }
 
             val nameRequestBody: RequestBody = RequestBody.create("text/plain".toMediaType(), projectName)
@@ -181,8 +204,15 @@ class ModifyFragment : Fragment(),ColSelDialog.OnColorSelectedListener, ImgDialo
                                 if (projectId != null) {
                                     Log.e("Post 여부", "Post 성공: 프로젝트 ID = $projectId")
 
-                                    // Show the success dialog or perform other actions
+                                    val bundle = Bundle()
+                                    bundle.putInt("modiProjectID",projectId!!)
+                                    bundle.putInt("num",2)
+
                                     val dialog = PjCompleteDialog()
+                                    dialog.arguments = bundle
+
+                                    // Show the success dialog or perform other actions
+
                                     dialog.show(requireActivity().supportFragmentManager, "PjCompleteDialog")
                                 } else {
                                     Log.e("Patch 여부", "Patch 성공하지만 프로젝트 ID가 없습니다.")
@@ -396,6 +426,7 @@ class ModifyFragment : Fragment(),ColSelDialog.OnColorSelectedListener, ImgDialo
             binding.imgModi.setImageURI(selectedImageUri)
             binding.text.visibility = View.INVISIBLE
 
+            img_Selected = true
         }
     }
 
@@ -404,6 +435,7 @@ class ModifyFragment : Fragment(),ColSelDialog.OnColorSelectedListener, ImgDialo
             binding.imgModi.setImageURI(imageUri)
             binding.text.visibility = View.INVISIBLE
             selectedImageUri = imageUri
+            img_Selected = true
         }
     }
 
@@ -420,6 +452,8 @@ class ModifyFragment : Fragment(),ColSelDialog.OnColorSelectedListener, ImgDialo
 
             binding.imgModi.setImageURI(selectedImageUri)
             binding.text.visibility = View.INVISIBLE
+
+            img_Selected = true
 
         }
     }
