@@ -554,3 +554,54 @@ data class MemberResetPasswordResponse(
     @SerializedName("message")
     val message: String
 )
+
+data class MemberChangeProfileImageRequestDto(
+    @SerializedName("change_image_file")
+    val change_image_file: MultipartBody.Part?
+)
+
+data class MemberChangeProfileImageResponse(
+    @SerializedName("status")
+    val status: Int,
+    @SerializedName("message")
+    val message: String,
+    @SerializedName("data")
+    val data: String
+)
+
+data class CheckPasswordRequest(
+    @SerializedName("currentPassword")
+    val currentPassword: String
+)
+
+data class CheckPasswordResponse(
+    @SerializedName("status")
+    val status: Int,
+    @SerializedName("message")
+    val message: String,
+    @SerializedName("data")
+    val data: String
+)
+
+data class ChangePasswordRequest(
+    @SerializedName("current_password")
+    val change_password: String
+)
+
+data class ChangePasswordResponse(
+    @SerializedName("status")
+    val status: Int,
+    @SerializedName("message")
+    val message: String,
+    @SerializedName("data")
+    val data: ChangePass
+)
+
+data class ChangePass(
+    @SerializedName("grandType")
+    val grandType: String,
+    @SerializedName("memberId")
+    val memberId: Int,
+    @SerializedName("accessToken")
+    val accessToken: String
+)

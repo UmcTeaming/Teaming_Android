@@ -32,7 +32,7 @@
         >
     </TextView>
 
-    <ImageView
+    <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/Button_img"
         android:fontFamily="@font/gmarket_sans_ttf_medium"
         android:background="@drawable/button_img"
@@ -46,7 +46,7 @@
         android:textSize="13sp"
         android:textColor="#4D000000"
         >
-    </ImageView>
+    </de.hdodenhof.circleimageview.CircleImageView>
 
     <TextView
         android:id="@+id/text_img"
@@ -170,15 +170,14 @@
     </TextView>
 
     <TextView
-        android:fontFamily="@font/gmarket_sans_ttf_medium"
+        android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/gmarket_sans_ttf_medium"
         android:text=" 으로 보내주시면 감사하겠습니다."
         android:textColor="#80000000"
         android:textSize="12sp"
         app:layout_constraintLeft_toRightOf="@id/Button_mail"
-        app:layout_constraintTop_toTopOf="@id/text2"
-        >
-    </TextView>
+        app:layout_constraintTop_toTopOf="@id/text2"></TextView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
