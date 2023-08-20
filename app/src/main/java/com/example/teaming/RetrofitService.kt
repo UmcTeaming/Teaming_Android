@@ -131,4 +131,8 @@ interface RetrofitService {
     @POST("/member/{memberId}/date_list")
     fun monthSchedule(@Path("memberId") memberId: Int?, @Body dateRequest:MonthScheduleRequest) : Call<MonthScheduleList>
 
+
+    @Multipart
+    @POST("/projects/{memberId}/{projectId}/files-upload")
+    fun projectFileUpload(@Path("memberId") memberId: Int?,@Path("projectId") projectId: Int?,@Part filePart: MultipartBody.Part) : Call<ProjectFileUploadResponse>
 }

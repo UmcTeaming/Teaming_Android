@@ -562,3 +562,18 @@ data class MemberResetPasswordResponse(
     @SerializedName("message")
     val message: String
 )
+
+data class ProjectFileUploadResponse(
+    @SerializedName("status")
+    val status: Int,
+    @SerializedName("message")
+    val message: String,
+    @SerializedName("data")
+    val data: FileData
+)
+
+data class FileData(
+    @SerializedName("file_Id")
+    val file_Id: Int
+)
+
