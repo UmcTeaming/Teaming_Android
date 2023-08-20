@@ -483,7 +483,14 @@ data class ProjectEndResponse(
     @SerializedName("message")
     val message: String,
     @SerializedName("data")
-    val data: String
+    val data: EndData
+)
+
+data class EndData(
+    @SerializedName("startDate")
+    val startDate: String,
+    @SerializedName("endDate")
+    val endDate: String
 )
 
 data class ScheduleDate(
@@ -536,4 +543,17 @@ data class MemberRequestDto(
 data class MonthScheduleRequest(
     @SerializedName("date_request")
     val dateRequest:String
+)
+
+// 사용자 비밀번호 재설정
+data class MemberResetPasswordRequestDto(
+    @SerializedName("email")
+    val email: String
+)
+
+data class MemberResetPasswordResponse(
+    @SerializedName("status")
+    val status: Int,
+    @SerializedName("message")
+    val message: String
 )

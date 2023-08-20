@@ -52,6 +52,10 @@ class MainFragment : Fragment() {
                     if (response.isSuccessful) {
                         val mainPageResponse = response.body()
                         if (mainPageResponse != null) {
+                            val name = mainPageResponse.data.name
+                            binding.memberName.text = name
+                            binding.memberName2.text = name
+
                             val recentlyProjects = mainPageResponse.data.recentlyProject
                             //Log.d("data", "${recentlyProjects}")
 

@@ -7,7 +7,7 @@ import android.os.Bundle
 import com.example.teaming.SearchNumActivity
 import com.example.teaming.databinding.ActivityDialogFirstBinding
 
-class DialogFirstActivity : AppCompatActivity() {
+class  DialogFirstActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityDialogFirstBinding
 
