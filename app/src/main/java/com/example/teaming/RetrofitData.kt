@@ -240,8 +240,6 @@ data class ProjectData(
     val projectColor: String,
     @SerializedName("projectStatus")
     val projectStatus: String,
-    @SerializedName("projectColor")
-    val projectColor: String,
     @SerializedName("memberListDtos")
     val memberList: List<Member>
 )

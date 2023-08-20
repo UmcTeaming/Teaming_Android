@@ -80,7 +80,6 @@ class PjPageFragment : Fragment() {
 
         editor.commit()
 
-
         requireActivity().supportFragmentManager.beginTransaction()
             .add(R.id.fragmentContainer,PjSort())
             .commit()

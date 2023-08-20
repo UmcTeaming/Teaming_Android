@@ -265,7 +265,7 @@ class MainFragment : Fragment() {
                 pjPageFragment.arguments = bundle
 
                 requireActivity().supportFragmentManager.beginTransaction()
-                    .replace(R.id.container,PjPageFragment())
+                    .replace(R.id.container,pjPageFragment)
                     .addToBackStack(null)
                     .commit()
             }
