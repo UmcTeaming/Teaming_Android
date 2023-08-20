@@ -79,7 +79,7 @@ class FiSort : Fragment(), FiInAdapter.OnFiInItemClickListener, FiInAdapter.OnFi
             }
         })
 
-        binding.trashBtn.setOnClickListener{
+        binding.trashBtn.setOnClickListener {
             val filesToDelete = dataList.flatMap { finalFileData ->
                 finalFileData.filesDetails.filter { it.del_btn_mark }
             }
@@ -87,6 +87,8 @@ class FiSort : Fragment(), FiInAdapter.OnFiInItemClickListener, FiInAdapter.OnFi
             if (filesToDelete.isNotEmpty()) {
                 val dialogFragment = FinalFileDeleteDialogFragment.newInstance(filesToDelete)
                 dialogFragment.show(childFragmentManager, "FinalFileDeleteDialogFragment")
+            }
+        }
 
         // 프로젝트 종료하기 버튼
         binding.endBtn.setOnClickListener {

@@ -105,8 +105,6 @@ class DocRead : Fragment() {
         })
 
 
-
-
         binding.fileViewerBtn.setOnClickListener {
             setButtonState(true)
 
