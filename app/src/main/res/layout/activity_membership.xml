@@ -187,6 +187,7 @@
     </TextView>
 
     <ImageView
+        android:id="@+id/check1"
         android:layout_width="20dp"
         android:layout_height="20dp"
         android:src="@drawable/checkoff"
@@ -212,6 +213,7 @@
         android:textColor="#000000"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@id/text7"
+        android:inputType="textPassword"
         >
     </EditText>
 
@@ -234,6 +236,7 @@
     </TextView>
 
     <ImageView
+        android:id="@+id/check2"
         android:layout_width="20dp"
         android:layout_height="20dp"
         android:src="@drawable/checkoff"
@@ -319,14 +322,17 @@
         app:layout_constraintTop_toBottomOf="@id/Text_num_check"
         android:gravity="center_horizontal">
 
-        <Button
-            android:layout_marginEnd="5dp"
-            android:id="@+id/Button_necessary"
+        <ToggleButton
+            android:id="@+id/toggleButton"
             android:layout_width="20dp"
             android:layout_height="20dp"
-            android:background="@drawable/bin_black"
+            android:background="@drawable/toggle_background"
+            android:checked="false"
+            android:clickable="false"
+            android:textOn=" "
+            android:textOff=" "
             >
-        </Button>
+        </ToggleButton>
 
         <TextView
             android:id="@+id/text9"

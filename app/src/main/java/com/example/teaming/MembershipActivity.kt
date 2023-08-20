@@ -1,6 +1,8 @@
 package com.example.teaming
 
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.graphics.Paint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
