@@ -499,9 +499,6 @@ data class ScheduleDate(
 )
 
 
-
-
-
 data class MyPageResponse(
     @SerializedName("status")
     val status: Int,
