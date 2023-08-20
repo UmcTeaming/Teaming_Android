@@ -483,7 +483,14 @@ data class ProjectEndResponse(
     @SerializedName("message")
     val message: String,
     @SerializedName("data")
-    val data: String
+    val data: EndData
+)
+
+data class EndData(
+    @SerializedName("startDate")
+    val startDate: String,
+    @SerializedName("endDate")
+    val endDate: String
 )
 
 data class ScheduleDate(

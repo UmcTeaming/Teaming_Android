@@ -94,8 +94,16 @@ class FiSort : Fragment(), FiInAdapter.OnFiInItemClickListener  {
                                 // Handle successful response if needed
 
                                 // endDate랑 startDate 넘겨줘야함 (bundle)
+                                val bundle = Bundle()
                                 val dialog = PjEndDialog()
-                                //dialog.arguments = bundle
+                                val endDate = endProjectResponse.data.endDate
+                                val startDate = endProjectResponse.data.startDate
+
+                                bundle.putString("startDate",startDate)
+                                bundle.putString("endDate", endDate)
+
+                                Log.e("받은 값","${startDate}, ${endDate}")
+                                dialog.arguments = bundle
 
                                 // Show the success dialog or perform other actions
                                 dialog.show(requireActivity().supportFragmentManager, "PjCompleteDialog")
