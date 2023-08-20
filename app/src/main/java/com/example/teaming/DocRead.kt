@@ -1,25 +1,34 @@
 package com.example.teaming
 
-
+import android.app.ProgressDialog
 import android.content.Context
 import android.os.Bundle
+import android.os.Environment
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.content.ContextCompat
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.teaming.databinding.FragmentDocReadBinding
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.io.*
 
 class DocRead : Fragment() {
     private lateinit var binding: FragmentDocReadBinding
+    private lateinit var filename : String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+
         arguments?.let {
         }
     }
@@ -56,6 +65,20 @@ class DocRead : Fragment() {
                         binding.writer.text = docReadPageResponse.data.uploader
                         binding.fileTypeName.text = docReadPageResponse.data.file_type
 
+                        filename = docReadPageResponse.data.file_name
+
+                        val bundle = Bundle()
+
+                        bundle.putInt("file_id",fileId)
+                        bundle.putString("file_name",filename)
+
+                        val pdfViewer = PDFViewer()
+                        pdfViewer.arguments = bundle
+
+                        requireActivity().supportFragmentManager.beginTransaction()
+                            .add(R.id.doc_read_contain,pdfViewer)
+                            .commit()
+
                         if (fileStatus == "ING"){
                             binding.fileStatusCircle.setImageResource(R.drawable.circle)
                         }else if(fileStatus == "END"){
@@ -74,17 +97,21 @@ class DocRead : Fragment() {
         })
 
 
-        requireActivity().supportFragmentManager.beginTransaction()
-            .add(R.id.doc_read_contain,PDFViewer())
-            .commit()
+
 
         binding.fileViewerBtn.setOnClickListener {
             setButtonState(true)
 
+            val bundle = Bundle()
 
+            bundle.putInt("file_id",fileId)
+            bundle.putString("file_name",filename)
+
+            val pdfViewer = PDFViewer()
+            pdfViewer.arguments = bundle
 
             requireActivity().supportFragmentManager.beginTransaction()
-                .replace(R.id.doc_read_contain,PDFViewer())
+                .replace(R.id.doc_read_contain,pdfViewer)
                 .commit()
         }
 
@@ -103,6 +130,78 @@ class DocRead : Fragment() {
                 .commit()
 
         }
+
+        binding.downloadBtn.setOnClickListener {
+            val fileUrl =
+                "http://teaming.shop:8080/files/$memberId/$projectId/files/$fileId/download"
+
+            val progressDialog = ProgressDialog(requireContext()).apply {
+                setMessage("잠시만 기다려주세요")
+                setProgressStyle(ProgressDialog.STYLE_HORIZONTAL)
+                isIndeterminate = false
+                max = 100
+            }
+
+            progressDialog.show()
+
+            GlobalScope.launch(Dispatchers.IO) {
+                try {
+                    val service = RetrofitApi.getRetrofitService.fileDownload(fileUrl)
+                    val response = service.execute()
+
+                    if (response.isSuccessful) {
+                        val responseBody: ResponseBody? = response.body()
+                        if (responseBody != null) {
+                            val totalFileSize = responseBody.contentLength()
+
+                            val inputStream: InputStream = responseBody.byteStream()
+                            val file = File(
+                                Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS),
+                                filename
+                            )
+                            val outputStream: OutputStream = FileOutputStream(file)
+                            val buffer = ByteArray(4 * 1024) // 4KB 버퍼
+
+                            var read: Int
+                            var downloadedSize: Long = 0
+
+                            while (inputStream.read(buffer).also { read = it } != -1) {
+                                outputStream.write(buffer, 0, read)
+                                downloadedSize += read.toLong()
+
+                                val progress = (downloadedSize * 100 / totalFileSize).toInt()
+                                launch(Dispatchers.Main) {
+                                    progressDialog.progress = progress
+                                }
+                            }
+
+                            outputStream.flush()
+                            outputStream.close()
+                            inputStream.close()
+
+                            launch(Dispatchers.Main) {
+                                progressDialog.dismiss()
+                                Toast.makeText(requireContext(), "다운로드가 완료되었습니다.", Toast.LENGTH_SHORT).show()
+                            }
+                        }
+                    } else {
+                        launch(Dispatchers.Main) {
+                            progressDialog.dismiss()
+                            Toast.makeText(requireContext(), "다운로드를 실패하였습니다.", Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                } catch (e: IOException) {
+                    e.printStackTrace()
+                    launch(Dispatchers.Main) {
+                        progressDialog.dismiss()
+                        Toast.makeText(requireContext(), "다운로드를 실패하였습니다.", Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }
+        }
+
+
+
 
         return binding.root
     }

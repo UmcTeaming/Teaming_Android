@@ -236,6 +236,8 @@ data class ProjectData(
     val startDate: String,
     @SerializedName("endDate")
     val endDate: String,
+    @SerializedName("projectColor")
+    val projectColor: String,
     @SerializedName("projectStatus")
     val projectStatus: String,
     @SerializedName("projectColor")
@@ -266,7 +268,7 @@ data class ProjectFileData(
     @SerializedName("createdAt")
     val createdAt: String,
     @SerializedName("filesDetails")
-    val filesDetails: List<FileDetails>
+    val filesDetails: List<FileDetails>,
 )
 
 data class FileDetails(
@@ -279,7 +281,8 @@ data class FileDetails(
     @SerializedName("comment")
     val comment: Int,
     @SerializedName("file_id")
-    val file_id: Int
+    val file_id: Int,
+    var del_btn_mark: Boolean = false,
 )
 
 data class FinalFilesResponse(

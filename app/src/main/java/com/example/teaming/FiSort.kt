@@ -64,7 +64,7 @@ class FiSort : Fragment(), FiInAdapter.OnFiInItemClickListener  {
 
                     }else{
                         requireActivity().supportFragmentManager.beginTransaction()
-                            .replace(R.id.fragmentContainer,NoPjSort())
+                            .replace(R.id.fragmentContainer,NoFi())
                             .commit()
                     }
                 } else {

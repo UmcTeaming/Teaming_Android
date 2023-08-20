@@ -9,7 +9,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 class PjOutAdapter(private val dataList: ArrayList<ProjectFileData>,
-                   private val itemClickListener: PjInAdapter.OnPjInItemClickListener
+                   private val itemClickListener: PjInAdapter.OnPjInItemClickListener,
+                   private val itemDelListener: PjInAdapter.OnPjInItemDelListener
 ) :
     RecyclerView.Adapter<PjOutAdapter.PjOutViewHolder>() {
 
@@ -34,21 +35,12 @@ class PjOutAdapter(private val dataList: ArrayList<ProjectFileData>,
         fun bind(item: ProjectFileData) {
             dateTextView.text = item.createdAt.substring(0, 10)
 
-            val innerAdapter = PjInAdapter(ArrayList(item.filesDetails),itemClickListener)
+            val innerAdapter = PjInAdapter(ArrayList(item.filesDetails),itemClickListener, itemDelListener)
             innerRecyclerView.apply {
                 layoutManager =
                     LinearLayoutManager(itemView.context, LinearLayoutManager.VERTICAL, false)
                 adapter = innerAdapter
             }
-
-            /*//체크용 로그출력
-            Log.d("PjOutData", "Date: ${item.createdAt}")
-            for (innerData in item.filesDetails) {
-                Log.d(
-                    "PjOutData",
-                    "Inner Data: File Name: ${innerData.file_name}, Comment Num: ${innerData.comment}"
-                )
-            }*/
         }
     }
 
