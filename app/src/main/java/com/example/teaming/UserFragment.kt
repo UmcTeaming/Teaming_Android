@@ -2,6 +2,9 @@ package com.example.teaming
 
 
 import android.content.Context
+import android.graphics.Bitmap
+import android.graphics.drawable.BitmapDrawable
+import android.net.Uri
 import android.os.Bundle
 import android.text.TextUtils.replace
 import android.util.Log
@@ -12,17 +15,25 @@ import android.view.ViewGroup
 import android.widget.Button
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentManager
 import com.example.teaming.databinding.FragmentUserBinding
+import okhttp3.MediaType
+import okhttp3.MediaType.Companion.toMediaType
+import okhttp3.RequestBody
+import okio.BufferedSink
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.io.File
+import java.io.FileOutputStream
 
-class UserFragment : Fragment() {
+class UserFragment : Fragment(), ImgDialog.OnImgSelectedListener {
 
     private lateinit var fragmentManager: FragmentManager
     private lateinit var binding: FragmentUserBinding
     private lateinit var backCallback: OnBackPressedCallback
+    private var selectedImageUri: Uri? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -38,6 +49,15 @@ class UserFragment : Fragment() {
         val memberId = sharedPreference.getInt("memberId",-1)
 
         val callMyPage = RetrofitApi.getRetrofitService.myPage(memberId)
+
+        //
+        binding.ButtonImg.setOnClickListener{
+            val imgDialog = ImgDialog()
+            imgDialog.show(requireActivity().supportFragmentManager,"ImgDialog")
+            // target설정을 해야 interface사용이 가능하다고 함
+            imgDialog.setTargetFragment(this,2)
+        }
+        //
 
         callMyPage.enqueue(object : Callback<MyPageResponse> {
             override fun onResponse(call: Call<MyPageResponse>, response: Response<MyPageResponse>) {
@@ -101,4 +121,49 @@ class UserFragment : Fragment() {
         backCallback.remove()
     }
 
+    override fun onImgSelected(img_num: Int) {
+        if (img_num == 1) {
+            val drawable = ContextCompat.getDrawable(requireContext(), R.drawable.file_background)
+            val imageBitmap = (drawable as BitmapDrawable).bitmap
+
+            val fileName = "image${System.currentTimeMillis()}.jpg"
+            val imageFile = File(requireContext().cacheDir, fileName)
+
+            FileOutputStream(imageFile).use { outputStream ->
+                imageBitmap.compress(Bitmap.CompressFormat.JPEG, 90, outputStream)
+            }
+
+            selectedImageUri = Uri.fromFile(imageFile)
+
+            binding.ButtonImg.setImageURI(selectedImageUri)
+            binding.textImg.visibility = View.INVISIBLE
+        }
+    }
+
+    override fun onImgSelected(imageUri: Uri?) {
+        if (imageUri != null) {
+            binding.ButtonImg.setImageURI(imageUri)
+            binding.textImg.visibility = View.INVISIBLE
+            selectedImageUri = imageUri
+        }
+    }
+
+    override fun onImgSelected(imageBitmap: Bitmap?) {
+        if (imageBitmap != null) {
+            val fileName = "image${System.currentTimeMillis()}.jpg"
+            val imageFile = File(requireContext().cacheDir, fileName)
+
+            FileOutputStream(imageFile).use { outputStream ->
+                imageBitmap.compress(Bitmap.CompressFormat.JPEG, 90, outputStream)
+            }
+
+            selectedImageUri = Uri.fromFile(imageFile)
+
+            binding.ButtonImg.setImageURI(selectedImageUri)
+            binding.textImg.visibility = View.INVISIBLE
+
+        }
+    }
+
 }
+
