@@ -33,11 +33,13 @@ class PjInAdapter(
         private val fileNameTextView: TextView = itemView.findViewById(R.id.file_name)
         private val commentNumTextView: TextView = itemView.findViewById(R.id.comment_num)
         private val oneDelBtn : ImageButton = itemView.findViewById(R.id.one_del_btn)
+        private val fileTypeName : TextView = itemView.findViewById(R.id.file_type_name)
 
 
         fun bind(item: FileDetails) {
             fileNameTextView.text = item.file_name
             commentNumTextView.text = item.comment.toString()
+            fileTypeName.text = item.file_type
 
             if(item.del_btn_mark == false){
                 oneDelBtn.setImageResource(R.drawable.one_del_btn)

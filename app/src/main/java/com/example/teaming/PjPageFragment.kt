@@ -25,6 +25,7 @@ import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.lang.Thread.sleep
 
 class PjPageFragment : Fragment() {
     private lateinit var binding:FragmentPjPageBinding
@@ -107,7 +108,7 @@ class PjPageFragment : Fragment() {
 
                         if (projectpageresponse.data.projectStatus == "ING"){
                             binding.status.setImageResource(R.drawable.circle)
-                            binding.projectDate.text = "${projectpageresponse.data.startDate} ~"
+                            binding.projectDate.text = "${projectpageresponse.data.startDate} ~ 진행중"
                         }else{
                             binding.status.setImageResource(R.drawable.circle_end)
                             binding.projectDate.text = "${projectpageresponse.data.startDate} ~ ${projectpageresponse.data.startDate}"
@@ -146,15 +147,31 @@ class PjPageFragment : Fragment() {
 
         binding.pjFile.setOnClickListener {
             setButtonState(true)
+
+            val bundle = Bundle()
+
+            bundle.putString("file_color","project")
+
+            val pjSort = PjSort()
+            pjSort.arguments = bundle
+
             requireActivity().supportFragmentManager.beginTransaction()
-                .replace(R.id.fragmentContainer,PjSort())
+                .replace(R.id.fragmentContainer,pjSort)
                 .commit()
         }
 
         binding.finalFile.setOnClickListener {
             setButtonState(false)
+
+            val bundle = Bundle()
+
+            bundle.putString("file_color","final")
+
+            val fiSort = FiSort()
+            fiSort.arguments = bundle
+
             requireActivity().supportFragmentManager.beginTransaction()
-                .replace(R.id.fragmentContainer,FiSort())
+                .replace(R.id.fragmentContainer,fiSort)
                 .commit()
         }
 
@@ -322,7 +339,14 @@ class PjPageFragment : Fragment() {
         inviteYesInfoDialog.setContentView(dialogBinding.root)
 
         dialogBinding.closeYesBtn.setOnClickListener {
+
+            sleep(300)
+            requireActivity().supportFragmentManager.beginTransaction()
+                .replace(R.id.container,PjPageFragment())
+                .commit()
+
             inviteYesInfoDialog.dismiss()
+
         }
 
         inviteYesInfoDialog.show()

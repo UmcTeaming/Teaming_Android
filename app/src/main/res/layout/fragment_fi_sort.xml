@@ -25,16 +25,19 @@
         android:layout_marginBottom="10dp"/>
 
     <ImageButton
+        android:padding="2dp"
         android:id="@+id/trash_btn"
         android:scaleType="fitCenter"
         android:background="@android:color/transparent"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
         android:src="@drawable/trash"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="5dp"
         android:layout_marginEnd="10dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent"
+        android:elevation="10dp"
+        android:outlineProvider="none"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/out_recycler_fi"

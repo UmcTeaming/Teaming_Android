@@ -14,7 +14,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class FiSort : Fragment(), FiInAdapter.OnFiInItemClickListener  {
+class FiSort : Fragment(), FiInAdapter.OnFiInItemClickListener, FiInAdapter.OnFiInItemDelListener  {
     private lateinit var binding: FragmentFiSortBinding
     private lateinit var FiOutAdapter: FiOutAdapter
     private lateinit var pjEndDialog: Dialog
@@ -57,7 +57,7 @@ class FiSort : Fragment(), FiInAdapter.OnFiInItemClickListener  {
                         Log.d("통신파이","${finalfilesresponse}")
                         Log.d("파이","${dataList}")
 
-                        FiOutAdapter = FiOutAdapter(dataList,this@FiSort)
+                        FiOutAdapter = FiOutAdapter(dataList,this@FiSort,this@FiSort)
 
                         binding.outRecyclerFi.apply {
                             layoutManager = LinearLayoutManager(requireContext())
@@ -78,6 +78,15 @@ class FiSort : Fragment(), FiInAdapter.OnFiInItemClickListener  {
                 Log.e("projectfiles", "로그인 API 호출 실패", t)
             }
         })
+
+        binding.trashBtn.setOnClickListener{
+            val filesToDelete = dataList.flatMap { finalFileData ->
+                finalFileData.filesDetails.filter { it.del_btn_mark }
+            }
+
+            if (filesToDelete.isNotEmpty()) {
+                val dialogFragment = FinalFileDeleteDialogFragment.newInstance(filesToDelete)
+                dialogFragment.show(childFragmentManager, "FinalFileDeleteDialogFragment")
 
         // 프로젝트 종료하기 버튼
         binding.endBtn.setOnClickListener {
@@ -142,4 +151,18 @@ class FiSort : Fragment(), FiInAdapter.OnFiInItemClickListener  {
             .commit()
     }
 
+    override fun onFiInItemDel(finalDetails: FinalDetails){
+        finalDetails.del_btn_mark = !finalDetails.del_btn_mark
+        FiOutAdapter.notifyDataSetChanged()
+
+        val filesToDelete = dataList.flatMap { FinalFileData ->
+            FinalFileData.filesDetails.filter { it.del_btn_mark }
+        }
+
+        if (filesToDelete.isNotEmpty()) {
+            binding.trashBtn.setImageResource(R.drawable.trashred_trash)
+        } else {
+            binding.trashBtn.setImageResource(R.drawable.trash) // 또는 다른 이미지로 변경
+        }
+    }
 }
