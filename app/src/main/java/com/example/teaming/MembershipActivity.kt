@@ -12,6 +12,7 @@ import android.text.TextWatcher
 import android.util.Log
 import android.view.View
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.ToggleButton
 import androidx.lifecycle.ViewModelProvider
 import com.example.teaming.StartActivity
@@ -104,6 +105,19 @@ class MembershipActivity : AppCompatActivity() {
         val confirm = binding.TextConfirm.text.toString()
         val num = binding.TextNum.text.toString()
         val check = binding.TextNumCheck.text.toString()
+
+        //
+        val imageViewCheckNum = findViewById<ImageView>(R.id.check1)
+        val imageViewCheckNumCheck = findViewById<ImageView>(R.id.check2)
+
+        if (num.isNotEmpty() && check.isNotEmpty() && num == check) {
+            imageViewCheckNum.setImageResource(R.drawable.checkon)
+            imageViewCheckNumCheck.setImageResource(R.drawable.checkon)
+        } else {
+            imageViewCheckNum.setImageResource(R.drawable.checkoff)
+            imageViewCheckNumCheck.setImageResource(R.drawable.checkoff)
+        }
+        //
 
         Log.e("조건 확인", "name: $name, email: $email, confirm: $confirm, num: $num, check: $check")
 

@@ -181,6 +181,7 @@
     </TextView>
 
     <ImageView
+        android:id="@+id/check1"
         android:layout_width="20dp"
         android:layout_height="20dp"
         android:src="@drawable/checkoff"
@@ -225,6 +226,7 @@
     </TextView>
 
     <ImageView
+        android:id="@+id/check2"
         android:layout_width="20dp"
         android:layout_height="20dp"
         android:src="@drawable/checkoff"
@@ -259,7 +261,7 @@
         android:background="@drawable/bin_blue"
         android:textColor="#FFFFFF"
         android:textSize="10sp"
-        android:text="재전송하기"
+        android:text="인증하기"
         app:layout_constraintTop_toTopOf="@id/Text_email"
         app:layout_constraintRight_toRightOf="@id/Text_email"
         >
