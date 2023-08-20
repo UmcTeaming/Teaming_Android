@@ -2,6 +2,7 @@ package com.example.teaming
 
 import android.app.Dialog
 import android.content.Context
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -48,7 +49,29 @@ class PjPageFragment : Fragment() {
 
         binding = FragmentPjPageBinding.inflate(inflater,container,false)
 
-        val projectId = arguments?.getInt("projectID")
+        var projectId: Int? = null
+        var num = arguments?.getInt("num")
+        /*var num2 = arguments?.getInt("num2")
+        var num3 = arguments?.getInt("num3")
+        Log.e("num","${num2}, ${num3}")*/
+
+        /*if(num2!=2){
+            projectId = arguments?.getInt("createProjectID")
+        }
+
+        if(num3!=3){
+            projectId = arguments?.getInt("modiProjectID")
+        }
+
+        if(num2==0 && num3==0){
+            projectId = arguments?.getInt("projectID")
+        }*/
+
+        projectId = when(num){
+            2-> arguments?.getInt("modiProjectID")
+            3-> arguments?.getInt("createProjectID")
+            else-> arguments?.getInt("projectID")
+        }
 
         val preferences = requireContext().getSharedPreferences("projectID_page", AppCompatActivity.MODE_PRIVATE)
 
@@ -56,7 +79,6 @@ class PjPageFragment : Fragment() {
         editor.putInt("projectID_page", projectId ?: -1)
 
         editor.commit()
-
 
         requireActivity().supportFragmentManager.beginTransaction()
             .add(R.id.fragmentContainer,PjSort())
@@ -81,11 +103,12 @@ class PjPageFragment : Fragment() {
                         Glide.with(requireContext())
                             .load(projectpageresponse.data.image)
                             .error(R.drawable.pj_image_default)
+                            .fitCenter()
                             .into(binding.pjImage)
 
                         if (projectpageresponse.data.projectStatus == "ING"){
                             binding.status.setImageResource(R.drawable.circle)
-                            binding.projectDate.text = "${projectpageresponse.data.startDate}"
+                            binding.projectDate.text = "${projectpageresponse.data.startDate} ~"
                         }else{
                             binding.status.setImageResource(R.drawable.circle_end)
                             binding.projectDate.text = "${projectpageresponse.data.startDate} ~ ${projectpageresponse.data.startDate}"
@@ -147,6 +170,20 @@ class PjPageFragment : Fragment() {
             args.putInt("memberId", memberId!!)
             dialog.arguments = args
             dialog.show(requireActivity().supportFragmentManager,"CalNewScheduleDialog")
+        }
+
+        binding.modifyBtn.setOnClickListener{
+
+            val bundle = Bundle()
+            bundle.putInt("projectID",projectId!!)
+
+            val modifyFragment = ModifyFragment()
+            modifyFragment.arguments = bundle
+
+            requireActivity().supportFragmentManager.beginTransaction()
+                .replace(R.id.container,modifyFragment)
+                .addToBackStack(null)
+                .commit()
         }
 
         return binding.root
@@ -232,10 +269,34 @@ class PjPageFragment : Fragment() {
                             Log.d("Invitation", "API 호출 성공: ${invitationsResponse}")
                             pjInviteDialog.dismiss()
                             showInviteYesInfoDialog()
+
+                            itemList.clear()
+                            for (member in invitationsResponse.data.members) {
+                                itemList.add(
+                                    MemberData(
+                                        member.memberImage,
+                                        member.memberName
+                                    )
+                                )
+                            }
+                            while (itemList.size < 4) {
+                                itemList.add(MemberData("no_profile", "기본"))
+                            }
+
+                            val memberboard = binding.root.findViewById<RecyclerView>(R.id.member)
+
+                            val memberAdapter = MemberAdapter(itemList)
+                            memberAdapter.notifyDataSetChanged()
+
+                            memberboard.adapter = memberAdapter
+                            memberboard.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+
+                            if(invitationsResponse.status != 200){
+                                pjInviteDialog.dismiss()
+                                showInviteNoInfoDialog(invitationsResponse.status)
+                            }
                         }
                     } else {
-                        pjInviteDialog.dismiss()
-                        showInviteNoInfoDialog()
                         Log.d("Invitation", "API 호출 실패: ${response.code()}")
                     }
                 }
@@ -268,7 +329,7 @@ class PjPageFragment : Fragment() {
         inviteYesInfoDialog.show()
     }
 
-    private fun showInviteNoInfoDialog() {
+    private fun showInviteNoInfoDialog(errorcode : Int) {
         inviteNoInfoDialog = Dialog(requireContext())
         val dialogBinding: InviteNoInfoDialogBinding = DataBindingUtil.inflate(
             LayoutInflater.from(requireContext()),
@@ -276,6 +337,12 @@ class PjPageFragment : Fragment() {
             null,
             false
         )
+
+        if (errorcode == 208){
+            dialogBinding.noWayHome.text = "이미 참여 중인 초대자입니다."
+        }else if(errorcode == 404){
+            dialogBinding.noWayHome.text = "회원이 아닌 초대자 입니다."
+        }
         inviteNoInfoDialog.setContentView(dialogBinding.root)
 
         dialogBinding.yesBtn.setOnClickListener {

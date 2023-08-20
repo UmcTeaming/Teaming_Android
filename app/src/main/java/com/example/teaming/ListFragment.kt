@@ -47,7 +47,7 @@ class ListFragment : Fragment() {
                     if (response.isSuccessful) {
                         Log.e("포트폴리오 memberId","${memberId}")
                         val progressPageResponse = response.body()
-                        if (progressPageResponse != null) {
+                        if (progressPageResponse != null ) {
                             val progressProjects = progressPageResponse.data.progressProjects
                             Log.e("tag","${progressProjects}")
 

@@ -3,9 +3,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".PDFViewer">
+    tools:context=".PDFViewer"
+    android:background="@color/white">
 
     <com.github.barteksc.pdfviewer.PDFView
+        android:elevation="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginLeft="40dp"
         android:id="@+id/pdfshow"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>

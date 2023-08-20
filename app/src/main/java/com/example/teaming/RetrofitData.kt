@@ -2,7 +2,7 @@ package com.example.teaming
 
 import com.google.gson.annotations.SerializedName
 import okhttp3.MultipartBody
-import retrofit2.http.Multipart
+import okhttp3.RequestBody
 
 
 data class LoginResponse(
@@ -68,7 +68,7 @@ data class RecentlyProject(
     @SerializedName("projectStatus")
     val projectStatus: String,
     @SerializedName("projectImage")
-    val projectImage: String
+    val projectImage: String?
 )
 
 data class ProgressProject(
@@ -207,15 +207,15 @@ data class CreateData(
 
 data class CreateProjectRequest(
     @SerializedName("project_name")
-    val projectName: String,
+    val projectName: RequestBody,
     @SerializedName("project_image")
-    val projectImage: String,
+    val projectImage: MultipartBody.Part?,
     @SerializedName("start_date")
-    val startDate: String,
+    val startDate: RequestBody,
     @SerializedName("end_date")
-    val endDate: String,
+    val endDate: RequestBody,
     @SerializedName("project_color")
-    val projectColor: String
+    val projectColor: RequestBody
 )
 
 data class ProjectpageResponse(
@@ -236,6 +236,8 @@ data class ProjectData(
     val startDate: String,
     @SerializedName("endDate")
     val endDate: String,
+    @SerializedName("projectColor")
+    val projectColor: String,
     @SerializedName("projectStatus")
     val projectStatus: String,
     @SerializedName("memberListDtos")
@@ -264,7 +266,7 @@ data class ProjectFileData(
     @SerializedName("createdAt")
     val createdAt: String,
     @SerializedName("filesDetails")
-    val filesDetails: List<FileDetails>
+    val filesDetails: List<FileDetails>,
 )
 
 data class FileDetails(
@@ -277,7 +279,8 @@ data class FileDetails(
     @SerializedName("comment")
     val comment: Int,
     @SerializedName("file_id")
-    val file_id: Int
+    val file_id: Int,
+    var del_btn_mark: Boolean = false,
 )
 
 data class FinalFilesResponse(
@@ -336,6 +339,134 @@ data class InvitationsRequest(
     @SerializedName("email")
     val email: String
 )
+
+data class DocReadPageResponse(
+    @SerializedName("status")
+    val status: Int,
+    @SerializedName("message")
+    val message: String,
+    @SerializedName("data")
+    val data: DocFileData
+)
+
+data class DocFileData(
+    @SerializedName("project_name")
+    val project_name: String,
+    @SerializedName("file_type")
+    val file_type: String,
+    @SerializedName("file_name")
+    val file_name: String,
+    @SerializedName("uploader")
+    val uploader: String,
+    @SerializedName("upload_date")
+    val upload_date: String
+)
+
+data class CommentLoadResponse(
+    @SerializedName("status")
+    val status: Int,
+    @SerializedName("message")
+    val message: String,
+    @SerializedName("data")
+    val data: List<CommentData>
+)
+
+data class CommentData(
+    @SerializedName("commentId")
+    val commentId: Int,
+    @SerializedName("writer")
+    val writer: String,
+    @SerializedName("content")
+    val content: String,
+    @SerializedName("create_at")
+    val create_at: String,
+    @SerializedName("profile_image")
+    val profile_image: String?
+)
+
+data class CommentWriteRequest(
+    @SerializedName("content")
+    val content: String
+)
+
+data class CommentWriteResponse(
+    @SerializedName("status")
+    val status: Int,
+    @SerializedName("message")
+    val message: String,
+    @SerializedName("data")
+    val commentData: CommentIdData
+)
+
+data class CommentIdData(
+    @SerializedName("commentId")
+    val commentId: Int
+)
+
+// 프로젝트 수정 부분 data
+data class ModifyProjectResponse(
+    @SerializedName("status")
+    val status: Int,
+    @SerializedName("message")
+    val message: String,
+    @SerializedName("data")
+    val data: CreateData
+)
+
+data class ModifyData(
+    @SerializedName("project_id")
+    val project_id: Int
+)
+
+data class ModifyProjectRequest(
+    @SerializedName("project_name")
+    val projectName: RequestBody,
+    @SerializedName("project_image")
+    val projectImage: MultipartBody.Part?,
+    @SerializedName("start_date")
+    val startDate: RequestBody,
+    @SerializedName("end_date")
+    val endDate: RequestBody,
+    @SerializedName("project_color")
+    val projectColor: RequestBody
+)
+
+// 프로젝트 정보 조회
+data class InfoProjectResponse(
+    @SerializedName("status")
+    val status: Int,
+    @SerializedName("message")
+    val message: String,
+    @SerializedName("data")
+    val data: InfoProjectData
+)
+
+data class InfoProjectData(
+    @SerializedName("name")
+    val name: String,
+    @SerializedName("image")
+    val image: String,
+    @SerializedName("startDate")
+    val startDate: String,
+    @SerializedName("endDate")
+    val endDate: String,
+    @SerializedName("projectStatus")
+    val projectStatus: String,
+    @SerializedName("projectColor")
+    val projectColor: String,
+    @SerializedName("memberListDtos")
+    val memberListDtos: List<MemberListData>
+)
+
+data class MemberListData(
+    @SerializedName("member_name")
+    val member_name: String,
+    @SerializedName("member_image")
+    val member_image:String,
+    @SerializedName("email")
+    val email: String
+)
+
 
 
 

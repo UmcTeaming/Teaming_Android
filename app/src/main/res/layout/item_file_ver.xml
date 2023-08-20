@@ -40,9 +40,9 @@
                 android:textColor="@color/black"
                 android:textSize="12sp" />
 
-            <View
+            <ImageView
                 android:layout_gravity="top|right"
-                android:id="@+id/ver_state"
+                android:id="@+id/file_ver_state"
                 android:layout_marginTop="15dp"
                 android:layout_marginRight="10dp"
                 android:layout_width="12dp"

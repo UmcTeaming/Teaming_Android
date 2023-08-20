@@ -8,7 +8,11 @@ import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
-class FiOutAdapter(private val dataList: ArrayList<FinalFileData>) :
+class FiOutAdapter(
+    private val dataList: ArrayList<FinalFileData>,
+    private val itemClickListener: FiInAdapter.OnFiInItemClickListener
+
+) :
     RecyclerView.Adapter<FiOutAdapter.FiOutViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FiOutViewHolder {
@@ -32,18 +36,18 @@ class FiOutAdapter(private val dataList: ArrayList<FinalFileData>) :
         fun bind(item: FinalFileData) {
             dateTextView.text = item.createdAt.substring(0,10)
 
-            val innerAdapter = FiInAdapter(ArrayList(item.filesDetails))
+            val innerAdapter = FiInAdapter(ArrayList(item.filesDetails),itemClickListener)
 
             innerRecyclerView.apply {
                 layoutManager = LinearLayoutManager(itemView.context,LinearLayoutManager.VERTICAL, false)
                 adapter = innerAdapter
             }
 
-            //체크용 로그출력
+            /*//체크용 로그출력
             Log.d("PjOutData", "Date: ${item.createdAt}")
             for (innerData in item.filesDetails) {
                 Log.d("PjOutData", "Inner Data: File Name: ${innerData.file_name}, Comment Num: ${innerData.comment}")
-            }
+            }*/
         }
     }
 }

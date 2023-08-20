@@ -7,17 +7,13 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager2.widget.ViewPager2
 import com.example.teaming.databinding.FragmentMainBinding
 import retrofit2.Call
 import retrofit2.Callback
-import retrofit2.Response
 
 class MainFragment : Fragment() {
     private val verItemList = arrayListOf<VerListItem>()      // 아이템 배열
@@ -59,17 +55,28 @@ class MainFragment : Fragment() {
                             val recentlyProjects = mainPageResponse.data.recentlyProject
                             //Log.d("data", "${recentlyProjects}")
 
-                            horItemList.clear()
-                            if(recentlyProjects!=null){
+                            if(recentlyProjects!=null && recentlyProjects.isNotEmpty()){
+
                                 binding.nonViewPager2.visibility = View.INVISIBLE
                                 binding.viewPager2.visibility = View.VISIBLE
+
+                                /*for (project in recentlyProjects) {
+                                    Glide.with(requireContext())
+                                        .load(project.projectImage)
+                                        .error(R.drawable.file_background)
+                                        .into(binding.pjImage)
+                                }*/
+
+                                horItemList.clear()
                                 for (project in recentlyProjects) {
                                     horItemList.add(
                                         HorListItem(
-                                            R.drawable.file_view_img,
+                                            project.projectImage,
                                             project.projectName,
                                             project.projectCreatedDate,
-                                            project.projectId                                        )
+                                            project.projectId,
+                                            project.projectStatus
+                                        )
                                     )
                                 }
                             }
@@ -84,18 +91,18 @@ class MainFragment : Fragment() {
 
                             verItemList.clear()
                             val progressProjects = mainPageResponse.data.progressProject
-                            if(progressProjects!=null){
-                                binding.nonVerList.visibility = View.INVISIBLE
+                            if(progressProjects!=null && progressProjects.isNotEmpty()){
+                                binding.nonVerList.visibility = View.GONE
                                 binding.verList.visibility = View.VISIBLE
                                 for (index in 0 until minOf(progressProjects.size, 3)) {
                                     val project = progressProjects[index]
                                     val formattedDate = "${project.projectStartDate} ~ "
                                     verItemList.add(
                                         VerListItem(
-                                            R.drawable.state_oval,
                                             project.projectName, // 이 부분 수정 필요
                                             formattedDate,
-                                            project.projectId
+                                            project.projectId,
+                                            project.projectStatus
                                         )
                                     )
                                 }
@@ -106,19 +113,24 @@ class MainFragment : Fragment() {
                             }
                             verAdapter.notifyDataSetChanged()
 
-                            gridItemList.clear()
+
                             val portfolio = mainPageResponse.data.portfolio
-                            if(portfolio != null){
-                                binding.nonGridList.visibility = View.INVISIBLE
+                            binding.nonGridList.visibility = View.VISIBLE
+                            binding.gridList.visibility = View.GONE
+
+                            if(portfolio != null && portfolio.isNotEmpty()){
+                                gridItemList.clear()
+                                binding.nonGridList.visibility = View.GONE
                                 binding.gridList.visibility = View.VISIBLE
                                 for(project in portfolio){
                                     val formattedDate = "${project.projectStartDate} ~ ${project.projectEndDate}"
                                     gridItemList.add(
                                         GridListItem(
-                                            R.drawable.file_background,
+                                            project.projectImage,
                                             project.projectName,
                                             formattedDate,
-                                            project.projectId
+                                            project.projectId,
+                                            project.projectStatus
                                         )
                                     )
                                 }
@@ -127,7 +139,6 @@ class MainFragment : Fragment() {
                                 binding.nonGridList.visibility = View.VISIBLE
                                 binding.gridList.visibility = View.GONE
                             }
-
                             gridAdapter.notifyDataSetChanged()
 
                             val userId = mainPageResponse.data
@@ -254,7 +265,7 @@ class MainFragment : Fragment() {
                 pjPageFragment.arguments = bundle
 
                 requireActivity().supportFragmentManager.beginTransaction()
-                    .replace(R.id.container,PjPageFragment())
+                    .replace(R.id.container,pjPageFragment)
                     .addToBackStack(null)
                     .commit()
             }
