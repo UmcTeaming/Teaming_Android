@@ -52,6 +52,14 @@ class FileFragment : Fragment() {
             .add(R.id.file_frame,File_Icon1_Fragment())
             .commit()
 
+        val sharedPreference = requireActivity().getSharedPreferences("memberName",
+            Context.MODE_PRIVATE
+        )
+        val memberName = sharedPreference.getString("memberName", "카리나")
+        binding.memberName.text = memberName
+
+        Log.e("파일프래그, name", "${memberName}")
+
         // =버튼 클릭 시 색상 변경 관련
         binding.fileIcon1.setOnClickListener {
             if (!isFileIcon1Selected) {

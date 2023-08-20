@@ -6,7 +6,6 @@ import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.GET
-import retrofit2.http.Headers
 import retrofit2.http.Multipart
 import retrofit2.http.PATCH
 import retrofit2.http.POST
@@ -15,8 +14,6 @@ import retrofit2.http.PartMap
 import retrofit2.http.Path
 import retrofit2.http.Streaming
 import retrofit2.http.Url
-
-import retrofit2.http.Query
 
 /**
  * API Request를 Interface로 정의하는 곳입니다.
@@ -68,6 +65,11 @@ interface RetrofitService {
         @Path("projectId") projectId: Int,
         @Body request: ProjectEndRequest
     ):Call<ProjectEndResponse>
+
+    @PATCH("/auth/reset-password")
+    fun resetPassword(
+        @Body request: String
+    ):Call<MemberResetPasswordResponse>
 
     @GET("/projects/{memberId}/{projectId}")
     fun getInfoModify(
