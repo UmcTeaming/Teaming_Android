@@ -5,6 +5,7 @@ import android.graphics.Paint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
+import android.widget.TextView
 import com.example.teaming.StartActivity
 import com.example.teaming.AgreeActivity
 import com.example.teaming.databinding.ActivityMembershipBinding
@@ -30,7 +31,7 @@ class MembershipActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        val button = findViewById<Button>(R.id.Button_see);
+        val button = findViewById<TextView>(R.id.Button_see);
         button.paintFlags = button.paintFlags or Paint.UNDERLINE_TEXT_FLAG
         button.text = getString(R.string.underlined_text1)
     }
