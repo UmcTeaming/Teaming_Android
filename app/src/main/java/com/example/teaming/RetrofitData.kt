@@ -467,6 +467,20 @@ data class MemberListData(
     val email: String
 )
 
+data class ProjectEndRequest(
+    @SerializedName("project_status")
+    val project_status: String
+)
+
+data class ProjectEndResponse(
+    @SerializedName("status")
+    val status: Int,
+    @SerializedName("message")
+    val message: String,
+    @SerializedName("data")
+    val data: String
+)
+
 
 
 

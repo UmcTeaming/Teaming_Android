@@ -60,6 +60,13 @@ interface RetrofitService {
         @PartMap requestBody: HashMap<String, RequestBody>
     ): Call<ModifyProjectResponse>
 
+    @PATCH("/projects/{memberId}/{projectId}/status")
+    fun endProject(
+        @Path("memberId") memberId: Int,
+        @Path("projectId") projectId: Int,
+        @Body request: ProjectEndRequest
+    ):Call<ProjectEndResponse>
+
     @GET("/projects/{memberId}/{projectId}")
     fun getInfoModify(
         @Path("memberId") memberId: Int?,

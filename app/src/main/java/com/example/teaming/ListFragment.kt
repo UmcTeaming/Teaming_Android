@@ -51,7 +51,7 @@ class ListFragment : Fragment() {
                             val progressProjects = progressPageResponse.data.progressProjects
                             Log.e("tag","${progressProjects}")
 
-                            if(progressProjects !=null){
+                            if(progressProjects !=null && progressProjects.isNotEmpty()){
                                 binding.btnLayout.visibility = View.VISIBLE
                                 binding.fileFrame.visibility = View.VISIBLE
                                 binding.nonViewPager2.visibility = View.GONE
