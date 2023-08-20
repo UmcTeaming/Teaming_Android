@@ -491,6 +491,48 @@ data class ScheduleDate(
     val dateList:String
 )
 
+
+
+
+
+data class MyPageResponse(
+    @SerializedName("status")
+    val status: Int,
+    @SerializedName("message")
+    val message: String,
+    @SerializedName("data")
+    val data: profiledata
+)
+
+data class profiledata(
+    @SerializedName("memberId")
+    val memberId: Int,
+    @SerializedName("name")
+    val name: String,
+    @SerializedName("email")
+    val email: String,
+    @SerializedName("profileImage")
+    val profileImage: String?
+)
+
+data class SignupResponse(
+    @SerializedName("status")
+    val status: Int,
+    @SerializedName("message")
+    val message: String,
+    @SerializedName("data")
+    val data: String
+)
+
+data class MemberRequestDto(
+    @SerializedName("name")
+    val name: String,
+    @SerializedName("email")
+    val email: String,
+    @SerializedName("password")
+    val password: String
+)
+
 data class MonthScheduleRequest(
     @SerializedName("date_request")
     val dateRequest:String
