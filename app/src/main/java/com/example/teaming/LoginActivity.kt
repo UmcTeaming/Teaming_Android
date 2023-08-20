@@ -40,7 +40,8 @@ class LoginActivity : AppCompatActivity() {
             val logInId = binding.TextEmail.text.toString()
             val password = binding.TextNum.text.toString()
 
-            val requestBodyData = LoginRequset(logInId,password)
+            // 여기서부터 주석 풀면됨
+            /*val requestBodyData = LoginRequset(logInId,password)
 
             //val requestBodyData = LoginRequset("hyun@gmail.com", "hyun123")
 
@@ -49,6 +50,9 @@ class LoginActivity : AppCompatActivity() {
 
             // 데이터 있는 로그인 정보
             //val requestBodyData = LoginRequset("test@gmail.com", "test123")
+
+
+
             val json = Gson().toJson(requestBodyData)
             val requestBody = RequestBody.create("application/json".toMediaType(), json)
             val callLogin = RetrofitApi.getRetrofitService.login(requestBody)
@@ -95,7 +99,10 @@ class LoginActivity : AppCompatActivity() {
                 override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
                     Log.e("Login", "로그인 API 호출 실패", t)
                 }
-            })
+            })*/
+
+            val intent = Intent(this@LoginActivity, MainActivity::class.java)
+            startActivity(intent)
         }
 
     }
