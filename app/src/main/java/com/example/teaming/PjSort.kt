@@ -81,6 +81,7 @@ class PjSort : Fragment(), PjInAdapter.OnPjInItemClickListener, PjInAdapter.OnPj
                     }else{
                         requireActivity().supportFragmentManager.beginTransaction()
                             .replace(R.id.fragmentContainer,NoPjSort())
+                            .addToBackStack(null)
                             .commit()
                     }
                 } else {

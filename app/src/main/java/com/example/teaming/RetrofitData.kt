@@ -403,6 +403,70 @@ data class CommentIdData(
     val commentId: Int
 )
 
+// 프로젝트 수정 부분 data
+data class ModifyProjectResponse(
+    @SerializedName("status")
+    val status: Int,
+    @SerializedName("message")
+    val message: String,
+    @SerializedName("data")
+    val data: CreateData
+)
+
+data class ModifyData(
+    @SerializedName("project_id")
+    val project_id: Int
+)
+
+data class ModifyProjectRequest(
+    @SerializedName("project_name")
+    val projectName: RequestBody,
+    @SerializedName("project_image")
+    val projectImage: MultipartBody.Part?,
+    @SerializedName("start_date")
+    val startDate: RequestBody,
+    @SerializedName("end_date")
+    val endDate: RequestBody,
+    @SerializedName("project_color")
+    val projectColor: RequestBody
+)
+
+// 프로젝트 정보 조회
+data class InfoProjectResponse(
+    @SerializedName("status")
+    val status: Int,
+    @SerializedName("message")
+    val message: String,
+    @SerializedName("data")
+    val data: InfoProjectData
+)
+
+data class InfoProjectData(
+    @SerializedName("name")
+    val name: String,
+    @SerializedName("image")
+    val image: String,
+    @SerializedName("startDate")
+    val startDate: String,
+    @SerializedName("endDate")
+    val endDate: String,
+    @SerializedName("projectStatus")
+    val projectStatus: String,
+    @SerializedName("projectColor")
+    val projectColor: String,
+    @SerializedName("memberListDtos")
+    val memberListDtos: List<MemberListData>
+)
+
+data class MemberListData(
+    @SerializedName("member_name")
+    val member_name: String,
+    @SerializedName("member_image")
+    val member_image:String,
+    @SerializedName("email")
+    val email: String
+)
+
 
 
 

@@ -7,10 +7,13 @@ import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.Multipart
+import retrofit2.http.PATCH
 import retrofit2.http.POST
 import retrofit2.http.Part
 import retrofit2.http.PartMap
 import retrofit2.http.Path
+import retrofit2.http.Streaming
+import retrofit2.http.Url
 
 
 /**
@@ -26,7 +29,6 @@ interface RetrofitService {
 
     @GET("/member/{memberId}/portfolio")
     fun portfolioPage(@Path("memberId") memberId: Int?) : Call<PortfolioPageResponse>
-
 
     @POST("/projects/{memberId}/{projectId}/schedule")
     fun createSchedule(
@@ -48,6 +50,21 @@ interface RetrofitService {
         @Part projectImage: MultipartBody.Part,
         @PartMap requestBody: HashMap<String, RequestBody>
     ): Call<CreateProjectResponse>
+
+    @Multipart
+    @PATCH("/projects/{memberId}/{projectId}/modifyProject")
+    fun modifyProject(
+        @Path("memberId") memberId: Int,
+        @Path("projectId") projectId: Int,
+        @Part projectImage: MultipartBody.Part,
+        @PartMap requestBody: HashMap<String, RequestBody>
+    ): Call<ModifyProjectResponse>
+
+    @GET("/projects/{memberId}/{projectId}")
+    fun getInfoModify(
+        @Path("memberId") memberId: Int?,
+        @Path("projectId") projectId: Int?
+    ) : Call<InfoProjectResponse>
 
     @GET("/projects/{memberId}/{projectId}")
 

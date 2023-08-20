@@ -30,6 +30,9 @@ class FirstActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)*/
 
         binding.ButtonStart.setOnClickListener {
+
+            //val requestBodyData = LoginRequset("hyun@gmail.com", "hyun123")
+
             // 데이터 없는 로그인 정보
             //val requestBodyData = LoginRequset("and@gmail.com", "and123")
 
