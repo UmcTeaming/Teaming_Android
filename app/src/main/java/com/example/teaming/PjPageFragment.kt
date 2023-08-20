@@ -87,7 +87,7 @@ class PjPageFragment : Fragment() {
 
                         if (projectpageresponse.data.projectStatus == "ING"){
                             binding.status.setImageResource(R.drawable.circle)
-                            binding.projectDate.text = "${projectpageresponse.data.startDate} ~"
+                            binding.projectDate.text = "${projectpageresponse.data.startDate} ~ 진행중"
                         }else{
                             binding.status.setImageResource(R.drawable.circle_end)
                             binding.projectDate.text = "${projectpageresponse.data.startDate} ~ ${projectpageresponse.data.startDate}"
