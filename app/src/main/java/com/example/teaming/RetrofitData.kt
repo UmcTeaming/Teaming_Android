@@ -544,3 +544,16 @@ data class MonthScheduleRequest(
     @SerializedName("date_request")
     val dateRequest:String
 )
+
+// 사용자 비밀번호 재설정
+data class MemberResetPasswordRequestDto(
+    @SerializedName("email")
+    val email: String
+)
+
+data class MemberResetPasswordResponse(
+    @SerializedName("status")
+    val status: Int,
+    @SerializedName("message")
+    val message: String
+)

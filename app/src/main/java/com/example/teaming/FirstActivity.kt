@@ -31,7 +31,7 @@ class FirstActivity : AppCompatActivity() {
 
         binding.ButtonStart.setOnClickListener {
 
-            val requestBodyData = LoginRequset("hyun@gmail.com", "hyun123")
+            /*val requestBodyData = LoginRequset("hyun@gmail.com", "hyun123")
 
             // 데이터 없는 로그인 정보
             //val requestBodyData = LoginRequset("and@gmail.com", "and123")
@@ -51,16 +51,23 @@ class FirstActivity : AppCompatActivity() {
                         if (loginResponse != null) {
                             val accessToken = "Bearer ${loginResponse.data.jwtToken.accessToken}"
                             val userId = loginResponse.data.jwtToken.memberId
+                            val userName = loginResponse.data.name
 
+                            Log.e("userName","${userName}")
 
                             var bundle = Bundle()
 
                             val preferences = getSharedPreferences("memberId", MODE_PRIVATE)
+                            val preferences2 = getSharedPreferences("memberName", MODE_PRIVATE)
 
                             val editor = preferences.edit()
+                            val editor2 = preferences2.edit()
+
                             editor.putInt("memberId", userId)
+                            editor2.putString("memberName",userName)
 
                             editor.commit()
+                            editor2.commit()
 
                             App.prefs.token = accessToken
 
@@ -74,7 +81,7 @@ class FirstActivity : AppCompatActivity() {
                 override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
                     Log.e("Login", "로그인 API 호출 실패", t)
                 }
-            })
+            })*/
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
 
