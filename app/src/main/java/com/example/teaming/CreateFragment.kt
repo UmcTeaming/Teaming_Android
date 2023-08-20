@@ -125,8 +125,14 @@ class CreateFragment : Fragment(), ColSelDialog.OnColorSelectedListener, ImgDial
                             if (projectId != null) {
                                 Log.e("Post 여부", "Post 성공: 프로젝트 ID = $projectId")
 
-                                // Show the success dialog or perform other actions
+                                val bundle = Bundle()
+                                bundle.putInt("createProjectID",projectId!!)
+                                bundle.putInt("num",3)
+
                                 val dialog = PjCompleteDialog()
+                                dialog.arguments = bundle
+
+                                // Show the success dialog or perform other actions
                                 dialog.show(requireActivity().supportFragmentManager, "PjCompleteDialog")
                             } else {
                                 Log.e("Post 여부", "Post 성공하지만 프로젝트 ID가 없습니다.")

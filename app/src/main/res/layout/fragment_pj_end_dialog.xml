@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".PjEndDialog"
+    android:background="@drawable/round_border2"
+    android:layout_gravity="center"
+    >
+
+    <LinearLayout
+        android:layout_width="276dp"
+        android:layout_height="308dp"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="143dp"
+            android:layout_height="101dp"
+            android:background="@drawable/end_img"/>
+
+        <TextView
+            android:layout_marginTop="12dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/gmarket_sans_ttf_bold"
+            android:textSize="20sp"
+            android:textColor="@color/black"
+            android:text="수고하셨습니다!"/>
+
+        <TextView
+            android:layout_marginTop="12dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/gmarket_sans_ttf_medium"
+            android:textSize="11sp"
+            android:textColor="#80000000"
+            android:text="종료한 프로젝트는 포트폴리오에 저장됩니다."/>
+
+
+        <LinearLayout
+            android:layout_marginTop="6dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/startDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="시작날짜"
+                android:textSize="11sp"
+                android:textColor="@color/black"
+                android:fontFamily="@font/gmarket_sans_ttf_medium"/>
+
+            <TextView
+                android:layout_marginLeft="4dp"
+                android:layout_marginRight="4dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="~"
+                android:textSize="11sp"
+                android:textColor="@color/black"
+                android:fontFamily="@font/gmarket_sans_ttf_medium"/>
+
+            <TextView
+                android:id="@+id/endDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="마감날짜"
+                android:textSize="11sp"
+                android:textColor="@color/black"
+                android:fontFamily="@font/gmarket_sans_ttf_medium"/>
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/pj_end_btn"
+            android:layout_marginTop="28dp"
+            android:layout_width="155dp"
+            android:layout_height="22dp"
+            android:background="@drawable/end_btn"/>
+
+    </LinearLayout>
+
+
+</LinearLayout>

@@ -181,6 +181,7 @@
     </TextView>
 
     <ImageView
+        android:id="@+id/check1"
         android:layout_width="20dp"
         android:layout_height="20dp"
         android:src="@drawable/checkoff"
@@ -204,6 +205,7 @@
         android:textColor="#000000"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@id/text7"
+        android:inputType="textPassword"
         >
     </EditText>
 
@@ -224,6 +226,7 @@
     </TextView>
 
     <ImageView
+        android:id="@+id/check2"
         android:layout_width="20dp"
         android:layout_height="20dp"
         android:src="@drawable/checkoff"
@@ -246,6 +249,7 @@
         android:textColor="#000000"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@id/text8"
+        android:inputType="textPassword"
         >
     </EditText>
 
@@ -257,7 +261,7 @@
         android:background="@drawable/bin_blue"
         android:textColor="#FFFFFF"
         android:textSize="10sp"
-        android:text="재전송하기"
+        android:text="인증하기"
         app:layout_constraintTop_toTopOf="@id/Text_email"
         app:layout_constraintRight_toRightOf="@id/Text_email"
         >
@@ -295,16 +299,20 @@
         >
     </Button>
 
-    <Button
-        android:id="@+id/Button_necessary"
+    <ToggleButton
+        android:id="@+id/toggleButton"
         android:layout_width="20dp"
         android:layout_height="20dp"
-        android:background="@drawable/bin_black"
+        android:background="@drawable/toggle_background"
         android:layout_marginTop="15dp"
+        android:checked="false"
+        android:clickable="false"
+        android:textOn=" "
+        android:textOff=" "
         app:layout_constraintTop_toBottomOf="@id/Text_num_check"
         app:layout_constraintLeft_toLeftOf="@id/Text_num_check"
         >
-    </Button>
+    </ToggleButton>
 
     <TextView
         android:id="@+id/text9"
@@ -317,7 +325,7 @@
         android:layout_marginTop="17dp"
         android:layout_marginLeft="10dp"
         app:layout_constraintTop_toBottomOf="@id/Text_num_check"
-        app:layout_constraintLeft_toRightOf="@id/Button_necessary"
+        app:layout_constraintLeft_toRightOf="@id/toggleButton"
         >
     </TextView>
 

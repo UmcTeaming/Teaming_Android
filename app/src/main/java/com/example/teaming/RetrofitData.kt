@@ -412,5 +412,153 @@ data class FileDeleteResponse(
 )
 
 
+// 프로젝트 수정 부분 data
+data class ModifyProjectResponse(
+    @SerializedName("status")
+    val status: Int,
+    @SerializedName("message")
+    val message: String,
+    @SerializedName("data")
+    val data: CreateData
+)
+data class ModifyData(
+    @SerializedName("project_id")
+    val project_id: Int
+)
+
+data class ModifyProjectRequest(
+    @SerializedName("project_name")
+    val projectName: RequestBody,
+    @SerializedName("project_image")
+    val projectImage: MultipartBody.Part?,
+    @SerializedName("start_date")
+    val startDate: RequestBody,
+    @SerializedName("end_date")
+    val endDate: RequestBody,
+    @SerializedName("project_color")
+    val projectColor: RequestBody
+)
+
+// 프로젝트 정보 조회
+data class InfoProjectResponse(
+    @SerializedName("status")
+    val status: Int,
+    @SerializedName("message")
+    val message: String,
+    @SerializedName("data")
+    val data: InfoProjectData
+)
+
+data class InfoProjectData(
+    @SerializedName("name")
+    val name: String,
+    @SerializedName("image")
+    val image: String,
+    @SerializedName("startDate")
+    val startDate: String,
+    @SerializedName("endDate")
+    val endDate: String,
+    @SerializedName("projectStatus")
+    val projectStatus: String,
+    @SerializedName("projectColor")
+    val projectColor: String,
+    @SerializedName("memberListDtos")
+    val memberListDtos: List<MemberListData>
+)
+
+data class MemberListData(
+    @SerializedName("member_name")
+    val member_name: String,
+    @SerializedName("member_image")
+    val member_image:String,
+    @SerializedName("email")
+    val email: String
+)
+
+data class MonthScheduleList(
+    @SerializedName("data")
+    val data : ArrayList<ScheduleDate>
+)
+
+data class ProjectEndRequest(
+    @SerializedName("project_status")
+    val project_status: String
+)
+
+data class ProjectEndResponse(
+    @SerializedName("status")
+    val status: Int,
+    @SerializedName("message")
+    val message: String,
+    @SerializedName("data")
+    val data: EndData
+)
+
+data class EndData(
+    @SerializedName("startDate")
+    val startDate: String,
+    @SerializedName("endDate")
+    val endDate: String
+)
+
+data class ScheduleDate(
+    @SerializedName("date_list")
+    val dateList:String
+)
 
 
+data class MyPageResponse(
+    @SerializedName("status")
+    val status: Int,
+    @SerializedName("message")
+    val message: String,
+    @SerializedName("data")
+    val data: profiledata
+)
+
+data class profiledata(
+    @SerializedName("memberId")
+    val memberId: Int,
+    @SerializedName("name")
+    val name: String,
+    @SerializedName("email")
+    val email: String,
+    @SerializedName("profileImage")
+    val profileImage: String?
+)
+
+data class SignupResponse(
+    @SerializedName("status")
+    val status: Int,
+    @SerializedName("message")
+    val message: String,
+    @SerializedName("data")
+    val data: String
+)
+
+data class MemberRequestDto(
+    @SerializedName("name")
+    val name: String,
+    @SerializedName("email")
+    val email: String,
+    @SerializedName("password")
+    val password: String
+)
+
+data class MonthScheduleRequest(
+    @SerializedName("date_request")
+    val dateRequest:String
+)
+
+// 사용자 비밀번호 재설정
+data class MemberResetPasswordRequestDto(
+    @SerializedName("email")
+    val email: String
+)
+
+data class MemberResetPasswordResponse(
+    @SerializedName("status")
+    val status: Int,
+    @SerializedName("message")
+    val message: String
+)
