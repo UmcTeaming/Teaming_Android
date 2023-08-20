@@ -27,12 +27,15 @@ import java.util.Locale
 class CalFragment : Fragment() {//minsdk API26 이상으로 바꿀 필요 있음
     private lateinit var binding:FragmentCalBinding
     private var scheduleDay:LocalDate? = null
+    private var memberId:Int? = null
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         CalendarUtil.selectedDate = LocalDate.now()
         scheduleDay = LocalDate.now()
+        val sharedPreference = requireActivity().getSharedPreferences("memberId", MODE_PRIVATE)
+        memberId = sharedPreference.getInt("memberId", -1)
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -85,9 +88,11 @@ class CalFragment : Fragment() {//minsdk API26 이상으로 바꿀 필요 있음
     }
     @RequiresApi(Build.VERSION_CODES.O)
     fun setMonthView(){
+        val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
+        val monthScheduleList = ArrayList<LocalDate>()
         binding.monthText.text=monthFromDate(CalendarUtil.selectedDate)
         val dayList:ArrayList<LocalDate?> = daysInMonthArray(CalendarUtil.selectedDate)
-        val adapter = CalendarAdapter(dayList,binding.calendarView)
+        val adapter = CalendarAdapter(dayList,binding.calendarView,monthScheduleList)
         adapter.setOnItemClickListener(object:CalendarAdapter.OnCalendarDayClickListener{
             override fun onItemClick(v: View, position: Int) {
                 val outputFormat = DateTimeFormatter.ofPattern("M월 d일", Locale.getDefault())
@@ -99,8 +104,35 @@ class CalFragment : Fragment() {//minsdk API26 이상으로 바꿀 필요 있음
         })
         val context = requireContext()
         val manager = GridLayoutManager(context,7)
+        val reqMonth = MonthScheduleRequest(CalendarUtil.selectedDate.toString())
+        val retrofitMonthObj = RetrofitApi.getRetrofitService.monthSchedule(memberId,reqMonth)
         binding.calendarView.layoutManager = manager
         binding.calendarView.adapter = adapter
+        retrofitMonthObj.enqueue(object:Callback<MonthScheduleList>{
+            override fun onResponse(
+                call: Call<MonthScheduleList>,
+                response: Response<MonthScheduleList>
+            ) {
+                if(response.isSuccessful){
+                    Log.d("chanho", "MonthSchedule success")
+                    if (response.body() != null)
+                    {
+                        for (x in response.body()!!.data)
+                        {
+                            monthScheduleList.add(LocalDate.parse(x.dateList,formatter))
+                        }
+                        adapter.notifyDataSetChanged()
+                    }
+                }
+                else{
+                    Log.d("chanho", "MonthSchedule not success")
+                }
+            }
+
+            override fun onFailure(call: Call<MonthScheduleList>, t: Throwable) {
+                Log.d("chanho", "MonthSchedule Failure")
+            }
+        })
     }
 
     //캘린더 다가오는 일정 등록
@@ -110,7 +142,6 @@ class CalFragment : Fragment() {//minsdk API26 이상으로 바꿀 필요 있음
         val scheduleList = ArrayList<CalendarScheduleItem>()
         //scheduleList.add(CalendarScheduleItem("2023-12-11","2023-07-10","10:30:00","14:30:00","티밍 입니다다", "#d79ac3"))
         //val sharedPreference = requireActivity().getSharedPreferences("memberId", MODE_PRIVATE)
-        val memberId = 54
         val req = TakeDayScheduleRequest(scheduleDay.toString())
         val retrofitObj = RetrofitApi.getRetrofitService.takeDaySchedule(memberId,req)
         retrofitObj.enqueue(object : Callback<CalendarScheduleResult>{

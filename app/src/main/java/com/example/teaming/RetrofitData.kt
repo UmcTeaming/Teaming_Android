@@ -467,6 +467,17 @@ data class MemberListData(
     val email: String
 )
 
+data class MonthScheduleList(
+    @SerializedName("data")
+    val data : ArrayList<ScheduleDate>
+)
 
+data class ScheduleDate(
+    @SerializedName("date_list")
+    val dateList:String
+)
 
-
+data class MonthScheduleRequest(
+    @SerializedName("date_request")
+    val dateRequest:String
+)

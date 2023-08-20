@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import java.time.LocalDate
 
 
-class CalendarAdapter(val dayList:ArrayList<LocalDate?>,val recyclerView: RecyclerView): RecyclerView.Adapter<CalendarAdapter.CalendarViewHolder>() {
+class CalendarAdapter(val dayList:ArrayList<LocalDate?>,val recyclerView: RecyclerView, val monthScheduleList: ArrayList<LocalDate>): RecyclerView.Adapter<CalendarAdapter.CalendarViewHolder>() {
     private lateinit var itemClickListener: OnCalendarDayClickListener
     var check:Int? =null
 
@@ -20,6 +20,7 @@ class CalendarAdapter(val dayList:ArrayList<LocalDate?>,val recyclerView: Recycl
         var dayText:TextView = itemView.findViewById(R.id.day_text)
         var todayCircle:ImageView = itemView.findViewById(R.id.cal_today_circle)
         var selectedCircle:ImageView = itemView.findViewById(R.id.cal_selected_day_circle)
+        var hasScheduleCircle:ImageView = itemView.findViewById(R.id.cal_day_has_schedule)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CalendarViewHolder {
@@ -50,10 +51,13 @@ class CalendarAdapter(val dayList:ArrayList<LocalDate?>,val recyclerView: Recycl
                 check = position
                 itemClickListener.onItemClick(it,position)
             }
-
             if(day==(CalendarUtil.selectedDate)&&CalendarUtil.selectedDate== LocalDate.now()){
                 holder.todayCircle.visibility=View.VISIBLE
                 holder.dayText.setTextColor(Color.WHITE)
+            }
+            for (x in monthScheduleList){
+                if (day.isEqual(x))
+                    holder.hasScheduleCircle.visibility = View.VISIBLE
             }
         }
     }
