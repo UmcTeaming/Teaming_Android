@@ -120,5 +120,6 @@ interface RetrofitService {
     @GET
     fun fileDownload(@Url url: String): Call<ResponseBody>
 
-
+    @POST("/member/{memberId}/date_list")
+    fun monthSchedule(@Path("memberId") memberId: Int?, @Body dateRequest:MonthScheduleRequest) : Call<MonthScheduleList>
 }
