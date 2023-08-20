@@ -1,8 +1,13 @@
 package com.example.teaming
 
+import android.app.Activity
 import android.content.Intent
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import com.example.teaming.MembershipActivity
 import com.example.teaming.databinding.ActivityAgreeBinding
 
@@ -19,8 +24,11 @@ class AgreeActivity : AppCompatActivity() {
 
         binding.ButtonAgree.setOnClickListener {
             val intent = Intent(this, MembershipActivity::class.java)
+            intent.putExtra("toggleState", "true")
             startActivity(intent)
-        }
 
+        }
     }
+
+
 }

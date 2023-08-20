@@ -35,6 +35,7 @@
                 android:textColor="#194AC2"/>
 
             <EditText
+                android:id="@+id/add_email"
                 android:layout_marginTop="5dp"
                 android:layout_width="265dp"
                 android:layout_height="wrap_content"

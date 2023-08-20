@@ -37,6 +37,15 @@ class ListFragment : Fragment() {
         val memberId = sharedPreference.getInt("memberId",-1)
         Log.e("포트폴리오 id","${memberId}")
 
+        val sharedPreference2 = requireActivity().getSharedPreferences("memberName",
+            Context.MODE_PRIVATE
+        )
+
+        val memberName = sharedPreference2.getString("memberName", "카리나")
+        binding.memberName.text = memberName
+
+        Log.e("리스트프래그, name", "${memberName}")
+
         val callProgressPage = RetrofitApi.getRetrofitService.progressPage(memberId)
 
         if(memberId!=null){
@@ -47,11 +56,12 @@ class ListFragment : Fragment() {
                     if (response.isSuccessful) {
                         Log.e("포트폴리오 memberId","${memberId}")
                         val progressPageResponse = response.body()
-                        if (progressPageResponse != null) {
+                        if (progressPageResponse != null ) {
+                            //val name = progressPageResponse.data.
                             val progressProjects = progressPageResponse.data.progressProjects
                             Log.e("tag","${progressProjects}")
 
-                            if(progressProjects !=null){
+                            if(progressProjects !=null && progressProjects.isNotEmpty()){
                                 binding.btnLayout.visibility = View.VISIBLE
                                 binding.fileFrame.visibility = View.VISIBLE
                                 binding.nonViewPager2.visibility = View.GONE

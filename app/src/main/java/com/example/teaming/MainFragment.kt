@@ -52,10 +52,14 @@ class MainFragment : Fragment() {
                     if (response.isSuccessful) {
                         val mainPageResponse = response.body()
                         if (mainPageResponse != null) {
+                            val name = mainPageResponse.data.name
+                            binding.memberName.text = name
+                            binding.memberName2.text = name
+
                             val recentlyProjects = mainPageResponse.data.recentlyProject
                             //Log.d("data", "${recentlyProjects}")
 
-                            if(recentlyProjects!=null){
+                            if(recentlyProjects!=null && recentlyProjects.isNotEmpty()){
 
                                 binding.nonViewPager2.visibility = View.INVISIBLE
                                 binding.viewPager2.visibility = View.VISIBLE
@@ -91,8 +95,8 @@ class MainFragment : Fragment() {
 
                             verItemList.clear()
                             val progressProjects = mainPageResponse.data.progressProject
-                            if(progressProjects!=null){
-                                binding.nonVerList.visibility = View.INVISIBLE
+                            if(progressProjects!=null && progressProjects.isNotEmpty()){
+                                binding.nonVerList.visibility = View.GONE
                                 binding.verList.visibility = View.VISIBLE
                                 for (index in 0 until minOf(progressProjects.size, 3)) {
                                     val project = progressProjects[index]
@@ -113,10 +117,14 @@ class MainFragment : Fragment() {
                             }
                             verAdapter.notifyDataSetChanged()
 
-                            gridItemList.clear()
+
                             val portfolio = mainPageResponse.data.portfolio
-                            if(portfolio != null){
-                                binding.nonGridList.visibility = View.INVISIBLE
+                            binding.nonGridList.visibility = View.VISIBLE
+                            binding.gridList.visibility = View.GONE
+
+                            if(portfolio != null && portfolio.isNotEmpty()){
+                                gridItemList.clear()
+                                binding.nonGridList.visibility = View.GONE
                                 binding.gridList.visibility = View.VISIBLE
                                 for(project in portfolio){
                                     val formattedDate = "${project.projectStartDate} ~ ${project.projectEndDate}"
@@ -135,7 +143,6 @@ class MainFragment : Fragment() {
                                 binding.nonGridList.visibility = View.VISIBLE
                                 binding.gridList.visibility = View.GONE
                             }
-
                             gridAdapter.notifyDataSetChanged()
 
                             val userId = mainPageResponse.data
@@ -280,15 +287,6 @@ class MainFragment : Fragment() {
                 }
             })
         }
-
-
-        /*
-        // 프로젝트가 없는 경우
-        binding.nonViewPager2.visibility = View.INVISIBLE
-        binding.nonVerList.visibility = View.GONE
-        binding.nonGridList.visibility = View.INVISIBLE
-        */
-
         return binding.root
     }
 }

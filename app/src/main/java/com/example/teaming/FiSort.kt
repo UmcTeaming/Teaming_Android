@@ -1,5 +1,6 @@
 package com.example.teaming
 
+import android.app.Dialog
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
@@ -16,6 +17,7 @@ import retrofit2.Response
 class FiSort : Fragment(), FiInAdapter.OnFiInItemClickListener, FiInAdapter.OnFiInItemDelListener  {
     private lateinit var binding: FragmentFiSortBinding
     private lateinit var FiOutAdapter: FiOutAdapter
+    private lateinit var pjEndDialog: Dialog
 
     private val dataList : ArrayList<FinalFileData> = ArrayList()
 
@@ -85,6 +87,48 @@ class FiSort : Fragment(), FiInAdapter.OnFiInItemClickListener, FiInAdapter.OnFi
             if (filesToDelete.isNotEmpty()) {
                 val dialogFragment = FinalFileDeleteDialogFragment.newInstance(filesToDelete)
                 dialogFragment.show(childFragmentManager, "FinalFileDeleteDialogFragment")
+
+        // 프로젝트 종료하기 버튼
+        binding.endBtn.setOnClickListener {
+            if (projectId != null) {
+                val endRequest = ProjectEndRequest(project_status = "END") // You might need to adjust this status value based on your requirements
+
+                val endProject = RetrofitApi.getRetrofitService.endProject(memberId, projectId, endRequest)
+
+                endProject.enqueue(object : Callback<ProjectEndResponse> {
+                    override fun onResponse(call: Call<ProjectEndResponse>, response: Response<ProjectEndResponse>) {
+                        if (response.isSuccessful) {
+                            val endProjectResponse = response.body()
+                            if (endProjectResponse != null) {
+                                // Handle successful response if needed
+
+                                // endDate랑 startDate 넘겨줘야함 (bundle)
+                                val bundle = Bundle()
+                                val dialog = PjEndDialog()
+                                val endDate = endProjectResponse.data.endDate
+                                val startDate = endProjectResponse.data.startDate
+
+                                bundle.putString("startDate",startDate)
+                                bundle.putString("endDate", endDate)
+
+                                Log.e("받은 값","${startDate}, ${endDate}")
+                                dialog.arguments = bundle
+
+                                // Show the success dialog or perform other actions
+                                dialog.show(requireActivity().supportFragmentManager, "PjCompleteDialog")
+
+                            } else {
+                                Log.e("Patch 여부", "Patch 성공하지만 응답 데이터가 비어있습니다.")
+                            }
+                        } else {
+                            Log.e("Patch 여부", "Patch 실패: 응답 코드 = ${response.code()}")
+                        }
+                    }
+
+                    override fun onFailure(call: Call<ProjectEndResponse>, t: Throwable) {
+                        Log.e("endProject", "로그인 API 호출 실패", t)
+                    }
+                })
             }
         }
 

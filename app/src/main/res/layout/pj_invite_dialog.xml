@@ -28,7 +28,7 @@
     <EditText
         android:id="@+id/email_write"
         android:layout_marginTop="10dp"
-        android:layout_width="match_parent"
+        android:layout_width="265dp"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
