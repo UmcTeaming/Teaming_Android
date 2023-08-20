@@ -499,13 +499,6 @@ data class ScheduleDate(
 )
 
 
-
-data class MonthScheduleRequest(
-    @SerializedName("date_request")
-    val dateRequest:String
-)
-
-
 data class MyPageResponse(
     @SerializedName("status")
     val status: Int,
