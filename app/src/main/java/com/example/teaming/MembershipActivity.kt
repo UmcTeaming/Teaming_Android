@@ -106,7 +106,6 @@ class MembershipActivity : AppCompatActivity() {
         val num = binding.TextNum.text.toString()
         val check = binding.TextNumCheck.text.toString()
 
-        //
         val imageViewCheckNum = findViewById<ImageView>(R.id.check1)
         val imageViewCheckNumCheck = findViewById<ImageView>(R.id.check2)
 
@@ -117,13 +116,12 @@ class MembershipActivity : AppCompatActivity() {
             imageViewCheckNum.setImageResource(R.drawable.checkoff)
             imageViewCheckNumCheck.setImageResource(R.drawable.checkoff)
         }
-        //
 
         Log.e("조건 확인", "name: $name, email: $email, confirm: $confirm, num: $num, check: $check")
 
         val enableButton = num.isNotEmpty() && name.isNotEmpty() && email.isNotEmpty() && confirm.isNotEmpty() && check.isNotEmpty()
         val toggle = findViewById<ToggleButton>(R.id.toggleButton)
-        //
+
         val numCheckResult = sharedPreferences.getBoolean("num_check_result", false)
 
         Log.e("조건 확인", "enableButton: $enableButton, toggle.isChecked: ${toggle.isChecked}, num == check: ${num == check}")

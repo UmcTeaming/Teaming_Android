@@ -32,12 +32,13 @@
         >
     </TextView>
 
-    <ImageButton
+    <ImageView
         android:id="@+id/Button_img"
         android:fontFamily="@font/gmarket_sans_ttf_medium"
         android:background="@drawable/button_img"
         android:layout_width="100dp"
         android:layout_height="100dp"
+        android:clickable="true"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="40dp"
         app:layout_constraintLeft_toLeftOf="@id/text1"
@@ -45,7 +46,22 @@
         android:textSize="13sp"
         android:textColor="#4D000000"
         >
-    </ImageButton>
+    </ImageView>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="13sp"
+        android:textColor="#4D000000"
+        android:text="이미지"
+        android:fontFamily="@font/gmarket_sans_ttf_medium"
+        app:layout_constraintRight_toRightOf="@id/Button_img"
+        app:layout_constraintLeft_toLeftOf="@id/Button_img"
+        app:layout_constraintTop_toTopOf="@id/Button_img"
+        app:layout_constraintBottom_toBottomOf="@id/Button_img"
+        >
+    </TextView>
+
 
     <TextView
         android:id="@+id/name"
