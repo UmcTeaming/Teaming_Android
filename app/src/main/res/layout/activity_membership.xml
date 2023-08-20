@@ -204,6 +204,7 @@
         android:textColor="#000000"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@id/text7"
+        android:inputType="textPassword"
         >
     </EditText>
 
@@ -246,6 +247,7 @@
         android:textColor="#000000"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@id/text8"
+        android:inputType="textPassword"
         >
     </EditText>
 
@@ -302,6 +304,7 @@
         android:background="@drawable/toggle_background"
         android:layout_marginTop="15dp"
         android:checked="false"
+        android:clickable="false"
         android:textOn=" "
         android:textOff=" "
         app:layout_constraintTop_toBottomOf="@id/Text_num_check"

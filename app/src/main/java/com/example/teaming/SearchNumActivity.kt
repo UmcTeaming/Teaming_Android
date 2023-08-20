@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.teaming.FindNumActivity
 import com.example.teaming.R
+import android.widget.EditText
 import com.example.teaming.databinding.ActivitySearchNumBinding
 
 class SearchNumActivity : AppCompatActivity() {
@@ -21,6 +22,10 @@ class SearchNumActivity : AppCompatActivity() {
         binding.ButtonReset.setOnClickListener {
             val intent = Intent(this, FindNumActivity::class.java)
             startActivity(intent)
+        }
+
+        binding.x.setOnClickListener {
+            binding.TextEmail.text.clear()
         }
     }
 

@@ -1,12 +1,19 @@
 package com.example.teaming
 
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.graphics.Color
 import android.graphics.Paint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
+import android.view.View
 import android.widget.Button
+import android.widget.ToggleButton
+import androidx.lifecycle.ViewModelProvider
 import com.example.teaming.StartActivity
 import com.example.teaming.AgreeActivity
 import com.example.teaming.databinding.ActivityMembershipBinding
@@ -20,6 +27,7 @@ import retrofit2.Response
 class MembershipActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMembershipBinding
+    private lateinit var sharedPreferences: SharedPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,55 +36,96 @@ class MembershipActivity : AppCompatActivity() {
         binding = ActivityMembershipBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.ButtonNext.setOnClickListener {
-            val intent = Intent(this, StartActivity::class.java)
-            startActivity(intent)
+        //내용 저장
+        sharedPreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
+        binding.TextName.setText(sharedPreferences.getString("name", ""))
+        binding.TextEmail.setText(sharedPreferences.getString("email", ""))
+        binding.TextConfirm.setText(sharedPreferences.getString("confirm", ""))
+        binding.TextNum.setText(sharedPreferences.getString("num", ""))
+        binding.TextNumCheck.setText(sharedPreferences.getString("check", ""))
+
+        val toggleState = intent.getStringExtra("toggleState")
+        Log.d("MembershipActivity", "Received toggleState: $toggleState")
+
+        if(toggleState == "true"){
+            binding.toggleButton.isChecked = true
+            binding.text10.visibility = View.INVISIBLE
+            binding.toggleButton.isClickable = false
         }
 
         binding.ButtonSee.setOnClickListener {
             val intent = Intent(this, AgreeActivity::class.java)
+            // Save the numCheckResult value before navigating to AgreeActivity
+            val num = binding.TextNum.text.toString()
+            val check = binding.TextNumCheck.text.toString()
+            val numCheckResult = (num == check)
+
+            sharedPreferences.edit().putBoolean("num_check_result", numCheckResult).apply()
+
             startActivity(intent)
         }
+
 
         val button = findViewById<Button>(R.id.Button_see);
         button.paintFlags = button.paintFlags or Paint.UNDERLINE_TEXT_FLAG
         button.text = getString(R.string.underlined_text1)
 
 
-        /*val requestBodyData = MemberRequestDto("홍길동", "test@gmail.com", "test123")
-        val json = Gson().toJson(requestBodyData)
-        val requestBody = RequestBody.create("application/json".toMediaType(), json)
-        val callSignup = RetrofitApi.getRetrofitService.signup(requestBody)
+        val textWatcher = object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
 
-        callSignup.enqueue(object : Callback<SignupResponse> {
-                override fun onResponse(call: Call<SignupResponse>, response: Response<SignupResponse>) {
-                if (response.isSuccessful) {
-                    val SignupResponse = response.body()
-                    if (SignupResponse != null) {
-                        val accessToken = "Bearer ${SignupResponse.data.jwtToken.accessToken}"
-                        val userId = SignupResponse.data.jwtToken.memberId
-
-                        var bundle = Bundle()
-
-                        val preferences = getSharedPreferences("memberId", MODE_PRIVATE)
-
-                        val editor = preferences.edit()
-                        editor.putInt("memberId", userId)
-
-                        editor.commit()
-
-                        App.prefs.token = accessToken
-
-                        Log.d("Login_Token", "Access Token: $accessToken")
-                    }
-                } else {
-                    Log.d("Login", "API 호출 실패: ${response.code()}")
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                with(sharedPreferences.edit()) {
+                    putString("name", binding.TextName.text.toString())
+                    putString("email", binding.TextEmail.text.toString())
+                    putString("confirm", binding.TextConfirm.text.toString())
+                    putString("num", binding.TextNum.text.toString())
+                    putString("check", binding.TextNumCheck.text.toString())
+                    apply()
                 }
+                updateButtonState()
             }
-                    override fun onFailure(call: Call<SignupResponse>, t: Throwable) {
-                Log.e("Login", "로그인 API 호출 실패", t)
-            }
-        })*/
 
+            override fun afterTextChanged(s: Editable?) {}
+        }
+
+        binding.TextName.addTextChangedListener(textWatcher)
+        binding.TextEmail.addTextChangedListener(textWatcher)
+        binding.TextConfirm.addTextChangedListener(textWatcher)
+        binding.TextNum.addTextChangedListener(textWatcher)
+        binding.TextNumCheck.addTextChangedListener(textWatcher)
+
+    }
+
+
+    private fun updateButtonState() {
+        val name = binding.TextName.text.toString()
+        val email = binding.TextEmail.text.toString()
+        val confirm = binding.TextConfirm.text.toString()
+        val num = binding.TextNum.text.toString()
+        val check = binding.TextNumCheck.text.toString()
+
+        Log.e("조건 확인", "name: $name, email: $email, confirm: $confirm, num: $num, check: $check")
+
+        val enableButton = num.isNotEmpty() && name.isNotEmpty() && email.isNotEmpty() && confirm.isNotEmpty() && check.isNotEmpty()
+        val toggle = findViewById<ToggleButton>(R.id.toggleButton)
+        //
+        val numCheckResult = sharedPreferences.getBoolean("num_check_result", false)
+
+        Log.e("조건 확인", "enableButton: $enableButton, toggle.isChecked: ${toggle.isChecked}, num == check: ${num == check}")
+
+        if (enableButton && toggle.isChecked && numCheckResult) {
+            binding.ButtonNext.isEnabled = true
+            binding.ButtonNext.setBackgroundResource(R.drawable.round_border3)
+            binding.ButtonNext.setOnClickListener {
+                val intent = Intent(this, StartActivity::class.java)
+                startActivity(intent)
+            }
+        }
+        else {
+            Log.e("조건 확인", "조건이 만족하지 않음: enableButton=$enableButton, toggle.isChecked=${toggle.isChecked}, num=$num, check=$check")
+            binding.ButtonNext.isEnabled = false
+            binding.ButtonNext.setBackgroundResource(R.drawable.round_border3)
+        }
     }
 }
