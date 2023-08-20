@@ -467,6 +467,11 @@ data class MemberListData(
     val email: String
 )
 
+data class MonthScheduleList(
+    @SerializedName("data")
+    val data : ArrayList<ScheduleDate>
+)
+
 data class ProjectEndRequest(
     @SerializedName("project_status")
     val project_status: String
@@ -479,6 +484,11 @@ data class ProjectEndResponse(
     val message: String,
     @SerializedName("data")
     val data: String
+)
+
+data class ScheduleDate(
+    @SerializedName("date_list")
+    val dateList:String
 )
 
 
@@ -521,4 +531,9 @@ data class MemberRequestDto(
     val email: String,
     @SerializedName("password")
     val password: String
+)
+
+data class MonthScheduleRequest(
+    @SerializedName("date_request")
+    val dateRequest:String
 )
