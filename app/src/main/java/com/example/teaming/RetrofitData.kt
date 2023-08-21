@@ -584,7 +584,7 @@ data class CheckPasswordResponse(
 )
 
 data class ChangePasswordRequest(
-    @SerializedName("current_password")
+    @SerializedName("change_password")
     val change_password: String
 )
 
@@ -594,10 +594,10 @@ data class ChangePasswordResponse(
     @SerializedName("message")
     val message: String,
     @SerializedName("data")
-    val data: ChangePass
+    val data: ChangePassData
 )
 
-data class ChangePass(
+data class ChangePassData(
     @SerializedName("grandType")
     val grandType: String,
     @SerializedName("memberId")

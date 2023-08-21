@@ -90,10 +90,10 @@ interface RetrofitService {
         @Body currentPassword: CheckPasswordRequest
     ): Call<CheckPasswordResponse>
 
-    @PATCH("/member/{memberId}/change-password")
+    @POST("/member/{memberId}/change-password")
     fun changePassword(
         @Path("memberId") memberId: Int?,
-        @Body changeRequest: ChangePasswordRequest
+        @Body changePassword: ChangePasswordRequest
     ):Call<ChangePasswordResponse>
 
     @GET("/projects/{memberId}/{projectId}")

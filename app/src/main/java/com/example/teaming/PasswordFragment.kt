@@ -12,6 +12,9 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.teaming.databinding.FragmentChangeNumBinding
 import com.example.teaming.databinding.FragmentPasswordBinding
+import com.google.gson.Gson
+import okhttp3.MediaType.Companion.toMediaType
+import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -84,13 +87,15 @@ class PasswordFragment : Fragment() {
                 Context.MODE_PRIVATE)
 
             val memberId = sharedPreference.getInt("memberId",-1)
-            val requestBodyData = ChangePasswordRequest(binding.password.text.toString())
-            val checkPass = RetrofitApi.getRetrofitService.changePassword(
+            val requestBodyData = ChangePasswordRequest(binding.passCheck.text.toString())
+            val changePass = RetrofitApi.getRetrofitService.changePassword(
                 memberId,
                 requestBodyData
             )
 
-            checkPass.enqueue(object : Callback<ChangePasswordResponse> {
+            Log.e("requestbody","${requestBodyData}")
+
+            changePass.enqueue(object : Callback<ChangePasswordResponse> {
                 override fun onResponse(call: Call<ChangePasswordResponse>, response: Response<ChangePasswordResponse>) {
                     if (response.isSuccessful) {
                         val changePassResponse = response.body()
@@ -138,5 +143,4 @@ class PasswordFragment : Fragment() {
             binding.img4.setBackgroundResource(R.drawable.checkoff)
         }
     }
-
 }
