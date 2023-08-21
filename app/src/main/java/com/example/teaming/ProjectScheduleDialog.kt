@@ -17,6 +17,7 @@ class ProjectScheduleDialog : DialogFragment() {
     val scheduleList=ArrayList<CalendarScheduleItem>()
     var memberId : Int? = null
     var projectId : Int? = null
+    var dialogMode = 0
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -32,6 +33,30 @@ class ProjectScheduleDialog : DialogFragment() {
         takeProjectSchedule()
         binding.toBefore.setOnClickListener {
             dismiss()
+        }
+        binding.deleteBtn.setOnClickListener {
+            if (dialogMode == 0) {
+                dialogMode = 1
+                //스케줄 삭제 버튼 활성화, 초기화 버튼 활성화
+                binding.makeSchedule.visibility=View.GONE
+                binding.deleteBtn.visibility = View.VISIBLE
+                binding.toBefore.visibility = View.GONE
+                binding.initBtn.visibility=View.VISIBLE
+                //스케줄 아이템에 마이너스 버튼 visible로
+            }
+            else {
+                dialogMode = 0
+                binding.deleteBtn.visibility = View.GONE
+                binding.makeSchedule.visibility=View.VISIBLE
+                binding.initBtn.visibility=View.GONE
+                binding.toBefore.visibility = View.VISIBLE
+            }
+        }
+        binding.initBtn.setOnClickListener {
+            //초기화 버튼
+        }
+        binding.delBtn.setOnClickListener {
+            //삭제하기 버튼
         }
         binding.makeSchedule.setOnClickListener {
             val dialog = CalNewScheduleDialog()

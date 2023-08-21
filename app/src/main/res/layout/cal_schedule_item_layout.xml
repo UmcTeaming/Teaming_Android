@@ -45,7 +45,15 @@
         app:layout_constraintTop_toBottomOf="@+id/cal_schedule_day"
         android:layout_marginLeft="5dp"/>
 
+    <Button
+        android:layout_marginTop="10dp"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        app:layout_constraintRight_toRightOf="@+id/cal_schedule_time"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@drawable/one_del_btn"/>
     <TextView
+        android:layout_marginBottom="10dp"
         android:id="@+id/cal_schedule_time"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
@@ -56,7 +64,6 @@
         android:text="00:00~00:00"
         android:background="@drawable/cal_circle_shape"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         android:layout_marginRight="5dp"
         app:layout_constraintBottom_toBottomOf="parent"/>
 
