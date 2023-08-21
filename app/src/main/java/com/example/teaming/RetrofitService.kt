@@ -4,6 +4,7 @@ import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import okhttp3.ResponseBody
 import retrofit2.Call
+import retrofit2.http.*
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.Multipart
@@ -141,6 +142,16 @@ interface RetrofitService {
     @GET
     fun fileDownload(@Url url: String): Call<ResponseBody>
 
+
+    @DELETE("/projects/{memberId}/{projectId}/files/{fileId}")
+    fun fileDelete(@Path("memberId") memberId: Int?,@Path("projectId") projectId: Int?,@Path("fileId") fileId: Int?) : Call<FileDeleteResponse>
+
+
     @POST("/member/{memberId}/date_list")
     fun monthSchedule(@Path("memberId") memberId: Int?, @Body dateRequest:MonthScheduleRequest) : Call<MonthScheduleList>
+
+
+    @Multipart
+    @POST("/projects/{memberId}/{projectId}/files-upload")
+    fun projectFileUpload(@Path("memberId") memberId: Int?,@Path("projectId") projectId: Int?,@Part filePart: MultipartBody.Part) : Call<ProjectFileUploadResponse>
 }

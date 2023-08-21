@@ -280,7 +280,7 @@ data class FileDetails(
     val comment: Int,
     @SerializedName("file_id")
     val file_id: Int,
-    var del_btn_mark: Boolean = false,
+    var del_btn_mark: Boolean = false
 )
 
 data class FinalFilesResponse(
@@ -309,7 +309,8 @@ data class FinalDetails(
     @SerializedName("comment")
     val comment: Int,
     @SerializedName("file_id")
-    val file_id: Int
+    val file_id: Int,
+    var del_btn_mark: Boolean = false
 )
 
 data class InvitationsResponse(
@@ -402,6 +403,14 @@ data class CommentIdData(
     @SerializedName("commentId")
     val commentId: Int
 )
+
+data class FileDeleteResponse(
+    @SerializedName("status")
+    val status: Int,
+    @SerializedName("message")
+    val message: String
+)
+
 
 // 프로젝트 수정 부분 data
 data class ModifyProjectResponse(
@@ -605,3 +614,18 @@ data class ChangePassData(
     @SerializedName("accessToken")
     val accessToken: String
 )
+
+data class ProjectFileUploadResponse(
+    @SerializedName("status")
+    val status: Int,
+    @SerializedName("message")
+    val message: String,
+    @SerializedName("data")
+    val data: FileData
+)
+
+data class FileData(
+    @SerializedName("file_Id")
+    val file_Id: Int
+)
+

@@ -1,17 +1,21 @@
 package com.example.teaming
 
+import android.app.Activity
+import android.app.Activity.RESULT_OK
 import android.app.Dialog
 import android.content.Context
+import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.provider.OpenableColumns
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -21,10 +25,17 @@ import com.example.teaming.databinding.InviteYesInfoDialogBinding
 import com.example.teaming.databinding.PjInviteDialogBinding
 import com.google.gson.Gson
 import okhttp3.MediaType.Companion.toMediaType
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
 import okhttp3.RequestBody
+import okhttp3.RequestBody.Companion.asRequestBody
+import okhttp3.RequestBody.Companion.toRequestBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.io.File
+import java.lang.Thread.sleep
+
 
 class PjPageFragment : Fragment() {
     private lateinit var binding:FragmentPjPageBinding
@@ -33,7 +44,13 @@ class PjPageFragment : Fragment() {
     private lateinit var inviteYesInfoDialog: Dialog
     private lateinit var inviteNoInfoDialog: Dialog
 
+    private val FILE_PICK_REQUEST_CODE = 1
+    private lateinit var selectedFileUri: Uri
+
     private val itemList = ArrayList<MemberData>()
+
+    private var memberIdAll : Int = -1
+    private var projectIdAll : Int = -1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,6 +64,8 @@ class PjPageFragment : Fragment() {
     ): View? {
 
         binding = FragmentPjPageBinding.inflate(inflater,container,false)
+
+        setButtonState(true)
 
         var projectId: Int? = null
         var num = arguments?.getInt("num")
@@ -88,6 +107,9 @@ class PjPageFragment : Fragment() {
         )
         val memberId = sharedPreference.getInt("memberId",-1)
 
+        memberIdAll = memberId
+        projectIdAll = projectId ?: -1
+
         val callProjectPage = RetrofitApi.getRetrofitService.projectPage(memberId,projectId)
 
         callProjectPage.enqueue(object : Callback<ProjectpageResponse> {
@@ -107,7 +129,7 @@ class PjPageFragment : Fragment() {
 
                         if (projectpageresponse.data.projectStatus == "ING"){
                             binding.status.setImageResource(R.drawable.circle)
-                            binding.projectDate.text = "${projectpageresponse.data.startDate} ~"
+                            binding.projectDate.text = "${projectpageresponse.data.startDate} ~ 진행중"
                         }else{
                             binding.status.setImageResource(R.drawable.circle_end)
                             binding.projectDate.text = "${projectpageresponse.data.startDate} ~ ${projectpageresponse.data.startDate}"
@@ -146,15 +168,31 @@ class PjPageFragment : Fragment() {
 
         binding.pjFile.setOnClickListener {
             setButtonState(true)
+
+            val bundle = Bundle()
+
+            bundle.putString("file_color","project")
+
+            val pjSort = PjSort()
+            pjSort.arguments = bundle
+
             requireActivity().supportFragmentManager.beginTransaction()
-                .replace(R.id.fragmentContainer,PjSort())
+                .replace(R.id.fragmentContainer,pjSort)
                 .commit()
         }
 
         binding.finalFile.setOnClickListener {
             setButtonState(false)
+
+            val bundle = Bundle()
+
+            bundle.putString("file_color","final")
+
+            val fiSort = FiSort()
+            fiSort.arguments = bundle
+
             requireActivity().supportFragmentManager.beginTransaction()
-                .replace(R.id.fragmentContainer,FiSort())
+                .replace(R.id.fragmentContainer,fiSort)
                 .commit()
         }
 
@@ -185,6 +223,7 @@ class PjPageFragment : Fragment() {
                 .commit()
         }
 
+
         return binding.root
     }
 
@@ -192,6 +231,9 @@ class PjPageFragment : Fragment() {
         if (default_btn) {
             binding.uploadBtn.apply {
                 setImageResource(R.drawable.file_upload_btn)
+                setOnClickListener {
+                    openFilePickerAndUpload()
+                }
             }
 
             binding.pjFile.apply {
@@ -205,6 +247,7 @@ class PjPageFragment : Fragment() {
                 setTextColor(ContextCompat.getColor(requireContext(), R.color.slide_gray))
                 requestLayout()
             }
+
 
         } else {
 
@@ -222,6 +265,10 @@ class PjPageFragment : Fragment() {
                 setBackgroundResource(R.drawable.slide_btn_selected)
                 setTextColor(ContextCompat.getColor(requireContext(), R.color.black))
                 requestLayout()
+            }
+
+            binding.uploadBtn.setOnClickListener {
+
             }
         }
     }
@@ -322,7 +369,14 @@ class PjPageFragment : Fragment() {
         inviteYesInfoDialog.setContentView(dialogBinding.root)
 
         dialogBinding.closeYesBtn.setOnClickListener {
+
+            sleep(300)
+            requireActivity().supportFragmentManager.beginTransaction()
+                .replace(R.id.container,PjPageFragment())
+                .commit()
+
             inviteYesInfoDialog.dismiss()
+
         }
 
         inviteYesInfoDialog.show()
@@ -355,4 +409,62 @@ class PjPageFragment : Fragment() {
 
         inviteNoInfoDialog.show()
     }
+
+    private fun openFilePickerAndUpload() {
+        val intent = Intent(Intent.ACTION_GET_CONTENT)
+        intent.type = "*/*" // 모든 파일 타입을 선택 가능하게 하려면 "*/*"로 설정
+        startActivityForResult(intent, FILE_PICK_REQUEST_CODE)
+    }
+    private fun uploadFile(fileUri: Uri,fileName: String) {
+        val contentResolver = requireContext().contentResolver
+        val inputStream = contentResolver.openInputStream(fileUri)
+
+        if (inputStream != null) {
+            val requestBody = inputStream.readBytes().toRequestBody("multipart/form-data".toMediaTypeOrNull())
+            val filePart = MultipartBody.Part.createFormData("file", fileName, requestBody)
+
+            val call = RetrofitApi.getRetrofitService.projectFileUpload(memberIdAll, projectIdAll, filePart)
+            call.enqueue(object : Callback<ProjectFileUploadResponse> {
+                override fun onResponse(call: Call<ProjectFileUploadResponse>, response: Response<ProjectFileUploadResponse>) {
+                    if (response.isSuccessful) {
+                        val uploadResponse = response.body()
+                    } else {
+                        Log.d("파일 업로드", "${response.code()}")
+                    }
+                }
+
+                override fun onFailure(call: Call<ProjectFileUploadResponse>, t: Throwable) {
+                    Log.e("Invitation", "파일업로드 API 호출 실패", t)
+                }
+            })
+        }
+    }
+
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (requestCode == FILE_PICK_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
+            val selectedFileUri = data?.data
+            if (selectedFileUri != null) {
+                val fileName = getFileNameFromUri(selectedFileUri)
+                uploadFile(selectedFileUri,fileName)
+            }
+        }
+    }
+
+    private fun getFileNameFromUri(uri: Uri): String {
+        val contentResolver = requireContext().contentResolver
+        val cursor = contentResolver.query(uri, null, null, null, null)
+        cursor?.let {
+            val nameIndex = it.getColumnIndex(OpenableColumns.DISPLAY_NAME)
+            it.moveToFirst()
+            val fileName = cursor.getString(nameIndex)
+            cursor.close()
+            return fileName
+        }
+        return "unknown_filename"
+    }
+
+
 }

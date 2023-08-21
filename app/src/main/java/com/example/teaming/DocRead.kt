@@ -41,6 +41,13 @@ class DocRead : Fragment() {
 
         val fileId = arguments?.getInt("file_id") ?: -1
         val fileStatus = arguments?.getString("file_status")
+        val fileColor = arguments?.getString("file_color") ?: ""
+
+        if (fileColor == "project"){
+            binding.fileImg.setImageResource(R.drawable.pdf_img)
+        }else if(fileColor == "final"){
+            binding.fileImg.setImageResource(R.drawable.final_pdf_img)
+        }
 
         val sharedPreference_mem = requireActivity().getSharedPreferences("memberId",
             Context.MODE_PRIVATE
@@ -64,6 +71,7 @@ class DocRead : Fragment() {
                         binding.fileName.text = docReadPageResponse.data.file_name
                         binding.writer.text = docReadPageResponse.data.uploader
                         binding.fileTypeName.text = docReadPageResponse.data.file_type
+                        binding.fileImgType.text = docReadPageResponse.data.file_type
 
                         filename = docReadPageResponse.data.file_name
 
@@ -95,8 +103,6 @@ class DocRead : Fragment() {
                 Log.e("DocRead", "로그인 API 호출 실패", t)
             }
         })
-
-
 
 
         binding.fileViewerBtn.setOnClickListener {
