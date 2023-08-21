@@ -16,6 +16,7 @@ class ProjectScheduleDialog : DialogFragment() {
     private lateinit var binding : ProjectSheduleDialogBinding
     val scheduleList=ArrayList<CalendarScheduleItem>()
     private lateinit var adapter : CalenderScheduleAdapter
+    val deleteList = mutableSetOf<Int>()
     var memberId : Int? = null
     var projectId : Int? = null
     var dialogMode = 0
@@ -30,7 +31,7 @@ class ProjectScheduleDialog : DialogFragment() {
         projectId = argument!!.getInt("projectId")
         binding = ProjectSheduleDialogBinding.inflate(inflater,container,false)
         //scheduleList.add(CalendarScheduleItem("2023-12-11","2023-07-10","10:30:00","14:30:00","티밍 입니다다", "#d79ac3"))
-        adapter = CalenderScheduleAdapter(scheduleList,requireActivity())
+        adapter = CalenderScheduleAdapter(scheduleList,requireActivity(),deleteList)
         binding.projectSchedulesRecyclerView.layoutManager = LinearLayoutManager(activity,LinearLayoutManager.VERTICAL,false)
         takeProjectSchedule()
         binding.toBefore.setOnClickListener {
@@ -58,11 +59,15 @@ class ProjectScheduleDialog : DialogFragment() {
             adapter.delButtonPressed()
         }
         binding.delBtn.setOnClickListener {
-
-            //삭제하기 버튼
+            val dialog = ScheduleDeleteDialog()
+            val args = Bundle()
+            args.putSerializable("List", scheduleList)
+            args.putSerializable("Set", ArrayList(deleteList))
+            dialog.arguments = args
+            dialog.show(requireActivity().supportFragmentManager,"delDialog")
         }
         binding.makeSchedule.setOnClickListener {
-            val dialog = CalNewScheduleDialog()
+            val dialog = CalNewScheduleDialog(this)
             val args = Bundle()
             args.putInt("projectId", projectId!!)
             args.putInt("memberId", memberId!!)
@@ -70,6 +75,11 @@ class ProjectScheduleDialog : DialogFragment() {
             dialog.show(requireActivity().supportFragmentManager,"CalNewScheduleDialog")
         }
         return binding.root
+    }
+    fun updateAdapter(){
+        Log.d("chanho","adapterUpdated")
+        takeProjectSchedule()
+        adapter.notifyDataSetChanged()
     }
     fun takeProjectSchedule() {
         //스케줄 API로 받아오기

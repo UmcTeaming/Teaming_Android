@@ -22,7 +22,7 @@ import java.time.format.DateTimeFormatter
 import java.util.Date
 import java.util.Locale
 
-class CalNewScheduleDialog():DialogFragment() {
+class CalNewScheduleDialog(private val parent:ProjectScheduleDialog):DialogFragment() {
     private lateinit var binding:CalDialogNewBinding
     private var focus:Int?=null //1->시작 일자 2->종료일자 3->시작시간 4->종료시간
     val decimalForm = DecimalFormat("00")
@@ -65,6 +65,7 @@ class CalNewScheduleDialog():DialogFragment() {
                         args.putInt("projectId", 11)
                         dialog.arguments = args
                         dialog.show(requireActivity().supportFragmentManager,"ScheduleMakeCompleteDialog")
+                        parent.updateAdapter()
                         dismiss()
                     }
                     else
