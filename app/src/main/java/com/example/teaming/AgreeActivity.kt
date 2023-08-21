@@ -26,7 +26,6 @@ class AgreeActivity : AppCompatActivity() {
             val intent = Intent(this, MembershipActivity::class.java)
             intent.putExtra("toggleState", "true")
             startActivity(intent)
-
         }
     }
 
