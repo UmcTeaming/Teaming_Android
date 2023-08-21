@@ -160,4 +160,8 @@ interface RetrofitService {
     @Multipart
     @POST("/projects/{memberId}/{projectId}/files-upload")
     fun projectFileUpload(@Path("memberId") memberId: Int?,@Path("projectId") projectId: Int?,@Part filePart: MultipartBody.Part) : Call<ProjectFileUploadResponse>
+
+    @Multipart
+    @POST("/projects/{memberId}/{projectId}/final-file")
+    fun finalFileUpload(@Path("memberId") memberId: Int?,@Path("projectId") projectId: Int?,@Part filePart: MultipartBody.Part) : Call<FinalFileUploadResponse>
 }

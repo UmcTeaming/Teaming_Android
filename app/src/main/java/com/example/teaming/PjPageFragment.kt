@@ -47,6 +47,8 @@ class PjPageFragment : Fragment() {
     private val FILE_PICK_REQUEST_CODE = 1
     private lateinit var selectedFileUri: Uri
 
+    private var fileType : String = ""
+
     private val itemList = ArrayList<MemberData>()
 
     private var memberIdAll : Int = -1
@@ -232,6 +234,7 @@ class PjPageFragment : Fragment() {
             binding.uploadBtn.apply {
                 setImageResource(R.drawable.file_upload_btn)
                 setOnClickListener {
+                    fileType = "project"
                     openFilePickerAndUpload()
                 }
             }
@@ -253,6 +256,10 @@ class PjPageFragment : Fragment() {
 
             binding.uploadBtn.apply {
                 setImageResource(R.drawable.final_upload_btn)
+                setOnClickListener {
+                    fileType = "final"
+                    openFilePickerAndUpload()
+                }
             }
 
             binding.pjFile.apply {
@@ -422,21 +429,38 @@ class PjPageFragment : Fragment() {
         if (inputStream != null) {
             val requestBody = inputStream.readBytes().toRequestBody("multipart/form-data".toMediaTypeOrNull())
             val filePart = MultipartBody.Part.createFormData("file", fileName, requestBody)
-
-            val call = RetrofitApi.getRetrofitService.projectFileUpload(memberIdAll, projectIdAll, filePart)
-            call.enqueue(object : Callback<ProjectFileUploadResponse> {
-                override fun onResponse(call: Call<ProjectFileUploadResponse>, response: Response<ProjectFileUploadResponse>) {
-                    if (response.isSuccessful) {
-                        val uploadResponse = response.body()
-                    } else {
-                        Log.d("파일 업로드", "${response.code()}")
+            if (fileType == "project"){
+                val call = RetrofitApi.getRetrofitService.projectFileUpload(memberIdAll, projectIdAll, filePart)
+                call.enqueue(object : Callback<ProjectFileUploadResponse> {
+                    override fun onResponse(call: Call<ProjectFileUploadResponse>, response: Response<ProjectFileUploadResponse>) {
+                        if (response.isSuccessful) {
+                            val uploadResponse = response.body()
+                        } else {
+                            Log.d("파일 업로드", "${response.code()}")
+                        }
                     }
-                }
 
-                override fun onFailure(call: Call<ProjectFileUploadResponse>, t: Throwable) {
-                    Log.e("Invitation", "파일업로드 API 호출 실패", t)
-                }
-            })
+                    override fun onFailure(call: Call<ProjectFileUploadResponse>, t: Throwable) {
+                        Log.e("Invitation", "파일업로드 API 호출 실패", t)
+                    }
+                })
+            }else if (fileType == "final"){
+                val call = RetrofitApi.getRetrofitService.finalFileUpload(memberIdAll, projectIdAll, filePart)
+                call.enqueue(object : Callback<FinalFileUploadResponse> {
+                    override fun onResponse(call: Call<FinalFileUploadResponse>, response: Response<FinalFileUploadResponse>) {
+                        if (response.isSuccessful) {
+                            val uploadResponse = response.body()
+                        } else {
+                            Log.d("파일 업로드", "${response.code()}")
+                        }
+                    }
+
+                    override fun onFailure(call: Call<FinalFileUploadResponse>, t: Throwable) {
+                        Log.e("Invitation", "파일업로드 API 호출 실패", t)
+                    }
+                })
+            }
+
         }
     }
 
