@@ -61,7 +61,6 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/text1"
         android:lines="1"
-        android:singleLine="true"
         >
     </EditText>
 
@@ -84,7 +83,6 @@
         app:layout_constraintTop_toBottomOf="@id/Text_email"
         android:inputType="textPassword"
         android:lines="1"
-        android:singleLine="true"
         >
     </EditText>
 
