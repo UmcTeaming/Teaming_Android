@@ -577,3 +577,17 @@ data class FileData(
     val file_Id: Int
 )
 
+data class FinalFileUploadResponse(
+    @SerializedName("status")
+    val status: Int,
+    @SerializedName("message")
+    val message: String,
+    @SerializedName("data")
+    val data: FinalUploadData
+)
+
+data class FinalUploadData(
+    @SerializedName("file_Id")
+    val file_Id: Int
+)
+
