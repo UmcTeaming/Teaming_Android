@@ -7,11 +7,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
-import com.example.teaming.databinding.FragmentThirdDialogBinding
+import com.example.teaming.databinding.FragmentWrongPassDialog2Binding
 import com.example.teaming.databinding.FragmentWrongPassDialogBinding
 
-class WrongPassDialog : DialogFragment() {
-    private lateinit var binding: FragmentWrongPassDialogBinding
+class WrongPassDialog2 : DialogFragment() {
+    private lateinit var binding: FragmentWrongPassDialog2Binding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,7 +22,7 @@ class WrongPassDialog : DialogFragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentWrongPassDialogBinding.inflate(inflater,container,false)
+        binding = FragmentWrongPassDialog2Binding.inflate(inflater,container,false)
         val view = binding.root
 
         binding.yes.setOnClickListener {
@@ -30,11 +30,13 @@ class WrongPassDialog : DialogFragment() {
         }
 
         binding.findBtn.setOnClickListener {
-            val intent = Intent(activity, SearchNumActivity::class.java)
-            startActivity(intent)
+            requireActivity().supportFragmentManager.beginTransaction()
+                .replace(R.id.container,FindPassFragment())
+                .addToBackStack(null)
+                .commit()
+            dismiss()
         }
 
         return view
     }
-
 }

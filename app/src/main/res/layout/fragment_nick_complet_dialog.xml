@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".NickCompletDialog">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constlayout"
+        android:layout_width="328dp"
+        android:layout_height="182dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        >
+
+        <TextView
+            android:id="@+id/text1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="닉네임이 변경되었습니다."
+            android:textColor="#194AC2"
+            android:textSize="15sp"
+            android:fontFamily="@font/gmarket_sans_ttf_bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.3"
+            >
+        </TextView>
+
+
+        <Button
+            android:id="@+id/yes"
+            android:layout_width="128dp"
+            android:layout_height="28dp"
+            android:layout_marginRight="100dp"
+            android:background="@drawable/bin_blue"
+            android:fontFamily="@font/gmarket_sans_ttf_bold"
+            android:onClick="shutDownClick"
+            android:text="확인"
+            android:textColor="#ffffffff"
+            android:textSize="10sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="@id/constlayout"
+            app:layout_constraintTop_toBottomOf="@+id/text1"
+            app:layout_constraintVertical_bias="0.494"></Button>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

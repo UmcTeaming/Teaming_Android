@@ -97,6 +97,12 @@ interface RetrofitService {
         @Body changePassword: ChangePasswordRequest
     ):Call<ChangePasswordResponse>
 
+    @PATCH("/member/{memberId}/mypage/change-nickname")
+    fun changeNickname(
+        @Path("memberId") memberId: Int?,
+        @Body changePassword: ChangeNicknameRequest
+    ):Call<ChangeNicknameResponse>
+
     @GET("/projects/{memberId}/{projectId}")
 
     fun projectPage(@Path("memberId") memberId: Int?,@Path("projectId") projectId: Int?) : Call<ProjectpageResponse>

@@ -23,11 +23,12 @@
     </EditText>
 
     <Button
-        android:layout_width="45dp"
-        android:layout_height="18dp"
+        android:id="@+id/okay_btn"
+        android:layout_width="41dp"
+        android:layout_height="15.17dp"
         android:background="@drawable/button_check"
         android:text="확인"
-        android:textSize="11sp"
+        android:textSize="10sp"
         android:textColor="#ffffff"
         android:layout_marginTop="5dp"
         android:fontFamily="@font/gmarket_sans_ttf_bold"
@@ -35,6 +36,18 @@
         app:layout_constraintTop_toTopOf="@id/edittext"
         >
     </Button>
+
+    <TextView
+        android:textColor="@color/white"
+        android:id="@+id/text_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:fontFamily="@font/gmarket_sans_ttf_medium"
+        android:text="기본 텍스트"
+        android:textSize="8sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/edittext" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

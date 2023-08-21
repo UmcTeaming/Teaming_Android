@@ -52,13 +52,13 @@ class FileFragment : Fragment() {
             .add(R.id.file_frame,File_Icon1_Fragment())
             .commit()
 
-        val sharedPreference = requireActivity().getSharedPreferences("memberName",
+        /*val sharedPreference = requireActivity().getSharedPreferences("memberName",
             Context.MODE_PRIVATE
         )
         val memberName = sharedPreference.getString("memberName", "카리나")
         binding.memberName.text = memberName
 
-        Log.e("파일프래그, name", "${memberName}")
+        Log.e("파일프래그, name", "${memberName}")*/
 
         // =버튼 클릭 시 색상 변경 관련
         binding.fileIcon1.setOnClickListener {
@@ -111,6 +111,41 @@ class FileFragment : Fragment() {
                 .addToBackStack(null)
                 .commit()
         }
+
+        val sharedPreference = requireActivity().getSharedPreferences("memberId",
+            Context.MODE_PRIVATE
+        )
+        val memberId = sharedPreference.getInt("memberId",-1)
+        Log.e("포트폴리오 id","${memberId}")
+
+        val callPortfolioPage = RetrofitApi.getRetrofitService.portfolioPage(memberId)
+
+        if(memberId!=null){
+            callPortfolioPage.enqueue(object : Callback<PortfolioPageResponse> {
+                override fun onResponse(
+                    call: Call<PortfolioPageResponse>, response: Response<PortfolioPageResponse>
+                ) {
+                    if (response.isSuccessful) {
+                        Log.e("포트폴리오 memberId","${memberId}")
+                        val portfolioPageResponse = response.body()
+                        if (portfolioPageResponse != null) {
+                            val portfolioProjects = portfolioPageResponse.data.member_name
+                            binding.memberName.text = portfolioProjects
+                            Log.e("List 사용자명","${portfolioProjects}")
+
+                        }
+                    } else {
+                        Log.d("FileFragment", "API 반호출 실패: ${response.code()}")
+                    }
+                }
+
+                override fun onFailure(call: Call<PortfolioPageResponse>, t: Throwable) {
+                    Log.e("FileFragment", "API 완전호출 실패", t)
+                }
+            })
+        }
+
+
         return binding.root
     }
 }
