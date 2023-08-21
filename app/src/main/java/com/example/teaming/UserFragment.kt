@@ -2,7 +2,10 @@ package com.example.teaming
 
 
 import android.content.Context
+import android.content.res.ColorStateList
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.graphics.Color
 import android.graphics.drawable.BitmapDrawable
 import android.net.Uri
 import android.os.Bundle
@@ -17,14 +20,19 @@ import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.teaming.databinding.FragmentUserBinding
 import okhttp3.MediaType
 import okhttp3.MediaType.Companion.toMediaType
+import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import okio.BufferedSink
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.FileOutputStream
 
@@ -35,12 +43,14 @@ class UserFragment : Fragment(), ImgDialog.OnImgSelectedListener {
     private lateinit var backCallback: OnBackPressedCallback
     private var selectedImageUri: Uri? = null
 
+    private var img_Selected = false
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val binding = FragmentUserBinding.inflate(inflater,container,false)
+        binding = FragmentUserBinding.inflate(inflater,container,false)
         fragmentManager = requireActivity().supportFragmentManager
 
         val sharedPreference = requireActivity().getSharedPreferences("memberId",
@@ -50,15 +60,6 @@ class UserFragment : Fragment(), ImgDialog.OnImgSelectedListener {
 
         val callMyPage = RetrofitApi.getRetrofitService.myPage(memberId)
 
-        //
-        binding.ButtonImg.setOnClickListener{
-            val imgDialog = ImgDialog()
-            imgDialog.show(requireActivity().supportFragmentManager,"ImgDialog")
-            // target설정을 해야 interface사용이 가능하다고 함
-            imgDialog.setTargetFragment(this,2)
-        }
-        //
-
         callMyPage.enqueue(object : Callback<MyPageResponse> {
             override fun onResponse(call: Call<MyPageResponse>, response: Response<MyPageResponse>) {
                 if (response.isSuccessful) {
@@ -66,8 +67,17 @@ class UserFragment : Fragment(), ImgDialog.OnImgSelectedListener {
                     if (mypageResponse != null) {
 
                         val username = mypageResponse.data.name
+                        val email = mypageResponse.data.email
 
                         binding.name.text = username
+                        binding.email.text = email
+                        Log.e("이미지명","${mypageResponse.data.profileImage}")
+
+                        Glide.with(requireContext())
+                            .load(mypageResponse.data.profileImage)
+                            .error(R.drawable.profile_default)
+                            .fitCenter()
+                            .into(binding.ButtonImg)
 
                         Log.d("R_LoginActivity", "${mypageResponse.data}")
                     }
@@ -80,6 +90,13 @@ class UserFragment : Fragment(), ImgDialog.OnImgSelectedListener {
             }
         })
 
+
+        binding.ButtonImg.setOnClickListener{
+            val imgDialog = ImgDialog()
+            imgDialog.show(requireActivity().supportFragmentManager,"ImgDialog")
+            // target설정을 해야 interface사용이 가능하다고 함
+            imgDialog.setTargetFragment(this,2)
+        }
 
         binding.secret.setOnClickListener {
             requireActivity().supportFragmentManager.beginTransaction()
@@ -98,7 +115,6 @@ class UserFragment : Fragment(), ImgDialog.OnImgSelectedListener {
                 .replace(R.id.frameLayout,NameFragment())
                 .addToBackStack(null)
                 .commit()
-
 
         }
 
@@ -123,7 +139,7 @@ class UserFragment : Fragment(), ImgDialog.OnImgSelectedListener {
 
     override fun onImgSelected(img_num: Int) {
         if (img_num == 1) {
-            val drawable = ContextCompat.getDrawable(requireContext(), R.drawable.file_background)
+            val drawable = ContextCompat.getDrawable(requireContext(), R.drawable.profile_default)
             val imageBitmap = (drawable as BitmapDrawable).bitmap
 
             val fileName = "image${System.currentTimeMillis()}.jpg"
@@ -132,11 +148,14 @@ class UserFragment : Fragment(), ImgDialog.OnImgSelectedListener {
             FileOutputStream(imageFile).use { outputStream ->
                 imageBitmap.compress(Bitmap.CompressFormat.JPEG, 90, outputStream)
             }
-
             selectedImageUri = Uri.fromFile(imageFile)
 
             binding.ButtonImg.setImageURI(selectedImageUri)
             binding.textImg.visibility = View.INVISIBLE
+            img_Selected = true
+
+            // 이미지가 선택되었을 때 여기서 Patch 작업을 수행하도록 호출
+            performImagePatch()
         }
     }
 
@@ -145,6 +164,11 @@ class UserFragment : Fragment(), ImgDialog.OnImgSelectedListener {
             binding.ButtonImg.setImageURI(imageUri)
             binding.textImg.visibility = View.INVISIBLE
             selectedImageUri = imageUri
+
+            img_Selected = true
+
+            // 이미지가 선택되었을 때 여기서 Patch 작업을 수행하도록 호출
+            performImagePatch()
         }
     }
 
@@ -162,6 +186,86 @@ class UserFragment : Fragment(), ImgDialog.OnImgSelectedListener {
             binding.ButtonImg.setImageURI(selectedImageUri)
             binding.textImg.visibility = View.INVISIBLE
 
+            img_Selected = true
+
+            // 이미지가 선택되었을 때 여기서 Patch 작업을 수행하도록 호출
+            performImagePatch()
+        }
+    }
+
+    // 이미지 변경 작업 수행 메서드
+    private fun performImagePatch() {
+        // 이미지 선택 후 이곳에서 Patch 작업을 수행하도록 처리
+        // 이미지 변경 작업의 코드를 이곳에 적용하면 됨
+
+        val sharedPreference = requireActivity().getSharedPreferences("memberId",
+            Context.MODE_PRIVATE
+        )
+        val memberId = sharedPreference.getInt("memberId",-1)
+
+        var imagePart: MultipartBody.Part? = null
+
+        if (img_Selected) {
+            selectedImageUri?.let { uri ->
+                val inputStream = requireContext().contentResolver.openInputStream(uri)
+                val imageByteArray = inputStream?.readBytes()
+
+                imageByteArray?.let {
+                    val imageRequestBody = createBitmapRequestBody(BitmapFactory.decodeByteArray(it, 0, it.size))
+                    imagePart = MultipartBody.Part.createFormData("change_image_file", uri.lastPathSegment, imageRequestBody)
+                }
+            }
+        } else {
+            // 이미지뷰에서 Drawable 가져오기
+            val drawable = binding.ButtonImg.drawable
+            // Drawable을 Bitmap으로 변환
+            val imageBitmap = (drawable as BitmapDrawable).bitmap
+
+            // Bitmap을 ByteArray로 변환
+            val outputStream = ByteArrayOutputStream()
+            imageBitmap.compress(Bitmap.CompressFormat.JPEG, 90, outputStream)
+            val imageByteArray = outputStream.toByteArray()
+
+            // ByteArray를 RequestBody로 변환
+            val imageRequestBody = RequestBody.create("image/jpeg".toMediaType(), imageByteArray)
+
+            // MultipartBody.Part 생성
+            imagePart = MultipartBody.Part.createFormData("change_image_file", "image.jpg", imageRequestBody)
+        }
+
+        val call = RetrofitApi.getRetrofitService.changeProfileImg(memberId, change_image_file = imagePart!!)
+
+        call.enqueue(object : Callback<MemberChangeProfileImageResponse> {
+            override fun onResponse(call: Call<MemberChangeProfileImageResponse>, response: Response<MemberChangeProfileImageResponse>) {
+                if (response.isSuccessful) {
+                    val changeProfileResponse = response.body()
+                    if (changeProfileResponse != null) {
+                        binding.textImg.visibility = View.INVISIBLE
+                        val changeProfileProjects = changeProfileResponse.data
+
+                        if(changeProfileProjects != null){
+                            Log.e("이미지 Patch 여부", "이미지 Patch 성공")
+                            Log.e("성공","${changeProfileResponse.data}, ${changeProfileResponse.status}, ${changeProfileResponse.message}")
+                        }
+                    }
+                } else {
+                    Log.e("이미지 Patch 여부", "이미지 Patch 실패: 응답 코드 = ${response.code()}")
+                }
+            }
+
+            override fun onFailure(call: Call<MemberChangeProfileImageResponse>, t: Throwable) {
+                Log.e("이미지 Patch 여부", "이미지 Patch 실패: 네트워크 또는 기타 오류", t)
+            }
+        })
+    }
+
+
+    private fun createBitmapRequestBody(bitmap: Bitmap): RequestBody {
+        return object : RequestBody() {
+            override fun contentType(): MediaType = "image/jpeg".toMediaType()
+            override fun writeTo(sink: BufferedSink) {
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 99, sink.outputStream())
+            }
         }
     }
 

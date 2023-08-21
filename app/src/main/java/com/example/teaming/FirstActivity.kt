@@ -31,12 +31,14 @@ class FirstActivity : AppCompatActivity() {
 
         binding.ButtonStart.setOnClickListener {
 
+            // 테스트용 정보
+            val requestBodyData = LoginRequset("hello@gmail.com", "hello123")
 
             // 데이터 없는 로그인 정보
             //val requestBodyData = LoginRequset("and@gmail.com", "and123")
 
             // 데이터 있는 로그인 정보
-            val requestBodyData = LoginRequset("test@gmail.com", "test123")
+            //val requestBodyData = LoginRequset("test@gmail.com", "test123")
             val json = Gson().toJson(requestBodyData)
             val requestBody = RequestBody.create("application/json".toMediaType(), json)
             val callLogin = RetrofitApi.getRetrofitService.login(requestBody)

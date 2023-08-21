@@ -52,6 +52,13 @@ interface RetrofitService {
     ): Call<CreateProjectResponse>
 
     @Multipart
+    @PATCH("/member/{memberId}/mypage/change-image")
+    fun changeProfileImg(
+        @Path("memberId") memberId: Int,
+        @Part change_image_file: MultipartBody.Part
+    ): Call<MemberChangeProfileImageResponse>
+
+    @Multipart
     @PATCH("/projects/{memberId}/{projectId}/modifyProject")
     fun modifyProject(
         @Path("memberId") memberId: Int,
@@ -77,6 +84,18 @@ interface RetrofitService {
         @Path("memberId") memberId: Int?,
         @Path("projectId") projectId: Int?
     ) : Call<InfoProjectResponse>
+
+    @POST("/member/{memberId}/change-password/check-password")
+    fun checkPassword(
+        @Path("memberId") memberId: Int?,
+        @Body currentPassword: CheckPasswordRequest
+    ): Call<CheckPasswordResponse>
+
+    @POST("/member/{memberId}/change-password")
+    fun changePassword(
+        @Path("memberId") memberId: Int?,
+        @Body changePassword: ChangePasswordRequest
+    ):Call<ChangePasswordResponse>
 
     @GET("/projects/{memberId}/{projectId}")
 

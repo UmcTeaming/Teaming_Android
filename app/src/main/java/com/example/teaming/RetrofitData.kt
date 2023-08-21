@@ -421,6 +421,7 @@ data class ModifyProjectResponse(
     @SerializedName("data")
     val data: CreateData
 )
+
 data class ModifyData(
     @SerializedName("project_id")
     val project_id: Int
@@ -561,6 +562,57 @@ data class MemberResetPasswordResponse(
     val status: Int,
     @SerializedName("message")
     val message: String
+)
+
+data class MemberChangeProfileImageRequestDto(
+    @SerializedName("change_image_file")
+    val change_image_file: MultipartBody.Part?
+)
+
+data class MemberChangeProfileImageResponse(
+    @SerializedName("status")
+    val status: Int,
+    @SerializedName("message")
+    val message: String,
+    @SerializedName("data")
+    val data: String
+)
+
+data class CheckPasswordRequest(
+    @SerializedName("currentPassword")
+    val currentPassword: String
+)
+
+data class CheckPasswordResponse(
+    @SerializedName("status")
+    val status: Int,
+    @SerializedName("message")
+    val message: String,
+    @SerializedName("data")
+    val data: String
+)
+
+data class ChangePasswordRequest(
+    @SerializedName("change_password")
+    val change_password: String
+)
+
+data class ChangePasswordResponse(
+    @SerializedName("status")
+    val status: Int,
+    @SerializedName("message")
+    val message: String,
+    @SerializedName("data")
+    val data: ChangePassData
+)
+
+data class ChangePassData(
+    @SerializedName("grandType")
+    val grandType: String,
+    @SerializedName("memberId")
+    val memberId: Int,
+    @SerializedName("accessToken")
+    val accessToken: String
 )
 
 data class ProjectFileUploadResponse(
