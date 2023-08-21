@@ -77,6 +77,8 @@
         android:hint="현재 비밀번호를 입력해주세요."
         android:fontFamily="@font/gmarket_sans_ttf_light"
         android:textSize="12sp"
+        android:lines="1"
+        android:singleLine="true"
         >
     </EditText>
 

@@ -66,6 +66,7 @@
 
     <TextView
         android:id="@+id/name"
+        android:maxLength="6"
         android:fontFamily="@font/gmarket_sans_ttf_medium"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

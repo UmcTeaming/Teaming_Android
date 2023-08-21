@@ -82,6 +82,7 @@
         android:singleLine="true"
         android:maxLines="1"
         android:id="@+id/Text_name"
+        android:maxLength="6"
         android:layout_width="match_parent"
         android:fontFamily="@font/gmarket_sans_ttf_light"
         android:layout_height="50dp"
@@ -201,6 +202,7 @@
         android:maxLines="1"
         android:layout_gravity="right"
         android:id="@+id/Text_num"
+        android:maxLength="20"
         android:layout_width="match_parent"
         android:fontFamily="@font/gmarket_sans_ttf_light"
         android:layout_height="50dp"
@@ -247,6 +249,7 @@
 
     <EditText
         android:id="@+id/Text_num_check"
+        android:maxLength="20"
         android:layout_width="match_parent"
         android:fontFamily="@font/gmarket_sans_ttf_light"
         android:layout_height="50dp"
