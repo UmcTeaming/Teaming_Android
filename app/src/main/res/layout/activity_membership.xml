@@ -274,7 +274,7 @@
         android:background="@drawable/bin_blue"
         android:textColor="#FFFFFF"
         android:textSize="10sp"
-        android:text="재전송하기"
+        android:text="인증하기"
         app:layout_constraintTop_toTopOf="@id/Text_email"
         app:layout_constraintRight_toRightOf="@id/Text_email"
         >
@@ -296,15 +296,16 @@
     </Button>
 
     <Button
+        android:enabled="false"
         android:id="@+id/Button_next"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_marginLeft="60dp"
         android:layout_marginTop="20dp"
         android:layout_marginRight="60dp"
-        android:background="@drawable/bin_black"
+        android:background="@drawable/create_btn_round_border"
         android:fontFamily="@font/gmarket_sans_ttf_medium"
-        android:text="다음으로"
+        android:text="가입하기"
         android:textColor="#FFFFFF"
         android:textSize="20sp"
         app:layout_constraintLeft_toLeftOf="parent"

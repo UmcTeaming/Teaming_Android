@@ -12,7 +12,10 @@ import com.example.teaming.databinding.FragmentDialogFirstBinding
 class DialogAgreeFragment : DialogFragment() {
 
     private lateinit var binding: FragmentDialogAgreeBinding
-
+    private var dialogListener: DialogListener? = null
+    interface DialogListener {
+        fun onDialogButtonClicked(value: String)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,11 +31,15 @@ class DialogAgreeFragment : DialogFragment() {
         val view = binding.root
 
         binding.ButtonAgree.setOnClickListener{
-
+            dialogListener?.onDialogButtonClicked("true")
             dismiss()
         }
 
         return view
+    }
+
+    fun setDialogListener(listener: DialogListener) {
+        dialogListener = listener
     }
 
 }
