@@ -40,7 +40,7 @@ class LoginActivity : AppCompatActivity() {
             val logInId = binding.TextEmail.text.toString()
             val password = binding.TextNum.text.toString()
 
-            // 여기서부터 주석 풀면됨
+            // 여기서부터 주석 풀거나 걸면 됨
             /*val requestBodyData = LoginRequset(logInId,password)
 
             //val requestBodyData = LoginRequset("hyun@gmail.com", "hyun123")

@@ -83,6 +83,7 @@ class FirstActivity : AppCompatActivity() {
                     Log.e("Login", "로그인 API 호출 실패", t)
                 }
             })
+
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
             overridePendingTransition(0, 0)
