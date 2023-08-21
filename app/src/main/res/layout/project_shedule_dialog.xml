@@ -59,6 +59,19 @@
                 android:textColor="#527FF5"
                 android:layout_marginBottom="10dp"
                 android:background="@drawable/cal_dialog_back_btn"/>
+            <Button
+                android:layout_marginTop="20dp"
+                android:id="@+id/init_btn"
+                android:layout_width="100dp"
+                android:layout_height="25dp"
+                android:layout_marginLeft="20dp"
+                android:textSize="12sp"
+                android:fontFamily="@font/gmarket_sans_ttf_bold"
+                android:text="초기화"
+                android:textColor="#527FF5"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/cal_dialog_back_btn"
+                android:visibility="gone"/>
             <View
                 android:layout_width="0dp"
                 android:layout_height="25dp"
@@ -76,6 +89,21 @@
                 android:textColor="@color/white"
                 android:background="@drawable/btn_blue_ellipse"
                 android:layout_marginBottom="10dp"/>
+
+            <Button
+                android:layout_marginTop="20dp"
+                android:id="@+id/del_btn"
+                android:layout_width="100dp"
+                android:layout_height="25dp"
+                android:textSize="12sp"
+                android:text="일정 삭제하기"
+                android:fontFamily="@font/gmarket_sans_ttf_bold"
+                android:backgroundTint="#70000000"
+                android:layout_marginRight="20dp"
+                android:textColor="@color/white"
+                android:background="@drawable/btn_blue_ellipse"
+                android:layout_marginBottom="10dp"
+                android:visibility="gone"/>
         </LinearLayout>
     </LinearLayout>
 </FrameLayout>

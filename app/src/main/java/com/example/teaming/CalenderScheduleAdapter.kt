@@ -22,7 +22,7 @@ import java.util.Locale
 class CalenderScheduleAdapter(val scheduleList:ArrayList<CalendarScheduleItem>,val context:Context):RecyclerView.Adapter<CalenderScheduleAdapter.CalendarScheduleViewHolder>() {
     inner class CalendarScheduleViewHolder(val binding:CalScheduleItemLayoutBinding):RecyclerView.ViewHolder(binding.root){
          @RequiresApi(Build.VERSION_CODES.O)
-         fun bind(startDay:String, endDay:String, startTime:String, endTime:String, desc:String, color:String?){
+         fun bind(startDay:String, endDay:String, startTime:String, endTime:String, desc:String, color:String?, delBtnChecked:Boolean){
              val outputFormat = SimpleDateFormat("MM월 dd일", Locale.getDefault())
              val inputFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
              val outputTimeFormat = DateTimeFormatter.ofPattern("HH:mm")
@@ -35,6 +35,15 @@ class CalenderScheduleAdapter(val scheduleList:ArrayList<CalendarScheduleItem>,v
              val startTimeAfter: String = startTimeBefore.format(outputTimeFormat)
              val endTimeBefore: LocalTime = LocalTime.parse(endTime, inputTimeFormat)
              val endTimeAfter: String = endTimeBefore.format(outputTimeFormat)
+             if (delBtnChecked){
+                 binding.delCheckBtn.visibility = View.VISIBLE
+             }
+             else{
+                 binding.delCheckBtn.visibility = View.GONE
+             }
+             binding.delCheckBtn.setOnClickListener {
+                 //
+             }
              binding.calScheduleDay.text = startDayAfter + "~" + endDayAfter
              binding.calScheduleDescription.text = desc
              binding.calScheduleTime.text = startTimeAfter + "~" + endTimeAfter
@@ -70,6 +79,17 @@ class CalenderScheduleAdapter(val scheduleList:ArrayList<CalendarScheduleItem>,v
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onBindViewHolder(holder: CalendarScheduleViewHolder, position: Int) {
         var data = scheduleList[position]
-        holder.bind(data.startDay,data.endDay,data.startTime,data.endTime, data.desc, data.color)
+        holder.bind(data.startDay,data.endDay,data.startTime,data.endTime, data.desc, data.color, data.delBtnChecked)
+    }
+
+    fun delButtonPressed(){
+        for(x in scheduleList)
+        {
+            if (x.delBtnChecked == true)
+                x.delBtnChecked = false
+            else
+                x.delBtnChecked = true
+        }
+        notifyDataSetChanged()
     }
 }

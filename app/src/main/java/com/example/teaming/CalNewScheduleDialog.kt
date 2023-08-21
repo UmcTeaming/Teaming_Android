@@ -119,10 +119,10 @@ class CalNewScheduleDialog():DialogFragment() {
         }
         binding.scheduleDatePicker.setOnDateChangedListener { view, year, monthOfYear, dayOfMonth ->
             if(focus==1){
-                binding.scheduleStartDay.text=year.toString()+". "+decimalForm.format(monthOfYear) + ". " + decimalForm.format(dayOfMonth)
+                binding.scheduleStartDay.text=year.toString()+". "+decimalForm.format(monthOfYear + 1) + ". " + decimalForm.format(dayOfMonth)
             }
             else if(focus==2){
-                binding.scheduleEndDay.text=year.toString()+". "+decimalForm.format(monthOfYear) + ". " + decimalForm.format(dayOfMonth)
+                binding.scheduleEndDay.text=year.toString()+". "+decimalForm.format(monthOfYear + 1) + ". " + decimalForm.format(dayOfMonth)
             }
         }
         binding.scheduleTimePicker.setOnTimeChangedListener { view, hourOfDay, minute ->
