@@ -46,6 +46,8 @@
         android:layout_marginLeft="5dp"/>
 
     <Button
+        android:id="@+id/del_check_btn"
+        android:visibility="gone"
         android:layout_marginTop="10dp"
         android:layout_width="25dp"
         android:layout_height="25dp"
