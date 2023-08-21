@@ -20,15 +20,31 @@ class ScheduleDeleteDialog : DialogFragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        val scheduleList = ArrayList<CalendarScheduleItem>()
         binding = FragmentScheduleDeleteDialogBinding.inflate(inflater,container,false)
         binding.scheduleRecyclerView.layoutManager = LinearLayoutManager(activity,LinearLayoutManager.VERTICAL,false)
-        val delScheduleList = arguments?.getSerializable("delList") as ArrayList<CalendarScheduleItem>
-        val adapter = CalenderScheduleAdapter(delScheduleList,requireActivity())
+        val delScheduleList = arguments?.getSerializable("List") as ArrayList<CalendarScheduleItem>
+        val delSet = arguments?.getSerializable("Set") as ArrayList<Int>
+        for (x in delSet){
+            for (y in delScheduleList){
+                if (y.scheduleId == x)
+                    scheduleList.add(y)
+            }
+        }
+        val adapter = CalenderScheduleAdapter(scheduleList,requireActivity())
+        binding.scheduleRecyclerView.adapter = adapter
         binding.cancleBtn.setOnClickListener{
             dismiss()
         }
         binding.delOkBtn.setOnClickListener {
-            //삭제 로직 구현
+            //retrofit연결해서 삭제만 하면 됨
+            binding.firstText.text = "일정이 삭제되었습니다"
+            binding.delOkBtn.visibility = View.GONE
+            binding.cancleBtn.visibility = View.GONE
+            binding.confirmBtn.visibility = View.VISIBLE
+        }
+        binding.confirmBtn.setOnClickListener {
+            dismiss()
         }
         return binding.root
     }

@@ -19,10 +19,11 @@ import java.time.format.DateTimeFormatter
 import java.util.Date
 import java.util.Locale
 
-class CalenderScheduleAdapter(val scheduleList:ArrayList<CalendarScheduleItem>,val context:Context):RecyclerView.Adapter<CalenderScheduleAdapter.CalendarScheduleViewHolder>() {
+class CalenderScheduleAdapter(val scheduleList:ArrayList<CalendarScheduleItem>,val context:Context, var deleteList:MutableSet<Int>? = null):RecyclerView.Adapter<CalenderScheduleAdapter.CalendarScheduleViewHolder>() {
     inner class CalendarScheduleViewHolder(val binding:CalScheduleItemLayoutBinding):RecyclerView.ViewHolder(binding.root){
+        var isChecked = false
          @RequiresApi(Build.VERSION_CODES.O)
-         fun bind(startDay:String, endDay:String, startTime:String, endTime:String, desc:String, color:String?, delBtnChecked:Boolean){
+         fun bind(startDay:String, endDay:String, startTime:String, endTime:String, desc:String, color:String?, delBtnChecked:Boolean, scheduleId:Int?){
              val outputFormat = SimpleDateFormat("MM월 dd일", Locale.getDefault())
              val inputFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
              val outputTimeFormat = DateTimeFormatter.ofPattern("HH:mm")
@@ -42,7 +43,18 @@ class CalenderScheduleAdapter(val scheduleList:ArrayList<CalendarScheduleItem>,v
                  binding.delCheckBtn.visibility = View.GONE
              }
              binding.delCheckBtn.setOnClickListener {
-                 //
+                 if(isChecked) {
+                     binding.delCheckBtn.setBackgroundResource(R.drawable.one_del_btn)
+                     isChecked = false
+                     deleteList!!.remove(scheduleId)
+                     Log.d("chanho",deleteList.toString())
+                 }
+                 else {
+                     binding.delCheckBtn.setBackgroundResource(R.drawable.one_del_btn_blue)
+                     isChecked = true
+                     deleteList!!.add(scheduleId!!)
+                     Log.d("chanho",deleteList.toString())
+                 }
              }
              binding.calScheduleDay.text = startDayAfter + "~" + endDayAfter
              binding.calScheduleDescription.text = desc
@@ -79,7 +91,7 @@ class CalenderScheduleAdapter(val scheduleList:ArrayList<CalendarScheduleItem>,v
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onBindViewHolder(holder: CalendarScheduleViewHolder, position: Int) {
         var data = scheduleList[position]
-        holder.bind(data.startDay,data.endDay,data.startTime,data.endTime, data.desc, data.color, data.delBtnChecked)
+        holder.bind(data.startDay,data.endDay,data.startTime,data.endTime, data.desc, data.color, data.delBtnChecked, data.scheduleId)
     }
 
     fun delButtonPressed(){
