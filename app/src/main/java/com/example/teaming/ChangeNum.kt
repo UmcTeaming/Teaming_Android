@@ -1,59 +1,124 @@
 package com.example.teaming
 
+import android.content.Context
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
+import android.text.method.PasswordTransformationMethod
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.example.teaming.databinding.FragmentChangeNumBinding
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [ChangeNum.newInstance] factory method to
- * create an instance of this fragment.
- */
 class ChangeNum : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    private lateinit var binding: FragmentChangeNumBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
+
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_change_num, container, false)
+        binding = FragmentChangeNumBinding.inflate(inflater,container,false)
+
+        val textWatcher = object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                updateButtonState()
+            }
+
+            override fun afterTextChanged(s: Editable?) {}
+        }
+
+        binding.password.addTextChangedListener(textWatcher)
+
+        binding.img1.setOnClickListener {
+            // 커서 위치
+            val cursorPosition = binding.password.selectionStart
+
+            if (binding.password.transformationMethod == null) {
+                // 현재 비밀번호 입력 타입이면 일반 텍스트로 변경
+                binding.img1.setBackgroundResource(R.drawable.eyeoff)
+                binding.password.transformationMethod = PasswordTransformationMethod.getInstance()
+            } else {
+                // 일반 텍스트 입력 타입이면 비밀번호 형태로 변경
+                binding.img1.setBackgroundResource(R.drawable.eyeon)
+
+                binding.password.transformationMethod = null
+            }
+
+            // 커서 위치 지정
+            binding.password.setSelection(cursorPosition)
+        }
+
+        binding.nextBtn.setOnClickListener {
+            val sharedPreference = requireActivity().getSharedPreferences("memberId",
+                Context.MODE_PRIVATE)
+
+            val memberId = sharedPreference.getInt("memberId",-1)
+            val requestBodyData = CheckPasswordRequest(binding.password.text.toString())
+            val checkPass = RetrofitApi.getRetrofitService.checkPassword(
+                memberId,
+                requestBodyData
+            )
+
+            checkPass.enqueue(object : Callback<CheckPasswordResponse> {
+                override fun onResponse(call: Call<CheckPasswordResponse>, response: Response<CheckPasswordResponse>) {
+                    if (response.isSuccessful) {
+                        val checkPassResponse = response.body()
+                        if (checkPassResponse != null) {
+                            Log.e("패스워드 상태","${checkPassResponse.status}")
+
+                            requireActivity().supportFragmentManager.beginTransaction()
+                                .replace(R.id.container,PasswordFragment())
+                                .addToBackStack(null)
+                                .commit()
+
+                        } else {
+                            Log.e("Post 여부", "Post 성공하지만 응답 데이터가 비어있습니다.")
+                        }
+                    } else {
+                        if(response.code()==400){
+                            val dialog = WrongPassDialog2()
+                            //dialog.arguments = bundle
+
+                            // Show the success dialog or perform other actions
+                            dialog.show(requireActivity().supportFragmentManager, "WrongPassDialog2")
+                        }
+                        Log.e("Post 여부", "Post 실패: 응답 코드 = ${response.code()}")
+                    }
+                }
+
+                override fun onFailure(call: Call<CheckPasswordResponse>, t: Throwable) {
+                    Log.e("Post 여부", "Post 실패: 네트워크 또는 기타 오류", t)
+                }
+            })
+        }
+
+        return binding.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment change_num.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            ChangeNum().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+    private fun updateButtonState() {
+        val password = binding.password.text.toString()
+
+        val enableButton = password.isNotEmpty()
+
+        // Add condition to check hexColor
+        if (enableButton) {
+            binding.nextBtn.isEnabled = true
+            binding.nextBtn.setBackgroundResource(R.drawable.round_border4)
+        } else {
+            binding.nextBtn.isEnabled = false
+            binding.nextBtn.setBackgroundResource(R.drawable.round_border4)
+        }
     }
 }

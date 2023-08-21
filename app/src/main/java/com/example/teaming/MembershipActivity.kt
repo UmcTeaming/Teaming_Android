@@ -11,6 +11,7 @@ import android.text.TextWatcher
 import android.util.Log
 import android.view.View
 import android.widget.Button
+import android.widget.TextView
 import android.widget.ImageView
 import android.widget.ToggleButton
 import com.example.teaming.databinding.ActivityMembershipBinding
@@ -112,8 +113,7 @@ class MembershipActivity : AppCompatActivity() {
             })
         }
 
-
-        val button = findViewById<Button>(R.id.Button_see);
+        val button = findViewById<TextView>(R.id.Button_see);
         button.paintFlags = button.paintFlags or Paint.UNDERLINE_TEXT_FLAG
         button.text = getString(R.string.underlined_text1)
 

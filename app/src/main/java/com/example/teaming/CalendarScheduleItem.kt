@@ -14,4 +14,8 @@ data class CalendarScheduleItem(
     @SerializedName("schedule_name")
     val desc:String,
     @SerializedName("project_color")
-    var color:String?)
+    var color:String?,
+    @SerializedName("schedule_id")
+    var scheduleId:Int,
+    var delBtnChecked:Boolean = false
+)

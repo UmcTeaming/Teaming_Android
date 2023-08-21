@@ -147,6 +147,125 @@ class MainFragment : Fragment() {
 
                             val userId = mainPageResponse.data
 
+                            binding.viewPager2.adapter = horAdapter
+                            binding.viewPager2.orientation = ViewPager2.ORIENTATION_HORIZONTAL
+                            binding.viewPager2.offscreenPageLimit = 4
+                            binding.viewPager2.currentItem = 1
+
+                            val pageMargin = resources.getDimensionPixelOffset(R.dimen.pageMargin).toFloat()
+                            val pageOffset = resources.getDimensionPixelOffset(R.dimen.offset).toFloat()
+
+                            binding.viewPager2.setPageTransformer { page, position ->
+                                val myOffset = position * -(2 * pageOffset + pageMargin)
+                                if (position < -1) {
+                                    page.setTranslationX(-myOffset)
+                                } else if (position <= 1) {
+                                    val scaleFactor = Math.max(0.7f, 1 - Math.abs(position - 0.04285715f))
+                                    page.setTranslationX(myOffset)
+                                    page.setScaleY(scaleFactor)
+                                    page.setScaleX(scaleFactor)
+                                    page.setAlpha(scaleFactor)
+                                } else {
+                                    // 기본 값
+                                    //page.setAlpha(0f)
+                                    page.setAlpha(1f)
+                                    page.setTranslationX(myOffset)
+                                }
+                            }
+
+                            binding.verList.layoutManager = LinearLayoutManager(context)
+                            binding.verList.adapter = verAdapter
+
+                            binding.gridList.layoutManager = GridLayoutManager(context,2)
+                            binding.gridList.adapter = gridAdapter
+
+                            binding.btnMainCreate.setOnClickListener {
+                                requireActivity().supportFragmentManager.beginTransaction()
+                                    .replace(R.id.container,CreateFragment())
+                                    .addToBackStack(null)
+                                    .commit()
+                            }
+
+                            // main페이지의 첫번째 가로 리사이클러뷰 클릭이벤트
+                            horAdapter.setItemClickListener(object: HorizontalAdapter.OnItemClickListener{
+                                override fun onClick(v:View,position:Int){
+                                    // 클릭 시 이벤트 작성
+                                    /*Toast.makeText(view?.context,
+                                        "${position}\n${horItemList[position].hor_title}\n${horItemList[position].hor_date}",
+                                        Toast.LENGTH_SHORT).show()*/
+                                    val bundle = Bundle()
+
+                                    bundle.putInt("projectID",horItemList[position].hor_id)
+
+                                    val pjPageFragment = PjPageFragment()
+                                    pjPageFragment.arguments = bundle
+
+                                    requireActivity().supportFragmentManager.beginTransaction()
+                                        .replace(R.id.container,pjPageFragment)
+                                        .addToBackStack(null)
+                                        .commit()
+                                }
+                            })
+
+                            // main페이지의 두번째 세로 리사이클러뷰 클릭이벤트
+                            verAdapter.setItemClickListener(object: VerticalAdapter.OnItemClickListener{
+                                override fun onClick(v:View,position:Int){
+                                    // 클릭 시 이벤트 작성
+                                    /*Toast.makeText(view?.context,
+                                        "${position}\n${verItemList[position].ver_title}\n${verItemList[position].ver_date}",
+                                        Toast.LENGTH_SHORT).show()*/
+
+                                    val bundle = Bundle()
+
+                                    bundle.putInt("projectID",verItemList[position].ver_Id)
+
+                                    val pjPageFragment = PjPageFragment()
+                                    pjPageFragment.arguments = bundle
+
+                                    requireActivity().supportFragmentManager.beginTransaction()
+                                        .replace(R.id.container,pjPageFragment)
+                                        .addToBackStack(null)
+                                        .commit()
+
+                                }
+                            })
+
+                            // main페이지의 세번째 그리드 리사이클러뷰 클릭이벤트
+                            gridAdapter.setItemClickListener(object: GridAdapter.OnItemClickListener{
+                                override fun onClick(v:View,position:Int){
+                                    // 클릭 시 이벤트 작성
+                                    /*Toast.makeText(view?.context,
+                                        "${position}\n${gridItemList[position].grid_title}\n${gridItemList[position].grid_date}",
+                                        Toast.LENGTH_SHORT).show()*/
+
+                                    val bundle = Bundle()
+
+                                    bundle.putInt("projectID",gridItemList[position].grid_Id)
+
+                                    val pjPageFragment = PjPageFragment()
+                                    pjPageFragment.arguments = bundle
+
+                                    requireActivity().supportFragmentManager.beginTransaction()
+                                        .replace(R.id.container,PjPageFragment())
+                                        .addToBackStack(null)
+                                        .commit()
+                                }
+                            })
+
+                            binding.btnNew1.setOnClickListener {
+                                requireActivity().supportFragmentManager.beginTransaction()
+                                    .replace(R.id.container,CreateFragment())
+                                    .addToBackStack(null)
+                                    .commit()
+                            }
+
+                            binding.btnNew2.setOnClickListener {
+                                requireActivity().supportFragmentManager.beginTransaction()
+                                    .replace(R.id.container,CreateFragment())
+                                    .addToBackStack(null)
+                                    .commit()
+                            }
+
                             Log.d("R_MainFragment", "Data: ${userId}")
                             Log.d("MainFragment", "Data: ${userId}")
                         }
@@ -168,134 +287,6 @@ class MainFragment : Fragment() {
                 }
             })
         }
-
-        //viewPager 관련 내용
-        binding.viewPager2.adapter = horAdapter
-        binding.viewPager2.orientation = ViewPager2.ORIENTATION_HORIZONTAL
-        binding.viewPager2.offscreenPageLimit = 3
-        binding.viewPager2.currentItem = 1
-
-        val pageMargin = resources.getDimensionPixelOffset(R.dimen.pageMargin).toFloat()
-        val pageOffset = resources.getDimensionPixelOffset(R.dimen.offset).toFloat()
-
-        binding.viewPager2.setPageTransformer { page, position ->
-            val myOffset = position * -(2 * pageOffset + pageMargin)
-            if (position < -1) {
-                page.setTranslationX(-myOffset)
-            } else if (position <= 1) {
-                val scaleFactor = Math.max(0.7f, 1 - Math.abs(position - 0.04285715f))
-                page.setTranslationX(myOffset)
-                page.setScaleY(scaleFactor)
-                page.setScaleX(scaleFactor)
-                page.setAlpha(scaleFactor)
-            } else {
-                // 기본 값
-                //page.setAlpha(0f)
-                page.setAlpha(1f)
-                page.setTranslationX(myOffset)
-            }
-        }
-
-        binding.verList.layoutManager = LinearLayoutManager(context)
-        binding.verList.adapter = verAdapter
-
-        binding.gridList.layoutManager = GridLayoutManager(context,2)
-        binding.gridList.adapter = gridAdapter
-
-        binding.btnMainCreate.setOnClickListener {
-            requireActivity().supportFragmentManager.beginTransaction()
-                .replace(R.id.container,CreateFragment())
-                .addToBackStack(null)
-                .commit()
-        }
-
-        // main페이지의 첫번째 가로 리사이클러뷰 클릭이벤트
-        horAdapter.setItemClickListener(object: HorizontalAdapter.OnItemClickListener{
-            override fun onClick(v:View,position:Int){
-                // 클릭 시 이벤트 작성
-                /*Toast.makeText(view?.context,
-                    "${position}\n${horItemList[position].hor_title}\n${horItemList[position].hor_date}",
-                    Toast.LENGTH_SHORT).show()*/
-                val bundle = Bundle()
-
-                bundle.putInt("projectID",horItemList[position].hor_id)
-
-                val pjPageFragment = PjPageFragment()
-                pjPageFragment.arguments = bundle
-
-                requireActivity().supportFragmentManager.beginTransaction()
-                        .replace(R.id.container,pjPageFragment)
-                    .addToBackStack(null)
-                    .commit()
-            }
-        })
-
-        // main페이지의 두번째 세로 리사이클러뷰 클릭이벤트
-        verAdapter.setItemClickListener(object: VerticalAdapter.OnItemClickListener{
-            override fun onClick(v:View,position:Int){
-                // 클릭 시 이벤트 작성
-                /*Toast.makeText(view?.context,
-                    "${position}\n${verItemList[position].ver_title}\n${verItemList[position].ver_date}",
-                    Toast.LENGTH_SHORT).show()*/
-
-                val bundle = Bundle()
-
-                bundle.putInt("projectID",verItemList[position].ver_Id)
-
-                val pjPageFragment = PjPageFragment()
-                pjPageFragment.arguments = bundle
-
-                requireActivity().supportFragmentManager.beginTransaction()
-                    .replace(R.id.container,pjPageFragment)
-                    .addToBackStack(null)
-                    .commit()
-
-            }
-        })
-
-        // main페이지의 세번째 그리드 리사이클러뷰 클릭이벤트
-        gridAdapter.setItemClickListener(object: GridAdapter.OnItemClickListener{
-            override fun onClick(v:View,position:Int){
-                // 클릭 시 이벤트 작성
-                /*Toast.makeText(view?.context,
-                    "${position}\n${gridItemList[position].grid_title}\n${gridItemList[position].grid_date}",
-                    Toast.LENGTH_SHORT).show()*/
-
-                val bundle = Bundle()
-
-                bundle.putInt("projectID",gridItemList[position].grid_Id)
-
-                val pjPageFragment = PjPageFragment()
-                pjPageFragment.arguments = bundle
-
-                requireActivity().supportFragmentManager.beginTransaction()
-                    .replace(R.id.container,pjPageFragment)
-                    .addToBackStack(null)
-                    .commit()
-            }
-        })
-
-        binding.btnNew1.setOnClickListener {
-            requireActivity().supportFragmentManager.beginTransaction()
-                .replace(R.id.container,CreateFragment())
-                .addToBackStack(null)
-                .commit()
-        }
-
-        binding.btnNew2.setOnClickListener {
-            requireActivity().supportFragmentManager.beginTransaction()
-                .replace(R.id.container,CreateFragment())
-                .addToBackStack(null)
-                .commit()
-        }
-
-        /*
-        // 프로젝트가 없는 경우
-        binding.nonViewPager2.visibility = View.INVISIBLE
-        binding.nonVerList.visibility = View.GONE
-        binding.nonGridList.visibility = View.INVISIBLE
-        */
-
         return binding.root
     }
 }

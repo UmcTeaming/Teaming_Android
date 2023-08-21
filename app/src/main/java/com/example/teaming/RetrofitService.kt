@@ -4,6 +4,7 @@ import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import okhttp3.ResponseBody
 import retrofit2.Call
+import retrofit2.http.*
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.Multipart
@@ -45,10 +46,17 @@ interface RetrofitService {
     @Multipart
     @POST("/projects/{memberId}/create")
     fun createProject(
-        @Path("memberId") memberId: Int?,
+        @Path("memberId") memberId: Int,
         @Part projectImage: MultipartBody.Part,
         @PartMap requestBody: HashMap<String, RequestBody>
     ): Call<CreateProjectResponse>
+
+    @Multipart
+    @PATCH("/member/{memberId}/mypage/change-image")
+    fun changeProfileImg(
+        @Path("memberId") memberId: Int,
+        @Part change_image_file: MultipartBody.Part
+    ): Call<MemberChangeProfileImageResponse>
 
     @Multipart
     @PATCH("/projects/{memberId}/{projectId}/modifyProject")
@@ -76,6 +84,24 @@ interface RetrofitService {
         @Path("memberId") memberId: Int?,
         @Path("projectId") projectId: Int?
     ) : Call<InfoProjectResponse>
+
+    @POST("/member/{memberId}/change-password/check-password")
+    fun checkPassword(
+        @Path("memberId") memberId: Int?,
+        @Body currentPassword: CheckPasswordRequest
+    ): Call<CheckPasswordResponse>
+
+    @POST("/member/{memberId}/change-password")
+    fun changePassword(
+        @Path("memberId") memberId: Int?,
+        @Body changePassword: ChangePasswordRequest
+    ):Call<ChangePasswordResponse>
+
+    @PATCH("/member/{memberId}/mypage/change-nickname")
+    fun changeNickname(
+        @Path("memberId") memberId: Int?,
+        @Body changePassword: ChangeNicknameRequest
+    ):Call<ChangeNicknameResponse>
 
     @GET("/projects/{memberId}/{projectId}")
 
@@ -119,6 +145,11 @@ interface RetrofitService {
     @GET
     fun fileDownload(@Url url: String): Call<ResponseBody>
 
+
+    @DELETE("/projects/{memberId}/{projectId}/files/{fileId}")
+    fun fileDelete(@Path("memberId") memberId: Int?,@Path("projectId") projectId: Int?,@Path("fileId") fileId: Int?) : Call<FileDeleteResponse>
+
+
     @POST("/member/{memberId}/date_list")
     fun monthSchedule(@Path("memberId") memberId: Int?, @Body dateRequest:MonthScheduleRequest) : Call<MonthScheduleList>
 
@@ -128,4 +159,13 @@ interface RetrofitService {
     @POST("/auth/email-verification")
     fun memberverification(@Body requestBody:MemberVerificationRequest) : Call<MemberVerificationResponse>
 
+
+
+    @Multipart
+    @POST("/projects/{memberId}/{projectId}/files-upload")
+    fun projectFileUpload(@Path("memberId") memberId: Int?,@Path("projectId") projectId: Int?,@Part filePart: MultipartBody.Part) : Call<ProjectFileUploadResponse>
+
+    @Multipart
+    @POST("/projects/{memberId}/{projectId}/final-file")
+    fun finalFileUpload(@Path("memberId") memberId: Int?,@Path("projectId") projectId: Int?,@Part filePart: MultipartBody.Part) : Call<FinalFileUploadResponse>
 }

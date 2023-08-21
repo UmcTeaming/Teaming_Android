@@ -113,8 +113,10 @@ data class PortfolioPageResponse(
 )
 
 data class PortFolioData(
-    @SerializedName("memberId")
-    val memberId: Int,
+    @SerializedName("member_id")
+    val member_id: Int,
+    @SerializedName("member_name")
+    val member_name: String,
     @SerializedName("portfolio")
     val portfolio: List<PortfolioList>
 )
@@ -171,6 +173,8 @@ data class ProgressPageResponse(
 data class ProgressData(
     @SerializedName("member_id")
     val member_id: Int,
+    @SerializedName("member_name")
+    val member_name: String,
     @SerializedName("progressProjects")
     val progressProjects: List<PortfolioProgress>
 )
@@ -280,7 +284,7 @@ data class FileDetails(
     val comment: Int,
     @SerializedName("file_id")
     val file_id: Int,
-    var del_btn_mark: Boolean = false,
+    var del_btn_mark: Boolean = false
 )
 
 data class FinalFilesResponse(
@@ -309,7 +313,8 @@ data class FinalDetails(
     @SerializedName("comment")
     val comment: Int,
     @SerializedName("file_id")
-    val file_id: Int
+    val file_id: Int,
+    var del_btn_mark: Boolean = false
 )
 
 data class InvitationsResponse(
@@ -402,6 +407,14 @@ data class CommentIdData(
     @SerializedName("commentId")
     val commentId: Int
 )
+
+data class FileDeleteResponse(
+    @SerializedName("status")
+    val status: Int,
+    @SerializedName("message")
+    val message: String
+)
+
 
 // 프로젝트 수정 부분 data
 data class ModifyProjectResponse(
@@ -592,3 +605,97 @@ data class MemberVerificationResponse(
     @SerializedName("data")
     val data: String
 )
+
+data class MemberChangeProfileImageRequestDto(
+    @SerializedName("change_image_file")
+    val change_image_file: MultipartBody.Part?
+)
+
+data class MemberChangeProfileImageResponse(
+    @SerializedName("status")
+    val status: Int,
+    @SerializedName("message")
+    val message: String,
+    @SerializedName("data")
+    val data: String
+)
+
+data class CheckPasswordRequest(
+    @SerializedName("currentPassword")
+    val currentPassword: String
+)
+
+data class CheckPasswordResponse(
+    @SerializedName("status")
+    val status: Int,
+    @SerializedName("message")
+    val message: String,
+    @SerializedName("data")
+    val data: String
+)
+
+data class ChangePasswordRequest(
+    @SerializedName("change_password")
+    val change_password: String
+)
+
+data class ChangePasswordResponse(
+    @SerializedName("status")
+    val status: Int,
+    @SerializedName("message")
+    val message: String,
+    @SerializedName("data")
+    val data: ChangePassData
+)
+
+data class ChangePassData(
+    @SerializedName("grandType")
+    val grandType: String,
+    @SerializedName("memberId")
+    val memberId: Int,
+    @SerializedName("accessToken")
+    val accessToken: String
+)
+
+data class ChangeNicknameRequest(
+    @SerializedName("change_nickname")
+    val change_nickname: String
+)
+
+data class ChangeNicknameResponse(
+    @SerializedName("status")
+    val status: Int,
+    @SerializedName("message")
+    val message: String,
+    @SerializedName("data")
+    val data: String
+)
+
+data class ProjectFileUploadResponse(
+    @SerializedName("status")
+    val status: Int,
+    @SerializedName("message")
+    val message: String,
+    @SerializedName("data")
+    val data: FileData
+)
+
+data class FileData(
+    @SerializedName("file_Id")
+    val file_Id: Int
+)
+
+data class FinalFileUploadResponse(
+    @SerializedName("status")
+    val status: Int,
+    @SerializedName("message")
+    val message: String,
+    @SerializedName("data")
+    val data: FinalUploadData
+)
+
+data class FinalUploadData(
+    @SerializedName("file_Id")
+    val file_Id: Int
+)
+

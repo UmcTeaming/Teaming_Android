@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:textColor="@color/black"
         android:fontFamily="@font/gmarket_sans_ttf_bold"
-        android:text="정말 파일을 삭제하시겠어요?"
+        android:text="정말 일정을 삭제하시겠어요?"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -36,7 +36,7 @@
             android:textColor="#B3000000"
             android:fontFamily="@font/gmarket_sans_ttf_medium"
             android:textSize="13sp"
-            android:text="삭제된 파일은 "
+            android:text="삭제된 일정은 "
             />
 
         <TextView
@@ -82,7 +82,7 @@
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/pj_file_list"
+        android:id="@+id/schedule_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -98,10 +98,11 @@
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/pj_file_list"
+        app:layout_constraintTop_toBottomOf="@id/schedule_recycler_view"
         android:orientation="horizontal">
 
         <ImageButton
+            android:id="@+id/cancle_btn"
             android:layout_marginEnd="7dp"
             android:layout_width="wrap_content"
             android:layout_height="30dp"
@@ -111,6 +112,7 @@
             android:background="@android:color/transparent"/>
 
         <ImageButton
+            android:id="@+id/del_ok_btn"
             android:layout_marginStart="7dp"
             android:layout_width="wrap_content"
             android:layout_height="30dp"

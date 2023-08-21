@@ -67,7 +67,6 @@ class ModifyFragment : Fragment(),ColSelDialog.OnColorSelectedListener, ImgDialo
 
         val projectId = arguments?.getInt("projectID")
 
-
         Log.e("modify memberId","${memberId}")
         Log.e("modify projectId","${projectId}")
 
