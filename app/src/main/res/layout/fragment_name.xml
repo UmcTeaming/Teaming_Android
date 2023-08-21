@@ -17,6 +17,8 @@
         android:textColorHint="#80000000"
         android:backgroundTint="#527FF5"
         android:textColor="#000000"
+        android:lines="1"
+        android:singleLine="true"
         android:textSize="10sp"
         tools:ignore="MissingConstraints"
         >

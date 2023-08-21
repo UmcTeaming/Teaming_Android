@@ -45,7 +45,7 @@ interface RetrofitService {
     @Multipart
     @POST("/projects/{memberId}/create")
     fun createProject(
-        @Path("memberId") memberId: Int,
+        @Path("memberId") memberId: Int?,
         @Part projectImage: MultipartBody.Part,
         @PartMap requestBody: HashMap<String, RequestBody>
     ): Call<CreateProjectResponse>
@@ -94,11 +94,8 @@ interface RetrofitService {
 
     @POST("/auth/signup")
     fun signup(
-        @Part("name") name: RequestBody,
-        @Part("email") email: RequestBody,
-        @Part("password") password: RequestBody
-    ): Call<SignupResponse>
-
+        @Body signupBody: MemberRequestDto
+    ): Call<MemberRequestDtoResponse>
 
     @GET("/projects/{memberId}/{projectId}/schedule")
     fun projectSchedule(@Path("memberId") memberId:Int?, @Path("projectId") projectId:Int?) : Call<CalendarScheduleResult>
@@ -124,4 +121,11 @@ interface RetrofitService {
 
     @POST("/member/{memberId}/date_list")
     fun monthSchedule(@Path("memberId") memberId: Int?, @Body dateRequest:MonthScheduleRequest) : Call<MonthScheduleList>
+
+    @POST("/auth/email-duplication")
+    fun memberduplication(@Body requestBody:MemberDuplicationRequest) : Call<MemberDuplicationResponse>
+
+    @POST("/auth/email-verification")
+    fun memberverification(@Body requestBody:MemberVerificationRequest) : Call<MemberVerificationResponse>
+
 }

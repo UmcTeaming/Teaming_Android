@@ -528,14 +528,6 @@ data class SignupResponse(
     val data: String
 )
 
-data class MemberRequestDto(
-    @SerializedName("name")
-    val name: String,
-    @SerializedName("email")
-    val email: String,
-    @SerializedName("password")
-    val password: String
-)
 
 data class MonthScheduleRequest(
     @SerializedName("date_request")
@@ -553,4 +545,50 @@ data class MemberResetPasswordResponse(
     val status: Int,
     @SerializedName("message")
     val message: String
+)
+
+data class MemberRequestDto(
+    @SerializedName("name")
+    val name: String,
+    @SerializedName("email")
+    val email: String,
+    @SerializedName("password")
+    val password: String
+)
+
+data class MemberRequestDtoResponse(
+    @SerializedName("status")
+    val status: Int,
+    @SerializedName("message")
+    val message: String,
+    @SerializedName("data")
+    val data: String?
+)
+
+data class MemberDuplicationRequest(
+    @SerializedName("email")
+    val email: String
+)
+
+data class MemberDuplicationResponse(
+    @SerializedName("status")
+    val status: Int,
+    @SerializedName("message")
+    val message: String,
+    @SerializedName("data")
+    val data: String
+)
+
+data class MemberVerificationRequest(
+    @SerializedName("authentication")
+    val authentication: String
+)
+
+data class MemberVerificationResponse(
+    @SerializedName("status")
+    val status: Int,
+    @SerializedName("message")
+    val message: String,
+    @SerializedName("data")
+    val data: String
 )
