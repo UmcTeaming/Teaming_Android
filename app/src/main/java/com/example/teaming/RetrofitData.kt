@@ -113,8 +113,10 @@ data class PortfolioPageResponse(
 )
 
 data class PortFolioData(
-    @SerializedName("memberId")
-    val memberId: Int,
+    @SerializedName("member_id")
+    val member_id: Int,
+    @SerializedName("member_name")
+    val member_name: String,
     @SerializedName("portfolio")
     val portfolio: List<PortfolioList>
 )
@@ -171,6 +173,8 @@ data class ProgressPageResponse(
 data class ProgressData(
     @SerializedName("member_id")
     val member_id: Int,
+    @SerializedName("member_name")
+    val member_name: String,
     @SerializedName("progressProjects")
     val progressProjects: List<PortfolioProgress>
 )
@@ -613,6 +617,20 @@ data class ChangePassData(
     val memberId: Int,
     @SerializedName("accessToken")
     val accessToken: String
+)
+
+data class ChangeNicknameRequest(
+    @SerializedName("change_nickname")
+    val change_nickname: String
+)
+
+data class ChangeNicknameResponse(
+    @SerializedName("status")
+    val status: Int,
+    @SerializedName("message")
+    val message: String,
+    @SerializedName("data")
+    val data: String
 )
 
 data class ProjectFileUploadResponse(
