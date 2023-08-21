@@ -32,7 +32,7 @@ class FirstActivity : AppCompatActivity() {
         binding.ButtonStart.setOnClickListener {
 
             // 테스트용 정보
-            val requestBodyData = LoginRequset("hello@gmail.com", "hello123")
+            val requestBodyData = LoginRequset("mapledt001@naver.com", "cat123")
 
             // 데이터 없는 로그인 정보
             //val requestBodyData = LoginRequset("and@gmail.com", "and123")
@@ -59,16 +59,16 @@ class FirstActivity : AppCompatActivity() {
                             var bundle = Bundle()
 
                             val preferences = getSharedPreferences("memberId", MODE_PRIVATE)
-                            val preferences2 = getSharedPreferences("memberName", MODE_PRIVATE)
+                            //val preferences2 = getSharedPreferences("memberName", MODE_PRIVATE)
 
                             val editor = preferences.edit()
-                            val editor2 = preferences2.edit()
+                            //val editor2 = preferences2.edit()
 
                             editor.putInt("memberId", userId)
-                            editor2.putString("memberName",userName)
+                            //editor2.putString("memberName",userName)
 
                             editor.commit()
-                            editor2.commit()
+                            //editor2.commit()
 
                             App.prefs.token = accessToken
 
@@ -87,8 +87,6 @@ class FirstActivity : AppCompatActivity() {
             startActivity(intent)
             overridePendingTransition(0, 0)
             finish()
-
-
         }
     }
 

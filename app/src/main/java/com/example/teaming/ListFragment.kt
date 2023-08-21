@@ -61,6 +61,9 @@ class ListFragment : Fragment() {
                             val progressProjects = progressPageResponse.data.progressProjects
                             Log.e("tag","${progressProjects}")
 
+                            binding.memberName.text = progressPageResponse.data.member_name
+                            Log.e("List 사용자명","${progressPageResponse.data.member_name}")
+
                             if(progressProjects !=null && progressProjects.isNotEmpty()){
                                 binding.btnLayout.visibility = View.VISIBLE
                                 binding.fileFrame.visibility = View.VISIBLE

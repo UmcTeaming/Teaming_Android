@@ -88,11 +88,11 @@ class ChangeNum : Fragment() {
                         }
                     } else {
                         if(response.code()==400){
-                            val dialog = WrongPassDialog()
+                            val dialog = WrongPassDialog2()
                             //dialog.arguments = bundle
 
                             // Show the success dialog or perform other actions
-                            dialog.show(requireActivity().supportFragmentManager, "WrongPassDialog")
+                            dialog.show(requireActivity().supportFragmentManager, "WrongPassDialog2")
                         }
                         Log.e("Post 여부", "Post 실패: 응답 코드 = ${response.code()}")
                     }
