@@ -19,7 +19,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginTop="50dp"
-        android:textSize="17sp"
+        android:textSize="15sp"
         android:gravity="center"
         />
 
@@ -32,8 +32,9 @@
         app:layout_constraintTop_toBottomOf="@id/yes_home"
         app:layout_constraintBottom_toBottomOf="parent"
         android:layout_marginStart="7dp"
-        android:layout_width="130dp"
+        android:layout_width="140dp"
         android:layout_height="30dp"
+        android:textSize="14sp"
         android:src="@drawable/yes_btn"
         android:scaleType="fitCenter"
         android:background="@android:color/transparent"

@@ -149,7 +149,7 @@
         android:textColor="#80000000"
         android:textSize="12sp"
         android:layout_marginTop="24dp"
-        android:layout_marginLeft="50dp"
+        android:layout_marginLeft="40dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@id/secret"
         >
@@ -179,22 +179,9 @@
         android:textColor="#80000000"
         android:textSize="12sp"
         app:layout_constraintLeft_toRightOf="@id/Button_mail"
-        app:layout_constraintTop_toTopOf="@id/text2"></TextView>
+        app:layout_constraintTop_toTopOf="@id/text2"
+        >
+    </TextView>
 
-    <Button
-        android:visibility="invisible"
-        android:id="@+id/complete_btn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="50dp"
-        android:layout_marginTop="200dp"
-        android:layout_marginRight="50dp"
-        android:background="@drawable/button_check"
-        android:fontFamily="@font/gmarket_sans_ttf_bold"
-        android:text="닉네임 수정 완료하기"
-        android:textColor="#ffffff"
-        app:layout_constraintTop_toBottomOf="@+id/Button_mail"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
