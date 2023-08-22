@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".PdfError">
+    tools:context=".PdfErrorFi">
 
     <ImageView
         android:layout_marginTop="15dp"
@@ -16,6 +16,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:src="@drawable/no_viewer_pj"
-        />
+        />>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
