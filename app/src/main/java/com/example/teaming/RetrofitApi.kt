@@ -10,7 +10,7 @@ object RetrofitApi {
 
     private val okHttpClient = OkHttpClient.Builder().addInterceptor(AuthInterceptor()).build()
 
-    private const val BASE_URL = "http://teaming.shop:8080"
+    private const val BASE_URL = "https://teaming.shop"
     private val getRetrofit by lazy{
         Retrofit.Builder()
             .client(okHttpClient) //토큰 인터셉터
