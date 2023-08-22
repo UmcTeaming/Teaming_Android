@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="287dp"
+    android:layout_width="match_parent"
     android:layout_marginTop="7dp"
     android:layout_marginBottom="7dp"
     android:layout_height="114dp"
@@ -10,18 +10,20 @@
     <ImageView
         android:id="@+id/ver_state2"
         android:layout_marginTop="18dp"
-        android:layout_marginLeft="260dp"
+        android:layout_gravity="end"
+        android:layout_marginEnd="20dp"
         android:layout_width="12dp"
         android:layout_height="12dp"
         android:background="@drawable/state_oval"/>
 
     <TextView
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
         android:layout_marginTop="14dp"
         android:textSize="14sp"
         android:id="@+id/ver_title2"
-        android:layout_marginLeft="22dp"
         android:textColor="@color/black"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="26.21dp"
         android:gravity="center_vertical"
         android:fontFamily="@font/gmarket_sans_ttf_bold"
@@ -29,9 +31,10 @@
 
     <TextView
         android:id="@+id/ver_date2"
-        android:layout_marginLeft="22dp"
         android:textColor="#99000000"
-        android:layout_width="wrap_content"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fontFamily="@font/gmarket_sans_ttf_medium"
         android:text="2023.  07. 01 ~ 2023. 08. 29"
