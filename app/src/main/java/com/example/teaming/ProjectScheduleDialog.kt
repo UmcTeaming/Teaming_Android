@@ -30,7 +30,7 @@ class ProjectScheduleDialog : DialogFragment() {
         memberId = argument!!.getInt("memberId")
         projectId = argument!!.getInt("projectId")
         binding = ProjectSheduleDialogBinding.inflate(inflater,container,false)
-        //scheduleList.add(CalendarScheduleItem("2023-12-11","2023-07-10","10:30:00","14:30:00","티밍 입니다다", "#d79ac3"))
+        binding.projectName.text = argument!!.getString("projectName","failed loading") + "의 일정"
         adapter = CalenderScheduleAdapter(scheduleList,requireActivity(),deleteList)
         binding.projectSchedulesRecyclerView.layoutManager = LinearLayoutManager(activity,LinearLayoutManager.VERTICAL,false)
         takeProjectSchedule()
