@@ -46,7 +46,6 @@ class PjPageFragment : Fragment() {
     private lateinit var projectName:String
 
     private val FILE_PICK_REQUEST_CODE = 1
-    private lateinit var selectedFileUri: Uri
 
     private var fileType : String = ""
 
@@ -236,9 +235,10 @@ class PjPageFragment : Fragment() {
         if (default_btn) {
             binding.uploadBtn.apply {
                 setImageResource(R.drawable.file_upload_btn)
+                fileType = "project"
                 setOnClickListener {
-                    fileType = "project"
                     openFilePickerAndUpload()
+                    Log.e("click","$fileType")
                 }
             }
 
@@ -255,12 +255,12 @@ class PjPageFragment : Fragment() {
             }
 
 
-        } else {
+        } else if (default_btn == false){
 
             binding.uploadBtn.apply {
                 setImageResource(R.drawable.final_upload_btn)
-                setOnClickListener {
-                    fileType = "final"
+                fileType = "final"
+                setOnClickListener{
                     openFilePickerAndUpload()
                 }
             }
@@ -275,10 +275,6 @@ class PjPageFragment : Fragment() {
                 setBackgroundResource(R.drawable.slide_btn_selected)
                 setTextColor(ContextCompat.getColor(requireContext(), R.color.black))
                 requestLayout()
-            }
-
-            binding.uploadBtn.setOnClickListener {
-
             }
         }
     }
@@ -421,6 +417,7 @@ class PjPageFragment : Fragment() {
     }
 
     private fun openFilePickerAndUpload() {
+        Log.d("파일업로드","됐다")
         val intent = Intent(Intent.ACTION_GET_CONTENT)
         intent.type = "*/*" // 모든 파일 타입을 선택 가능하게 하려면 "*/*"로 설정
         startActivityForResult(intent, FILE_PICK_REQUEST_CODE)

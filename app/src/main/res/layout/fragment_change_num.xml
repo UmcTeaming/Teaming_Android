@@ -102,8 +102,8 @@
     <ImageView
         android:id="@+id/img1"
         android:layout_width="23dp"
-        android:layout_height="23dp"
-        android:scaleType="fitXY"
+        android:layout_height="20dp"
+        android:scaleType="centerInside"
         android:background="@drawable/eyeoff"
         app:layout_constraintRight_toRightOf="@id/password"
         app:layout_constraintTop_toTopOf="@id/text2"
