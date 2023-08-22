@@ -205,47 +205,6 @@ class CreateFragment : Fragment(), ColSelDialog.OnColorSelectedListener, ImgDial
         updateButtonState()
     }
 
-    /*override fun onImgSelected(img_num: Int) {
-        if (img_num == 1) {
-            val drawable = ContextCompat.getDrawable(requireContext(), R.drawable.file_background)
-            val imageBitmap = (drawable as BitmapDrawable).bitmap
-
-            val imageFile = File(requireContext().cacheDir, "image${System.currentTimeMillis()}.jpg")
-            imageBitmap.compress(Bitmap.CompressFormat.JPEG, 90, FileOutputStream(imageFile))
-
-            selectedImageUri = Uri.fromFile(imageFile)
-
-            binding.imgAdd.setImageURI(selectedImageUri)
-            binding.text.visibility = View.INVISIBLE
-
-            updateButtonState()
-        }
-    }
-
-    override fun onImgSelected(imageUri: Uri?) {
-        if (imageUri != null) {
-            // 이미지를 imgAdd ImageView에 추가하고 처리합니다.
-            binding.imgAdd.setImageURI(imageUri)
-            binding.text.visibility = View.INVISIBLE
-            selectedImageUri = imageUri
-        }
-        updateButtonState()
-    }
-
-    override fun onImgSelected(imageBitmap: Bitmap?) {
-        if (imageBitmap != null) {
-            val imageFile = File(requireContext().cacheDir, "image${System.currentTimeMillis()}.jpg")
-            imageBitmap.compress(Bitmap.CompressFormat.JPEG, 90, FileOutputStream(imageFile))
-
-            selectedImageUri = Uri.fromFile(imageFile)
-
-            binding.imgAdd.setImageURI(selectedImageUri)
-            binding.text.visibility = View.INVISIBLE
-
-            updateButtonState()
-        }
-    }*/
-
     override fun onImgSelected(img_num: Int) {
         if (img_num == 1) {
             val drawable = ContextCompat.getDrawable(requireContext(), R.drawable.file_background)

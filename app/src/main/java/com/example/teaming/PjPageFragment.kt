@@ -304,14 +304,12 @@ class PjPageFragment : Fragment() {
 
             val memberId = sharedPreference_mem.getInt("memberId",-1)
 
-            val projectId = sharedPreference.getInt("projectID_page",-1)
-
             val requestBodyData = InvitationsRequest(dialogBinding.emailWrite.text.toString())
             Log.d("리퀘스트","${requestBodyData}")
             val json = Gson().toJson(requestBodyData)
             val requestBody = RequestBody.create("application/json".toMediaType(), json)
 
-            val callInvitation = RetrofitApi.getRetrofitService.invitation(memberId,projectId,requestBody)
+            val callInvitation = RetrofitApi.getRetrofitService.invitation(memberId, projectIdAll,requestBody)
 
             callInvitation.enqueue(object : Callback<InvitationsResponse> {
                 override fun onResponse(call: Call<InvitationsResponse>, response: Response<InvitationsResponse>) {
@@ -349,7 +347,8 @@ class PjPageFragment : Fragment() {
                             }
                         }
                     } else {
-                        Log.d("Invitation", "API 호출 실패: ${response.code()}")
+                        pjInviteDialog.dismiss()
+                        showInviteNoInfoDialog(response.code())
                     }
                 }
 
@@ -376,10 +375,6 @@ class PjPageFragment : Fragment() {
 
         dialogBinding.closeYesBtn.setOnClickListener {
 
-            sleep(300)
-            requireActivity().supportFragmentManager.beginTransaction()
-                .replace(R.id.container,PjPageFragment())
-                .commit()
 
             inviteYesInfoDialog.dismiss()
 
@@ -400,6 +395,7 @@ class PjPageFragment : Fragment() {
         if (errorcode == 208){
             dialogBinding.noWayHome.text = "이미 참여 중인 초대자입니다."
         }else if(errorcode == 404){
+            Log.d("뭐지","404")
             dialogBinding.noWayHome.text = "회원이 아닌 초대자 입니다."
         }
         inviteNoInfoDialog.setContentView(dialogBinding.root)
@@ -435,6 +431,10 @@ class PjPageFragment : Fragment() {
                     override fun onResponse(call: Call<ProjectFileUploadResponse>, response: Response<ProjectFileUploadResponse>) {
                         if (response.isSuccessful) {
                             val uploadResponse = response.body()
+                            sleep(500)
+                            requireActivity().supportFragmentManager.beginTransaction()
+                                .replace(R.id.fragmentContainer,PjSort())
+                                .commit()
                         } else {
                             Log.d("파일 업로드", "${response.code()}")
                         }
@@ -450,6 +450,10 @@ class PjPageFragment : Fragment() {
                     override fun onResponse(call: Call<FinalFileUploadResponse>, response: Response<FinalFileUploadResponse>) {
                         if (response.isSuccessful) {
                             val uploadResponse = response.body()
+                            sleep(500)
+                            requireActivity().supportFragmentManager.beginTransaction()
+                                .replace(R.id.fragmentContainer,FiSort())
+                                .commit()
                         } else {
                             Log.d("파일 업로드", "${response.code()}")
                         }
