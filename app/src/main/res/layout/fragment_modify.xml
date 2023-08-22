@@ -103,8 +103,9 @@
 
             <EditText
                 android:id="@+id/modi_start"
-                android:inputType="date"
                 android:hint="2023-07-02"
+                android:inputType="text"
+                android:digits="0123456789-"
                 android:textSize="11sp"
                 android:fontFamily="@font/gmarket_sans_ttf_medium"
                 android:gravity="center_horizontal"
@@ -122,8 +123,9 @@
                 android:textColor="#194AC2"/>
 
             <EditText
+                android:inputType="text"
+                android:digits="0123456789-"
                 android:id="@+id/modi_end"
-                android:inputType="date"
                 android:gravity="center_horizontal"
                 android:hint="2023-07-02"
                 android:textSize="11sp"
