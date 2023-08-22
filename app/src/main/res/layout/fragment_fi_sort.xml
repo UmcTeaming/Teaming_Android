@@ -8,6 +8,7 @@
     android:background="@color/white">
 
     <TextView
+        android:layout_marginTop="14dp"
         android:clickable="true"
         android:id="@+id/end_btn"
         android:layout_width="wrap_content"
@@ -17,10 +18,9 @@
         android:fontFamily="@font/gmarket_sans_ttf_medium"
         android:textColor="#527FF5"
         android:textSize="15sp"
-        app:layout_constraintTop_toBottomOf="@id/out_recycler_fi"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginTop="30dp"
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="10dp"/>
 
@@ -42,10 +42,11 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/out_recycler_fi"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/trash_btn"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:paddingBottom="37dp"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
