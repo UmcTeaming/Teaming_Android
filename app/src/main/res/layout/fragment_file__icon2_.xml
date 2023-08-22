@@ -9,7 +9,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:visibility="visible"
         android:id="@+id/pot_ver_list2"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="5dp"
@@ -24,7 +24,7 @@
         android:id="@+id/icon2_non"
         android:visibility="invisible"
         android:layout_gravity="center_horizontal"
-        android:layout_width="287dp"
+        android:layout_width="match_parent"
         android:layout_height="222dp"
         android:orientation="vertical"
         android:backgroundTint="@color/white"
