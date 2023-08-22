@@ -49,6 +49,8 @@ class ModifyFragment : Fragment(),ColSelDialog.OnColorSelectedListener, ImgDialo
     private lateinit var inviteNoInfoDialog: Dialog
     private var selectedImageUri: Uri? = null
 
+    private var projectIdAll : Int = -1
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -66,6 +68,8 @@ class ModifyFragment : Fragment(),ColSelDialog.OnColorSelectedListener, ImgDialo
         val memberId = sharedPreference.getInt("memberId", -1)
 
         val projectId = arguments?.getInt("projectID")
+
+        projectIdAll = projectId ?:-1
 
         Log.e("modify memberId","${memberId}")
         Log.e("modify projectId","${projectId}")
@@ -310,18 +314,20 @@ class ModifyFragment : Fragment(),ColSelDialog.OnColorSelectedListener, ImgDialo
             val json = Gson().toJson(requestBodyData)
             val requestBody = RequestBody.create("application/json".toMediaType(), json)
 
-            val callInvitation = RetrofitApi.getRetrofitService.invitation(memberId,projectId,requestBody)
+            val callInvitation = RetrofitApi.getRetrofitService.invitation(memberId,projectIdAll,requestBody)
 
             callInvitation.enqueue(object : Callback<InvitationsResponse> {
                 override fun onResponse(call: Call<InvitationsResponse>, response: Response<InvitationsResponse>) {
                     if (response.isSuccessful) {
                         val invitationsResponse = response.body()
-                        if (invitationsResponse != null) {
+                        if (invitationsResponse != null&& invitationsResponse.data != null) {
                             Log.d("Invitation", "API 호출 성공: ${invitationsResponse}")
                             pjInviteDialog.dismiss()
                             showInviteYesInfoDialog()
 
+
                             itemList.clear()
+
                             for (member in invitationsResponse.data.members) {
                                 itemList.add(
                                     MemberData(
@@ -330,16 +336,13 @@ class ModifyFragment : Fragment(),ColSelDialog.OnColorSelectedListener, ImgDialo
                                     )
                                 )
                             }
-                            while (itemList.size < 4) {
-                                itemList.add(MemberData("no_profile", "기본"))
-                            }
+                            
+                            val memberboard = binding.root.findViewById<RecyclerView>(R.id.member_modify)
 
-                            val memberboard = binding.root.findViewById<RecyclerView>(R.id.member)
+                            val memberAdapter2 = MemberAdapter2(itemList)
+                            memberAdapter2.notifyDataSetChanged()
 
-                            val memberAdapter = MemberAdapter(itemList)
-                            memberAdapter.notifyDataSetChanged()
-
-                            memberboard.adapter = memberAdapter
+                            memberboard.adapter = memberAdapter2
                             memberboard.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
 
                             if(invitationsResponse.status != 200){
@@ -349,6 +352,8 @@ class ModifyFragment : Fragment(),ColSelDialog.OnColorSelectedListener, ImgDialo
                         }
                     } else {
                         Log.d("Invitation", "API 호출 실패: ${response.code()}")
+                        pjInviteDialog.dismiss()
+                        showInviteNoInfoDialog(response.code())
                     }
                 }
 
