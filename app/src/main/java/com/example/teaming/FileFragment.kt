@@ -20,6 +20,9 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class FileFragment : Fragment() {
+    private lateinit var binding: FragmentFileBinding
+    private var memberName:String? = null
+
     // 색상 변경을 위해 선택되었는지 아닌지 확인하는 변수
     private var isFileIcon1Selected = true
     private var isFileIcon2Selected = false
@@ -32,11 +35,20 @@ class FileFragment : Fragment() {
         super.onCreate(savedInstanceState)
     }
 
+    override fun onResume() {
+        super.onResume()
+        val sharedPreference = requireActivity().getSharedPreferences("memberId",
+            Context.MODE_PRIVATE
+        )
+        memberName = sharedPreference.getString("userName", "Loading name failed")
+        binding.memberName.text = memberName
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val binding = FragmentFileBinding.inflate(inflater,container,false)
+        binding = FragmentFileBinding.inflate(inflater,container,false)
 
         // 화면 시작시에 처음 보여야되는 리사이클러뷰 설정
         isFileIcon1Selected = true
