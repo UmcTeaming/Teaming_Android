@@ -99,7 +99,7 @@
                 android:textSize="12sp"
                 android:text="일정 삭제하기"
                 android:fontFamily="@font/gmarket_sans_ttf_bold"
-                android:backgroundTint="#70000000"
+                android:backgroundTint="#527FF5"
                 android:layout_marginRight="20dp"
                 android:textColor="@color/white"
                 android:background="@drawable/btn_blue_ellipse"
