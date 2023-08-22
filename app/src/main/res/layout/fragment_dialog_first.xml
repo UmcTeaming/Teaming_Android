@@ -35,7 +35,7 @@
         <Button
             android:id="@+id/num"
             android:layout_width="140dp"
-            android:layout_height="35dp"
+            android:layout_height="30dp"
             android:text="비밀번호 찾기"
             android:layout_marginLeft="25dp"
             android:background="@drawable/bin_line"
@@ -50,7 +50,7 @@
         <Button
             android:id="@+id/closeButton"
             android:layout_width="140dp"
-            android:layout_height="35dp"
+            android:layout_height="30dp"
             android:text="확인"
             android:layout_marginRight="25dp"
             android:background="@drawable/bin_blue"

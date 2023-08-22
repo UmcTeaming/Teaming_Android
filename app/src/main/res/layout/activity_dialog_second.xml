@@ -36,7 +36,7 @@
         <Button
             android:id="@+id/closeButton"
             android:layout_width="140dp"
-            android:layout_height="35dp"
+            android:layout_height="30dp"
             android:text="확인"
             android:background="@drawable/bin_blue"
             android:textColor="#ffffffff"

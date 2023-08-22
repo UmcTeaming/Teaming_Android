@@ -8,8 +8,8 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constlayout"
-        android:layout_width="328dp"
-        android:layout_height="182dp"
+        android:layout_width="350dp"
+        android:layout_height="200dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -34,19 +34,21 @@
 
         <Button
             android:id="@+id/closeButton"
-            android:layout_width="128dp"
-            android:layout_height="28dp"
+            android:layout_width="140dp"
+            android:layout_height="30dp"
             android:layout_marginRight="100dp"
             android:background="@drawable/bin_blue"
             android:fontFamily="@font/gmarket_sans_ttf_bold"
             android:onClick="shutDownClick"
             android:text="확인"
             android:textColor="#ffffffff"
-            android:textSize="10sp"
+            android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintRight_toRightOf="@id/constlayout"
             app:layout_constraintTop_toBottomOf="@+id/text1"
-            app:layout_constraintVertical_bias="0.494"></Button>
+            app:layout_constraintVertical_bias="0.494">
+
+        </Button>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
