@@ -59,8 +59,9 @@
     <ImageView
         android:layout_width="370dp"
         android:layout_height="370dp"
-        android:src="@drawable/logo_m_1"
-        android:layout_marginLeft="90dp"
+        android:src="@drawable/logo_m"
+        android:layout_marginLeft="135dp"
+        android:layout_marginTop="30dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="@id/text2">
     </ImageView>
