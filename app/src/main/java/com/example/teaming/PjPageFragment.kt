@@ -43,6 +43,7 @@ class PjPageFragment : Fragment() {
     private lateinit var pjInviteDialog: Dialog
     private lateinit var inviteYesInfoDialog: Dialog
     private lateinit var inviteNoInfoDialog: Dialog
+    private lateinit var projectName:String
 
     private val FILE_PICK_REQUEST_CODE = 1
     private lateinit var selectedFileUri: Uri
@@ -121,6 +122,7 @@ class PjPageFragment : Fragment() {
                     if (projectpageresponse != null) {
 
                         binding.projectNameTop.text = projectpageresponse.data.name
+                        projectName = projectpageresponse.data.name
                         binding.projectNameBottom.text = projectpageresponse.data.name
 
                         Glide.with(requireContext())
@@ -207,6 +209,7 @@ class PjPageFragment : Fragment() {
             val args = Bundle()
             args.putInt("projectId", projectId!!)
             args.putInt("memberId", memberId!!)
+            args.putString("projectName", projectName)
             dialog.arguments = args
             dialog.show(requireActivity().supportFragmentManager,"CalNewScheduleDialog")
         }
