@@ -142,14 +142,14 @@ class ImgDialog : DialogFragment() {
     private fun checkGalleryPermission(): Boolean {
         return ContextCompat.checkSelfPermission(
             requireContext(),
-            Manifest.permission.READ_MEDIA_IMAGES
+            Manifest.permission.READ_EXTERNAL_STORAGE
         ) == PackageManager.PERMISSION_GRANTED
     }
 
     private fun requestGalleryPermission() {
         ActivityCompat.requestPermissions(
             requireActivity(),
-            arrayOf(Manifest.permission.READ_MEDIA_IMAGES),
+            arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),
             GALLERY_PERMISSION_CODE
         )
     }
