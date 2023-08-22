@@ -431,6 +431,10 @@ class PjPageFragment : Fragment() {
                     override fun onResponse(call: Call<ProjectFileUploadResponse>, response: Response<ProjectFileUploadResponse>) {
                         if (response.isSuccessful) {
                             val uploadResponse = response.body()
+                            sleep(500)
+                            requireActivity().supportFragmentManager.beginTransaction()
+                                .replace(R.id.fragmentContainer,PjSort())
+                                .commit()
                         } else {
                             Log.d("파일 업로드", "${response.code()}")
                         }
@@ -446,6 +450,10 @@ class PjPageFragment : Fragment() {
                     override fun onResponse(call: Call<FinalFileUploadResponse>, response: Response<FinalFileUploadResponse>) {
                         if (response.isSuccessful) {
                             val uploadResponse = response.body()
+                            sleep(500)
+                            requireActivity().supportFragmentManager.beginTransaction()
+                                .replace(R.id.fragmentContainer,FiSort())
+                                .commit()
                         } else {
                             Log.d("파일 업로드", "${response.code()}")
                         }
