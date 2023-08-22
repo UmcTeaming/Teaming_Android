@@ -103,7 +103,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/gmarket_sans_ttf_bold"
-                            android:text="카리나"
+                            android:text=""
                             android:textColor="#527FF5"
                             android:textSize="24sp" />
 

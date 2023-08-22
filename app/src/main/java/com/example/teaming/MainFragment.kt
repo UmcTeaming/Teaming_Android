@@ -11,17 +11,20 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager2.widget.ViewPager2
+import com.example.teaming.databinding.FragmentCalBinding
 import com.example.teaming.databinding.FragmentMainBinding
 import retrofit2.Call
 import retrofit2.Callback
 
 class MainFragment : Fragment() {
+    private lateinit var binding: FragmentMainBinding
     private val verItemList = arrayListOf<VerListItem>()      // 아이템 배열
     private val verAdapter = VerticalAdapter(verItemList)
     private val horItemList = arrayListOf<HorListItem>()
     private val horAdapter = HorizontalAdapter(horItemList)
     private val gridItemList = arrayListOf<GridListItem>()
     private val gridAdapter = GridAdapter(gridItemList)
+    private var memberName:String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,11 +34,19 @@ class MainFragment : Fragment() {
         super.onAttach(context)
     }
 
+    override fun onResume() {
+        super.onResume()
+        val sharedPreference = requireActivity().getSharedPreferences("memberId", MODE_PRIVATE)
+        memberName = sharedPreference.getString("userName", "Loading name failed")
+        binding.memberName.text = memberName
+        binding.memberName2.text = memberName
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val binding = FragmentMainBinding.inflate(inflater,container,false)
+        binding = FragmentMainBinding.inflate(inflater,container,false)
 
         // API 설정 - GET
         /*val memberId = arguments?.getInt("memberId")

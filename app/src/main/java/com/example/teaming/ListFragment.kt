@@ -9,12 +9,17 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentManager
+import com.example.teaming.databinding.FragmentFileBinding
 import com.example.teaming.databinding.FragmentListBinding
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 class ListFragment : Fragment() {
+
+    private lateinit var binding: FragmentListBinding
+    private var memberName:String? = null
+
     // 색상 변경을 위해 선택되었는지 아닌지 확인하는 변수
     private var isFileIcon1Selected = true
     private var isFileIcon2Selected = false
@@ -24,11 +29,20 @@ class ListFragment : Fragment() {
 
     }
 
+    override fun onResume() {
+        super.onResume()
+        val sharedPreference = requireActivity().getSharedPreferences("memberId",
+            Context.MODE_PRIVATE
+        )
+        memberName = sharedPreference.getString("userName", "Loading name failed")
+        binding.memberName.text = memberName
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val binding = FragmentListBinding.inflate(inflater,container,false)
+        binding = FragmentListBinding.inflate(inflater,container,false)
 
         val sharedPreference = requireActivity().getSharedPreferences("memberId",
             Context.MODE_PRIVATE
