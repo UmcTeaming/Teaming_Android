@@ -1,9 +1,13 @@
 package com.example.teaming
 
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import com.example.teaming.SearchNumActivity
 import com.example.teaming.MembershipActivity
 import com.example.teaming.databinding.ActivityLoginBinding
@@ -13,6 +17,7 @@ import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import android.Manifest
 
 class LoginActivity : AppCompatActivity() {
 
@@ -73,17 +78,12 @@ class LoginActivity : AppCompatActivity() {
                             var bundle = Bundle()
 
                             val preferences = getSharedPreferences("memberId", MODE_PRIVATE)
-                            //val preferences2 = getSharedPreferences("memberName", MODE_PRIVATE)
-
                             val editor = preferences.edit()
-                            //val editor2 = preferences2.edit()
 
                             editor.putInt("memberId", userId)
-                            //editor2.putString("memberName",userName)
                             editor.putString("userName", userName)
 
                             editor.commit()
-                            //editor2.commit()
 
                             App.prefs.token = accessToken
 
@@ -91,6 +91,7 @@ class LoginActivity : AppCompatActivity() {
 
                             val intent = Intent(this@LoginActivity, MainActivity::class.java)
                             startActivity(intent)
+
                         }
                     } else {
                         Log.d("Login", "API 호출 실패: ${response.code()}")
@@ -102,10 +103,7 @@ class LoginActivity : AppCompatActivity() {
                 }
             })
 
-            /*val intent = Intent(this@LoginActivity, MainActivity::class.java)
-            startActivity(intent)*/
         }
 
     }
-
 }
