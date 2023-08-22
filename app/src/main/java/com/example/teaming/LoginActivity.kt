@@ -91,7 +91,7 @@ class LoginActivity : AppCompatActivity() {
 
                             val intent = Intent(this@LoginActivity, MainActivity::class.java)
                             startActivity(intent)
-
+                            finish()
                         }
                     } else {
                         Log.d("Login", "API 호출 실패: ${response.code()}")
