@@ -67,6 +67,8 @@ class FirstActivity : AppCompatActivity() {
                             editor.putInt("memberId", userId)
                             //editor2.putString("memberName",userName)
 
+                            editor.putString("userName", userName)
+
                             editor.commit()
                             //editor2.commit()
 

@@ -24,6 +24,10 @@ import java.util.Locale
 
 class CalNewScheduleDialog(private val parent:ProjectScheduleDialog):DialogFragment() {
     private lateinit var binding:CalDialogNewBinding
+    var startTimeSet = false
+    var endTimeSet = false
+    var startDaySet= false
+    var endDaySet = false
     private var focus:Int?=null //1->시작 일자 2->종료일자 3->시작시간 4->종료시간
     val decimalForm = DecimalFormat("00")
     @RequiresApi(Build.VERSION_CODES.O)
@@ -74,7 +78,6 @@ class CalNewScheduleDialog(private val parent:ProjectScheduleDialog):DialogFragm
                 override fun onFailure(call: Call<CreateSchedule>, t: Throwable) {
                     Log.d("chanho", "onFailure")
                 }
-
             })
 
             //여기에 등록로직추가해야.
@@ -121,17 +124,37 @@ class CalNewScheduleDialog(private val parent:ProjectScheduleDialog):DialogFragm
         binding.scheduleDatePicker.setOnDateChangedListener { view, year, monthOfYear, dayOfMonth ->
             if(focus==1){
                 binding.scheduleStartDay.text=year.toString()+". "+decimalForm.format(monthOfYear + 1) + ". " + decimalForm.format(dayOfMonth)
+                startDaySet = true
+                if (startTimeSet && endTimeSet && startDaySet && endDaySet){
+                    binding.makeSchedule.isEnabled = true
+                    binding.makeSchedule.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(requireActivity(), R.color.cal_day_name_color))
+                }
             }
             else if(focus==2){
                 binding.scheduleEndDay.text=year.toString()+". "+decimalForm.format(monthOfYear + 1) + ". " + decimalForm.format(dayOfMonth)
+                endDaySet = true
+                if (startTimeSet && endTimeSet && startDaySet && endDaySet){
+                    binding.makeSchedule.isEnabled = true
+                    binding.makeSchedule.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(requireActivity(), R.color.cal_day_name_color))
+                }
             }
         }
         binding.scheduleTimePicker.setOnTimeChangedListener { view, hourOfDay, minute ->
             if(focus==3){
                 binding.scheduleStartTime.text = decimalForm.format(hourOfDay) + " : " + decimalForm.format(minute)
+                startTimeSet = true
+                if (startTimeSet && endTimeSet && startDaySet && endDaySet){
+                    binding.makeSchedule.isEnabled = true
+                    binding.makeSchedule.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(requireActivity(), R.color.cal_day_name_color))
+                }
             }
             else if(focus==4){
                 binding.scheduleEndTime.text = decimalForm.format(hourOfDay) + " : " + decimalForm.format(minute)
+                endTimeSet = true
+                if (startTimeSet && endTimeSet && startDaySet && endDaySet){
+                    binding.makeSchedule.isEnabled = true
+                    binding.makeSchedule.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(requireActivity(), R.color.cal_day_name_color))
+                }
             }
         }
         

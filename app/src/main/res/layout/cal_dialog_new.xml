@@ -129,6 +129,7 @@
                 android:layout_height="25dp"
                 android:layout_weight="1"/>
             <Button
+                android:enabled="false"
                 android:layout_marginTop="20dp"
                 android:id="@+id/make_schedule"
                 android:layout_width="100dp"

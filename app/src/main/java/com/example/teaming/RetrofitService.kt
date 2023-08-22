@@ -168,4 +168,7 @@ interface RetrofitService {
     @Multipart
     @POST("/projects/{memberId}/{projectId}/final-file")
     fun finalFileUpload(@Path("memberId") memberId: Int?,@Path("projectId") projectId: Int?,@Part filePart: MultipartBody.Part) : Call<FinalFileUploadResponse>
+
+    @DELETE("/projects/{memberId}/{projectId}/{scheduleId}")
+    fun deleteSchedule(@Path("memberId") memberId: Int?, @Path("projectId") projectId: Int?, @Path("scheduleId") scheduleId:Int?) : Call<Void>
 }
