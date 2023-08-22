@@ -140,48 +140,50 @@
         >
     </Button>
 
-    <TextView
-        android:id="@+id/text2"
-        android:fontFamily="@font/gmarket_sans_ttf_medium"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="문의사항은"
-        android:textColor="#80000000"
-        android:textSize="12sp"
-        android:layout_marginTop="24dp"
-        android:layout_marginLeft="40dp"
-        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/secret"
-        >
-    </TextView>
+        android:layout_marginTop="40dp">
 
-    <TextView
-        android:id="@+id/Button_mail"
-        android:fontFamily="@font/gmarket_sans_ttf_medium"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text=" test@gmail.com"
-        android:textAllCaps="false"
-        android:textColor="#527FF5"
-        android:textSize="11sp"
-        android:layout_marginTop="24dp"
-        app:layout_constraintLeft_toRightOf="@id/text2"
-        app:layout_constraintTop_toBottomOf="@id/secret"
-        >
-    </TextView>
+        <TextView
+            android:id="@+id/text2"
+            android:fontFamily="@font/gmarket_sans_ttf_medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="문의사항은"
+            android:textColor="#80000000"
+            android:textSize="12sp"
+            >
+        </TextView>
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/gmarket_sans_ttf_medium"
-        android:text=" 으로 보내주시면 감사하겠습니다."
-        android:textColor="#80000000"
-        android:textSize="12sp"
-        app:layout_constraintLeft_toRightOf="@id/Button_mail"
-        app:layout_constraintTop_toTopOf="@id/text2"
-        >
-    </TextView>
+        <TextView
+            android:id="@+id/Button_mail"
+            android:fontFamily="@font/gmarket_sans_ttf_medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" test@gmail.com"
+            android:textAllCaps="false"
+            android:textColor="#527FF5"
+            android:textSize="11sp"
+            >
+        </TextView>
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/gmarket_sans_ttf_medium"
+            android:text=" 으로 보내주시면 감사하겠습니다."
+            android:textColor="#80000000"
+            android:textSize="12sp"
+            >
+        </TextView>
+
+    </LinearLayout>
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
