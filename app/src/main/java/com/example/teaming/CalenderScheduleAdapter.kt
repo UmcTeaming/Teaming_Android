@@ -1,6 +1,7 @@
 package com.example.teaming
 
 import android.content.Context
+import android.content.res.ColorStateList
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
@@ -59,8 +60,8 @@ class CalenderScheduleAdapter(val scheduleList:ArrayList<CalendarScheduleItem>,v
              binding.calScheduleDay.text = startDayAfter + "~" + endDayAfter
              binding.calScheduleDescription.text = desc
              binding.calScheduleTime.text = startTimeAfter + "~" + endTimeAfter
-             //binding.colorBar.setBackgroundColor(Color.parseColor(color))
-             binding.colorBar.setBackgroundColor(Color.WHITE)
+             binding.colorBar.backgroundTintList = ColorStateList.valueOf(Color.parseColor(color))
+             //binding.colorBar.setBackgroundColor(Color.WHITE)
              binding.root.setOnClickListener {
                  Log.d("chanho","?")
                  val dialog = CheckProjectScheduleDialog()
