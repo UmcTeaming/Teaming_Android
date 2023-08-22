@@ -61,6 +61,10 @@ class CalenderScheduleAdapter(val scheduleList:ArrayList<CalendarScheduleItem>,v
              binding.calScheduleDescription.text = desc
              binding.calScheduleTime.text = startTimeAfter + "~" + endTimeAfter
              binding.colorBar.backgroundTintList = ColorStateList.valueOf(Color.parseColor(color))
+             if(color != "#FFFFFF") {
+                 binding.calScheduleTime.backgroundTintList =
+                     ColorStateList.valueOf(Color.parseColor(color))
+             }
              //binding.colorBar.setBackgroundColor(Color.WHITE)
              binding.root.setOnClickListener {
                  Log.d("chanho","?")
@@ -74,7 +78,6 @@ class CalenderScheduleAdapter(val scheduleList:ArrayList<CalendarScheduleItem>,v
                  dialog.arguments = args
                  Log.d("chanho",binding.root.context.toString())
                  val parentFragmentManager = (context as AppCompatActivity).supportFragmentManager
-                 Log.d("chanho","!")
                  dialog.show(parentFragmentManager, "check_project_schedule_dialog")
              }
          }
