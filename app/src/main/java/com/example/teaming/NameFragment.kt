@@ -71,6 +71,9 @@ class NameFragment : Fragment() {
                             //dialog.arguments = bundle
 
                             // Show the success dialog or perform other actions
+                            val editor = sharedPreference.edit()
+                            editor.putString("userName", binding.edittext.text.toString())
+                            editor.commit()
                             dialog.show(requireActivity().supportFragmentManager, "NickCompletDialog")
 
                         } else {

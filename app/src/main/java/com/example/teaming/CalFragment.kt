@@ -40,6 +40,13 @@ class CalFragment : Fragment() {//minsdk API26 이상으로 바꿀 필요 있음
         memberName = sharedPreference.getString("userName", "Loading name failed")
     }
 
+    override fun onResume() {
+        super.onResume()
+        val sharedPreference = requireActivity().getSharedPreferences("memberId", MODE_PRIVATE)
+        memberName = sharedPreference.getString("userName", "Loading name failed")
+        binding.calUsername.text = memberName + "님의 일정"
+    }
+
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
