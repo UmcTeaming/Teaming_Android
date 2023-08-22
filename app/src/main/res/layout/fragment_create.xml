@@ -3,15 +3,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:paddingTop="15dp"
+    android:paddingBottom="20dp"
+    android:paddingStart="20dp"
+    android:paddingEnd="20dp"
     tools:context=".CreateFragment"
     android:orientation="vertical"
     android:gravity="center_vertical">
 
     <RelativeLayout
         android:id="@+id/relative_img"
+        android:layout_marginTop="45dp"
+        android:paddingStart="40dp"
+        android:paddingEnd="40dp"
         android:layout_gravity="center"
-        android:layout_width="265dp"
+        android:layout_width="match_parent"
         android:layout_height="149dp">
 
         <ImageView
@@ -19,7 +25,7 @@
             android:clickable="true"
             android:background="#F4F4F4"
             android:layout_gravity="center"
-            android:layout_width="265dp"
+            android:layout_width="match_parent"
             android:layout_height="149dp"/>
 
         <TextView
@@ -37,7 +43,9 @@
 
     <LinearLayout
         android:layout_marginTop="32dp"
-        android:layout_width="265dp"
+        android:paddingStart="40dp"
+        android:paddingEnd="40dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_gravity="center_horizontal">
@@ -57,7 +65,6 @@
             android:layout_height="wrap_content"
             android:hint="프로젝트 명을 입력해주세요.(9자 이하)"
             android:maxLength="9"
-            android:textColorHint="#80000000"
             android:textSize="11sp"
             android:fontFamily="@font/gmarket_sans_ttf_light"/>
 
@@ -65,13 +72,15 @@
 
     <LinearLayout
         android:layout_marginTop="32dp"
+        android:paddingStart="40dp"
+        android:paddingEnd="40dp"
         android:layout_gravity="center_horizontal"
-        android:layout_width="265dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="날짜"
             android:textColor="#194AC2"
@@ -80,7 +89,7 @@
 
         <TextView
             android:layout_marginTop="8dp"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="프로젝트의 예상 진행 날짜를 입력해주세요"
             android:textColor="#80000000"
@@ -89,25 +98,24 @@
 
         <LinearLayout
             android:layout_marginTop="10dp"
-            android:layout_width="265dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
             <EditText
                 android:id="@+id/pj_start"
                 android:inputType="date"
-                android:hint="2023/07/02"
+                android:hint="2023-07-02"
                 android:textSize="11sp"
                 android:fontFamily="@font/gmarket_sans_ttf_medium"
                 android:gravity="center_horizontal"
                 android:layout_weight="1"
                 android:backgroundTint="#527FF5"
-                android:layout_width="117.04dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 
             <TextView
                 android:gravity="center"
-                android:layout_weight="1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/gmarket_sans_ttf_bold"
@@ -118,21 +126,23 @@
                 android:id="@+id/pj_end"
                 android:inputType="date"
                 android:gravity="center_horizontal"
-                android:hint="2023/07/02"
+                android:hint="2023-07-02"
                 android:textSize="11sp"
                 android:fontFamily="@font/gmarket_sans_ttf_medium"
                 android:layout_weight="1"
                 android:backgroundTint="#527FF5"
-                android:layout_width="117.04dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 
         </LinearLayout>
     </LinearLayout>
 
     <LinearLayout
+        android:paddingStart="40dp"
+        android:paddingEnd="40dp"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="32dp"
-        android:layout_width="265dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
@@ -165,12 +175,15 @@
     </LinearLayout>
 
     <Button
+        android:layout_marginBottom="45dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="50dp"
         android:enabled="false"
         android:id="@+id/btn_create_project"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="100dp"
         android:background="@drawable/create_btn_round_border"
-        android:layout_width="265dp"
+        android:layout_width="match_parent"
         android:layout_height="36dp"
         android:text="팀 프로젝트 생성하기"
         android:fontFamily="@font/gmarket_sans_ttf_medium"

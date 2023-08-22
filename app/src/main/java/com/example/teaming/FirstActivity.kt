@@ -31,14 +31,14 @@ class FirstActivity : AppCompatActivity() {
 
         binding.ButtonStart.setOnClickListener {
 
-            // 테스트용 정보
-            val requestBodyData = LoginRequset("mapledt001@naver.com", "cat123")
+            /*// 테스트용 정보
+            //val requestBodyData = LoginRequset("mapledt001@naver.com", "cat123")
 
             // 데이터 없는 로그인 정보
             //val requestBodyData = LoginRequset("and@gmail.com", "and123")
 
             // 데이터 있는 로그인 정보
-            //val requestBodyData = LoginRequset("test@gmail.com", "test123")
+            val requestBodyData = LoginRequset("test@gmail.com", "test123")
             val json = Gson().toJson(requestBodyData)
             val requestBody = RequestBody.create("application/json".toMediaType(), json)
             val callLogin = RetrofitApi.getRetrofitService.login(requestBody)
@@ -84,7 +84,7 @@ class FirstActivity : AppCompatActivity() {
                 override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
                     Log.e("Login", "로그인 API 호출 실패", t)
                 }
-            })
+            })*/
 
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
