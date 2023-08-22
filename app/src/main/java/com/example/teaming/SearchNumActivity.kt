@@ -5,6 +5,8 @@ import android.content.res.ColorStateList
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.View
 import android.widget.Toast
@@ -26,6 +28,18 @@ class SearchNumActivity : AppCompatActivity() {
 
         binding = ActivitySearchNumBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        val textWatcher = object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                updateButtonState()
+            }
+
+            override fun afterTextChanged(s: Editable?) {}
+        }
+
+        binding.TextEmail.addTextChangedListener(textWatcher)
 
         binding.ButtonReset.setOnClickListener {
             val email = binding.TextEmail.text.toString()
@@ -76,7 +90,7 @@ class SearchNumActivity : AppCompatActivity() {
                 })
             }
             //binding.ButtonReset.isClickable = false
-            Toast.makeText(this,"이메일을 입력해주세요",Toast.LENGTH_SHORT).show()
+            //Toast.makeText(this,"이메일을 입력해주세요",Toast.LENGTH_SHORT).show()
 
         /*val intent = Intent(this, FindNumActivity::class.java)
             startActivity(intent)*/
@@ -84,6 +98,21 @@ class SearchNumActivity : AppCompatActivity() {
 
         binding.x.setOnClickListener {
             binding.TextEmail.text.clear()
+        }
+    }
+
+    private fun updateButtonState() {
+        val password = binding.TextEmail.text.toString()
+
+        val enableButton = password.isNotEmpty()
+
+        // Add condition to check hexColor
+        if (enableButton) {
+            binding.ButtonReset.isEnabled = true
+            binding.ButtonReset.setBackgroundResource(R.drawable.round_border4)
+        } else {
+            binding.ButtonReset.isEnabled = false
+            binding.ButtonReset.setBackgroundResource(R.drawable.round_border4)
         }
     }
 
