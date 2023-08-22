@@ -28,6 +28,7 @@ class CalFragment : Fragment() {//minsdk API26 이상으로 바꿀 필요 있음
     private lateinit var binding:FragmentCalBinding
     private var scheduleDay:LocalDate? = null
     private var memberId:Int? = null
+    private var memberName:String? = null
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,6 +37,7 @@ class CalFragment : Fragment() {//minsdk API26 이상으로 바꿀 필요 있음
         scheduleDay = LocalDate.now()
         val sharedPreference = requireActivity().getSharedPreferences("memberId", MODE_PRIVATE)
         memberId = sharedPreference.getInt("memberId", -1)
+        memberName = sharedPreference.getString("userName", "Loading name failed")
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -47,6 +49,7 @@ class CalFragment : Fragment() {//minsdk API26 이상으로 바꿀 필요 있음
         binding = FragmentCalBinding.inflate(inflater,container,false)
         setMonthView()
         setScheduleView()
+        binding.calUsername.text = memberName + "님의 일정"
         //이전 달 버튼
         binding.leftButton.setOnClickListener{
             CalendarUtil.selectedDate = CalendarUtil.selectedDate.minusMonths(1)

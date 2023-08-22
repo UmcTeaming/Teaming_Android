@@ -59,10 +59,11 @@ class ProjectScheduleDialog : DialogFragment() {
             adapter.delButtonPressed()
         }
         binding.delBtn.setOnClickListener {
-            val dialog = ScheduleDeleteDialog()
+            val dialog = ScheduleDeleteDialog(this)
             val args = Bundle()
             args.putSerializable("List", scheduleList)
             args.putSerializable("Set", ArrayList(deleteList))
+            args.putInt("projectId",projectId!!)
             dialog.arguments = args
             dialog.show(requireActivity().supportFragmentManager,"delDialog")
         }
@@ -78,8 +79,17 @@ class ProjectScheduleDialog : DialogFragment() {
     }
     fun updateAdapter(){
         Log.d("chanho","adapterUpdated")
+        scheduleList.clear()
         takeProjectSchedule()
         adapter.notifyDataSetChanged()
+    }
+    fun deleteComplete(){
+        dialogMode = 0
+        binding.delBtn.visibility = View.GONE
+        binding.makeSchedule.visibility=View.VISIBLE
+        binding.initBtn.visibility=View.GONE
+        binding.toBefore.visibility = View.VISIBLE
+        binding.deleteBtn.visibility=View.VISIBLE
     }
     fun takeProjectSchedule() {
         //스케줄 API로 받아오기
@@ -95,7 +105,7 @@ class ProjectScheduleDialog : DialogFragment() {
                         val res = response.body()?.data
                         if (res != null) {
                             for (x in res) {
-                                x.color = "#000000"
+                                x.color = "#FFFFFF"
                                 scheduleList.add(x)
                             }
                             binding.projectSchedulesRecyclerView.adapter = adapter

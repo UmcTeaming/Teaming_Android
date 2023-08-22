@@ -661,3 +661,8 @@ data class FinalUploadData(
     val file_Id: Int
 )
 
+data class DeleteScheduleResponse(
+    @SerializedName("status")
+    val status:Int
+)
+
