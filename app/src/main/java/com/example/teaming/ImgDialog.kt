@@ -17,6 +17,7 @@ import com.example.teaming.databinding.ImgAddDialogBinding
 import android.Manifest
 import android.content.Context
 import android.net.Uri
+import android.os.Build
 import android.util.Log
 import androidx.activity.result.contract.ActivityResultContracts
 import com.example.teaming.databinding.UserAddDialogBinding
@@ -140,18 +141,34 @@ class ImgDialog : DialogFragment() {
     }
 
     private fun checkGalleryPermission(): Boolean {
-        return ContextCompat.checkSelfPermission(
-            requireContext(),
-            Manifest.permission.READ_EXTERNAL_STORAGE
-        ) == PackageManager.PERMISSION_GRANTED
+        return if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU) {
+            ContextCompat.checkSelfPermission(
+                requireContext(),
+                Manifest.permission.READ_EXTERNAL_STORAGE
+            ) == PackageManager.PERMISSION_GRANTED
+        } else {
+            ContextCompat.checkSelfPermission(
+                requireContext(),
+                Manifest.permission.READ_MEDIA_IMAGES
+            ) == PackageManager.PERMISSION_GRANTED
+        }
     }
 
+
     private fun requestGalleryPermission() {
-        ActivityCompat.requestPermissions(
-            requireActivity(),
-            arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),
-            GALLERY_PERMISSION_CODE
-        )
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU) {
+            ActivityCompat.requestPermissions(
+                requireActivity(),
+                arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),
+                GALLERY_PERMISSION_CODE
+            )
+        } else {
+            ActivityCompat.requestPermissions(
+                requireActivity(),
+                arrayOf(Manifest.permission.READ_MEDIA_IMAGES),
+                GALLERY_PERMISSION_CODE
+            )
+        }
     }
 
     private fun openGallery() {

@@ -43,7 +43,7 @@
             android:onClick="shutDownClick"
             android:text="확인"
             android:textColor="#ffffffff"
-            android:textSize="10sp"
+            android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintRight_toRightOf="@id/constlayout"
             app:layout_constraintTop_toBottomOf="@+id/text1"
