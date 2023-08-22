@@ -46,7 +46,6 @@ class PjPageFragment : Fragment() {
     private lateinit var projectName:String
 
     private val FILE_PICK_REQUEST_CODE = 1
-    private lateinit var selectedFileUri: Uri
 
     private var fileType : String = ""
 
@@ -236,9 +235,10 @@ class PjPageFragment : Fragment() {
         if (default_btn) {
             binding.uploadBtn.apply {
                 setImageResource(R.drawable.file_upload_btn)
+                fileType = "project"
                 setOnClickListener {
-                    fileType = "project"
                     openFilePickerAndUpload()
+                    Log.e("click","$fileType")
                 }
             }
 
@@ -255,12 +255,12 @@ class PjPageFragment : Fragment() {
             }
 
 
-        } else {
+        } else if (default_btn == false){
 
             binding.uploadBtn.apply {
                 setImageResource(R.drawable.final_upload_btn)
-                setOnClickListener {
-                    fileType = "final"
+                fileType = "final"
+                setOnClickListener{
                     openFilePickerAndUpload()
                 }
             }
@@ -275,10 +275,6 @@ class PjPageFragment : Fragment() {
                 setBackgroundResource(R.drawable.slide_btn_selected)
                 setTextColor(ContextCompat.getColor(requireContext(), R.color.black))
                 requestLayout()
-            }
-
-            binding.uploadBtn.setOnClickListener {
-
             }
         }
     }
@@ -308,14 +304,12 @@ class PjPageFragment : Fragment() {
 
             val memberId = sharedPreference_mem.getInt("memberId",-1)
 
-            val projectId = sharedPreference.getInt("projectID_page",-1)
-
             val requestBodyData = InvitationsRequest(dialogBinding.emailWrite.text.toString())
             Log.d("리퀘스트","${requestBodyData}")
             val json = Gson().toJson(requestBodyData)
             val requestBody = RequestBody.create("application/json".toMediaType(), json)
 
-            val callInvitation = RetrofitApi.getRetrofitService.invitation(memberId,projectId,requestBody)
+            val callInvitation = RetrofitApi.getRetrofitService.invitation(memberId, projectIdAll,requestBody)
 
             callInvitation.enqueue(object : Callback<InvitationsResponse> {
                 override fun onResponse(call: Call<InvitationsResponse>, response: Response<InvitationsResponse>) {
@@ -353,7 +347,8 @@ class PjPageFragment : Fragment() {
                             }
                         }
                     } else {
-                        Log.d("Invitation", "API 호출 실패: ${response.code()}")
+                        pjInviteDialog.dismiss()
+                        showInviteNoInfoDialog(response.code())
                     }
                 }
 
@@ -380,10 +375,6 @@ class PjPageFragment : Fragment() {
 
         dialogBinding.closeYesBtn.setOnClickListener {
 
-            sleep(300)
-            requireActivity().supportFragmentManager.beginTransaction()
-                .replace(R.id.container,PjPageFragment())
-                .commit()
 
             inviteYesInfoDialog.dismiss()
 
@@ -404,6 +395,7 @@ class PjPageFragment : Fragment() {
         if (errorcode == 208){
             dialogBinding.noWayHome.text = "이미 참여 중인 초대자입니다."
         }else if(errorcode == 404){
+            Log.d("뭐지","404")
             dialogBinding.noWayHome.text = "회원이 아닌 초대자 입니다."
         }
         inviteNoInfoDialog.setContentView(dialogBinding.root)
@@ -421,6 +413,7 @@ class PjPageFragment : Fragment() {
     }
 
     private fun openFilePickerAndUpload() {
+        Log.d("파일업로드","됐다")
         val intent = Intent(Intent.ACTION_GET_CONTENT)
         intent.type = "*/*" // 모든 파일 타입을 선택 가능하게 하려면 "*/*"로 설정
         startActivityForResult(intent, FILE_PICK_REQUEST_CODE)

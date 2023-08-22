@@ -43,6 +43,7 @@ class DocRead : Fragment() {
         val fileStatus = arguments?.getString("file_status")
         val fileColor = arguments?.getString("file_color") ?: ""
 
+
         if (fileColor == "project"){
             binding.fileImg.setImageResource(R.drawable.pdf_img)
         }else if(fileColor == "final"){
@@ -79,6 +80,7 @@ class DocRead : Fragment() {
 
                         bundle.putInt("file_id",fileId)
                         bundle.putString("file_name",filename)
+                        bundle.putString("file_status", fileStatus)
 
                         val pdfViewer = PDFViewer()
                         pdfViewer.arguments = bundle

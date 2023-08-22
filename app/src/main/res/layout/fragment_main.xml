@@ -54,7 +54,7 @@
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/gmarket_sans_ttf_bold"
                                 android:gravity="center_vertical"
-                                android:text="카리나"
+                                android:text=""
                                 android:textColor="@color/white"
                                 android:textSize="20sp" />
 
@@ -272,7 +272,7 @@
                             android:layout_gravity="center_vertical"
                             android:fontFamily="@font/gmarket_sans_ttf_bold"
                             android:gravity="center_vertical"
-                            android:text="카리나"
+                            android:text=""
                             android:textColor="#1E4FD0"
                             android:textSize="13sp" />
 
