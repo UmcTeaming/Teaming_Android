@@ -67,7 +67,7 @@ class ListFragment : Fragment() {
                             if(progressProjects !=null && progressProjects.isNotEmpty()){
                                 binding.btnLayout.visibility = View.VISIBLE
                                 binding.fileFrame.visibility = View.VISIBLE
-                                binding.nonViewPager2.visibility = View.GONE
+                                binding.nonViewPager2.visibility = View.INVISIBLE
                             }
                             else{
                                 binding.btnLayout.visibility = View.INVISIBLE

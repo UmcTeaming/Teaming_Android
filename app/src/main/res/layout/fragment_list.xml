@@ -19,6 +19,7 @@
             android:id="@+id/non_viewPager2"
             android:visibility="invisible"
             android:layout_gravity="center"
+            android:layout_marginTop="18dp"
             android:layout_width="match_parent"
             android:layout_height="315dp"
             android:orientation="vertical"

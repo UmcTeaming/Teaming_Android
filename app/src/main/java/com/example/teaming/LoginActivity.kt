@@ -41,7 +41,7 @@ class LoginActivity : AppCompatActivity() {
             val password = binding.TextNum.text.toString()
 
             // 여기서부터 주석 풀거나 걸면 됨
-            /*val requestBodyData = LoginRequset(logInId,password)
+            val requestBodyData = LoginRequset(logInId,password)
 
             //val requestBodyData = LoginRequset("hyun@gmail.com", "hyun123")
 
@@ -73,16 +73,16 @@ class LoginActivity : AppCompatActivity() {
                             var bundle = Bundle()
 
                             val preferences = getSharedPreferences("memberId", MODE_PRIVATE)
-                            val preferences2 = getSharedPreferences("memberName", MODE_PRIVATE)
+                            //val preferences2 = getSharedPreferences("memberName", MODE_PRIVATE)
 
                             val editor = preferences.edit()
-                            val editor2 = preferences2.edit()
+                            //val editor2 = preferences2.edit()
 
                             editor.putInt("memberId", userId)
-                            editor2.putString("memberName",userName)
+                            //editor2.putString("memberName",userName)
 
                             editor.commit()
-                            editor2.commit()
+                            //editor2.commit()
 
                             App.prefs.token = accessToken
 
@@ -99,10 +99,10 @@ class LoginActivity : AppCompatActivity() {
                 override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
                     Log.e("Login", "로그인 API 호출 실패", t)
                 }
-            })*/
+            })
 
-            val intent = Intent(this@LoginActivity, MainActivity::class.java)
-            startActivity(intent)
+            /*val intent = Intent(this@LoginActivity, MainActivity::class.java)
+            startActivity(intent)*/
         }
 
     }

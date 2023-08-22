@@ -7,6 +7,7 @@
     >
 
     <Button
+        android:enabled="false"
         android:id="@+id/Button_reset"
         android:layout_marginTop="400dp"
         android:layout_width="match_parent"
@@ -14,7 +15,7 @@
         android:fontFamily="@font/gmarket_sans_ttf_medium"
         android:layout_marginRight="50dp"
         android:layout_marginLeft="50dp"
-        android:background="@drawable/bin_blue"
+        android:background="@drawable/round_border4"
         android:textSize="20sp"
         android:textColor="#ffffff"
         android:text="비밀번호 재설정"

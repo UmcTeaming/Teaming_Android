@@ -194,9 +194,11 @@
                         </androidx.recyclerview.widget.RecyclerView>
 
                         <LinearLayout
+                            android:layout_marginStart="20dp"
+                            android:layout_marginEnd="20dp"
                             android:id="@+id/non_ver_list"
                             android:layout_marginTop="6dp"
-                            android:visibility="invisible"
+                            android:visibility="visible"
                             android:layout_marginBottom="10dp"
                             android:layout_gravity="center_horizontal"
                             android:layout_width="match_parent"
@@ -309,11 +311,13 @@
                         </androidx.recyclerview.widget.RecyclerView>
 
                         <LinearLayout
+                            android:layout_marginStart="20dp"
+                            android:layout_marginEnd="20dp"
                             android:id="@+id/non_grid_list"
                             android:visibility="invisible"
                             android:layout_marginTop="6dp"
                             android:layout_gravity="center_horizontal"
-                            android:layout_width="328dp"
+                            android:layout_width="match_parent"
                             android:layout_height="222dp"
                             android:orientation="vertical"
                             android:backgroundTint="@color/white"

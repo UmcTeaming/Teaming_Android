@@ -31,7 +31,7 @@ class FirstActivity : AppCompatActivity() {
 
         binding.ButtonStart.setOnClickListener {
 
-            // 테스트용 정보
+            /*// 테스트용 정보
             //val requestBodyData = LoginRequset("mapledt001@naver.com", "cat123")
 
             // 데이터 없는 로그인 정보
@@ -84,7 +84,7 @@ class FirstActivity : AppCompatActivity() {
                 override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
                     Log.e("Login", "로그인 API 호출 실패", t)
                 }
-            })
+            })*/
 
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
