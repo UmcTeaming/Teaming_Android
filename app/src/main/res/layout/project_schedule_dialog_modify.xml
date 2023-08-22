@@ -106,7 +106,7 @@
                 android:layout_height="25dp"
                 android:layout_marginLeft="20dp"
                 android:textSize="12sp"
-                android:fontFamily="@font/gmarket_sans_ttf_bold"
+                android:fontFamily="@font/gmarket_sans_ttf_medium"
                 android:text="이전으로"
                 android:textColor="#527FF5"
                 android:layout_marginBottom="10dp"

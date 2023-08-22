@@ -14,7 +14,6 @@ import com.example.teaming.databinding.ActivityAgreeBinding
 class AgreeActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityAgreeBinding
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_agree)

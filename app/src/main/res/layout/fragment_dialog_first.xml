@@ -39,6 +39,7 @@
             android:text="비밀번호 찾기"
             android:layout_marginLeft="25dp"
             android:background="@drawable/bin_line"
+            android:fontFamily="@font/gmarket_sans_ttf_medium"
             android:textColor="#527FF5"
             android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"
