@@ -36,6 +36,7 @@ class PDFViewer : Fragment() {
 
         val fileId = arguments?.getInt("file_id") ?: -1
         val fileName = arguments?.getString("file_name") ?: ""
+        var fileStatus = arguments?.getString("file_status") ?: ""
 
         val sharedPreference_mem = requireActivity().getSharedPreferences("memberId",
             Context.MODE_PRIVATE
@@ -47,7 +48,7 @@ class PDFViewer : Fragment() {
         val memberId = sharedPreference_mem.getInt("memberId", -1)
         val projectId = sharedPreference.getInt("projectID_page", -1)
 
-        val fileUrl = "http://teaming.shop:8080/files/$memberId/$projectId/files/$fileId/download"
+        val fileUrl = "https://teaming.shop/files/$memberId/$projectId/files/$fileId/download"
 
         GlobalScope.launch(Dispatchers.IO) {
             val service = RetrofitApi.getRetrofitService.fileDownload(fileUrl)
@@ -57,7 +58,6 @@ class PDFViewer : Fragment() {
                 val responseBody: ResponseBody? = response.body()
                 if (responseBody != null) {
                     val savedFile = saveFileToInternalStorage(requireContext(), fileName, responseBody)
-
                     if (savedFile != null) {
                         withContext(Dispatchers.Main) {
                             binding.pdfshow.fromFile(savedFile)
@@ -65,9 +65,16 @@ class PDFViewer : Fragment() {
                                 .scrollHandle(DefaultScrollHandle(requireContext()))
                                 .spacing(20)
                                 .onError {
-                                    requireActivity().supportFragmentManager.beginTransaction()
-                                        .replace(R.id.doc_read_contain,PdfError())
-                                        .commit()
+                                    if (fileStatus == "ING" ){
+                                        requireActivity().supportFragmentManager.beginTransaction()
+                                            .replace(R.id.doc_read_contain,PdfError())
+                                            .commit()
+                                    }
+                                    else {
+                                        requireActivity().supportFragmentManager.beginTransaction()
+                                            .replace(R.id.doc_read_contain,PdfErrorFi())
+                                            .commit()
+                                    }
                                 }
                                 .load()
                         }
