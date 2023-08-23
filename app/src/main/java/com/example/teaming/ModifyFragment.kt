@@ -211,12 +211,12 @@ class ModifyFragment : Fragment(),ColSelDialog.OnColorSelectedListener, ImgDialo
                                     bundle.putInt("modiProjectID",projectId!!)
                                     bundle.putInt("num",2)
 
-                                    val dialog = PjCompleteDialog()
+                                    val dialog = PjModiDialog()
                                     dialog.arguments = bundle
 
                                     // Show the success dialog or perform other actions
 
-                                    dialog.show(requireActivity().supportFragmentManager, "PjCompleteDialog")
+                                    dialog.show(requireActivity().supportFragmentManager, "PjModiDialog")
                                 } else {
                                     Log.e("Patch 여부", "Patch 성공하지만 프로젝트 ID가 없습니다.")
                                 }
