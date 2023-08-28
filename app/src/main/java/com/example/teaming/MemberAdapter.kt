@@ -4,7 +4,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 
@@ -28,7 +27,7 @@ class MemberAdapter(val itemList: ArrayList<MemberData>) :
             }else{
                 Glide.with(itemView.context)
                     .load(imageData.img)
-                    .error(R.drawable.default_profile)
+                    .error(R.drawable.profile_default)
                     .into(image)
             }
         }

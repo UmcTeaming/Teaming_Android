@@ -26,7 +26,7 @@
         android:layout_width="match_parent"
         android:layout_height="26.21dp"
         android:gravity="center_vertical"
-        android:fontFamily="@font/gmarket_sans_ttf_bold"
+        android:fontFamily="@font/pretendard_bold"
         android:text="UMC 파이널 프로젝트 Teaming" />
 
     <TextView
@@ -36,7 +36,7 @@
         android:paddingEnd="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/gmarket_sans_ttf_medium"
+        android:fontFamily="@font/pretendard_medium"
         android:text="2023.  07. 01 ~ 2023. 08. 29"
         android:textSize="12sp" />
 

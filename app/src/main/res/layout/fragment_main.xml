@@ -52,7 +52,7 @@
                                 android:id="@+id/member_name"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:fontFamily="@font/gmarket_sans_ttf_bold"
+                                android:fontFamily="@font/pretendard_bold"
                                 android:gravity="center_vertical"
                                 android:text=""
                                 android:textColor="@color/white"
@@ -61,7 +61,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:fontFamily="@font/gmarket_sans_ttf_bold"
+                                android:fontFamily="@font/pretendard_bold"
                                 android:gravity="center_vertical"
                                 android:text="님의 최근 프로젝트"
                                 android:textColor="@color/white"
@@ -72,7 +72,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/gmarket_sans_ttf_light"
+                            android:fontFamily="@font/pretendard_light"
                             android:gravity="center_vertical"
                             android:text="최근 작업한 프로젝트입니다."
                             android:textColor="#B3FFFFFF"
@@ -112,7 +112,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="현재 진행중인 프로젝트가 없어요!"
-                                android:fontFamily="@font/gmarket_sans_ttf_bold"
+                                android:fontFamily="@font/pretendard_bold"
                                 android:textColor="#80000000"
                                 android:textSize="12sp"/>
 
@@ -131,7 +131,7 @@
                                 android:layout_height="wrap_content"
                                 android:text="프로젝트를 생성하고 티밍을 이용해보세요."
                                 android:textSize="11sp"
-                                android:fontFamily="@font/gmarket_sans_ttf_medium"
+                                android:fontFamily="@font/pretendard_medium"
                                 android:textColor="#66000000"/>
 
                             <Button
@@ -165,7 +165,7 @@
                             android:layout_weight="1"
                             android:layout_width="wrap_content"
                             android:layout_height="30dp"
-                            android:fontFamily="@font/gmarket_sans_ttf_bold"
+                            android:fontFamily="@font/pretendard_bold"
                             android:gravity="center_vertical"
                             android:text="진행중인 프로젝트"
                             android:textColor="#1E4FD0"
@@ -214,7 +214,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="현재 진행중인 프로젝트가 없어요!"
-                                android:fontFamily="@font/gmarket_sans_ttf_bold"
+                                android:fontFamily="@font/pretendard_bold"
                                 android:textColor="#80000000"
                                 android:textSize="16sp"/>
 
@@ -233,7 +233,7 @@
                                 android:layout_height="wrap_content"
                                 android:text="프로젝트를 생성하고 티밍을 이용해보세요."
                                 android:textSize="11sp"
-                                android:fontFamily="@font/gmarket_sans_ttf_medium"
+                                android:fontFamily="@font/pretendard_medium"
                                 android:textColor="#66000000"/>
 
                             <Button
@@ -270,7 +270,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
-                            android:fontFamily="@font/gmarket_sans_ttf_bold"
+                            android:fontFamily="@font/pretendard_bold"
                             android:gravity="center_vertical"
                             android:text=""
                             android:textColor="#1E4FD0"
@@ -280,7 +280,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="30dp"
                             android:layout_gravity="center_horizontal"
-                            android:fontFamily="@font/gmarket_sans_ttf_bold"
+                            android:fontFamily="@font/pretendard_bold"
                             android:gravity="center_vertical"
                             android:text="님의 포트폴리오"
                             android:textColor="#1E4FD0"
@@ -330,7 +330,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="아직 완료된 프로젝트가 없어요!"
-                                android:fontFamily="@font/gmarket_sans_ttf_bold"
+                                android:fontFamily="@font/pretendard_bold"
                                 android:textColor="#80000000"
                                 android:textSize="16sp"/>
 
@@ -348,7 +348,7 @@
                                 android:layout_height="wrap_content"
                                 android:text="프로젝트를 완료하고 포트폴리오를 채워보세요:)"
                                 android:textSize="11sp"
-                                android:fontFamily="@font/gmarket_sans_ttf_medium"
+                                android:fontFamily="@font/pretendard_medium"
                                 android:textColor="#66000000"/>
 
                         </LinearLayout>

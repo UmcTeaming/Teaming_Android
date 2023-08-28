@@ -31,7 +31,7 @@
         app:layout_constraintLeft_toRightOf="@+id/color_bar"
         android:text="0월0일~0월0일"
         android:textColor="#B3000000"
-        android:fontFamily="@font/gmarket_sans_ttf_medium"
+        android:fontFamily="@font/pretendard_medium"
         app:layout_constraintTop_toTopOf="@+id/color_bar"
         android:layout_marginLeft="5dp"/>
     <TextView
@@ -40,7 +40,7 @@
         android:layout_height="wrap_content"
         android:textSize="15sp"
         android:textColor="@color/black"
-        android:fontFamily="@font/gmarket_sans_ttf_medium"
+        android:fontFamily="@font/pretendard_medium"
         android:text="일정 뭐시기 저시기"
         android:maxLines="1"
         android:ellipsize="end"
@@ -70,7 +70,7 @@
         android:textColor="@color/white"
         android:text="00:00~00:00"
         android:gravity="center"
-        android:fontFamily="@font/gmarket_sans_ttf_bold"
+        android:fontFamily="@font/pretendard_bold"
         android:background="@drawable/bin_blue"
         app:layout_constraintRight_toRightOf="parent"
         android:layout_marginRight="5dp"
