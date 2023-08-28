@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -24,338 +24,329 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <LinearLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
+                android:layout_height="match_parent">
 
-                <LinearLayout
-                    android:background="@drawable/back"
+                <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="381dp"
-                    android:orientation="vertical">
+                    android:background="@drawable/back"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-                    <LinearLayout
-                        android:layout_marginTop="45dp"
-                        android:paddingStart="20dp"
-                        android:layout_gravity="center_horizontal"
+                <TextView
+                    android:id="@+id/member_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="45dp"
+                    android:fontFamily="@font/gmarket_sans_ttf_bold"
+                    android:text="카리나"
+                    android:textColor="@color/white"
+                    android:textSize="20sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="45dp"
+                    android:fontFamily="@font/gmarket_sans_ttf_bold"
+                    android:text="님의 최근 프로젝트"
+                    android:textColor="@color/white"
+                    android:textSize="20sp"
+                    app:layout_constraintStart_toEndOf="@id/member_name"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:fontFamily="@font/gmarket_sans_ttf_light"
+                    android:text="최근 작업한 프로젝트입니다."
+                    android:textColor="#B3FFFFFF"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/member_name" />
+
+                <FrameLayout
+                    android:id="@+id/frame1"
+                    android:layout_width="match_parent"
+                    android:layout_height="381dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <androidx.viewpager2.widget.ViewPager2
+                        android:id="@+id/viewPager2"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
+                        android:layout_height="match_parent"
+                        android:clipChildren="false"
+                        android:clipToPadding="false"
+                        android:visibility="visible" />
 
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal">
-
-                            <TextView
-                                android:id="@+id/member_name"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/gmarket_sans_ttf_bold"
-                                android:gravity="center_vertical"
-                                android:text=""
-                                android:textColor="@color/white"
-                                android:textSize="20sp" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/gmarket_sans_ttf_bold"
-                                android:gravity="center_vertical"
-                                android:text="님의 최근 프로젝트"
-                                android:textColor="@color/white"
-                                android:textSize="20sp" />
-
-                        </LinearLayout>
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/non_viewPager2"
+                        android:layout_width="236dp"
+                        android:layout_height="196dp"
+                        android:background="@drawable/round_border"
+                        android:backgroundTint="@color/white"
+                        android:elevation="7dp"
+                        android:paddingTop="25dp"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="40dp"
+                        android:visibility="invisible">
 
                         <TextView
+                            android:id="@+id/ntext"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/gmarket_sans_ttf_light"
-                            android:gravity="center_vertical"
-                            android:text="최근 작업한 프로젝트입니다."
-                            android:textColor="#B3FFFFFF"
-                            android:textSize="11sp" />
+                            android:fontFamily="@font/gmarket_sans_ttf_bold"
+                            android:text="현재 진행중인 프로젝트가 없어요!"
+                            android:textColor="#80000000"
+                            android:textSize="12sp"
+                            app:layout_constraintEnd_toEndOf="@id/non_viewPager2"
+                            app:layout_constraintStart_toStartOf="@+id/non_viewPager2"
+                            app:layout_constraintTop_toTopOf="@+id/non_viewPager2" />
 
-                    </LinearLayout>
+                        <ImageView
+                            android:id="@+id/nimg"
+                            android:layout_width="90dp"
+                            android:layout_height="79dp"
+                            android:background="@drawable/non_img2"
+                            app:layout_constraintEnd_toEndOf="@+id/non_viewPager2"
+                            app:layout_constraintStart_toStartOf="@id/non_viewPager2"
+                            app:layout_constraintTop_toBottomOf="@id/ntext" />
 
-                    <FrameLayout
-                        android:id="@+id/frame1"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
+                        <TextView
+                            android:id="@+id/ntext2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:fontFamily="@font/gmarket_sans_ttf_medium"
+                            android:text="프로젝트를 생성하고 티밍을 이용해보세요."
+                            android:textColor="#66000000"
+                            android:textSize="11sp"
+                            app:layout_constraintEnd_toEndOf="@id/non_viewPager2"
+                            app:layout_constraintStart_toStartOf="@id/non_viewPager2"
+                            app:layout_constraintTop_toBottomOf="@id/nimg" />
 
-                        <androidx.viewpager2.widget.ViewPager2
-                            android:visibility="visible"
-                            android:id="@+id/viewPager2"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:clipToPadding="false"
-                            android:clipChildren="false"
-                            />
+                        <Button
+                            android:id="@+id/btn_new1"
+                            android:layout_width="116dp"
+                            android:layout_height="23dp"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginTop="9dp"
+                            android:background="@drawable/non_project_btn2"
+                            app:layout_constraintEnd_toEndOf="@id/non_viewPager2"
+                            app:layout_constraintStart_toStartOf="@id/non_viewPager2"
+                            app:layout_constraintTop_toBottomOf="@id/ntext2" />
 
-                        <LinearLayout
-                            android:id="@+id/non_viewPager2"
-                            android:visibility="invisible"
-                            android:layout_gravity="center"
-                            android:layout_width="236dp"
-                            android:layout_height="196dp"
-                            android:orientation="vertical"
-                            android:backgroundTint="@color/white"
-                            android:layout_marginBottom="10dp"
-                            android:elevation="7dp"
-                            android:background="@drawable/round_border"
-                            android:gravity="center">
+                    </androidx.constraintlayout.widget.ConstraintLayout>
 
-                            <TextView
-                                android:layout_gravity="center_horizontal"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="현재 진행중인 프로젝트가 없어요!"
-                                android:fontFamily="@font/gmarket_sans_ttf_bold"
-                                android:textColor="#80000000"
-                                android:textSize="12sp"/>
+                </FrameLayout>
 
-                            <ImageView
-                                android:layout_marginLeft="14dp"
-                                android:layout_marginTop="5dp"
-                                android:layout_gravity="center_horizontal"
-                                android:layout_width="90dp"
-                                android:layout_height="70dp"
-                                android:background="@drawable/non_img2"/>
+                <TextView
+                    android:id="@+id/ntext3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:fontFamily="@font/gmarket_sans_ttf_bold"
+                    android:text="진행 중인 프로젝트"
+                    android:textColor="#1E4FD0"
+                    android:textSize="13sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/frame1" />
 
-                            <TextView
-                                android:layout_marginTop="10dp"
-                                android:layout_gravity="center_horizontal"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="프로젝트를 생성하고 티밍을 이용해보세요."
-                                android:textSize="11sp"
-                                android:fontFamily="@font/gmarket_sans_ttf_medium"
-                                android:textColor="#66000000"/>
-
-                            <Button
-                                android:id="@+id/btn_new1"
-                                android:layout_marginTop="9dp"
-                                android:background="@drawable/non_project_btn2"
-                                android:layout_width="116dp"
-                                android:layout_height="23dp"
-                                android:layout_gravity="center_horizontal"
-                                />
-
-                        </LinearLayout>
-
-                    </FrameLayout>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_marginTop="12dp"
+                <FrameLayout
+                    android:id="@+id/frame2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/ntext3">
 
-                    <LinearLayout
-                        android:paddingStart="20dp"
-                        android:layout_gravity="center_horizontal"
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/ver_list"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="260dp"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="6dp"
+                        android:nestedScrollingEnabled="false"
+                        android:orientation="vertical"
+                        android:overScrollMode="never"
+                        android:paddingStart="20dp"
+                        android:paddingEnd="20dp"
+                        android:visibility="visible"
+                        tools:listitem="@layout/item_ver" />
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/non_ver_list"
+                        android:layout_width="match_parent"
+                        android:layout_height="252dp"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginEnd="20dp"
+                        android:background="@drawable/round_border"
+                        android:backgroundTint="@color/white"
+                        android:elevation="7dp"
+                        android:paddingTop="30dp"
+                        android:visibility="visible">
 
                         <TextView
-                            android:layout_weight="1"
+                            android:id="@+id/ntext4"
                             android:layout_width="wrap_content"
-                            android:layout_height="30dp"
-                            android:fontFamily="@font/gmarket_sans_ttf_bold"
-                            android:gravity="center_vertical"
-                            android:text="진행중인 프로젝트"
-                            android:textColor="#1E4FD0"
-                            android:textSize="13sp" />
-
-                    </LinearLayout>
-
-                    <FrameLayout
-                        android:id="@+id/frame2"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
-
-                        <androidx.recyclerview.widget.RecyclerView
-                            android:paddingStart="20dp"
-                            android:paddingEnd="20dp"
-                            android:visibility="visible"
-                            android:layout_marginTop="3dp"
-                            android:id="@+id/ver_list"
-                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:fontFamily="@font/gmarket_sans_ttf_bold"
+                            android:text="현재 진행중인 프로젝트가 없어요!"
+                            android:textColor="#80000000"
+                            android:textSize="16sp"
+                            app:layout_constraintEnd_toEndOf="@id/non_ver_list"
+                            app:layout_constraintStart_toStartOf="@+id/non_ver_list"
+                            app:layout_constraintTop_toTopOf="@+id/non_ver_list" />
+
+                        <ImageView
+                            android:id="@+id/nimg2"
+                            android:layout_width="112dp"
+                            android:layout_height="98dp"
+                            android:background="@drawable/non_img2"
+                            app:layout_constraintEnd_toEndOf="@id/non_ver_list"
+                            app:layout_constraintStart_toStartOf="@+id/non_ver_list"
+                            app:layout_constraintTop_toBottomOf="@id/ntext4" />
+
+                        <TextView
+                            android:id="@+id/ntext5"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:fontFamily="@font/gmarket_sans_ttf_medium"
+                            android:text="프로젝트를 생성하고 티밍을 이용해보세요."
+                            android:textColor="#66000000"
+                            android:textSize="11sp"
+                            app:layout_constraintEnd_toEndOf="@id/non_ver_list"
+                            app:layout_constraintStart_toStartOf="@+id/non_ver_list"
+                            app:layout_constraintTop_toBottomOf="@id/nimg2" />
+
+                        <Button
+                            android:id="@+id/btn_new2"
+                            android:layout_width="160.46dp"
+                            android:layout_height="33dp"
                             android:layout_gravity="center_horizontal"
-                            android:orientation="vertical"
-                            tools:listitem="@layout/item_ver"
-                            android:overScrollMode="never"
-                            android:nestedScrollingEnabled="false">
-                        </androidx.recyclerview.widget.RecyclerView>
+                            android:layout_marginTop="21dp"
+                            android:background="@drawable/non_project_btn2"
+                            app:layout_constraintEnd_toEndOf="@id/non_ver_list"
+                            app:layout_constraintStart_toStartOf="@+id/non_ver_list"
+                            app:layout_constraintTop_toBottomOf="@id/ntext5" />
 
-                        <LinearLayout
-                            android:layout_marginStart="20dp"
-                            android:layout_marginEnd="20dp"
-                            android:id="@+id/non_ver_list"
-                            android:layout_marginTop="6dp"
-                            android:visibility="visible"
-                            android:layout_marginBottom="10dp"
-                            android:layout_gravity="center_horizontal"
-                            android:layout_width="match_parent"
-                            android:layout_height="252dp"
-                            android:orientation="vertical"
-                            android:backgroundTint="@color/white"
-                            android:elevation="7dp"
-                            android:background="@drawable/round_border"
-                            android:gravity="center">
+                    </androidx.constraintlayout.widget.ConstraintLayout>
 
-                            <TextView
-                                android:layout_gravity="center_horizontal"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="현재 진행중인 프로젝트가 없어요!"
-                                android:fontFamily="@font/gmarket_sans_ttf_bold"
-                                android:textColor="#80000000"
-                                android:textSize="16sp"/>
+                </FrameLayout>
 
-                            <ImageView
-                                android:layout_marginLeft="14dp"
-                                android:layout_marginTop="11dp"
-                                android:layout_gravity="center_horizontal"
-                                android:layout_width="112dp"
-                                android:layout_height="98dp"
-                                android:background="@drawable/non_img2"/>
+                <TextView
+                    android:id="@+id/member_name2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/gmarket_sans_ttf_bold"
+                    android:paddingStart="20dp"
+                    android:paddingTop="30dp"
+                    android:text="카리나"
+                    android:textColor="#1E4FD0"
+                    android:textSize="13sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/frame2" />
 
-                            <TextView
-                                android:layout_marginTop="12dp"
-                                android:layout_gravity="center_horizontal"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="프로젝트를 생성하고 티밍을 이용해보세요."
-                                android:textSize="11sp"
-                                android:fontFamily="@font/gmarket_sans_ttf_medium"
-                                android:textColor="#66000000"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/gmarket_sans_ttf_bold"
+                    android:paddingTop="30dp"
+                    android:text="님의 포트폴리오"
+                    android:textColor="#1E4FD0"
+                    android:textSize="13sp"
+                    app:layout_constraintStart_toEndOf="@id/member_name2"
+                    app:layout_constraintTop_toBottomOf="@id/frame2" />
 
-                            <Button
-                                android:id="@+id/btn_new2"
-                                android:layout_marginTop="21dp"
-                                android:background="@drawable/non_project_btn2"
-                                android:layout_width="160.46dp"
-                                android:layout_height="33dp"
-                                android:layout_gravity="center_horizontal"
-                                />
-
-                        </LinearLayout>
-
-                    </FrameLayout>
-
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_marginTop="39dp"
+                <FrameLayout
+                    android:layout_marginBottom="30dp"
+                    android:id="@+id/frame3"
                     android:layout_width="match_parent"
-                    android:layout_height="570dp"
-                    android:orientation="vertical">
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@+id/member_name2">
 
-                    <LinearLayout
-                        android:paddingStart="20dp"
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:layout_marginTop="5dp"
+                        android:id="@+id/grid_list"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:nestedScrollingEnabled="false"
                         android:orientation="horizontal"
-                        android:layout_gravity="center_horizontal">
+                        android:overScrollMode="never"
+                        android:paddingStart="20dp"
+                        android:paddingEnd="20dp"
+                        android:visibility="visible"
+                        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                        tools:listitem="@layout/item_grid"/>
 
-                        <TextView
-                            android:id="@+id/member_name2"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical"
-                            android:fontFamily="@font/gmarket_sans_ttf_bold"
-                            android:gravity="center_vertical"
-                            android:text=""
-                            android:textColor="#1E4FD0"
-                            android:textSize="13sp" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="30dp"
-                            android:layout_gravity="center_horizontal"
-                            android:fontFamily="@font/gmarket_sans_ttf_bold"
-                            android:gravity="center_vertical"
-                            android:text="님의 포트폴리오"
-                            android:textColor="#1E4FD0"
-                            android:textSize="13sp" />
-
-                    </LinearLayout>
-
-
-                    <FrameLayout
-                        android:id="@+id/frame3"
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_marginTop="18dp"
+                        android:id="@+id/non_grid_list"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent">
+                        android:layout_height="222dp"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginEnd="20dp"
+                        android:background="@drawable/round_border"
+                        android:backgroundTint="@color/white"
+                        android:elevation="7dp"
+                        android:paddingTop="30dp"
+                        android:visibility="visible">
 
-                        <androidx.recyclerview.widget.RecyclerView
-                            android:paddingStart="20dp"
-                            android:paddingEnd="20dp"
-                            android:visibility="visible"
-                            android:layout_gravity="center_horizontal"
-                            android:id="@+id/grid_list"
-                            android:layout_width="match_parent"
+                        <TextView
+                            android:id="@+id/ntext6"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            tools:listitem="@layout/item_grid"
-                            android:orientation="horizontal"
-                            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-                            android:overScrollMode="never"
-                            android:nestedScrollingEnabled="false"
-                            >
-                        </androidx.recyclerview.widget.RecyclerView>
+                            android:fontFamily="@font/gmarket_sans_ttf_bold"
+                            android:text="아직 완료된 프로젝트가 없어요!"
+                            android:textColor="#80000000"
+                            android:textSize="16sp"
+                            app:layout_constraintEnd_toEndOf="@+id/non_grid_list"
+                            app:layout_constraintStart_toStartOf="@+id/non_grid_list"
+                            app:layout_constraintTop_toTopOf="@+id/non_grid_list" />
 
-                        <LinearLayout
-                            android:layout_marginStart="20dp"
-                            android:layout_marginEnd="20dp"
-                            android:id="@+id/non_grid_list"
-                            android:visibility="invisible"
-                            android:layout_marginTop="6dp"
-                            android:layout_gravity="center_horizontal"
-                            android:layout_width="match_parent"
-                            android:layout_height="222dp"
-                            android:orientation="vertical"
-                            android:backgroundTint="@color/white"
-                            android:elevation="7dp"
-                            android:background="@drawable/round_border"
-                            android:gravity="center">
+                        <ImageView
+                            android:id="@+id/nimg3"
+                            android:layout_width="144dp"
+                            android:layout_height="126dp"
+                            android:background="@drawable/non_img2"
+                            app:layout_constraintEnd_toEndOf="@+id/non_grid_list"
+                            app:layout_constraintStart_toStartOf="@+id/non_grid_list"
+                            app:layout_constraintTop_toBottomOf="@+id/ntext6" />
 
-                            <TextView
-                                android:layout_gravity="center_horizontal"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="아직 완료된 프로젝트가 없어요!"
-                                android:fontFamily="@font/gmarket_sans_ttf_bold"
-                                android:textColor="#80000000"
-                                android:textSize="16sp"/>
+                        <TextView
+                            android:id="@+id/ntext7"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:fontFamily="@font/gmarket_sans_ttf_medium"
+                            android:text="프로젝트를 완료하고 포트폴리오를 채워보세요:)"
+                            android:textColor="#66000000"
+                            android:textSize="11sp"
+                            app:layout_constraintEnd_toEndOf="@+id/non_grid_list"
+                            app:layout_constraintStart_toStartOf="@+id/non_grid_list"
+                            app:layout_constraintTop_toBottomOf="@+id/nimg3" />
 
-                            <ImageView
-                                android:layout_marginLeft="14dp"
-                                android:layout_gravity="center_horizontal"
-                                android:layout_width="144dp"
-                                android:layout_height="126dp"
-                                android:background="@drawable/non_img2"/>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
 
-                            <TextView
-                                android:layout_marginTop="10dp"
-                                android:layout_gravity="center_horizontal"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="프로젝트를 완료하고 포트폴리오를 채워보세요:)"
-                                android:textSize="11sp"
-                                android:fontFamily="@font/gmarket_sans_ttf_medium"
-                                android:textColor="#66000000"/>
+                </FrameLayout>
 
-                        </LinearLayout>
-                    </FrameLayout>
-                </LinearLayout>
-            </LinearLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
         </ScrollView>
+
     </FrameLayout>
 
-</LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
