@@ -39,7 +39,7 @@
             android:textColorHint="#4D000000"
             android:paddingStart="10dp"
             android:hint="내용을 입력해주세요"
-            android:fontFamily="@font/gmarket_sans_ttf_medium"/>
+            android:fontFamily="@font/pretendard_medium"/>
         
         <ImageButton
             android:id="@+id/send_btn"

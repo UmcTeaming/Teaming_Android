@@ -15,7 +15,7 @@
         android:layout_height="wrap_content"
         android:background="@android:color/transparent"
         android:text="프로젝트 종료하기"
-        android:fontFamily="@font/gmarket_sans_ttf_medium"
+        android:fontFamily="@font/pretendard_medium"
         android:textColor="#527FF5"
         android:textSize="15sp"
         app:layout_constraintTop_toTopOf="parent"

@@ -22,7 +22,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="15sp"
                 android:text="초대 이메일이 전송되었습니다."
-                android:fontFamily="@font/gmarket_sans_ttf_bold"
+                android:fontFamily="@font/pretendard_bold"
                 android:textColor="#194AC2"/>
 
             <Button
@@ -35,7 +35,7 @@
                 android:layout_height="28dp"
                 android:text="확인"
                 android:textColor="@color/white"
-                android:fontFamily="@font/gmarket_sans_ttf_bold"
+                android:fontFamily="@font/pretendard_bold"
                 android:textSize="14sp"/>
 
 

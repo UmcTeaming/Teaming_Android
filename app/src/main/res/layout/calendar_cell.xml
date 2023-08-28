@@ -5,15 +5,17 @@
     android:orientation="vertical">
         <ImageView
             android:id="@+id/cal_today_circle"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_gravity="center"
             android:background="@drawable/cal_circle_shape"
             android:visibility="invisible"
             />
         <ImageView
             android:id="@+id/cal_selected_day_circle"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="25dp"
+            android:layout_gravity="center"
+            android:layout_height="25dp"
             android:background="@drawable/cal_circle_shape"
             android:backgroundTint="#808080"
             android:visibility="invisible"
@@ -27,7 +29,7 @@
             android:background="@drawable/cal_circle_shape"
             android:visibility="invisible"/>
         <TextView
-            android:fontFamily="@font/gmarket_sans_ttf_medium"
+            android:fontFamily="@font/pretendard_medium"
             android:id="@+id/day_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
