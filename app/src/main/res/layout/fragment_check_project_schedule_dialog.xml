@@ -15,7 +15,7 @@
             android:layout_marginTop="40dp"
             android:backgroundTint="#527FF5"
             android:textColor="#000000"
-            android:fontFamily="@font/gmarket_sans_ttf_medium"
+            android:fontFamily="@font/pretendard_medium"
             android:id="@+id/title_text"
             android:textSize="15sp"
             android:gravity="center"
@@ -33,14 +33,14 @@
             android:layout_marginTop="15dp"
             android:gravity="center">
             <TextView
-                android:fontFamily="@font/gmarket_sans_ttf_medium"
+                android:fontFamily="@font/pretendard_medium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:textColor="#000000"
                 android:text="날짜:"/>
             <TextView
-                android:fontFamily="@font/gmarket_sans_ttf_medium"
+                android:fontFamily="@font/pretendard_medium"
                 android:id="@+id/schedule_start_day"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -51,11 +51,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:fontFamily="@font/gmarket_sans_ttf_medium"
+                android:fontFamily="@font/pretendard_medium"
                 android:gravity="center"
                 android:text=" ~ "/>
             <TextView
-                android:fontFamily="@font/gmarket_sans_ttf_medium"
+                android:fontFamily="@font/pretendard_medium"
                 android:id="@+id/schedule_end_day"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -71,7 +71,7 @@
             android:layout_marginTop="15dp">
             <Button
                 android:id="@+id/start_time"
-                android:fontFamily="@font/gmarket_sans_ttf_bold"
+                android:fontFamily="@font/pretendard_bold"
                 android:layout_width="80dp"
                 android:layout_height="25dp"
                 android:text="00:00"
@@ -87,7 +87,7 @@
                 android:layout_weight="1"/>
             <Button
                 android:id="@+id/end_time"
-                android:fontFamily="@font/gmarket_sans_ttf_bold"
+                android:fontFamily="@font/pretendard_bold"
                 android:layout_width="80dp"
                 android:layout_height="25dp"
                 android:backgroundTint="#527FF5"
@@ -108,7 +108,7 @@
                 android:layout_width="120dp"
                 android:layout_height="30dp"
                 android:textSize="12sp"
-                android:fontFamily="@font/gmarket_sans_ttf_medium"
+                android:fontFamily="@font/pretendard_medium"
                 android:text="이전으로"
                 android:textColor="#527FF5"
                 android:layout_marginBottom="30dp"

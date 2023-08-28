@@ -27,7 +27,7 @@
             android:background="@drawable/cal_circle_shape"
             android:visibility="invisible"/>
         <TextView
-            android:fontFamily="@font/gmarket_sans_ttf_medium"
+            android:fontFamily="@font/pretendard_medium"
             android:id="@+id/day_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

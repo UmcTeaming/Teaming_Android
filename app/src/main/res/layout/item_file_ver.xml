@@ -63,7 +63,7 @@
             android:id="@+id/grid_date"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/gmarket_sans_ttf_medium"
+            android:fontFamily="@font/pretendard_medium"
             android:text="2023.06.13 ~ (진행 기간)"
             android:textColor="#99000000"
             android:textSize="11sp" />
