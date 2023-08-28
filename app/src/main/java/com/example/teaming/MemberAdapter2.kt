@@ -7,7 +7,6 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import org.w3c.dom.Text
 
 class MemberAdapter2(val itemList: ArrayList<MemberData>) :
     RecyclerView.Adapter<MemberAdapter2.MemberViewHolder>() {
@@ -30,7 +29,7 @@ class MemberAdapter2(val itemList: ArrayList<MemberData>) :
             }else{
                 Glide.with(itemView.context)
                     .load(imageData.img)
-                    .error(R.drawable.default_profile)
+                    .error(R.drawable.profile_default)
                     .into(image)
             }
         }

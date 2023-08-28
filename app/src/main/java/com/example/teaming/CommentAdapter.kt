@@ -5,7 +5,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 
@@ -27,7 +26,7 @@ class CommentAdapter(private val comments: List<CommentData>) :
         holder.apply {
             Glide.with(itemView.context)
                 .load(comment.profile_image)
-                .error(R.drawable.default_profile)
+                .error(R.drawable.profile_default)
                 .into(imgView)
 
         }
