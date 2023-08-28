@@ -12,7 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/black"
-        android:fontFamily="@font/gmarket_sans_ttf_bold"
+        android:fontFamily="@font/pretendard_bold"
         android:text="정말 파일을 삭제하시겠어요?"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -34,7 +34,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="#B3000000"
-            android:fontFamily="@font/gmarket_sans_ttf_medium"
+            android:fontFamily="@font/pretendard_medium"
             android:textSize="13sp"
             android:text="삭제된 파일은 "
             />
@@ -44,7 +44,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="#FF0000"
-            android:fontFamily="@font/gmarket_sans_ttf_medium"
+            android:fontFamily="@font/pretendard_medium"
             android:text="복구"
             android:textSize="13sp"
             />
@@ -54,7 +54,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="#B3000000"
-            android:fontFamily="@font/gmarket_sans_ttf_medium"
+            android:fontFamily="@font/pretendard_medium"
             android:text="가 "
             android:textSize="13sp"
             />
@@ -64,7 +64,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="#FF0000"
-            android:fontFamily="@font/gmarket_sans_ttf_medium"
+            android:fontFamily="@font/pretendard_medium"
             android:text="불가"
             android:textSize="13sp"
             />
@@ -74,7 +74,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="#B3000000"
-            android:fontFamily="@font/gmarket_sans_ttf_medium"
+            android:fontFamily="@font/pretendard_medium"
             android:text="합니다."
             android:textSize="13sp"
             />
@@ -85,6 +85,7 @@
         android:id="@+id/pj_file_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginTop="15dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/second_text">
@@ -109,7 +110,8 @@
             android:src="@drawable/cancle_chk_btn"
             android:layout_weight="1"
             android:scaleType="fitCenter"
-            android:background="@android:color/transparent"/>
+            android:background="@android:color/transparent"
+            />
 
         <ImageButton
             android:id="@+id/del_ok_btn"

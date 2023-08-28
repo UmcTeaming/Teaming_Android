@@ -19,13 +19,13 @@
 
     <TextView
         android:id="@+id/text1"
-        android:fontFamily="@font/gmarket_sans_ttf_bold"
+        android:fontFamily="@font/pretendard_bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="마이페이지"
         android:textColor="#000000"
         android:textSize="20sp"
-        android:layout_marginLeft="40dp"
+        android:layout_marginStart="25dp"
         android:layout_marginTop="60dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -34,12 +34,12 @@
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/Button_img"
-        android:fontFamily="@font/gmarket_sans_ttf_medium"
+        android:fontFamily="@font/pretendard_medium"
         android:background="@drawable/button_img"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:clickable="true"
-        android:layout_marginLeft="20dp"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="40dp"
         app:layout_constraintLeft_toLeftOf="@id/text1"
         app:layout_constraintTop_toBottomOf="@id/text1"
@@ -55,7 +55,7 @@
         android:textSize="13sp"
         android:textColor="#4D000000"
         android:text="이미지"
-        android:fontFamily="@font/gmarket_sans_ttf_medium"
+        android:fontFamily="@font/pretendard_medium"
         app:layout_constraintRight_toRightOf="@id/Button_img"
         app:layout_constraintLeft_toLeftOf="@id/Button_img"
         app:layout_constraintTop_toTopOf="@id/Button_img"
@@ -67,7 +67,7 @@
     <TextView
         android:id="@+id/name"
         android:maxLength="6"
-        android:fontFamily="@font/gmarket_sans_ttf_medium"
+        android:fontFamily="@font/pretendard_medium"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="카리나"
@@ -82,7 +82,7 @@
 
     <TextView
         android:id="@+id/nim"
-        android:fontFamily="@font/gmarket_sans_ttf_medium"
+        android:fontFamily="@font/pretendard_medium"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="님"
@@ -108,7 +108,7 @@
     </ImageButton>
 
     <TextView
-        android:fontFamily="@font/gmarket_sans_ttf_medium"
+        android:fontFamily="@font/pretendard_medium"
         android:id="@+id/email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -123,7 +123,7 @@
 
     <Button
         android:id="@+id/secret"
-        android:fontFamily="@font/gmarket_sans_ttf_medium"
+        android:fontFamily="@font/pretendard_medium"
         android:layout_width="wrap_content"
         android:layout_height="25dp"
         android:alpha="0.5"
@@ -140,48 +140,50 @@
         >
     </Button>
 
-    <TextView
-        android:id="@+id/text2"
-        android:fontFamily="@font/gmarket_sans_ttf_medium"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="문의사항은"
-        android:textColor="#80000000"
-        android:textSize="12sp"
-        android:layout_marginTop="24dp"
-        android:layout_marginLeft="40dp"
-        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/secret"
-        >
-    </TextView>
+        android:layout_marginTop="40dp">
 
-    <TextView
-        android:id="@+id/Button_mail"
-        android:fontFamily="@font/gmarket_sans_ttf_medium"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text=" test@gmail.com"
-        android:textAllCaps="false"
-        android:textColor="#527FF5"
-        android:textSize="11sp"
-        android:layout_marginTop="24dp"
-        app:layout_constraintLeft_toRightOf="@id/text2"
-        app:layout_constraintTop_toBottomOf="@id/secret"
-        >
-    </TextView>
+        <TextView
+            android:id="@+id/text2"
+            android:fontFamily="@font/pretendard_medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="문의사항은"
+            android:textColor="#80000000"
+            android:textSize="12sp"
+            >
+        </TextView>
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/gmarket_sans_ttf_medium"
-        android:text=" 으로 보내주시면 감사하겠습니다."
-        android:textColor="#80000000"
-        android:textSize="12sp"
-        app:layout_constraintLeft_toRightOf="@id/Button_mail"
-        app:layout_constraintTop_toTopOf="@id/text2"
-        >
-    </TextView>
+        <TextView
+            android:id="@+id/Button_mail"
+            android:fontFamily="@font/pretendard_medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" test@gmail.com"
+            android:textAllCaps="false"
+            android:textColor="#527FF5"
+            android:textSize="11sp"
+            >
+        </TextView>
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/pretendard_medium"
+            android:text=" 으로 보내주시면 감사하겠습니다."
+            android:textColor="#80000000"
+            android:textSize="12sp"
+            >
+        </TextView>
+
+    </LinearLayout>
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

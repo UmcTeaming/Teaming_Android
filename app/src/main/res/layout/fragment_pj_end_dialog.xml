@@ -23,7 +23,7 @@
             android:layout_marginTop="12dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/gmarket_sans_ttf_bold"
+            android:fontFamily="@font/pretendard_bold"
             android:textSize="20sp"
             android:textColor="@color/black"
             android:text="수고하셨습니다!"/>
@@ -32,7 +32,7 @@
             android:layout_marginTop="12dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/gmarket_sans_ttf_medium"
+            android:fontFamily="@font/pretendard_medium"
             android:textSize="11sp"
             android:textColor="#80000000"
             android:text="종료한 프로젝트는 포트폴리오에 저장됩니다."/>
@@ -51,7 +51,7 @@
                 android:text="시작날짜"
                 android:textSize="11sp"
                 android:textColor="@color/black"
-                android:fontFamily="@font/gmarket_sans_ttf_medium"/>
+                android:fontFamily="@font/pretendard_medium"/>
 
             <TextView
                 android:layout_marginLeft="4dp"
@@ -61,7 +61,7 @@
                 android:text="~"
                 android:textSize="11sp"
                 android:textColor="@color/black"
-                android:fontFamily="@font/gmarket_sans_ttf_medium"/>
+                android:fontFamily="@font/pretendard_medium"/>
 
             <TextView
                 android:id="@+id/endDate"
@@ -70,7 +70,7 @@
                 android:text="마감날짜"
                 android:textSize="11sp"
                 android:textColor="@color/black"
-                android:fontFamily="@font/gmarket_sans_ttf_medium"/>
+                android:fontFamily="@font/pretendard_medium"/>
         </LinearLayout>
 
         <Button

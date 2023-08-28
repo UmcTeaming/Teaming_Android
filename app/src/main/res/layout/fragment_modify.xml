@@ -31,7 +31,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:fontFamily="@font/gmarket_sans_ttf_medium"
+            android:fontFamily="@font/pretendard_medium"
             android:text="대표 이미지"
             android:textColor="#4D000000"
             android:textSize="12sp" />
@@ -52,7 +52,7 @@
             android:layout_height="wrap_content"
             android:text="프로젝트 명"
             android:textColor="#194AC2"
-            android:fontFamily="@font/gmarket_sans_ttf_bold"
+            android:fontFamily="@font/pretendard_bold"
             android:textSize="11sp"/>
 
         <EditText
@@ -63,7 +63,7 @@
             android:hint="프로젝트 명을 입력해주세요.(9자 이하)"
             android:maxLength="9"
             android:textSize="11sp"
-            android:fontFamily="@font/gmarket_sans_ttf_light"/>
+            android:fontFamily="@font/pretendard_light"/>
 
     </LinearLayout>
 
@@ -81,7 +81,7 @@
             android:layout_height="wrap_content"
             android:text="날짜"
             android:textColor="#194AC2"
-            android:fontFamily="@font/gmarket_sans_ttf_bold"
+            android:fontFamily="@font/pretendard_bold"
             android:textSize="11sp"/>
 
         <TextView
@@ -90,7 +90,7 @@
             android:layout_height="wrap_content"
             android:text="프로젝트의 예상 진행 날짜를 입력해주세요"
             android:textColor="#80000000"
-            android:fontFamily="@font/gmarket_sans_ttf_light"
+            android:fontFamily="@font/pretendard_light"
             android:textSize="11sp"/>
 
         <LinearLayout
@@ -105,7 +105,7 @@
                 android:inputType="text"
                 android:digits="0123456789-"
                 android:textSize="11sp"
-                android:fontFamily="@font/gmarket_sans_ttf_medium"
+                android:fontFamily="@font/pretendard_medium"
                 android:gravity="center_horizontal"
                 android:layout_weight="1"
                 android:backgroundTint="#527FF5"
@@ -116,7 +116,7 @@
                 android:gravity="center"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/gmarket_sans_ttf_bold"
+                android:fontFamily="@font/pretendard_bold"
                 android:text="~"
                 android:textColor="#194AC2"/>
 
@@ -127,7 +127,7 @@
                 android:gravity="center_horizontal"
                 android:hint="2023-07-02"
                 android:textSize="11sp"
-                android:fontFamily="@font/gmarket_sans_ttf_medium"
+                android:fontFamily="@font/pretendard_medium"
                 android:layout_weight="1"
                 android:backgroundTint="#527FF5"
                 android:layout_width="match_parent"
@@ -149,7 +149,7 @@
             android:layout_gravity="center_vertical"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/gmarket_sans_ttf_bold"
+            android:fontFamily="@font/pretendard_bold"
             android:text="색상"
             android:textSize="11sp"
             android:textColor="#194AC2"/>
@@ -190,7 +190,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/gmarket_sans_ttf_bold"
+                android:fontFamily="@font/pretendard_bold"
                 android:text="팀원 추가"
                 android:textSize="11sp"
                 android:textColor="#194AC2"/>
@@ -229,7 +229,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="초대하기"
-                    android:fontFamily="@font/gmarket_sans_ttf_medium"
+                    android:fontFamily="@font/pretendard_medium"
                     android:textSize="12sp"
                     android:textColor="#80000000"/>
             </LinearLayout>
@@ -252,7 +252,7 @@
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:text="팀 프로젝트 수정하기"
-        android:fontFamily="@font/gmarket_sans_ttf_medium"
+        android:fontFamily="@font/pretendard_medium"
         android:textSize="15sp"
         android:textColor="@color/white"/>
 

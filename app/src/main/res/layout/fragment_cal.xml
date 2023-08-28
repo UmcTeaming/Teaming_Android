@@ -31,12 +31,12 @@
             android:textColor="@color/white"
             android:layout_marginLeft="30dp"
             android:text="카리나님의 일정"
-            android:fontFamily="@font/gmarket_sans_ttf_bold"
+            android:fontFamily="@font/pretendard_bold"
             android:id="@+id/cal_username"/>
         <TextView
             android:textColor="@color/white"
             android:id="@+id/cal_desc"
-            android:fontFamily="@font/gmarket_sans_ttf_light"
+            android:fontFamily="@font/pretendard_light"
             app:layout_constraintTop_toBottomOf="@id/cal_username"
             app:layout_constraintLeft_toLeftOf="@id/cal_username"
             android:layout_width="wrap_content"
@@ -61,6 +61,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
             <Button
+                android:layout_gravity="center_vertical"
                 android:layout_marginLeft="15dp"
                 tools:ignore="SpeakableTextPresentCheck"
                 android:id="@+id/left_button"
@@ -71,6 +72,7 @@
                 app:layout_constraintEnd_toStartOf="@+id/month_text"
                 app:layout_constraintTop_toTopOf="@+id/month_text" />
             <TextView
+                android:fontFamily="@font/pretendard_bold"
                 android:id="@+id/month_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -83,6 +85,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <Button
+                android:layout_gravity="center_vertical"
                 tools:ignore="SpeakableTextPresentCheck"
                 android:id="@+id/right_button"
                 android:layout_width="16dp"
@@ -102,6 +105,9 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:layout_gravity="center"
+                    android:textSize="12sp"
+                    android:fontFamily="@font/pretendard_medium"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -109,6 +115,9 @@
                     android:text="SUN"
                     android:textColor="@color/cal_day_name_color" />
                 <TextView
+                    android:layout_gravity="center"
+                    android:textSize="12sp"
+                    android:fontFamily="@font/pretendard_medium"
                     android:layout_weight="1"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
@@ -116,6 +125,9 @@
                     android:gravity="center"
                     android:textColor="@color/cal_day_name_color"/>
                 <TextView
+                    android:layout_gravity="center"
+                    android:textSize="12sp"
+                    android:fontFamily="@font/pretendard_medium"
                     android:layout_weight="1"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
@@ -123,6 +135,9 @@
                     android:gravity="center"
                     android:textColor="@color/cal_day_name_color"/>
                 <TextView
+                    android:layout_gravity="center"
+                    android:textSize="12sp"
+                    android:fontFamily="@font/pretendard_medium"
                     android:layout_weight="1"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
@@ -130,6 +145,9 @@
                     android:gravity="center"
                     android:textColor="@color/cal_day_name_color"/>
                 <TextView
+                    android:layout_gravity="center"
+                    android:textSize="12sp"
+                    android:fontFamily="@font/pretendard_medium"
                     android:layout_weight="1"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
@@ -137,6 +155,9 @@
                     android:gravity="center"
                     android:textColor="@color/cal_day_name_color"/>
                 <TextView
+                    android:layout_gravity="center"
+                    android:textSize="12sp"
+                    android:fontFamily="@font/pretendard_medium"
                     android:layout_weight="1"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
@@ -144,6 +165,9 @@
                     android:gravity="center"
                     android:textColor="@color/cal_day_name_color"/>
                 <TextView
+                    android:layout_gravity="center"
+                    android:textSize="12sp"
+                    android:fontFamily="@font/pretendard_medium"
                     android:layout_weight="1"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
@@ -167,6 +191,7 @@
 
 
         <TextView
+            android:fontFamily="@font/pretendard_medium"
             android:layout_marginTop="25dp"
             android:id="@+id/split"
             android:layout_width="wrap_content"
@@ -184,7 +209,8 @@
             app:layout_constraintTop_toBottomOf="@id/split"
             app:layout_constraintBottom_toBottomOf="parent"
             android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"/>
+            android:layout_marginRight="20dp"
+            tools:listitem=""/>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
