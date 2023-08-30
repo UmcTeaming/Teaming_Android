@@ -109,7 +109,6 @@ class UserFragment : Fragment(), ImgDialog.OnImgSelectedListener {
 
             binding.name.visibility = View.INVISIBLE
             binding.ButtonPencil.visibility = View.INVISIBLE
-            binding.nim.visibility = View.INVISIBLE
 
             requireActivity().supportFragmentManager.beginTransaction()
                 .replace(R.id.frameLayout,NameFragment())
@@ -122,7 +121,6 @@ class UserFragment : Fragment(), ImgDialog.OnImgSelectedListener {
             override fun handleOnBackPressed() {
                 binding.name.visibility = View.VISIBLE
                 binding.ButtonPencil.visibility = View.VISIBLE
-                binding.nim.visibility = View.VISIBLE
 
                 fragmentManager.popBackStackImmediate()
             }

@@ -243,7 +243,7 @@ class MembershipActivity : AppCompatActivity(), DialogAgreeFragment.DialogListen
 
         if(toggleState == "true"){
             binding.toggleButton.isChecked = true
-            binding.text10.visibility = View.INVISIBLE
+            binding.text11.visibility = View.INVISIBLE
             binding.toggleButton.isClickable = false
 
             updateToggleButtonColor(true)
