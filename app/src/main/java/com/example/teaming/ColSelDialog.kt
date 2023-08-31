@@ -64,9 +64,9 @@ class ColSelDialog(): DialogFragment() {
         }
 
         // dialog내의 x버튼 클릭 시
-        binding.btnX.setOnClickListener {
+        /*binding.btnX.setOnClickListener {
             dismiss()
-        }
+        }*/
 
         return view
     }
