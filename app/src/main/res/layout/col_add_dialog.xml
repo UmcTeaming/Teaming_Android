@@ -1,168 +1,231 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="260dp"
+    android:layout_gravity="center_vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <FrameLayout
+    <!--<Button
+        android:id="@+id/btn_x"
+        android:layout_gravity="right"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:background="@drawable/btn_x"
+        android:backgroundTint="#B3000000"/>-->
+
+    <TextView
+        android:id="@+id/dtext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="색상 선택"
+        android:fontFamily="@font/pretendard_extrabold"
+        android:textSize="11sp"
+        android:textColor="#194AC2"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:paddingStart="20dp"
+        android:paddingTop="20dp"/>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/icons1"
+        android:paddingStart="50dp"
+        android:paddingEnd="50dp"
+        android:paddingTop="30dp"
         android:layout_width="match_parent"
-        android:layout_height="330dp">
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/dtext"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/icons2">
+
+        <ImageView
+            android:id="@+id/btn_col_pink"
+            android:layout_width="32.22dp"
+            android:layout_height="32.22dp"
+            android:background="@drawable/color6"
+            android:clickable="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/btn_col_yel"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toEndOf="@id/btn_col_pink"
+            app:layout_constraintEnd_toStartOf="@id/btn_col_org"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:id="@+id/btn_col_yel"
+            android:clickable="true"
+            android:layout_marginLeft="17dp"
+            android:layout_width="32.22dp"
+            android:layout_height="32.22dp"
+            android:background="@drawable/color8"/>
+
+        <ImageView
+            app:layout_constraintEnd_toStartOf="@id/btn_col_green"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/btn_col_yel"
+            android:id="@+id/btn_col_org"
+            android:clickable="true"
+            android:layout_marginLeft="17dp"
+            android:layout_width="32.22dp"
+            android:layout_height="32.22dp"
+            android:background="@drawable/color7"/>
+
+        <ImageView
+            app:layout_constraintEnd_toStartOf="@id/btn_col_dpgreen"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/btn_col_org"
+            android:id="@+id/btn_col_green"
+            android:clickable="true"
+            android:layout_marginLeft="17dp"
+            android:layout_width="32.22dp"
+            android:layout_height="32.22dp"
+            android:background="@drawable/color9"/>
+
+        <ImageView
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/btn_col_green"
+            android:id="@+id/btn_col_dpgreen"
+            android:clickable="true"
+            android:layout_marginLeft="17dp"
+            android:layout_width="32.22dp"
+            android:layout_height="32.22dp"
+            android:background="@drawable/color10"/>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/icons2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="50dp"
+        android:paddingTop="10dp"
+        android:paddingEnd="50dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/icons1">
+
+        <ImageView
+            android:id="@+id/btn_col_blue"
+            android:layout_width="32.22dp"
+            android:layout_height="32.22dp"
+            android:background="@drawable/color1"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/btn_col_dpblue"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/btn_col_dpblue"
+            android:layout_width="32.22dp"
+            android:layout_height="32.22dp"
+            android:layout_marginLeft="17dp"
+            android:background="@drawable/color2"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/btn_col_pur"
+            app:layout_constraintStart_toEndOf="@id/btn_col_blue"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/btn_col_pur"
+            android:layout_width="32.22dp"
+            android:layout_height="32.22dp"
+            android:layout_marginLeft="17dp"
+            android:background="@drawable/color3"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/btn_col_black"
+            app:layout_constraintStart_toEndOf="@id/btn_col_dpblue"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/btn_col_black"
+            android:layout_width="32.22dp"
+            android:layout_height="32.22dp"
+            android:layout_marginLeft="17dp"
+            android:background="@drawable/color4"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/btn_col_grey"
+            app:layout_constraintStart_toEndOf="@id/btn_col_pur"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/btn_col_grey"
+            android:layout_width="32.22dp"
+            android:layout_height="32.22dp"
+            android:layout_marginLeft="17dp"
+            android:background="@drawable/color5"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/btn_col_black"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="30dp"
+        android:paddingBottom="20dp"
+        android:paddingStart="30dp"
+        android:paddingEnd="30dp"
+        app:layout_constraintTop_toBottomOf="@id/icons2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <View
+            android:id="@+id/col_view"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@drawable/state_oval"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/itext"
+            android:backgroundTint="#D9D9D9"/>
+
+        <TextView
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toEndOf="@id/col_view"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/btn_select"
+            android:id="@id/itext"
+            android:layout_gravity="center_vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="해당 색상을 선택하시겠습니까?"
+            android:fontFamily="@font/pretendard_semibold"
+            android:textSize="11sp"
+            android:textColor="#99000000"/>
 
         <Button
-            android:id="@+id/btn_x"
-            android:layout_gravity="right"
-            android:layout_marginTop="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_width="15dp"
-            android:layout_height="15dp"
-            android:background="@drawable/btn_x"
-            android:backgroundTint="#B3000000"/>
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toEndOf="@id/itext"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:id="@+id/btn_select"
+            android:layout_gravity="center_vertical"
+            android:layout_width="70dp"
+            android:layout_height="22dp"
+            android:text="선택하기"
+            android:fontFamily="@font/pretendard_extrabold"
+            android:textSize="10sp"
+            android:textColor="@color/white"
+            android:background="@drawable/create_btn_round_border"
+            android:backgroundTint="#527FF5"/>
 
-        <LinearLayout
-            android:layout_gravity="center"
-            android:gravity="center_vertical"
-            android:layout_width="match_parent"
-            android:layout_height="330dp"
-            android:orientation="vertical">
 
-            <TextView
-                android:layout_gravity="center_horizontal"
-                android:textColor="@color/black"
-                android:layout_width="315dp"
-                android:layout_height="wrap_content"
-                android:text="색상 선택"
-                android:textSize="11sp"
-                android:fontFamily="@font/pretendard_medium"/>
 
-            <LinearLayout
-                android:layout_marginTop="34dp"
-                android:layout_gravity="center_horizontal"
-                android:layout_width="232.77dp"
-                android:layout_height="wrap_content">
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-                <ImageView
-                    android:id="@+id/btn_col_pink"
-                    android:clickable="true"
-                    android:layout_width="32.22dp"
-                    android:layout_height="32.22dp"
-                    android:background="@drawable/color6"/>
 
-                <ImageView
-                    android:id="@+id/btn_col_yel"
-                    android:clickable="true"
-                    android:layout_marginLeft="17dp"
-                    android:layout_width="32.22dp"
-                    android:layout_height="32.22dp"
-                    android:background="@drawable/color8"/>
-
-                <ImageView
-                    android:id="@+id/btn_col_org"
-                    android:clickable="true"
-                    android:layout_marginLeft="17dp"
-                    android:layout_width="32.22dp"
-                    android:layout_height="32.22dp"
-                    android:background="@drawable/color7"/>
-
-                <ImageView
-                    android:id="@+id/btn_col_green"
-                    android:clickable="true"
-                    android:layout_marginLeft="17dp"
-                    android:layout_width="32.22dp"
-                    android:layout_height="32.22dp"
-                    android:background="@drawable/color9"/>
-
-                <ImageView
-                    android:id="@+id/btn_col_dpgreen"
-                    android:clickable="true"
-                    android:layout_marginLeft="17dp"
-                    android:layout_width="32.22dp"
-                    android:layout_height="32.22dp"
-                    android:background="@drawable/color10"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="20dp"
-                android:layout_width="232.77dp"
-                android:layout_height="wrap_content">
-
-                <ImageView
-                    android:id="@+id/btn_col_blue"
-                    android:layout_width="32.22dp"
-                    android:layout_height="32.22dp"
-                    android:background="@drawable/color1"/>
-
-                <ImageView
-                    android:id="@+id/btn_col_dpblue"
-                    android:layout_marginLeft="17dp"
-                    android:layout_width="32.22dp"
-                    android:layout_height="32.22dp"
-                    android:background="@drawable/color2"/>
-
-                <ImageView
-                    android:id="@+id/btn_col_pur"
-                    android:layout_marginLeft="17dp"
-                    android:layout_width="32.22dp"
-                    android:layout_height="32.22dp"
-                    android:background="@drawable/color3"/>
-
-                <ImageView
-                    android:id="@+id/btn_col_black"
-                    android:layout_marginLeft="17dp"
-                    android:layout_width="32.22dp"
-                    android:layout_height="32.22dp"
-                    android:background="@drawable/color4"/>
-
-                <ImageView
-                    android:id="@+id/btn_col_grey"
-                    android:layout_marginLeft="17dp"
-                    android:layout_width="32.22dp"
-                    android:layout_height="32.22dp"
-                    android:background="@drawable/color5"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_marginTop="53dp"
-                android:layout_gravity="center_horizontal"
-                android:layout_width="308dp"
-                android:layout_height="wrap_content">
-
-                <View
-                    android:id="@+id/col_view"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:background="@drawable/state_oval"
-                    android:backgroundTint="#FFAA00"/>
-
-                <TextView
-                    android:layout_marginLeft="17dp"
-                    android:layout_gravity="center_vertical"
-                    android:layout_width="164dp"
-                    android:layout_height="wrap_content"
-                    android:text="해당 색상을 선택하시겠습니까?"
-                    android:fontFamily="@font/pretendard_medium"
-                    android:textSize="11sp"
-                    android:textColor="@color/black"/>
-
-                <Button
-                    android:id="@+id/btn_select"
-                    android:layout_marginLeft="27dp"
-                    android:layout_gravity="center_vertical"
-                    android:layout_width="70dp"
-                    android:layout_height="22dp"
-                    android:text="선택하기"
-                    android:fontFamily="@font/pretendard_bold"
-                    android:textSize="10sp"
-                    android:textColor="@color/white"
-                    android:background="@drawable/create_btn_round_border"
-                    android:backgroundTint="#527FF5"/>
-
-            </LinearLayout>
-
-        </LinearLayout>
-
-    </FrameLayout>
-
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

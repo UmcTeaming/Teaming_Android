@@ -62,7 +62,7 @@
             android:paddingEnd="20dp"
             android:layout_height="wrap_content"
             android:fontFamily="@font/pretendard_medium"
-            android:text="2023.06.13 ~ "
+            android:text="2023.06.13"
             android:textSize="11sp" />
     </LinearLayout>
 </LinearLayout>

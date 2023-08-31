@@ -11,6 +11,14 @@
         android:icon="@drawable/home"/>
 
     <item
+        android:id="@+id/list"
+        android:title="list"
+        android:enabled="true"
+
+        android:menuCategory="secondary"
+        android:icon="@drawable/list"/>
+
+    <item
         android:id="@+id/file"
         android:title="file"
         android:enabled="true"
@@ -18,13 +26,6 @@
         android:menuCategory="secondary"
         android:icon="@drawable/file"/>
 
-    <item
-        android:id="@+id/list"
-        android:title="list"
-        android:enabled="true"
-
-        android:menuCategory="secondary"
-        android:icon="@drawable/list"/>
 
     <item
         android:id="@+id/cal"

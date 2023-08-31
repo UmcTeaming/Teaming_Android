@@ -35,12 +35,13 @@
                 android:textColor="#194AC2"/>
 
             <EditText
+                android:paddingStart="4dp"
                 android:id="@+id/add_email"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="7dp"
                 android:layout_width="265dp"
-                android:layout_height="wrap_content"
+                android:layout_height="36dp"
+                android:background="@drawable/edittext_custom"
                 android:hint="초대할 팀원의 이메일을 입력해주세요."
-                android:fontFamily="@font/pretendard_light"
                 android:textColor="#80000000"
                 android:textSize="11sp"/>
 
@@ -51,16 +52,18 @@
                 android:orientation="horizontal">
 
                 <Button
+                    android:layout_marginTop="10dp"
                     android:id="@+id/btn_del"
                     android:background="@drawable/btn_useradd"
                     android:layout_width="128dp"
                     android:layout_height="28dp"
                     android:text="취소하기"
                     android:textColor="#527FF5"
-                    android:fontFamily="@font/pretendard_medium"
+                    android:fontFamily="@font/pretendard_black"
                     android:textSize="10sp"/>
 
                 <Button
+                    android:layout_marginTop="10dp"
                     android:id="@+id/btn_invite"
                     android:layout_marginLeft="9dp"
                     android:backgroundTint="#527FF5"
@@ -69,7 +72,7 @@
                     android:layout_height="28dp"
                     android:text="초대하기"
                     android:textColor="@color/white"
-                    android:fontFamily="@font/pretendard_bold"
+                    android:fontFamily="@font/pretendard_black"
                     android:textSize="10sp"/>
             </LinearLayout>
 

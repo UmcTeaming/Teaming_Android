@@ -40,6 +40,7 @@ class MainFragment : Fragment() {
         memberName = sharedPreference.getString("userName", "Loading name failed")
         binding.memberName.text = memberName
         binding.memberName2.text = memberName
+        binding.memberName3.text = memberName
     }
 
     override fun onCreateView(
@@ -298,6 +299,14 @@ class MainFragment : Fragment() {
                 }
             })
         }
+
+        binding.btnMainCreate.setOnClickListener {
+            requireActivity().supportFragmentManager.beginTransaction()
+                .replace(R.id.container,CreateFragment())
+                .addToBackStack(null)
+                .commit()
+        }
+
         return binding.root
     }
 }

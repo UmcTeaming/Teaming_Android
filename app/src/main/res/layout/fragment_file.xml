@@ -101,7 +101,7 @@
                             android:layout_marginLeft="6dp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/pretendard_bold"
+                            android:fontFamily="@font/pretendard_extrabold"
                             android:text=""
                             android:textColor="@color/white"
                             android:textSize="24sp" />
@@ -109,8 +109,8 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/pretendard_bold"
-                            android:text="님의 포트폴리오"
+                            android:fontFamily="@font/pretendard_extrabold"
+                            android:text="님의 완료된 프로젝트"
                             android:textColor="@color/white"
                             android:textSize="24sp" />
 
@@ -123,7 +123,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="3dp"
-                        android:fontFamily="@font/pretendard_light"
+                        android:fontFamily="@font/pretendard_regular"
                         android:text="지금까지의 프로젝트를 한눈에 모아보세요!"
                         android:textColor="@color/white"
                         android:textSize="11sp" />
