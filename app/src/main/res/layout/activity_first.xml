@@ -7,28 +7,46 @@
     android:orientation="vertical"
     >
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:padding="0sp"
+        android:src="@drawable/first_back"
+        >
+    </ImageView>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/first_shade"
+        android:scaleType="centerCrop"
+        android:padding="0sp"
+        >
+    </ImageView>
+
     <TextView
         android:id="@+id/text1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="50dp"
-        android:layout_marginTop="160dp"
-        android:fontFamily="@font/pretendard_medium"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="110dp"
+        android:fontFamily="@font/pretendard_bold"
         android:text="티밍"
-        android:textColor="#B30049FF"
-        android:textSize="30sp"
-        app:layout_constraintLeft_toLeftOf="parent"
+        android:textColor="#ffffff"
+        android:textSize="28sp"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
     </TextView>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/pretendard_medium"
+        android:fontFamily="@font/pretendard_bold"
         android:text="에서 효율적인"
-        android:textColor="#000000"
-        android:textSize="30sp"
-        app:layout_constraintLeft_toRightOf="@id/text1"
+        android:textColor="#ffffff"
+        android:textSize="28sp"
+        app:layout_constraintStart_toEndOf="@id/text1"
         app:layout_constraintTop_toTopOf="@id/text1">
     </TextView>
 
@@ -36,11 +54,11 @@
         android:id="@+id/text2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/pretendard_medium"
+        android:fontFamily="@font/pretendard_bold"
         android:text="팀 프로젝트를"
-        android:textColor="#000000"
-        android:textSize="30sp"
-        app:layout_constraintLeft_toLeftOf="@id/text1"
+        android:textColor="#ffffff"
+        android:textSize="28sp"
+        app:layout_constraintStart_toStartOf="@id/text1"
         app:layout_constraintTop_toBottomOf="@id/text1">
     </TextView>
 
@@ -48,41 +66,29 @@
         android:id="@+id/text3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/pretendard_medium"
+        android:fontFamily="@font/pretendard_bold"
         android:text="기록해 보세요!"
-        android:textColor="#000000"
-        android:textSize="30sp"
-        app:layout_constraintLeft_toLeftOf="@id/text2"
+        android:textColor="#ffffff"
+        android:textSize="28sp"
+        app:layout_constraintStart_toStartOf="@id/text2"
         app:layout_constraintTop_toBottomOf="@id/text2">
     </TextView>
-
-    <ImageView
-        android:layout_width="370dp"
-        android:layout_height="370dp"
-        android:src="@drawable/logo_m"
-        app:layout_constraintStart_toStartOf="parent"
-        app:flow_horizontalBias="1"
-        android:layout_marginLeft="135dp"
-        android:layout_marginTop="30dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="@id/text2">
-    </ImageView>
 
     <Button
         android:id="@+id/Button_start"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_marginLeft="30dp"
-        android:layout_marginTop="420dp"
-        android:layout_marginRight="30dp"
-        android:background="@drawable/bin_blue"
-        android:fontFamily="@font/pretendard_medium"
-        android:text="시작하기"
-        android:textColor="#ffffff"
-        android:textSize="25sp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="@id/text1">
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="400dp"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/bin_white"
+        android:fontFamily="@font/pretendard_bold"
+        android:text="시작하기  ->"
+        android:textColor="#527FF5"
+        android:textSize="23sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/text3">
     </Button>
 
 
