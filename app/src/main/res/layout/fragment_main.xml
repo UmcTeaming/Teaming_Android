@@ -101,7 +101,7 @@
                         android:elevation="7dp"
                         android:paddingTop="25dp"
                         android:layout_gravity="center"
-                        android:visibility="invisible">
+                        android:visibility="visible">
 
                         <TextView
                             android:id="@+id/ntext"
