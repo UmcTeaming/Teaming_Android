@@ -160,7 +160,7 @@
                     android:layout_weight="1"/>
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:layout_marginTop="5dp"
@@ -176,9 +176,10 @@
                         android:src="@drawable/file_upload_btn" />
 
                     <ImageButton
+                        android:layout_weight="1"
                         android:id="@+id/project_schedules"
-                        android:layout_width="18dp"
-                        android:layout_height="18dp"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
                         android:scaleType="fitCenter"
                         android:background="@android:color/transparent"
                         android:src="@drawable/team_calender"
