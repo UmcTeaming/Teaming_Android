@@ -49,6 +49,8 @@ class PjPageFragment : Fragment() {
 
     private var fileType : String = ""
 
+    private var pjStatus : String = "ING"
+
     private val itemList = ArrayList<MemberData>()
 
     private var memberIdAll : Int = -1
@@ -131,9 +133,11 @@ class PjPageFragment : Fragment() {
                             .into(binding.pjImage)
 
                         if (projectpageresponse.data.projectStatus == "ING"){
+                            pjStatus = "ING"
                             binding.status.setImageResource(R.drawable.circle)
                             binding.projectDate.text = "${projectpageresponse.data.startDate} ~ 진행중"
                         }else{
+                            pjStatus = "END"
                             binding.status.setImageResource(R.drawable.circle_end)
                             binding.projectDate.text = "${projectpageresponse.data.startDate} ~ ${projectpageresponse.data.startDate}"
                         }
@@ -189,6 +193,7 @@ class PjPageFragment : Fragment() {
 
             val bundle = Bundle()
 
+            bundle.putString("file_status",pjStatus)
             bundle.putString("file_color","final")
 
             val fiSort = FiSort()
@@ -432,6 +437,7 @@ class PjPageFragment : Fragment() {
                         if (response.isSuccessful) {
                             val uploadResponse = response.body()
                             sleep(500)
+
                             requireActivity().supportFragmentManager.beginTransaction()
                                 .replace(R.id.fragmentContainer,PjSort())
                                 .commit()
@@ -451,8 +457,14 @@ class PjPageFragment : Fragment() {
                         if (response.isSuccessful) {
                             val uploadResponse = response.body()
                             sleep(500)
+                            val bundle = Bundle()
+
+                            bundle.putString("file_status",pjStatus)
+                            Log.d("프젝상태",pjStatus)
+                            val fiSort = FiSort()
+                            fiSort.arguments = bundle
                             requireActivity().supportFragmentManager.beginTransaction()
-                                .replace(R.id.fragmentContainer,FiSort())
+                                .replace(R.id.fragmentContainer,fiSort)
                                 .commit()
                         } else {
                             Log.d("파일 업로드", "${response.code()}")

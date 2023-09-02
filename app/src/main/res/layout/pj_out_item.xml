@@ -10,17 +10,17 @@
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:text="2023.06.20"
+        android:text=""
         android:fontFamily="@font/pretendard_medium"
-        android:textColor="@color/black"
+        android:textColor="#194AC2"
         android:textSize="17sp"
-        android:layout_marginTop="10dp"
         android:layout_marginStart="10dp"
         />
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
         android:id="@+id/in_recycler"
         app:layout_constraintTop_toBottomOf="@id/date"
         app:layout_constraintStart_toStartOf="parent"
