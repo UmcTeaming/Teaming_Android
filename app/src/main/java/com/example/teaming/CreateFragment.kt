@@ -1,11 +1,15 @@
 package com.example.teaming
 
 import android.content.Context
+import android.content.res.ColorStateList
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.graphics.Color
 import android.graphics.drawable.BitmapDrawable
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
+import android.os.Handler
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
@@ -13,7 +17,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat
 import com.example.teaming.databinding.FragmentCreateBinding
 import okhttp3.MediaType
 import okhttp3.MediaType.Companion.toMediaType
@@ -25,14 +31,25 @@ import retrofit2.Callback
 import retrofit2.Response
 import java.io.File
 import java.io.FileOutputStream
+import java.lang.Thread.sleep
+import java.text.DecimalFormat
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 class CreateFragment : Fragment(), ColSelDialog.OnColorSelectedListener, ImgDialog.OnImgSelectedListener {
     private lateinit var binding: FragmentCreateBinding
     private var selectedImageUri: Uri? = null
+    private var focus:Int?=null //1->시작 일자 2->종료일자 3->시작시간 4->종료시간
+    val decimalForm = DecimalFormat("00")
+    var startDaySet= false
+    var endDaySet = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -62,6 +79,59 @@ class CreateFragment : Fragment(), ColSelDialog.OnColorSelectedListener, ImgDial
 
         }
 
+        binding.pjStart.setOnClickListener{
+            binding.pjStart.setTextColor(Color.BLACK)
+            binding.pjEnd.setTextColor(Color.GRAY)
+            //binding.scheduleStartTime.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(requireActivity(), R.color.disabled))
+            //binding.scheduleEndTime.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(requireActivity(), R.color.disabled))
+            binding.cDatePicker.visibility=View.VISIBLE
+            //binding.scheduleDatePicker.visibility=View.VISIBLE
+
+            focus = 1
+        }
+        binding.pjEnd.setOnClickListener{
+            binding.pjStart.setTextColor(Color.GRAY)
+            binding.pjEnd.setTextColor(Color.BLACK)
+            //binding.scheduleStartTime.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(requireActivity(), R.color.disabled))
+            //binding.scheduleEndTime.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(requireActivity(), R.color.disabled))
+            binding.cDatePicker.visibility=View.VISIBLE
+            //binding.scheduleDatePicker.visibility=View.VISIBLE
+            focus = 2
+        }
+
+        binding.cDatePicker.setOnDateChangedListener { view, year, monthOfYear, dayOfMonth ->
+            if(focus==1){
+                binding.pjStart.text =year.toString()+". "+decimalForm.format(monthOfYear + 1) + ". " + decimalForm.format(dayOfMonth)
+                startDaySet = true
+                /*if(startDaySet && endDaySet) {
+                    binding.cDatePicker.visibility = View.GONE
+                }*/
+               /* if (startTimeSet && endTimeSet && startDaySet && endDaySet){
+                    binding.makeSchedule.isEnabled = true
+                    binding.makeSchedule.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(requireActivity(), R.color.cal_day_name_color))
+                }*/
+            }
+            else if(focus==2){
+                binding.pjEnd.text = year.toString()+". "+decimalForm.format(monthOfYear + 1) + ". " + decimalForm.format(dayOfMonth)
+                endDaySet = true
+
+                /*if(startDaySet && endDaySet) {
+                    binding.cDatePicker.visibility = View.GONE
+                }*/
+                /*if (startTimeSet && endTimeSet && startDaySet && endDaySet){
+                    binding.makeSchedule.isEnabled = true
+                    binding.makeSchedule.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(requireActivity(), R.color.cal_day_name_color))
+                }*/
+            }
+
+            val handler = Handler()
+            handler.postDelayed({
+                if (startDaySet || endDaySet) {
+                    binding.cDatePicker.visibility = View.GONE
+                }
+            }, 800) // 1000ms (1초) 후에 View.GONE으로 설정
+        }
+
         val textWatcher = object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
 
@@ -80,10 +150,17 @@ class CreateFragment : Fragment(), ColSelDialog.OnColorSelectedListener, ImgDial
 
         binding.btnCreateProject.setOnClickListener {
             val name = binding.pjName.text.toString()
-            val start = binding.pjStart.text.toString()
-            val end = binding.pjEnd.text.toString()
+            /*val start = binding.pjStart.text.toString()
+            val end = binding.pjEnd.text.toString()*/
             val backgroundColor = binding.createCol.backgroundTintList?.defaultColor ?: 0
             val hexColor = String.format("#%06X", 0xFFFFFF and backgroundColor)
+
+            val inputFormat = SimpleDateFormat("yyyy. MM. dd", Locale.getDefault())
+            val outputFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+            val start: Date = inputFormat.parse(binding.pjStart.text.toString())
+            val end: Date = inputFormat.parse(binding.pjEnd.text.toString())
+            val startDayAfter: String = outputFormat.format(start)
+            val endDayAfter : String = outputFormat.format(end)
 
             val imagePart: MultipartBody.Part? = selectedImageUri?.let { uri ->
                 val inputStream = requireContext().contentResolver.openInputStream(uri)
@@ -96,8 +173,8 @@ class CreateFragment : Fragment(), ColSelDialog.OnColorSelectedListener, ImgDial
             }
 
             val nameRequestBody: RequestBody = RequestBody.create("text/plain".toMediaType(), name)
-            val startRequestBody: RequestBody = RequestBody.create("text/plain".toMediaType(), start)
-            val endRequestBody: RequestBody = RequestBody.create("text/plain".toMediaType(), end)
+            val startRequestBody: RequestBody = RequestBody.create("text/plain".toMediaType(), startDayAfter)
+            val endRequestBody: RequestBody = RequestBody.create("text/plain".toMediaType(), endDayAfter)
             val hexColorRequestBody: RequestBody = RequestBody.create("text/plain".toMediaType(), hexColor)
 
             val textHashMap = hashMapOf<String, RequestBody>()
