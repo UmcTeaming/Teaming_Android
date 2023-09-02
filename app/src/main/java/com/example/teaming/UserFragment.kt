@@ -2,6 +2,7 @@ package com.example.teaming
 
 
 import android.content.Context
+import android.content.Intent
 import android.content.res.ColorStateList
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
@@ -125,6 +126,21 @@ class UserFragment : Fragment(), ImgDialog.OnImgSelectedListener {
                 .replace(R.id.frameLayout,nameFragment)
                 .commit()
 
+        }
+
+        binding.goLogout.setOnClickListener{
+            val auto = requireActivity().getSharedPreferences("autoLogin", AppCompatActivity.MODE_PRIVATE)
+
+            val autoLoginEdit = auto.edit()
+
+            autoLoginEdit.putBoolean("autoLoginUse", false)
+            autoLoginEdit.putString("Id", null)
+            autoLoginEdit.putString("Pw", null)
+            autoLoginEdit.commit()
+
+            val intent = Intent(requireContext(), LoginActivity::class.java)
+            startActivity(intent)
+            requireActivity().finish()
         }
 
         backCallback = object : OnBackPressedCallback(true) {
