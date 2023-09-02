@@ -27,8 +27,11 @@ class FileFragment : Fragment() {
     private var isFileIcon1Selected = true
     private var isFileIcon2Selected = false
 
+    private var searchText:String? = ""
+
     override fun onAttach(context: Context) {
         super.onAttach(context)
+
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -42,6 +45,9 @@ class FileFragment : Fragment() {
         )
         memberName = sharedPreference.getString("userName", "Loading name failed")
         binding.memberName.text = memberName
+
+        binding.searchEditText.text.clear()
+        searchText = ""
     }
 
     override fun onCreateView(
@@ -49,6 +55,31 @@ class FileFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentFileBinding.inflate(inflater,container,false)
+
+        binding.searchBtn.setOnClickListener{
+            searchText = binding.searchEditText.text.toString().trim()
+
+            val bundle = Bundle()
+            bundle.putString("searchText", searchText)
+
+            val fileFragment1 = File_Icon1_Fragment()
+            fileFragment1.arguments = bundle
+
+            isFileIcon1Selected = true
+            isFileIcon2Selected = false
+            binding.fileIcon1.isSelected = true
+            binding.fileIcon2.isSelected = false
+            binding.fileIcon1.backgroundTintList =
+                ContextCompat.getColorStateList(requireContext(), R.color.file_btn_focus)
+            binding.fileIcon2.backgroundTintList =
+                ContextCompat.getColorStateList(requireContext(), R.color.file_btn_unfocus)
+
+            requireActivity().supportFragmentManager.beginTransaction()
+                .replace(R.id.file_frame, fileFragment1)
+                .addToBackStack(null)
+                .commit()
+        }
+
 
         // 화면 시작시에 처음 보여야되는 리사이클러뷰 설정
         isFileIcon1Selected = true
@@ -84,8 +115,14 @@ class FileFragment : Fragment() {
                 binding.fileIcon2.backgroundTintList =
                     ContextCompat.getColorStateList(requireContext(), R.color.file_btn_unfocus)
 
+                val bundle = Bundle()
+                bundle.putString("searchText", searchText)
+
+                val fileFragment1 = File_Icon1_Fragment()
+                fileFragment1.arguments = bundle
+
                 requireActivity().supportFragmentManager.beginTransaction()
-                    .replace(R.id.file_frame,File_Icon1_Fragment())
+                    .replace(R.id.file_frame,fileFragment1)
                     .addToBackStack(null)
                     .commit()
             }
@@ -103,8 +140,14 @@ class FileFragment : Fragment() {
                 binding.fileIcon2.backgroundTintList =
                     ContextCompat.getColorStateList(requireContext(), R.color.file_btn_focus)
 
+                val bundle = Bundle()
+                bundle.putString("searchText", searchText)
+
+                val fileFragment2 = File_Icon2_Fragment()
+                fileFragment2.arguments = bundle
+
                 requireActivity().supportFragmentManager.beginTransaction()
-                    .replace(R.id.file_frame,File_Icon2_Fragment())
+                    .replace(R.id.file_frame,fileFragment2)
                     .addToBackStack(null)
                     .commit()
             }
