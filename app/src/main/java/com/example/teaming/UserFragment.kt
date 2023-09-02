@@ -45,6 +45,8 @@ class UserFragment : Fragment(), ImgDialog.OnImgSelectedListener {
 
     private var img_Selected = false
 
+    private var username = ""
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -66,7 +68,7 @@ class UserFragment : Fragment(), ImgDialog.OnImgSelectedListener {
                     val mypageResponse = response.body()
                     if (mypageResponse != null) {
 
-                        val username = mypageResponse.data.name
+                        username = mypageResponse.data.name
                         val email = mypageResponse.data.email
 
                         binding.name.text = username
@@ -107,12 +109,20 @@ class UserFragment : Fragment(), ImgDialog.OnImgSelectedListener {
 
         binding.ButtonPencil.setOnClickListener {
 
-            binding.name.visibility = View.INVISIBLE
-            binding.ButtonPencil.visibility = View.INVISIBLE
+            binding.byeFrame.visibility = View.GONE
+            binding.frameLayout.visibility = View.VISIBLE
+
+            val bundle = Bundle()
+
+            bundle.putString("user_name",username)
+
+            Log.d("보내기전","$bundle")
+
+            val nameFragment = NameFragment()
+            nameFragment.arguments = bundle
 
             requireActivity().supportFragmentManager.beginTransaction()
-                .replace(R.id.frameLayout,NameFragment())
-                .addToBackStack(null)
+                .replace(R.id.frameLayout,nameFragment)
                 .commit()
 
         }

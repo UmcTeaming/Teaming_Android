@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.example.teaming.databinding.FragmentPDFViewerBinding
 import com.github.barteksc.pdfviewer.scroll.DefaultScrollHandle
 import kotlinx.coroutines.Dispatchers
@@ -56,6 +57,7 @@ class PDFViewer : Fragment() {
             Glide.with(requireContext())
                 .asGif()
                 .load(R.drawable.loading) // 로딩 중 GIF 이미지 리소스 설정
+                .diskCacheStrategy( DiskCacheStrategy.RESOURCE )
                 .into(binding.loading)
 
         } else {
