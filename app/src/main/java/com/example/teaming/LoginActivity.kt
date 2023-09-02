@@ -79,7 +79,7 @@ class LoginActivity : AppCompatActivity() {
 
                             Log.d("Login_Token", "Access Token: $accessToken")
 
-                            sleep(200)
+                            sleep(250)
 
                             val intent = Intent(this@LoginActivity, MainActivity::class.java)
                             startActivity(intent)
@@ -181,7 +181,7 @@ class LoginActivity : AppCompatActivity() {
 
                             binding.loading.visibility = View.VISIBLE
 
-                            sleep(200)
+                            sleep(250)
 
                             Log.d("여기지나감","22")
 
