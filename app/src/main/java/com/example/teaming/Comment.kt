@@ -54,7 +54,31 @@ class Comment : Fragment() {
                         Log.d("코멘트","$commentLoadResponse")
                         dataList.addAll(commentLoadResponse.data)
 
-                        commentAdapter = CommentAdapter(dataList)
+                        commentAdapter = CommentAdapter(dataList){ comment ->
+                            // 아이템을 길게 눌렀을 때 이벤트 처리
+                            val commentId = comment.commentId
+                            val callCommentDeleteResponse = RetrofitApi.getRetrofitService.commentDelete(memberId, fileId, commentId)
+
+                            callCommentDeleteResponse.enqueue(object : Callback<CommentDeleteResponse> {
+                                override fun onResponse(
+                                    call: Call<CommentDeleteResponse>,
+                                    response: Response<CommentDeleteResponse>
+                                ) {
+                                    if (response.isSuccessful) {
+                                        val commentDeleteResponse = response.body()
+                                        if (commentDeleteResponse != null) {
+                                            loadComments()
+                                        }
+                                    } else {
+                                        Log.d("comment_load", "API 호출 실패: ${response.code()}")
+                                    }
+                                }
+
+                                override fun onFailure(call: Call<CommentDeleteResponse>, t: Throwable) {
+                                    Log.e("comment_load", "로그인 API 호출 실패", t)
+                                }
+                            })
+                        }
 
                         binding.commentRecycler.apply {
                             layoutManager = LinearLayoutManager(requireContext())
@@ -128,6 +152,35 @@ class Comment : Fragment() {
                     val commentLoadResponse = response.body()
                     if (commentLoadResponse != null && commentLoadResponse.data != null) {
                         Log.d("코멘트", "$commentLoadResponse")
+
+//                        commentAdapter = CommentAdapter(dataList) { comment ->
+//                            // 아이템을 길게 눌렀을 때 이벤트 처리
+//                            val commentId = comment.commentId
+//
+//                            val callCommentDeleteResponse = RetrofitApi.getRetrofitService.commentDelete(memberId, fileId, commentId)
+//
+//                            callCommentDeleteResponse.enqueue(object : Callback<CommentDeleteResponse> {
+//                                override fun onResponse(
+//                                    call: Call<CommentDeleteResponse>,
+//                                    response: Response<CommentDeleteResponse>
+//                                ) {
+//                                    if (response.isSuccessful) {
+//                                        val commentDeleteResponse = response.body()
+//                                        if (commentDeleteResponse != null) {
+//                                            loadComments()
+//                                        }
+//                                    } else {
+//                                        Log.d("comment_load", "API 호출 실패: ${response.code()}")
+//                                    }
+//                                }
+//
+//                                override fun onFailure(call: Call<CommentDeleteResponse>, t: Throwable) {
+//                                    Log.e("comment_load", "로그인 API 호출 실패", t)
+//                                }
+//                            })
+//
+//                        }
+
                         dataList.addAll(commentLoadResponse.data)
                         commentAdapter.notifyDataSetChanged()
                     }

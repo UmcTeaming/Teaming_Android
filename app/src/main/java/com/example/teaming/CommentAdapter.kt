@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 
 
-class CommentAdapter(private val comments: List<CommentData>) :
+class CommentAdapter(private val comments: List<CommentData>, private val onItemLongClickListener: (CommentData) -> Unit) :
     RecyclerView.Adapter<CommentAdapter.CommentViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CommentViewHolder {
@@ -23,11 +23,25 @@ class CommentAdapter(private val comments: List<CommentData>) :
         val comment = comments[position]
         holder.bind(comment)
 
+        holder.itemView.setOnLongClickListener {
+            // 여기서 commentId를 가져와서 로그로 출력
+            val commentId = comment.commentId
+
+
+
+            true // true를 반환하여 이벤트 소비 처리
+        }
+
         holder.apply {
             Glide.with(itemView.context)
                 .load(comment.profile_image)
                 .error(R.drawable.profile_default)
                 .into(imgView)
+
+            itemView.setOnLongClickListener {
+                onItemLongClickListener(comment)
+                true // true를 반환하여 이벤트 소비 처리
+            }
 
         }
     }

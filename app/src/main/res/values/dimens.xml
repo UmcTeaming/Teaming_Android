@@ -7,4 +7,5 @@
     <dimen name="small_height">25dp</dimen>
     <dimen name="elevation_10dp">10dp</dimen>
     <dimen name="elevation_0dp">5dp</dimen>
+    <dimen name="loading_gif_width">150dp</dimen>
 </resources>

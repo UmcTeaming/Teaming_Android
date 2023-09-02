@@ -704,3 +704,9 @@ data class DeleteScheduleResponse(
     val status:Int
 )
 
+data class CommentDeleteResponse(
+    @SerializedName("status")
+    val status: Int,
+    @SerializedName("message")
+    val message: String
+)
