@@ -4,35 +4,36 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".NameFragment">
-
-    <!-- TODO: Update blank fragment layout -->
+    tools:context=".NameFragment"
+    android:background="@null"
+    >
 
     <EditText
+        android:layout_marginStart="10dp"
         android:id="@+id/edittext"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="닉네임을 입력해주세요"
-        android:fontFamily="@font/pretendard_medium"
+        android:text="닉네임"
+        android:fontFamily="@font/pretendard_bold"
         android:textColorHint="#80000000"
         android:backgroundTint="#527FF5"
-        android:textColor="#000000"
+        android:textColor="#ffffff"
         android:lines="1"
         android:singleLine="true"
-        android:textSize="10sp"
+        android:textSize="22sp"
         tools:ignore="MissingConstraints"
         >
     </EditText>
 
     <Button
         android:id="@+id/okay_btn"
-        android:layout_width="41dp"
-        android:layout_height="15.17dp"
+        android:layout_width="70dp"
+        android:layout_height="25dp"
         android:background="@drawable/button_check"
         android:text="확인"
-        android:textSize="10sp"
+        android:textSize="15sp"
         android:textColor="#ffffff"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="13dp"
         android:fontFamily="@font/pretendard_bold"
         app:layout_constraintRight_toRightOf="@id/edittext"
         app:layout_constraintTop_toTopOf="@id/edittext"
@@ -40,14 +41,14 @@
     </Button>
 
     <TextView
+        android:layout_marginStart="10dp"
         android:textColor="@color/white"
         android:id="@+id/text_status"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
         android:fontFamily="@font/pretendard_medium"
-        android:text="기본 텍스트"
-        android:textSize="8sp"
+        android:text=""
+        android:textSize="15sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/edittext" />
 
