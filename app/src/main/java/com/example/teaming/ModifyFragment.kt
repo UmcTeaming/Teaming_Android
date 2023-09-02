@@ -9,12 +9,15 @@ import android.graphics.Color
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.GradientDrawable
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -37,6 +40,10 @@ import retrofit2.Response
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.FileOutputStream
+import java.text.DecimalFormat
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 class ModifyFragment : Fragment(),ColSelDialog.OnColorSelectedListener, ImgDialog.OnImgSelectedListener {
     private lateinit var binding: FragmentModifyBinding
@@ -51,11 +58,17 @@ class ModifyFragment : Fragment(),ColSelDialog.OnColorSelectedListener, ImgDialo
 
     private var projectIdAll : Int = -1
 
+    private var focus:Int?=null //1->시작 일자 2->종료일자 3->시작시간 4->종료시간
+    val decimalForm = DecimalFormat("00")
+    var startDaySet= false
+    var endDaySet = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -144,10 +157,17 @@ class ModifyFragment : Fragment(),ColSelDialog.OnColorSelectedListener, ImgDialo
         // 팀 프로젝트 수정하기 버튼 누른 경우 PATCH 여기서 하기
         binding.btnModiProject.setOnClickListener {
             val projectName = binding.modiName.text.toString()
-            val startDate = binding.modiStart.text.toString()
-            val endDate = binding.modiEnd.text.toString()
+            /*val startDate = binding.modiStart.text.toString()
+            val endDate = binding.modiEnd.text.toString()*/
             val backgroundColor = binding.modiCol.backgroundTintList?.defaultColor ?: 0
             val hexColor = String.format("#%06X", 0xFFFFFF and backgroundColor)
+
+            val inputFormat = SimpleDateFormat("yyyy. MM. dd", Locale.getDefault())
+            val outputFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+            val start: Date = inputFormat.parse(binding.modiStart.text.toString())
+            val end: Date = inputFormat.parse(binding.modiEnd.text.toString())
+            val startDayAfter: String = outputFormat.format(start)
+            val endDayAfter : String = outputFormat.format(end)
 
             var imagePart: MultipartBody.Part? = null
 
@@ -180,8 +200,8 @@ class ModifyFragment : Fragment(),ColSelDialog.OnColorSelectedListener, ImgDialo
             }
 
             val nameRequestBody: RequestBody = RequestBody.create("text/plain".toMediaType(), projectName)
-            val startRequestBody: RequestBody = RequestBody.create("text/plain".toMediaType(), startDate)
-            val endRequestBody: RequestBody = RequestBody.create("text/plain".toMediaType(), endDate)
+            val startRequestBody: RequestBody = RequestBody.create("text/plain".toMediaType(), startDayAfter)
+            val endRequestBody: RequestBody = RequestBody.create("text/plain".toMediaType(), endDayAfter)
             val hexColorRequestBody: RequestBody = RequestBody.create("text/plain".toMediaType(), hexColor)
 
             val textHashMap = hashMapOf<String, RequestBody>()
@@ -252,6 +272,59 @@ class ModifyFragment : Fragment(),ColSelDialog.OnColorSelectedListener, ImgDialo
             colSelDialog.show(requireActivity().supportFragmentManager,"ColSelDialog")
             // target설정을 해야 interface사용이 가능하다고 함
             colSelDialog.setTargetFragment(this,0)
+        }
+
+        binding.modiStart.setOnClickListener{
+            binding.modiStart.setTextColor(Color.BLACK)
+            binding.modiEnd.setTextColor(Color.GRAY)
+            //binding.scheduleStartTime.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(requireActivity(), R.color.disabled))
+            //binding.scheduleEndTime.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(requireActivity(), R.color.disabled))
+            binding.mDatePicker.visibility=View.VISIBLE
+            //binding.scheduleDatePicker.visibility=View.VISIBLE
+
+            focus = 1
+        }
+        binding.modiEnd.setOnClickListener{
+            binding.modiStart.setTextColor(Color.GRAY)
+            binding.modiEnd.setTextColor(Color.BLACK)
+            //binding.scheduleStartTime.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(requireActivity(), R.color.disabled))
+            //binding.scheduleEndTime.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(requireActivity(), R.color.disabled))
+            binding.mDatePicker.visibility=View.VISIBLE
+            //binding.scheduleDatePicker.visibility=View.VISIBLE
+            focus = 2
+        }
+
+        binding.mDatePicker.setOnDateChangedListener { view, year, monthOfYear, dayOfMonth ->
+            if(focus==1){
+                binding.modiStart.text =year.toString()+". "+decimalForm.format(monthOfYear + 1) + ". " + decimalForm.format(dayOfMonth)
+                startDaySet = true
+                /*if(startDaySet && endDaySet) {
+                    binding.cDatePicker.visibility = View.GONE
+                }*/
+                /* if (startTimeSet && endTimeSet && startDaySet && endDaySet){
+                     binding.makeSchedule.isEnabled = true
+                     binding.makeSchedule.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(requireActivity(), R.color.cal_day_name_color))
+                 }*/
+            }
+            else if(focus==2){
+                binding.modiEnd.text = year.toString()+". "+decimalForm.format(monthOfYear + 1) + ". " + decimalForm.format(dayOfMonth)
+                endDaySet = true
+
+                /*if(startDaySet && endDaySet) {
+                    binding.cDatePicker.visibility = View.GONE
+                }*/
+                /*if (startTimeSet && endTimeSet && startDaySet && endDaySet){
+                    binding.makeSchedule.isEnabled = true
+                    binding.makeSchedule.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(requireActivity(), R.color.cal_day_name_color))
+                }*/
+            }
+
+            val handler = Handler()
+            handler.postDelayed({
+                if (startDaySet || endDaySet) {
+                    binding.mDatePicker.visibility = View.GONE
+                }
+            }, 800) // 1000ms (1초) 후에 View.GONE으로 설정
         }
 
         return binding.root

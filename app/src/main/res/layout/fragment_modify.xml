@@ -78,7 +78,7 @@
             android:fontFamily="@font/pretendard_medium"
             android:hint="프로젝트 명을 입력해주세요.(9자 이하)"
             android:maxLength="9"
-            android:paddingStart="3dp"
+            android:paddingStart="10dp"
             android:textSize="11sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -122,7 +122,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/mdate" />
 
-        <EditText
+        <TextView
             app:layout_constraintHorizontal_weight="4"
             android:id="@+id/modi_start"
             android:layout_width="0dp"
@@ -130,46 +130,64 @@
             android:layout_marginTop="5dp"
             android:background="@drawable/edittext_custom"
             android:fontFamily="@font/pretendard_medium"
-            android:hint="2023-07-02"
-            android:textAlignment="center"
+            android:hint="0000.00.00"
+            android:gravity="center"
             android:textSize="11sp"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintTop_toBottomOf="@id/mdate2"
             app:layout_constraintEnd_toStartOf="@id/mtext1"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/m_date_picker"
             />
 
         <TextView
-            app:layout_constraintHorizontal_weight="1"
             android:id="@+id/mtext1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="~"
             android:textAlignment="center"
             android:textColor="#194AC2"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/m_date_picker"
             app:layout_constraintEnd_toStartOf="@id/modi_end"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_weight="1"
             app:layout_constraintStart_toEndOf="@id/modi_start"
-            app:layout_constraintTop_toBottomOf="@id/mdate2" />
+            app:layout_constraintTop_toBottomOf="@id/mdate2"
+            app:layout_constraintVertical_bias="0.45" />
 
-        <EditText
-            app:layout_constraintHorizontal_weight="4"
+        <TextView
             android:id="@+id/modi_end"
             android:layout_width="0dp"
             android:layout_height="36dp"
             android:layout_marginTop="5dp"
             android:background="@drawable/edittext_custom"
             android:fontFamily="@font/pretendard_medium"
-            android:hint="2023-07-02"
-            android:textAlignment="center"
+            android:gravity="center"
+            android:hint="0000.00.00"
             android:textSize="11sp"
+            app:layout_constraintBottom_toTopOf="@id/m_date_picker"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_weight="4"
             app:layout_constraintStart_toEndOf="@id/mtext1"
             app:layout_constraintTop_toBottomOf="@id/mdate2"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintVertical_bias="0.0" />
+
+        <DatePicker
+            android:layout_marginTop="10dp"
+            android:background="@drawable/round_border6"
+            app:layout_constraintBaseline_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/modi_start"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:id="@+id/m_date_picker"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:calendarViewShown="false"
+            android:datePickerMode="spinner"
+            android:theme="@style/MyDatePicker"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

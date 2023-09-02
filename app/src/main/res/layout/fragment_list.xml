@@ -71,8 +71,9 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_gravity="bottom|right"
-            android:elevation="4dp"
-            android:layout_margin="30dp"
+            android:elevation="5dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="30dp"
             android:background="@drawable/btn_round2"/>
 
         <androidx.core.widget.NestedScrollView
@@ -85,8 +86,8 @@
                 android:orientation="vertical">
 
                 <LinearLayout
-                    android:paddingStart="20dp"
-                    android:paddingEnd="20dp"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
                     android:layout_marginTop="45dp"
                     android:layout_gravity="center_horizontal"
                     android:layout_width="match_parent"
@@ -105,7 +106,7 @@
                             android:fontFamily="@font/pretendard_bold"
                             android:text=""
                             android:textColor="#527FF5"
-                            android:textSize="24sp" />
+                            android:textSize="21sp" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -113,7 +114,7 @@
                             android:fontFamily="@font/pretendard_bold"
                             android:text="님의 진행 중인 프로젝트 "
                             android:textColor="#527FF5"
-                            android:textSize="24sp" />
+                            android:textSize="21sp" />
 
                     </LinearLayout>
 
@@ -130,8 +131,8 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:paddingStart="20dp"
-                    android:paddingEnd="20dp"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
                     android:id="@+id/btn_layout"
                     android:visibility="visible"
                     android:layout_marginTop="33dp"
@@ -158,8 +159,8 @@
                 </LinearLayout>
 
                 <FrameLayout
-                    android:paddingStart="20dp"
-                    android:paddingEnd="20dp"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
                     android:visibility="visible"
                     android:id="@+id/file_frame"
                     android:layout_width="match_parent"
