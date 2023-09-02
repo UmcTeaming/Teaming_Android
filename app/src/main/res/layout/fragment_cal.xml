@@ -67,7 +67,7 @@
                 android:id="@+id/left_button"
                 android:layout_width="16dp"
                 android:layout_height="16dp"
-                android:background="@drawable/right"
+                android:background="@drawable/cheveron_right"
                 app:layout_constraintBottom_toBottomOf="@+id/month_text"
                 app:layout_constraintEnd_toStartOf="@+id/month_text"
                 app:layout_constraintTop_toTopOf="@+id/month_text" />

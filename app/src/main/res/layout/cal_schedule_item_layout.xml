@@ -34,20 +34,23 @@
         android:fontFamily="@font/pretendard_medium"
         app:layout_constraintTop_toTopOf="@+id/color_bar"
         android:layout_marginLeft="5dp"/>
-    <TextView
-        android:id="@+id/cal_schedule_description"
-        android:layout_width="180dp"
-        android:layout_height="wrap_content"
-        android:textSize="15sp"
-        android:textColor="@color/black"
-        android:fontFamily="@font/pretendard_medium"
-        android:text="일정 뭐시기 저시기"
-        android:maxLines="1"
-        android:ellipsize="end"
-        android:layout_marginTop="10dp"
-        app:layout_constraintLeft_toRightOf="@+id/color_bar"
-        app:layout_constraintTop_toBottomOf="@+id/cal_schedule_day"
-        android:layout_marginLeft="5dp"/>
+
+        <TextView
+            android:id="@+id/cal_schedule_description"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintHorizontal_bias="0"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="10dp"
+            android:ellipsize="end"
+            android:fontFamily="@font/pretendard_medium"
+            android:maxLines="1"
+            android:text="일정 뭐시기 저시기"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            app:layout_constraintRight_toLeftOf="@+id/cal_schedule_time"
+            app:layout_constraintLeft_toRightOf="@+id/color_bar"
+            app:layout_constraintTop_toBottomOf="@+id/cal_schedule_day" />
 
     <Button
         android:id="@+id/del_check_btn"
