@@ -17,6 +17,7 @@ import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.lang.Thread.sleep
 
 
 class LoginActivity : AppCompatActivity() {
@@ -78,6 +79,8 @@ class LoginActivity : AppCompatActivity() {
 
                             Log.d("Login_Token", "Access Token: $accessToken")
 
+                            sleep(200)
+
                             val intent = Intent(this@LoginActivity, MainActivity::class.java)
                             startActivity(intent)
                             finish()
@@ -131,15 +134,13 @@ class LoginActivity : AppCompatActivity() {
             val requestBody = RequestBody.create("application/json".toMediaType(), json)
             val callLogin = RetrofitApi.getRetrofitService.login(requestBody)
 
-            if (isAutoLoginEnabled){
-                val auto = getSharedPreferences("autoLogin", MODE_PRIVATE)
-                val autoLoginEdit = auto.edit()
-
-                autoLoginEdit.putBoolean("autoLoginUse", true)
-                autoLoginEdit.putString("Id", logInId)
-                autoLoginEdit.putString("Pw", password)
-                autoLoginEdit.commit()
-            }
+            setAllViewsToGone(view)
+            binding.loading.visibility = View.VISIBLE
+            Glide.with(this@LoginActivity)
+                .asGif()
+                .load(R.drawable.loading) // 로딩 중 GIF 이미지 리소스 설정
+                .diskCacheStrategy( DiskCacheStrategy.RESOURCE )
+                .into(binding.loading)
 
             callLogin.enqueue(object : Callback<LoginResponse> {
                 override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
@@ -149,6 +150,16 @@ class LoginActivity : AppCompatActivity() {
                             val accessToken = "Bearer ${loginResponse.data.jwtToken.accessToken}"
                             val userId = loginResponse.data.jwtToken.memberId
                             val userName = loginResponse.data.name
+
+                            if (isAutoLoginEnabled){
+                                val auto = getSharedPreferences("autoLogin", MODE_PRIVATE)
+                                val autoLoginEdit = auto.edit()
+
+                                autoLoginEdit.putBoolean("autoLoginUse", true)
+                                autoLoginEdit.putString("Id", logInId)
+                                autoLoginEdit.putString("Pw", password)
+                                autoLoginEdit.commit()
+                            }
 
                             Log.e("userName","${userName}")
 
@@ -165,6 +176,14 @@ class LoginActivity : AppCompatActivity() {
                             App.prefs.token = accessToken
 
                             Log.d("Login_Token", "Access Token: $accessToken")
+
+                            setAllViewsToGone(view)
+
+                            binding.loading.visibility = View.VISIBLE
+
+                            sleep(200)
+
+                            Log.d("여기지나감","22")
 
                             val intent = Intent(this@LoginActivity, MainActivity::class.java)
                             startActivity(intent)
