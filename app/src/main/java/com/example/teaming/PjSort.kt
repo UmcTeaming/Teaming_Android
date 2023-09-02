@@ -38,6 +38,7 @@ class PjSort : Fragment(), PjInAdapter.OnPjInItemClickListener, PjInAdapter.OnPj
     ): View? {
         binding = FragmentPjSortBinding.inflate(inflater,container,false)
 
+        binding.trashBtn.visibility = View.GONE
 
         val sharedPreference_mem = requireActivity().getSharedPreferences("memberId",
             Context.MODE_PRIVATE
@@ -57,6 +58,7 @@ class PjSort : Fragment(), PjInAdapter.OnPjInItemClickListener, PjInAdapter.OnPj
                 if (response.isSuccessful) {
                     val projectfilesresponse = response.body()
                     if (projectfilesresponse != null && projectfilesresponse.data != null) {
+                        binding.trashBtn.visibility = View.VISIBLE
                         dataList.addAll(projectfilesresponse.data)
 
 
@@ -70,10 +72,14 @@ class PjSort : Fragment(), PjInAdapter.OnPjInItemClickListener, PjInAdapter.OnPj
                         Log.d("pj data","$dataList")
 
                     }else{
-                        requireActivity().supportFragmentManager.beginTransaction()
-                            .replace(R.id.fragmentContainer,NoPjSort())
-                            .commit()
-                        Log.d("pj data","$projectfilesresponse")
+                        if (isAdded) {
+                            requireActivity().supportFragmentManager.beginTransaction()
+                                .replace(R.id.fragmentContainer,NoPjSort())
+                                .commit()
+                            Log.d("pj data","$projectfilesresponse")
+                        } else {
+                            onDestroyView()
+                        }
                     }
                 } else {
                     Log.d("pjfile", "API 호출 실패: ${response.code()}")
@@ -130,5 +136,7 @@ class PjSort : Fragment(), PjInAdapter.OnPjInItemClickListener, PjInAdapter.OnPj
         }
     }
 
-
+    override fun onDestroyView() {
+        super.onDestroyView()
+    }
 }
