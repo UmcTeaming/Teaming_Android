@@ -141,7 +141,7 @@ class DocRead : Fragment() {
 
         binding.downloadBtn.setOnClickListener {
             val fileUrl =
-                "http://teaming.shop:8080/files/$memberId/$projectId/files/$fileId/download"
+                "https://teaming.shop/files/$memberId/$projectId/files/$fileId/download"
 
             val progressDialog = ProgressDialog(requireContext()).apply {
                 setMessage("잠시만 기다려주세요")
@@ -159,6 +159,7 @@ class DocRead : Fragment() {
 
                     if (response.isSuccessful) {
                         val responseBody: ResponseBody? = response.body()
+                        Log.d("test 다운로드 로그","$responseBody")
                         if (responseBody != null) {
                             val totalFileSize = responseBody.contentLength()
 
@@ -202,7 +203,7 @@ class DocRead : Fragment() {
                     e.printStackTrace()
                     launch(Dispatchers.Main) {
                         progressDialog.dismiss()
-                        Toast.makeText(requireContext(), "다운로드를 실패하였습니다.", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(requireContext(), "API 호출을 실패하였습니다.", Toast.LENGTH_SHORT).show()
                     }
                 }
             }

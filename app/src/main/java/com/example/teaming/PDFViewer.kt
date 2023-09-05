@@ -71,6 +71,7 @@ class PDFViewer : Fragment() {
 
             if (response.isSuccessful) {
                 val responseBody: ResponseBody? = response.body()
+                Log.d("test 다운로드 pdf로그","$responseBody")
                 if (responseBody != null) {
                     val savedFile = saveFileToInternalStorage(requireContext(), fileName, responseBody)
                     if (savedFile != null) {
