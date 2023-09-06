@@ -3,17 +3,17 @@ package com.example.teaming
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.example.teaming.databinding.ActivityOnboarding1Binding
+import com.example.teaming.databinding.ActivityOnboarding2Binding
 
-class Onboarding1 : AppCompatActivity() {
+class Onboarding2 : AppCompatActivity() {
 
-    private lateinit var binding: ActivityOnboarding1Binding
+    private lateinit var binding: ActivityOnboarding2Binding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_onboarding1)
+        setContentView(R.layout.activity_onboarding2)
 
-        binding = ActivityOnboarding1Binding.inflate(layoutInflater)
+        binding = ActivityOnboarding2Binding.inflate(layoutInflater)
         setContentView(binding.root)
 
         binding.skip.setOnClickListener {
@@ -22,9 +22,8 @@ class Onboarding1 : AppCompatActivity() {
         }
 
         binding.next.setOnClickListener {
-            val intent = Intent(this, Onboarding2::class.java)
+            val intent = Intent(this, Onboarding3::class.java)
             startActivity(intent)
         }
-
     }
 }

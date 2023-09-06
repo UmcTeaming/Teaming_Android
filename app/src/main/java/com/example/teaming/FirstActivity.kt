@@ -86,7 +86,7 @@ class FirstActivity : AppCompatActivity() {
                 }
             })*/
 
-            val intent = Intent(this, LoginActivity::class.java)
+            val intent = Intent(this, Onboarding1::class.java)
             startActivity(intent)
             overridePendingTransition(0, 0)
             finish()
