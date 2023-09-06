@@ -3,10 +3,13 @@ package com.example.teaming
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
+import android.view.Gravity
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.example.teaming.databinding.FragmentPDFViewerBinding
 import com.github.barteksc.pdfviewer.scroll.DefaultScrollHandle
 import kotlinx.coroutines.Dispatchers
@@ -50,6 +53,18 @@ class PDFViewer : Fragment() {
 
         val fileUrl = "https://teaming.shop/files/$memberId/$projectId/files/$fileId/download"
 
+        if (isAdded) {
+            Glide.with(requireContext())
+                .asGif()
+                .load(R.drawable.loading) // 로딩 중 GIF 이미지 리소스 설정
+                .diskCacheStrategy( DiskCacheStrategy.RESOURCE )
+                .into(binding.loading)
+
+        } else {
+
+        }
+
+
         GlobalScope.launch(Dispatchers.IO) {
             val service = RetrofitApi.getRetrofitService.fileDownload(fileUrl)
             val response = service.execute()
@@ -60,6 +75,8 @@ class PDFViewer : Fragment() {
                     val savedFile = saveFileToInternalStorage(requireContext(), fileName, responseBody)
                     if (savedFile != null) {
                         withContext(Dispatchers.Main) {
+                            binding.loading.visibility = View.GONE
+                            binding.pdfshow.visibility = View.VISIBLE
                             binding.pdfshow.fromFile(savedFile)
                                 .defaultPage(0)
                                 .scrollHandle(DefaultScrollHandle(requireContext()))

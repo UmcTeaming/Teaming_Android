@@ -1,7 +1,9 @@
 package com.example.teaming
 
 
+import android.app.Dialog
 import android.content.Context
+import android.content.Intent
 import android.content.res.ColorStateList
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
@@ -16,6 +18,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageButton
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -45,6 +48,8 @@ class UserFragment : Fragment(), ImgDialog.OnImgSelectedListener {
 
     private var img_Selected = false
 
+    private var username = ""
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -66,7 +71,7 @@ class UserFragment : Fragment(), ImgDialog.OnImgSelectedListener {
                     val mypageResponse = response.body()
                     if (mypageResponse != null) {
 
-                        val username = mypageResponse.data.name
+                        username = mypageResponse.data.name
                         val email = mypageResponse.data.email
 
                         binding.name.text = username
@@ -107,14 +112,26 @@ class UserFragment : Fragment(), ImgDialog.OnImgSelectedListener {
 
         binding.ButtonPencil.setOnClickListener {
 
-            binding.name.visibility = View.INVISIBLE
-            binding.ButtonPencil.visibility = View.INVISIBLE
+            binding.byeFrame.visibility = View.GONE
+            binding.frameLayout.visibility = View.VISIBLE
+
+            val bundle = Bundle()
+
+            bundle.putString("user_name",username)
+
+            Log.d("보내기전","$bundle")
+
+            val nameFragment = NameFragment()
+            nameFragment.arguments = bundle
 
             requireActivity().supportFragmentManager.beginTransaction()
-                .replace(R.id.frameLayout,NameFragment())
-                .addToBackStack(null)
+                .replace(R.id.frameLayout,nameFragment)
                 .commit()
 
+        }
+
+        binding.goLogout.setOnClickListener{
+            showLogoutDialog()
         }
 
         backCallback = object : OnBackPressedCallback(true) {
@@ -266,6 +283,50 @@ class UserFragment : Fragment(), ImgDialog.OnImgSelectedListener {
             }
         }
     }
+
+    private fun showLogoutDialog() {
+        val dialog = Dialog(requireContext())
+        dialog.setContentView(R.layout.activity_dialog_login_fir)
+
+        val cancelBtn = dialog.findViewById<ImageButton>(R.id.logout_cancle)
+        val logoutBtn = dialog.findViewById<ImageButton>(R.id.logout_btn)
+
+        cancelBtn.setOnClickListener {
+            dialog.dismiss() // 다이얼로그 종료
+        }
+
+        logoutBtn.setOnClickListener {
+            val auto = requireActivity().getSharedPreferences("autoLogin", AppCompatActivity.MODE_PRIVATE)
+            val autoLoginEdit = auto.edit()
+
+            autoLoginEdit.putBoolean("autoLoginUse", false)
+            autoLoginEdit.putString("Id", null)
+            autoLoginEdit.putString("Pw", null)
+            autoLoginEdit.commit()
+
+            showLogoutConfirmationDialog()
+            dialog.dismiss()
+
+        }
+
+        dialog.show()
+    }
+    private fun showLogoutConfirmationDialog() {
+        val dialog = Dialog(requireContext())
+        dialog.setContentView(R.layout.activity_dialog_login_sec)
+
+        val logoutOkBtn = dialog.findViewById<ImageButton>(R.id.logout_ok)
+
+        logoutOkBtn.setOnClickListener {
+            dialog.dismiss() // 다이얼로그 종료
+            val intent = Intent(requireContext(), LoginActivity::class.java)
+            startActivity(intent)
+            requireActivity().finish()
+        }
+
+        dialog.show()
+    }
+
 
 }
 

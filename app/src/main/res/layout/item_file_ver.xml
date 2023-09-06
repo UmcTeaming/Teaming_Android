@@ -38,10 +38,10 @@
                 android:layout_height="30dp"
                 android:gravity="center_vertical"
                 android:layout_marginTop="7dp"
-                android:fontFamily="@font/roboto_bold"
+                android:fontFamily="@font/pretendard_semibold"
                 android:text="UMC 파이널 프로젝트 (프로젝트 명)"
                 android:textColor="@color/black"
-                android:textSize="12sp" />
+                android:textSize="13sp" />
 
             <ImageView
                 android:layout_gravity="top|right"
@@ -63,7 +63,7 @@
             android:id="@+id/grid_date"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/pretendard_medium"
+            android:fontFamily="@font/pretendard_regular"
             android:text="2023.06.13 ~ (진행 기간)"
             android:textColor="#99000000"
             android:textSize="11sp" />

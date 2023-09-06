@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- 다른 스타일 속성들... -->
+        <item name="android:datePickerDialogTheme">@style/DatePickerStyle</item>
+    </style>
+
+    <style name="DatePickerStyle">
+        <item name="android:datePickerStyle">@style/MyDatePicker</item>
+    </style>
+
+    <style name="MyDatePicker">
+        <!-- 원하는 폰트 속성을 설정합니다. -->
+        <item name="android:fontFamily">@font/pretendard_medium</item>
+    </style>
+</resources>

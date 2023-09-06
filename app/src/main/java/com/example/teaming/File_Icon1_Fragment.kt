@@ -38,6 +38,8 @@ class File_Icon1_Fragment : Fragment() {
 
         val callPortfolioPage = RetrofitApi.getRetrofitService.portfolioPage(memberId)
 
+        val searchText = arguments?.getString("searchText", "") ?: ""
+
         if(memberId!=null){
             callPortfolioPage.enqueue(object : Callback<PortfolioPageResponse> {
                 override fun onResponse(
@@ -53,7 +55,18 @@ class File_Icon1_Fragment : Fragment() {
                                 verItemList.clear()
                                 for(projects in portfolioProjects){
                                     val formattedDate = "${projects.projectStartDate} ~ ${projects.projectEndDate}"
-                                    verItemList.add(
+                                    if (searchText.isEmpty() || projects.projectName.contains(searchText, ignoreCase = true)) {
+                                        verItemList.add(
+                                            VerListItem(
+                                                projects.projectName,
+                                                formattedDate,
+                                                projects.projectId,
+                                                projects.projectStatus
+                                            )
+                                        )
+                                    }
+                                }
+                                    /*verItemList.add(
                                         VerListItem(
                                             projects.projectName,
                                             formattedDate,
@@ -61,7 +74,7 @@ class File_Icon1_Fragment : Fragment() {
                                             projects.projectStatus
                                         )
                                     )
-                                }
+                                }*/
                                 verAdapter2.notifyDataSetChanged()
                             }
                             else{

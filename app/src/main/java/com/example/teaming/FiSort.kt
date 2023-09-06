@@ -33,6 +33,10 @@ class FiSort : Fragment(), FiInAdapter.OnFiInItemClickListener, FiInAdapter.OnFi
     ): View? {
         binding = FragmentFiSortBinding.inflate(inflater,container,false)
 
+        binding.trashBtn.visibility = View.GONE
+        binding.endBtn.visibility = View.GONE
+
+        val fileStatus = arguments?.getString("file_status")
 
         val sharedPreference_mem = requireActivity().getSharedPreferences("memberId",
             Context.MODE_PRIVATE
@@ -52,6 +56,15 @@ class FiSort : Fragment(), FiInAdapter.OnFiInItemClickListener, FiInAdapter.OnFi
                 if (response.isSuccessful) {
                     val finalfilesresponse = response.body()
                     if (finalfilesresponse != null && finalfilesresponse.data != null) {
+
+                        binding.trashBtn.visibility = View.VISIBLE
+
+                        if (fileStatus == "ING"){
+                            binding.endBtn.visibility = View.VISIBLE
+                        }else{
+                            binding.endBtn.visibility = View.GONE
+                        }
+
                         dataList.addAll(finalfilesresponse.data)
 
                         Log.d("통신파이","${finalfilesresponse}")

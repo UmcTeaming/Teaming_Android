@@ -40,6 +40,8 @@ class File_Icon2_Fragment : Fragment() {
 
         val callPortfolioPage = RetrofitApi.getRetrofitService.portfolioPage(memberId)
 
+        val searchText = arguments?.getString("searchText", "") ?: ""
+
         if(memberId!=null){
             callPortfolioPage.enqueue(object : Callback<PortfolioPageResponse> {
                 override fun onResponse(
@@ -54,7 +56,19 @@ class File_Icon2_Fragment : Fragment() {
                                 fileVerItemList.clear()
                                 for(projects in portfolioProjects){
                                     val formattedDate = "${projects.projectStartDate} ~ ${projects.projectEndDate}"
-                                    fileVerItemList.add(
+                                    if (searchText.isEmpty() || projects.projectName.contains(searchText, ignoreCase = true)) {
+                                        fileVerItemList.add(
+                                            GridListItem(
+                                                projects.projectImage,
+                                                projects.projectName,
+                                                formattedDate,
+                                                projects.projectId,
+                                                projects.projectStatus
+                                            )
+                                        )
+                                    }
+                                }
+                                    /*fileVerItemList.add(
                                         GridListItem(
                                             projects.projectImage,
                                             projects.projectName,
@@ -63,7 +77,7 @@ class File_Icon2_Fragment : Fragment() {
                                             projects.projectStatus
                                         )
                                     )
-                                }
+                                }*/
                                 fileVerAdapter.notifyDataSetChanged()
                             }
                             else{

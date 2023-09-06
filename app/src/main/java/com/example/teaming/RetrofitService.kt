@@ -159,8 +159,6 @@ interface RetrofitService {
     @POST("/auth/email-verification")
     fun memberverification(@Body requestBody:MemberVerificationRequest) : Call<MemberVerificationResponse>
 
-
-
     @Multipart
     @POST("/projects/{memberId}/{projectId}/files-upload")
     fun projectFileUpload(@Path("memberId") memberId: Int?,@Path("projectId") projectId: Int?,@Part filePart: MultipartBody.Part) : Call<ProjectFileUploadResponse>
@@ -171,4 +169,7 @@ interface RetrofitService {
 
     @DELETE("/projects/{memberId}/{projectId}/{scheduleId}")
     fun deleteSchedule(@Path("memberId") memberId: Int?, @Path("projectId") projectId: Int?, @Path("scheduleId") scheduleId:Int?) : Call<Void>
+
+    @DELETE("/files/{memberId}/{fileId}/comments/{commentId}")
+    fun commentDelete(@Path("memberId") memberId: Int?,@Path("fileId") fileId: Int?,@Path("commentId") commentId:Int? ) : Call<CommentDeleteResponse>
 }

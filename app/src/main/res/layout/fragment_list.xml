@@ -33,17 +33,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="19.91dp"
                 android:text="아직 생성된 프로젝트가 없어요!"
-                android:fontFamily="@font/pretendard_bold"
+                android:fontFamily="@font/pretendard_black"
                 android:textColor="#80000000"
                 android:textSize="16sp"/>
 
             <ImageView
                 android:layout_marginLeft="14dp"
-                android:layout_marginTop="33dp"
+                android:layout_marginTop="5dp"
                 android:layout_gravity="center_horizontal"
-                android:layout_width="130.31dp"
-                android:layout_height="103dp"
-                android:background="@drawable/non_project_img"/>
+                android:layout_width="159dp"
+                android:layout_height="128dp"
+                android:background="@drawable/non_img2"/>
 
             <TextView
                 android:layout_marginTop="16dp"
@@ -52,7 +52,7 @@
                 android:layout_height="wrap_content"
                 android:text="프로젝트를 생성하고 티밍을 이용해보세요."
                 android:textSize="11sp"
-                android:fontFamily="@font/pretendard_medium"
+                android:fontFamily="@font/pretendard_semibold"
                 android:textColor="#66000000"/>
 
             <Button
@@ -71,8 +71,9 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_gravity="bottom|right"
-            android:elevation="4dp"
-            android:layout_margin="30dp"
+            android:elevation="5dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="30dp"
             android:background="@drawable/btn_round2"/>
 
         <androidx.core.widget.NestedScrollView
@@ -85,8 +86,8 @@
                 android:orientation="vertical">
 
                 <LinearLayout
-                    android:paddingStart="20dp"
-                    android:paddingEnd="20dp"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
                     android:layout_marginTop="45dp"
                     android:layout_gravity="center_horizontal"
                     android:layout_width="match_parent"
@@ -105,15 +106,15 @@
                             android:fontFamily="@font/pretendard_bold"
                             android:text=""
                             android:textColor="#527FF5"
-                            android:textSize="24sp" />
+                            android:textSize="21sp" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/pretendard_bold"
-                            android:text="님의 팀 프로젝트"
+                            android:text="님의 진행 중인 프로젝트 "
                             android:textColor="#527FF5"
-                            android:textSize="24sp" />
+                            android:textSize="21sp" />
 
                     </LinearLayout>
 
@@ -122,7 +123,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="3dp"
-                        android:fontFamily="@font/pretendard_light"
+                        android:fontFamily="@font/pretendard_medium"
                         android:text="현재 진행 중인 프로젝트를 한눈에 모아보세요!"
                         android:textColor="#527FF5"
                         android:textSize="11sp" />
@@ -130,8 +131,8 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:paddingStart="20dp"
-                    android:paddingEnd="20dp"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
                     android:id="@+id/btn_layout"
                     android:visibility="visible"
                     android:layout_marginTop="33dp"
@@ -158,8 +159,8 @@
                 </LinearLayout>
 
                 <FrameLayout
-                    android:paddingStart="20dp"
-                    android:paddingEnd="20dp"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
                     android:visibility="visible"
                     android:id="@+id/file_frame"
                     android:layout_width="match_parent"

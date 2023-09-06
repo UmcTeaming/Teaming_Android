@@ -18,7 +18,7 @@
         android:fontFamily="@font/pretendard_bold"
         android:text="이메일"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@id/email_write"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginTop="30dp"
         android:textSize="15sp"
@@ -28,8 +28,8 @@
     <EditText
         android:id="@+id/email_write"
         android:layout_marginTop="10dp"
-        android:layout_width="265dp"
-        android:layout_height="wrap_content"
+        android:layout_width="320dp"
+        android:layout_height="25dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/email"
@@ -38,11 +38,14 @@
         android:textColor="@color/black"
         android:textSize="12dp"
         android:hint="초대할 팀원의 이메일을 입력해주세요."
+        android:background="@drawable/edittext_rectangle"
+        android:paddingStart="10dp"
+
         />
 
     <LinearLayout
-        android:layout_marginTop="30dp"
-        android:layout_width="250dp"
+        android:layout_marginTop="20dp"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

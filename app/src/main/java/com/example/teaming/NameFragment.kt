@@ -30,6 +30,12 @@ class NameFragment : Fragment() {
     ): View? {
         binding = FragmentNameBinding.inflate(inflater,container,false)
 
+        val username = arguments?.getString("user_name") ?: ""
+
+        Log.d("보낸후","${username}")
+
+        binding.edittext.setText(username)
+
         val textWatcher = object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
 

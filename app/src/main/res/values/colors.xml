@@ -23,4 +23,6 @@
     <color name="disabled">#50000000</color>
     <color name="status_end">#FFD008</color>
     <color name="status_ing">#2F87F2</color>
+    <color name="gray">#80000000</color>
+    <color name="blue">#194AC2</color>
 </resources>
