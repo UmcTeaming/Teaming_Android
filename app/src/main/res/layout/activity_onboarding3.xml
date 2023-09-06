@@ -124,7 +124,7 @@
         android:layout_marginTop="25dp"
         app:layout_constraintStart_toStartOf="@id/text3"
         app:layout_constraintTop_toBottomOf="@id/text3"
-        android:textSize="17sp"
+        android:textSize="16sp"
         android:textColor="#4D000000"
         >
     </TextView>
@@ -136,7 +136,7 @@
         android:text="과정을 들여다 볼 수 있어요."
         app:layout_constraintStart_toStartOf="@id/text4"
         app:layout_constraintTop_toBottomOf="@id/text4"
-        android:textSize="17sp"
+        android:textSize="16sp"
         android:textColor="#4D000000"
         >
     </TextView>
@@ -150,7 +150,7 @@
         android:layout_marginTop="25dp"
         app:layout_constraintStart_toStartOf="@id/text5"
         app:layout_constraintTop_toBottomOf="@id/text5"
-        android:textSize="17sp"
+        android:textSize="16sp"
         android:textColor="#4D000000"
         >
     </TextView>
@@ -162,7 +162,7 @@
         android:text="포트폴리오를 채워보세요!"
         app:layout_constraintStart_toStartOf="@id/text6"
         app:layout_constraintTop_toBottomOf="@id/text6"
-        android:textSize="17sp"
+        android:textSize="16sp"
         android:textColor="#4D000000"
         >
     </TextView>
