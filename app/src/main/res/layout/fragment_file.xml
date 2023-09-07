@@ -152,7 +152,7 @@
                         android:maxLines="1"
                         android:paddingStart="13dp"
                         android:paddingEnd="15dp"
-                        android:textColorHint="#80000000"
+                        android:textColorHint="#80FFFFFF"
                         android:textSize="15sp"/>
 
                     <ImageButton
