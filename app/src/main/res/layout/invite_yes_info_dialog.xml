@@ -8,7 +8,8 @@
     android:paddingEnd="40dp"
     android:paddingTop="20dp"
     android:paddingBottom="20dp"
-    android:background="@color/white">
+    android:backgroundTint="@color/white"
+    android:background="@drawable/round_border2">
 
     <TextView
         android:id="@+id/yes_home"
