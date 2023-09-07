@@ -5,8 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:marginStart="20dp"
-    android:marginEnd="20dp"
     android:background="@color/white">
 
     <TextView
@@ -26,9 +24,11 @@
         />
 
     <EditText
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="40dp"
         android:id="@+id/email_write"
         android:layout_marginTop="10dp"
-        android:layout_width="320dp"
+        android:layout_width="300dp"
         android:layout_height="25dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
