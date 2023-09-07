@@ -149,6 +149,8 @@ interface RetrofitService {
     @DELETE("/projects/{memberId}/{projectId}/files/{fileId}")
     fun fileDelete(@Path("memberId") memberId: Int?,@Path("projectId") projectId: Int?,@Path("fileId") fileId: Int?) : Call<FileDeleteResponse>
 
+    @DELETE("/projects/{memberId}/{projectId}/deletes")
+    fun projectDelete(@Path("memberId") memberId: Int?, @Path("projectId") projectId: Int?) : Call<DeleteProjectResponse>
 
     @POST("/member/{memberId}/date_list")
     fun monthSchedule(@Path("memberId") memberId: Int?, @Body dateRequest:MonthScheduleRequest) : Call<MonthScheduleList>

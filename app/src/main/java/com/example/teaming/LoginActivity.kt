@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.content.ContextCompat
@@ -87,6 +88,8 @@ class LoginActivity : AppCompatActivity() {
                         }
                     } else {
                         Log.d("Login", "API 호출 실패: ${response.code()}")
+
+                        /*Toast.makeText(this@LoginActivity,"로그인에 실패했습니다. 다시 시도해주세요",Toast.LENGTH_SHORT).show()*/
                     }
                 }
 
@@ -134,13 +137,13 @@ class LoginActivity : AppCompatActivity() {
             val requestBody = RequestBody.create("application/json".toMediaType(), json)
             val callLogin = RetrofitApi.getRetrofitService.login(requestBody)
 
-            setAllViewsToGone(view)
+            /*setAllViewsToGone(view)
             binding.loading.visibility = View.VISIBLE
             Glide.with(this@LoginActivity)
                 .asGif()
                 .load(R.drawable.loading) // 로딩 중 GIF 이미지 리소스 설정
                 .diskCacheStrategy( DiskCacheStrategy.RESOURCE )
-                .into(binding.loading)
+                .into(binding.loading)*/
 
             callLogin.enqueue(object : Callback<LoginResponse> {
                 override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
@@ -177,9 +180,17 @@ class LoginActivity : AppCompatActivity() {
 
                             Log.d("Login_Token", "Access Token: $accessToken")
 
-                            setAllViewsToGone(view)
+                            //setAllViewsToGone(view)
 
+                            //binding.loading.visibility = View.VISIBLE
+
+                            setAllViewsToGone(view)
                             binding.loading.visibility = View.VISIBLE
+                            Glide.with(this@LoginActivity)
+                                .asGif()
+                                .load(R.drawable.loading) // 로딩 중 GIF 이미지 리소스 설정
+                                .diskCacheStrategy( DiskCacheStrategy.RESOURCE )
+                                .into(binding.loading)
 
                             sleep(250)
 
@@ -191,6 +202,7 @@ class LoginActivity : AppCompatActivity() {
                         }
                     } else {
                         Log.d("Login", "API 호출 실패: ${response.code()}")
+                        Toast.makeText(this@LoginActivity,"로그인에 실패했습니다. 다시 시도해주세요",Toast.LENGTH_SHORT).show()
                     }
                 }
 
