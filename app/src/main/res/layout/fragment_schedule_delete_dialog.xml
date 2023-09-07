@@ -5,7 +5,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:paddingStart="20dp"
     android:paddingEnd="20dp"
-    android:background="@color/white">
+    android:background="@drawable/round_border2"
+    android:backgroundTint="@color/white">
 
     <TextView
         android:id="@+id/first_text"
@@ -106,7 +107,7 @@
             android:layout_marginEnd="7dp"
             android:layout_width="wrap_content"
             android:layout_height="30dp"
-            android:src="@drawable/cancle_chk_btn"
+            android:src="@drawable/cancel_chk_btn"
             android:layout_weight="1"
             android:scaleType="fitCenter"
             android:background="@android:color/transparent"
