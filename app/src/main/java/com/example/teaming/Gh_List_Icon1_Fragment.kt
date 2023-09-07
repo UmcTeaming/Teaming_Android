@@ -96,6 +96,24 @@ class Gh_List_Icon1_Fragment : Fragment() {
             }
         })
 
+        verAdapter2.setItemLongClickListener(object: VerticalAdapter2.OnItemLongClickListener{
+            override fun onLongClick(v: View, position: Int) {
+
+                val bundle = Bundle()
+
+                bundle.putInt("memId",memberId)
+                bundle.putInt("pjId",listItemList[position].ver_Id)
+                bundle.putInt("num",1)
+
+                val dialog = DeletePjDialog()
+                dialog.arguments = bundle
+
+                // Show the success dialog or perform other actions
+                dialog.show(requireActivity().supportFragmentManager, "DeletePjDialog")
+
+            }
+        })
+
         return binding.root
     }
 

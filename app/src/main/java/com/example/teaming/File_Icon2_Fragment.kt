@@ -116,6 +116,24 @@ class File_Icon2_Fragment : Fragment() {
             }
         })
 
+        fileVerAdapter.setItemLongClickListener(object: FileVerAdapter.OnItemLongClickListener{
+            override fun onLongClick(v: View, position: Int) {
+
+                val bundle = Bundle()
+
+                bundle.putInt("memId",memberId)
+                bundle.putInt("pjId",fileVerItemList[position].grid_Id)
+                bundle.putInt("num",2)
+
+                val dialog = DeletePjDialog()
+                dialog.arguments = bundle
+
+                // Show the success dialog or perform other actions
+                dialog.show(requireActivity().supportFragmentManager, "DeletePjDialog")
+
+            }
+        })
+
         return binding.root
     }
 
