@@ -9,6 +9,26 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
 class VerticalAdapter2(val ver_itemList: ArrayList<VerListItem>): RecyclerView.Adapter<VerticalAdapter2.ViewHolder>() {
+
+    private var itemClickListener: OnItemClickListener?= null
+    private var itemLongClickListener: OnItemLongClickListener?=null
+
+    interface OnItemClickListener {
+        fun onClick(v: View, position: Int)
+    }
+    interface OnItemLongClickListener {
+        fun onLongClick(v: View, position: Int)
+    }
+
+    fun setItemLongClickListener(listener: OnItemLongClickListener) {
+        this.itemLongClickListener = listener
+    }
+
+    // (3) 외부에서 클릭 시 이벤트 설정
+    fun setItemClickListener(onItemClickListener: OnItemClickListener) {
+        this.itemClickListener = onItemClickListener
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VerticalAdapter2.ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_ver2,parent,false)
         return VerticalAdapter2.ViewHolder(view)
@@ -23,7 +43,7 @@ class VerticalAdapter2(val ver_itemList: ArrayList<VerListItem>): RecyclerView.A
         holder.verDate.text = ver_itemList[position].ver_date
 
         holder.itemView.setOnClickListener {
-            itemClickListener.onClick(it, position)
+            itemClickListener?.onClick(it, position)
         }
 
         val status = ver_itemList[position].ver_status
@@ -33,6 +53,11 @@ class VerticalAdapter2(val ver_itemList: ArrayList<VerListItem>): RecyclerView.A
         } else {
             holder.verState.setImageResource(R.drawable.circle_end)
         }
+
+        holder.itemView.setOnLongClickListener {
+            itemLongClickListener?.onLongClick(it, position)
+            true // 이벤트 소비를 표시하기 위해 true 반환
+        }
     }
 
     class ViewHolder(itemView: View):RecyclerView.ViewHolder(itemView){
@@ -40,14 +65,4 @@ class VerticalAdapter2(val ver_itemList: ArrayList<VerListItem>): RecyclerView.A
         val verTitle: TextView = itemView.findViewById(R.id.ver_title2)
         val verDate: TextView = itemView.findViewById(R.id.ver_date2)
     }
-
-    interface OnItemClickListener {
-        fun onClick(v: View, position: Int)
-    }
-    // (3) 외부에서 클릭 시 이벤트 설정
-    fun setItemClickListener(onItemClickListener: OnItemClickListener) {
-        this.itemClickListener = onItemClickListener
-    }
-    // (4) setItemClickListener로 설정한 함수 실행
-    private lateinit var itemClickListener : OnItemClickListener
 }

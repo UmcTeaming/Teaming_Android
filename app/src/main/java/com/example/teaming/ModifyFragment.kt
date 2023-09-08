@@ -103,10 +103,27 @@ class ModifyFragment : Fragment(),ColSelDialog.OnColorSelectedListener, ImgDialo
                             val getinfoProjects = infoProjectResponse.data
 
                             if(getinfoProjects != null){
+                                val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+
+                                val startDate = dateFormat.parse(getinfoProjects.startDate)
+                                val endDate = dateFormat.parse(getinfoProjects.endDate)
+
+                                val newDateFormat = SimpleDateFormat("yyyy. MM. dd", Locale.getDefault())
+
+                                val startDateStr = newDateFormat.format(startDate)
+                                val endDateStr = newDateFormat.format(endDate)
+
                                 binding.modiName.setText(getinfoProjects.name)
-                                binding.modiStart.setText(getinfoProjects.startDate)
-                                binding.modiEnd.setText(getinfoProjects.endDate)
+                                binding.modiStart.text = startDateStr
+                                binding.modiEnd.text = endDateStr
                                 binding.text.visibility = View.INVISIBLE
+
+                                /*val inFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+                                val outFormat = SimpleDateFormat("yyyy. MM. dd", Locale.getDefault())
+                                val start: Date = inFormat.parse(binding.modiStart.text.toString())
+                                val end: Date = inFormat.parse(binding.modiEnd.text.toString())
+                                val startDayAfter: String = outFormat.format(start)
+                                val endDayAfter : String = outFormat.format(end)*/
 
                                 Glide.with(requireContext())
                                     .load(getinfoProjects.image)

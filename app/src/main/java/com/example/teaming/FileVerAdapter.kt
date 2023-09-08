@@ -10,6 +10,26 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 
 class FileVerAdapter(val file_ver_itemList: ArrayList<GridListItem>): RecyclerView.Adapter<FileVerAdapter.ViewHolder>() {
+
+    private var itemClickListener: OnItemClickListener?= null
+    private var itemLongClickListener: OnItemLongClickListener?=null
+
+    interface OnItemClickListener {
+        fun onClick(v: View, position: Int)
+    }
+    interface OnItemLongClickListener {
+        fun onLongClick(v: View, position: Int)
+    }
+
+    fun setItemLongClickListener(listener: OnItemLongClickListener) {
+        this.itemLongClickListener = listener
+    }
+
+    // (3) 외부에서 클릭 시 이벤트 설정
+    fun setItemClickListener(onItemClickListener: OnItemClickListener) {
+        this.itemClickListener = onItemClickListener
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FileVerAdapter.ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_file_ver,parent,false)
         return FileVerAdapter.ViewHolder(view)
@@ -21,7 +41,7 @@ class FileVerAdapter(val file_ver_itemList: ArrayList<GridListItem>): RecyclerVi
 
         // 리사이클러뷰 클릭 이벤트
         holder.itemView.setOnClickListener {
-            itemClickListener.onClick(it, position)
+            itemClickListener?.onClick(it, position)
         }
 
         Glide.with(holder.itemView.context)
@@ -35,6 +55,11 @@ class FileVerAdapter(val file_ver_itemList: ArrayList<GridListItem>): RecyclerVi
             holder.stateCol.setImageResource(R.drawable.circle)
         } else {
             holder.stateCol.setImageResource(R.drawable.circle_end)
+        }
+
+        holder.itemView.setOnLongClickListener {
+            itemLongClickListener?.onLongClick(it, position)
+            true // 이벤트 소비를 표시하기 위해 true 반환
         }
     }
 
@@ -50,7 +75,7 @@ class FileVerAdapter(val file_ver_itemList: ArrayList<GridListItem>): RecyclerVi
     }
 
     // (2) 리스너 인터페이스
-    interface OnItemClickListener {
+    /*interface OnItemClickListener {
         fun onClick(v: View, position: Int)
     }
     // (3) 외부에서 클릭 시 이벤트 설정
@@ -58,5 +83,5 @@ class FileVerAdapter(val file_ver_itemList: ArrayList<GridListItem>): RecyclerVi
         this.itemClickListener = onItemClickListener
     }
     // (4) setItemClickListener로 설정한 함수 실행
-    private lateinit var itemClickListener : OnItemClickListener
+    //private lateinit var itemClickListener : OnItemClickListener*/
 }

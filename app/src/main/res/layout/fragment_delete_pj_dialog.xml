@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/round_border2"
+    tools:context=".DeletePjDialog">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constlayout"
+        android:layout_width="350dp"
+        android:layout_height="200dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        >
+
+        <TextView
+            android:id="@+id/text1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="프로젝트를 정말로 삭제하시겠습니까?"
+            android:textColor="#194AC2"
+            android:textSize="15sp"
+            android:fontFamily="@font/pretendard_bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.3"
+            >
+        </TextView>
+
+        <Button
+            android:id="@+id/no_del"
+            android:layout_width="140dp"
+            android:layout_height="30dp"
+            android:text="취소"
+            android:layout_marginLeft="25dp"
+            android:background="@drawable/bin_line"
+            android:fontFamily="@font/pretendard_medium"
+            android:textColor="#527FF5"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text1"
+            app:layout_constraintLeft_toLeftOf="@id/constlayout"
+            >
+        </Button>
+
+        <Button
+            android:id="@+id/yes_del"
+            android:layout_width="140dp"
+            android:layout_height="30dp"
+            android:text="확인"
+            android:layout_marginRight="25dp"
+            android:background="@drawable/bin_blue"
+            android:textColor="#ffffffff"
+            android:fontFamily="@font/pretendard_bold"
+            android:textSize="14sp"
+            android:onClick="shutDownClick"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text1"
+            app:layout_constraintRight_toRightOf="@id/constlayout"
+            >
+        </Button>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

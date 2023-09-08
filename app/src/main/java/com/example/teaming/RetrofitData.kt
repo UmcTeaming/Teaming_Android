@@ -710,3 +710,12 @@ data class CommentDeleteResponse(
     @SerializedName("message")
     val message: String
 )
+
+data class DeleteProjectResponse(
+    @SerializedName("status")
+    val status:Int,
+    @SerializedName("message")
+    val message:String,
+    @SerializedName("data")
+    val data:String
+)
