@@ -248,46 +248,6 @@
     </TextView>
 
     <TextView
-        android:id="@+id/question"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="자주 묻는 질문"
-        android:textSize="14sp"
-        android:fontFamily="@font/pretendard_medium"
-        android:textColor="#99000000"
-        android:layout_marginTop="130dp"
-        app:layout_constraintStart_toStartOf="@id/line"
-        app:layout_constraintTop_toTopOf="@id/line"
-        >
-    </TextView>
-
-    <ImageButton
-        android:id="@+id/go_question"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
-        app:layout_constraintStart_toEndOf="@id/line"
-        app:layout_constraintTop_toTopOf="@id/question"
-        android:background="#00ff0000"
-        android:scaleType="centerCrop"
-        android:padding="0sp"
-        android:src="@drawable/right"
-        >
-    </ImageButton>
-
-    <View
-        android:layout_width="330dp"
-        android:layout_height="1dp"
-        android:background="#1A000000"
-        android:layout_marginTop="15dp"
-        app:layout_constraintTop_toBottomOf="@id/question"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        >
-    </View>
-
-    <TextView
         android:id="@+id/logout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -295,9 +255,9 @@
         android:textSize="14sp"
         android:fontFamily="@font/pretendard_medium"
         android:textColor="#99000000"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="130dp"
         app:layout_constraintStart_toStartOf="@id/line"
-        app:layout_constraintTop_toBottomOf="@id/question"
+        app:layout_constraintTop_toBottomOf="@id/line"
         >
     </TextView>
 
